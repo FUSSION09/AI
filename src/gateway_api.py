@@ -60,6 +60,7 @@ from cyber_physical_guardian import cyber_physical_guardian, SELF_HEALING_LEDGER
 from open_network_mesh import open_network_mesh, OPEN_NETWORK_REPORT_FILE
 from causal_stress_novelty_pipeline import causal_pipeline, PIPELINE_REPORT_FILE
 from higher_order_vectors import higher_order_vectors, HIGHER_ORDER_REPORT_FILE
+from local_model_bridge import local_model_bridge, LOCAL_MODEL_REPORT_FILE
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -230,6 +231,12 @@ class DAOMandateRequest(BaseModel):
     description: str = Field(..., example="Autonomous treasury allocation mandate")
     action_payload: Dict[str, Any] = Field(..., example={"action": "EXECUTE_TRADE", "parameters": {"symbol": "BTC/USD", "side": "BUY", "quantity": 1.0, "price": 65000.0}})
     quorum: float = Field(default=100000.0, example=100000.0)
+
+class LocalModelGenerateRequest(BaseModel):
+    prompt: str = Field(..., example="Analyze statutory structuring risk for a $9,900 cash deposit.")
+    backend: str = Field(default="auto", example="auto")
+    max_tokens: int = Field(default=64, ge=1, le=512, example=64)
+    temperature: float = Field(default=0.2, ge=0.0, le=1.0, example=0.2)
 
 class DAOVoteRequest(BaseModel):
     proposal_id: str = Field(..., example="DAO-PROP-1C39A5D3")
@@ -1735,6 +1742,40 @@ def get_vector_psi_subjective_forking():
     return rep["vector_psi_subjective_forking"]
 
 
+# ==============================================================================
+# 4.17 OFFLINE LOCAL MODEL BRIDGE (VECTOR 2)
+# ==============================================================================
+
+@app.get("/api/v1/local-model/status", tags=["Offline Local Model Bridge (Vector 2)"])
+def get_local_model_status():
+    """Probes status of all local zero-cloud inference providers (Ollama, PyTorch LoRA, Deterministic)."""
+    return local_model_bridge.probe_all_providers()
+
+@app.post("/api/v1/local-model/generate", tags=["Offline Local Model Bridge (Vector 2)"])
+def generate_offline_local_model(req: LocalModelGenerateRequest):
+    """Executes offline neural text generation across local Ollama, in-process PyTorch LoRA, or deterministic kernel."""
+    res = local_model_bridge.generate(
+        prompt=req.prompt,
+        backend=req.backend,
+        max_tokens=req.max_tokens,
+        temperature=req.temperature
+    )
+    return {
+        "query": res.query,
+        "generated_text": res.generated_text,
+        "backend_used": res.backend_used,
+        "tokens_generated": res.tokens_generated,
+        "duration_ms": res.duration_ms,
+        "tokens_per_second": res.tokens_per_second,
+        "offline_certified": res.offline_certified,
+        "fallback_path": res.fallback_path,
+        "timestamp": res.timestamp
+    }
+
+@app.post("/api/v1/local-model/benchmark", tags=["Offline Local Model Bridge (Vector 2)"])
+def run_local_model_benchmark(prompt: Optional[str] = None):
+    """Executes live comparative benchmark across all offline local backends and persists telemetry."""
+    return local_model_bridge.benchmark_providers(prompt)
 
 
 # ==============================================================================

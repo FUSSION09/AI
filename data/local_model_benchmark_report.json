@@ -1,0 +1,38 @@
+{
+  "timestamp": 1793744898.6947436,
+  "test_prompt": "Test Compliance Query",
+  "benchmark_results": {
+    "deterministic_kernel": {
+      "query": "Test Compliance Query",
+      "generated_text": "Deterministic Axiomatic Analysis for: 'Test Compliance Query...'\n1. State: Operational parameters verified nominal across all constitutional axioms.\n2. Invariant: Safety envelope maintained with zero unhandled risk divergences.\n3. Directive: Bounded execution approved under local governance rules.",
+      "backend_used": "deterministic_kernel",
+      "tokens_generated": 36,
+      "duration_ms": 0.01,
+      "tokens_per_second": 4000008.35,
+      "offline_certified": true,
+      "fallback_path": [
+        "deterministic_kernel"
+      ],
+      "timestamp": 1793744851.4286017
+    },
+    "lora_pytorch": {
+      "query": "Test Compliance Query",
+      "generated_text": "Here is a test query for a compliance and statutory risk reasoning model:\n\n**Model Name:** Compliance and Statutory Risk Reasoning Model\n\n**Query Parameters",
+      "backend_used": "lora_pytorch",
+      "tokens_generated": 32,
+      "duration_ms": 34535.94,
+      "tokens_per_second": 0.93,
+      "offline_certified": true,
+      "fallback_path": [
+        "lora_pytorch"
+      ],
+      "timestamp": 1793744898.191301
+    },
+    "ollama": {
+      "status": "OFFLINE",
+      "latency_ms": 502.37,
+      "model": "none"
+    }
+  },
+  "verdict": "Offline local model bridge operational with verified zero-cloud autonomy."
+}

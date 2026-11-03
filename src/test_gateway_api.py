@@ -905,8 +905,44 @@ def run_api_tests():
     assert "philosophical_resolution" in psi_data
     print(f"[Test 98: /vectors/psi] Status: 200 OK | Dialectic Rounds: {len(psi_data['debate_transcript'])} | Duality Resolved.")
 
+    # =========================================================================
+    # OFFLINE LOCAL MODEL BRIDGE (TESTS 99-101)
+    # =========================================================================
+    # 99. Test /api/v1/local-model/status (Provider Status Probe)
+    r_lm_status = client.get("/api/v1/local-model/status")
+    assert r_lm_status.status_code == 200
+    lm_status_data = r_lm_status.json()
+    assert lm_status_data["offline_ready"] is True
+    assert "providers" in lm_status_data
+    assert "lora_pytorch" in lm_status_data["providers"]
+    print(f"[Test 99: /api/v1/local-model/status] Status: 200 OK | Recommended Backend: {lm_status_data['active_recommended_backend']} | Offline Ready: {lm_status_data['offline_ready']}")
+
+    # 100. Test /api/v1/local-model/generate (Deterministic Fast Generation)
+    gen_payload = {
+        "prompt": "Analyze structuring risk for 31 U.S.C. 5324.",
+        "backend": "deterministic",
+        "max_tokens": 32,
+        "temperature": 0.1
+    }
+    r_lm_gen = client.post("/api/v1/local-model/generate", json=gen_payload)
+    assert r_lm_gen.status_code == 200
+    gen_data = r_lm_gen.json()
+    assert gen_data["offline_certified"] is True
+    assert gen_data["backend_used"] == "deterministic_kernel"
+    assert "31 U.S.C. § 5324" in gen_data["generated_text"]
+    print(f"[Test 100: /api/v1/local-model/generate] Status: 200 OK | Backend: {gen_data['backend_used']} | Tokens: {gen_data['tokens_generated']} | Speed: {gen_data['tokens_per_second']:.1f} tok/s")
+
+    # 101. Test /api/v1/local-model/benchmark (Comparative Benchmark Probe)
+    r_lm_bench = client.post("/api/v1/local-model/benchmark?prompt=Test+Compliance+Query")
+    assert r_lm_bench.status_code == 200
+    bench_data = r_lm_bench.json()
+    assert "benchmark_results" in bench_data
+    assert "deterministic_kernel" in bench_data["benchmark_results"]
+    assert "verdict" in bench_data
+    print(f"[Test 101: /api/v1/local-model/benchmark] Status: 200 OK | Verdict: {bench_data['verdict']}")
+
     print("=" * 75)
-    print("ALL 98 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
+    print("ALL 101 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
     print("=" * 75)
 
 if __name__ == "__main__":

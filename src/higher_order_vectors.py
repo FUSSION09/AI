@@ -316,3 +316,4 @@ if __name__ == "__main__":
     print(f"Vector Sigma: Optimal Chain = {rep['vector_sigma_metagrid']['optimal_chain_selected']['candidate_id']}")
     print(f"Vector Psi: Dialectic Arbitration = {rep['vector_psi_subjective_forking']['philosophical_resolution']['is_it_truth']}")
     print(f"Runtime: {rep['runtime_ms']} ms")
+

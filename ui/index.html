@@ -890,6 +890,48 @@
             <div class="engine-desc">Scales the UAS outwards to live external nodes and Ollama endpoints with HMAC-SHA256 message signing.</div>
             <button class="btn btn-cyan" onclick="runVectorAction('/mesh/peers', 'GET')">🌐 Probe Multi-Agent Mesh</button>
           </div>
+
+          <!-- Offline Local Model Bridge -->
+          <div class="engine-card" style="border-color: var(--accent-cyan); background: rgba(0, 240, 255, 0.04);">
+            <div class="engine-head"><span style="color: var(--accent-cyan);">[VECTOR 2] OFFLINE LOCAL MODEL BRIDGE</span><span class="subsys-tag" style="background: var(--accent-cyan); color: #000; font-weight: bold;">ZERO-CLOUD</span></div>
+            <div class="engine-desc">100% offline edge neural inference: In-Process PyTorch SmolLM-135M + LoRA, Ollama (11434), and deterministic failover.</div>
+            <div style="display: flex; gap: 8px; margin-top: 8px;">
+              <button class="btn btn-cyan" style="flex: 1;" onclick="probeLocalModelStatus()">🔍 Probe Local Backends</button>
+              <button class="btn btn-primary" style="flex: 1;" onclick="runLocalModelBenchmark()">📊 Run Benchmark</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Offline Local Model Generator Console -->
+        <div style="margin-top: 18px; background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <div class="panel-title" style="border: none; padding: 0;">OFFLINE NEURAL GENERATION CONSOLE (ZERO-CLOUD EGRESS)</div>
+            <div style="display: flex; gap: 8px; font-family: var(--font-mono); font-size: 0.72rem;">
+              <span id="lm-badge-ollama" class="badge">Ollama: <span class="badge-val">STANDBY</span></span>
+              <span id="lm-badge-pytorch" class="badge">PyTorch LoRA: <span class="badge-val" style="color: var(--accent-green);">READY</span></span>
+              <span id="lm-badge-det" class="badge">Axiom Kernel: <span class="badge-val" style="color: var(--accent-green);">ONLINE</span></span>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 200px 100px; gap: 10px; margin-bottom: 10px;">
+            <input type="text" id="lm-prompt-input" style="background: #080b11; border: 1px solid var(--border-color); border-radius: 6px; padding: 8px 12px; color: var(--text-main); font-family: var(--font-sans); font-size: 0.82rem;" placeholder="Enter legal compliance, structuring, or causal reasoning prompt..." value="Analyze statutory structuring risk for a $9,900 cash deposit under 31 U.S.C. 5324.">
+            <select id="lm-backend-select" style="background: #080b11; border: 1px solid var(--border-color); border-radius: 6px; padding: 8px; color: var(--accent-cyan); font-family: var(--font-mono); font-size: 0.78rem;">
+              <option value="auto">Auto (Best Available)</option>
+              <option value="lora_pytorch">In-Process PyTorch LoRA</option>
+              <option value="deterministic">Deterministic Kernel</option>
+              <option value="ollama">Ollama (127.0.0.1:11434)</option>
+            </select>
+            <button class="btn btn-primary" onclick="runLocalModelGenerate()">⚡ GENERATE</button>
+          </div>
+
+          <div id="lm-output-telemetry" style="display: none; margin-bottom: 8px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-cyan); display: flex; gap: 16px;">
+            <span id="lm-telemetry-backend">Backend: -</span>
+            <span id="lm-telemetry-tokens">Tokens: -</span>
+            <span id="lm-telemetry-speed">Throughput: -</span>
+            <span id="lm-telemetry-latency">Latency: -</span>
+          </div>
+
+          <pre id="lm-output-text" style="background: #04060a; border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-main); min-height: 80px; max-height: 180px; overflow-y: auto; white-space: pre-wrap;">Awaiting offline generation request. Select a backend and click GENERATE.</pre>
         </div>
 
         <!-- Telemetry Results Viewer -->
@@ -949,6 +991,78 @@
       } catch (err) {
         if (out) out.innerText = `Error executing ${endpoint}: ${err.message}`;
         log(`Vector Action Failed: ${endpoint} (${err.message})`, "alert");
+      }
+    }
+
+    // Offline Local Model Bridge Actions
+    async function probeLocalModelStatus() {
+      const out = document.getElementById("vector-console-output");
+      if (out) out.innerText = "Probing all offline local backends (Ollama, PyTorch LoRA, Deterministic)...";
+      try {
+        const res = await fetch("/api/v1/local-model/status");
+        const data = await res.json();
+        if (out) out.innerText = JSON.stringify(data, null, 2);
+        
+        // Update badges
+        const p = data.providers;
+        if (p.ollama) {
+          const el = document.getElementById("lm-badge-ollama");
+          if (el) el.innerHTML = `Ollama: <span class="badge-val" style="color: ${p.ollama.status === 'ONLINE' ? 'var(--accent-green)' : 'var(--text-muted)'}">${p.ollama.status}</span>`;
+        }
+        if (p.lora_pytorch) {
+          const el = document.getElementById("lm-badge-pytorch");
+          if (el) el.innerHTML = `PyTorch LoRA: <span class="badge-val" style="color: ${p.lora_pytorch.status === 'AVAILABLE' ? 'var(--accent-green)' : 'var(--accent-warn)'}">${p.lora_pytorch.status}</span>`;
+        }
+        log(`Offline Local Model Probe complete. Active: ${data.active_recommended_backend}`, "success");
+      } catch (err) {
+        if (out) out.innerText = `Probe error: ${err.message}`;
+        log(`Local model probe failed: ${err.message}`, "alert");
+      }
+    }
+
+    async function runLocalModelGenerate() {
+      const prompt = document.getElementById("lm-prompt-input")?.value || "Analyze structuring risk.";
+      const backend = document.getElementById("lm-backend-select")?.value || "auto";
+      const outText = document.getElementById("lm-output-text");
+      const telemBox = document.getElementById("lm-output-telemetry");
+      
+      if (outText) outText.innerText = `Generating with local backend [${backend}] (offline, zero-cloud)...`;
+      try {
+        const t0 = performance.now();
+        const res = await fetch("/api/v1/local-model/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt: prompt, backend: backend, max_tokens: 48, temperature: 0.2 })
+        });
+        const data = await res.json();
+        const elapsed = (performance.now() - t0).toFixed(1);
+        
+        if (outText) outText.innerText = data.generated_text;
+        if (telemBox) {
+          telemBox.style.display = "flex";
+          document.getElementById("lm-telemetry-backend").innerText = `Backend: ${data.backend_used}`;
+          document.getElementById("lm-telemetry-tokens").innerText = `Tokens: ${data.tokens_generated}`;
+          document.getElementById("lm-telemetry-speed").innerText = `Speed: ${data.tokens_per_second} tok/s`;
+          document.getElementById("lm-telemetry-latency").innerText = `Latency: ${data.duration_ms} ms`;
+        }
+        log(`Local offline generation successful (${data.backend_used}, ${data.tokens_generated} tokens in ${data.duration_ms}ms)`, "success");
+      } catch (err) {
+        if (outText) outText.innerText = `Generation error: ${err.message}`;
+        log(`Offline generation error: ${err.message}`, "alert");
+      }
+    }
+
+    async function runLocalModelBenchmark() {
+      const out = document.getElementById("vector-console-output");
+      if (out) out.innerText = "Executing comparative benchmark across all offline local backends...";
+      try {
+        const res = await fetch("/api/v1/local-model/benchmark", { method: "POST" });
+        const data = await res.json();
+        if (out) out.innerText = JSON.stringify(data, null, 2);
+        log("Local model comparative benchmark completed and persisted.", "success");
+      } catch (err) {
+        if (out) out.innerText = `Benchmark error: ${err.message}`;
+        log(`Benchmark failed: ${err.message}`, "alert");
       }
     }
 

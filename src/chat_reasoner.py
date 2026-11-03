@@ -37,6 +37,7 @@ from cyber_physical_guardian import cyber_physical_guardian
 from open_network_mesh import open_network_mesh
 from causal_stress_novelty_pipeline import causal_pipeline
 from higher_order_vectors import higher_order_vectors
+from local_model_bridge import local_model_bridge
 
 
 def generate_conversational_response(
@@ -120,6 +121,31 @@ def generate_conversational_response(
             f"*(Executed via Sandboxed Tool & Function Calling Layer in {tool_res.execution_time_ms:.1f}ms)*"
         )
         return reply, reasoning_chain, confidence, subsystem
+
+    # --------------------------------------------------------------------------
+    # 0.2 OFFLINE LOCAL MODEL BRIDGE (VECTOR 2: ZERO-CLOUD NEURAL GENERATION)
+    # --------------------------------------------------------------------------
+    local_model_trigger = any(k in q_lower for k in [
+        "offline model", "local llm", "local model", "run local model", 
+        "smollm", "lora model", "offline inference", "edge model"
+    ])
+    if local_model_trigger and not any(k in q_lower for k in ["disable all predictive"]):
+        reasoning_chain.append("Routing query to Offline Local Model Bridge (Vector 2).")
+        gen_res = local_model_bridge.generate(q_clean, backend="auto", max_tokens=max_tokens, temperature=temperature)
+        reasoning_chain.append(f"Backend selected: {gen_res.backend_used} (Tokens: {gen_res.tokens_generated}, Latency: {gen_res.duration_ms:.1f}ms, Speed: {gen_res.tokens_per_second:.1f} tok/s).")
+        reasoning_chain.append(f"Fallback ladder traversed: {' -> '.join(gen_res.fallback_path)}.")
+        subsystem = "OFFLINE_LOCAL_MODEL_BRIDGE"
+        reply = (
+            f"### Offline Local Model Response (`{gen_res.backend_used}`)\n\n"
+            f"{gen_res.generated_text}\n\n"
+            f"---\n"
+            f"**Edge Inference Telemetry**:\n"
+            f"- **Backend**: `{gen_res.backend_used}`\n"
+            f"- **Offline Certified**: `{gen_res.offline_certified}` (Zero Cloud Egress)\n"
+            f"- **Throughput**: `{gen_res.tokens_per_second:.1f} tokens/sec` (`{gen_res.tokens_generated}` tokens in `{gen_res.duration_ms:.1f} ms`)\n"
+            f"- **Fallback Path**: `{' -> '.join(gen_res.fallback_path)}`"
+        )
+        return reply, reasoning_chain, 0.96, subsystem
 
     # --------------------------------------------------------------------------
     # 0.5 DYNAMIC RAG & HYBRID VECTOR MEMORY RETRIEVAL (Unstructured Papers & Documents)
