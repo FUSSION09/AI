@@ -17,6 +17,7 @@ import os
 import sys
 import time
 import json
+import re
 import socket
 import platform
 import subprocess
@@ -568,7 +569,7 @@ def dispatch_tool_intent(query: str) -> Optional[Tuple[str, Dict[str, Any]]]:
         return "ping_network_host", {"host": host}
 
     # Adapters list
-    if any(k in q for k in ["adapters", "network interfaces", "nic", "ethernet adapter"]):
+    if any(k in q for k in ["adapters", "network interfaces", "ethernet adapter"]) or bool(re.search(r'\bnic\b', q)):
         return "list_network_adapters", {}
 
     # Top processes

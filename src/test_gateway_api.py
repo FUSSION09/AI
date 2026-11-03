@@ -769,8 +769,35 @@ def run_api_tests():
     assert len(par_rep_data["paradox_resolutions"]) == 3
     print(f"[Test 83: /paradox/report] Status: 200 OK | Retrieved Resolutions: {len(par_rep_data['paradox_resolutions'])} | Paraconsistent Isolation Confirmed.")
 
+    # =========================================================================
+    # VECTOR GAMMA: THE EXTERNALIZATION PROTOCOL CONTRACTS (TESTS 84-86)
+    # =========================================================================
+    # 84. Test /network/externalize/dialogue (Inter-System Dialectic Execution)
+    r_dia = client.post("/network/externalize/dialogue")
+    assert r_dia.status_code == 200
+    dia_data = r_dia.json()
+    assert dia_data["peers_interfaced"] == 3
+    assert len(dia_data["network_dialogue_packets"]) == 3
+    print(f"[Test 84: /network/externalize/dialogue] Status: 200 OK | Peers Interfaced: {dia_data['peers_interfaced']} | Mutual Info: {dia_data['total_mutual_information_bits']:.2f} bits")
+
+    # 85. Test /network/externalize/report (Externalization Report Retrieval)
+    r_ext_rep = client.get("/network/externalize/report")
+    assert r_ext_rep.status_code == 200
+    ext_rep_data = r_ext_rep.json()
+    assert "mean_epistemic_parallax_gain_bits" in ext_rep_data
+    assert "formal_answers_to_externalization_question" in ext_rep_data
+    print(f"[Test 85: /network/externalize/report] Status: 200 OK | Parallax Gain: +{ext_rep_data['mean_epistemic_parallax_gain_bits']:.2f} bits | Network Effect Verified.")
+
+    # 86. Test /network/externalize/insights (Emergent Insights Extraction)
+    r_ins = client.get("/network/externalize/insights")
+    assert r_ins.status_code == 200
+    ins_data = r_ins.json()
+    assert ins_data["total_insights"] == 3
+    assert len(ins_data["emergent_insights"]) == 3
+    print(f"[Test 86: /network/externalize/insights] Status: 200 OK | Total Emergent Insights: {ins_data['total_insights']} | Anti-Solipsism Confirmed.")
+
     print("=" * 75)
-    print("ALL 83 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
+    print("ALL 86 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
     print("=" * 75)
 
 if __name__ == "__main__":

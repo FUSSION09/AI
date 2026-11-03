@@ -54,6 +54,7 @@ from rag_vector_engine import rag_database
 from rlhf_feedback_engine import rlhf_engine
 from predictive_director import predictive_director
 from paradox_engine import paradox_engine, PARADOX_REPORT_FILE
+from externalization_protocol import externalization_protocol, EXTERNALIZATION_REPORT_FILE
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -1584,6 +1585,33 @@ def get_paradox_engine_report():
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Failed to read paradox report: {str(e)}")
     return paradox_engine.run_paradox_simulation()
+
+
+# ==============================================================================
+# 4.11 VECTOR GAMMA: THE EXTERNALIZATION PROTOCOL (THE NETWORK EFFECT)
+# ==============================================================================
+
+@app.post("/network/externalize/dialogue", tags=["Externalization Protocol & Network Effect"])
+def execute_externalization_dialogue():
+    """Executes inter-system dialectic translation across 3 external non-human intelligences (Diffusion, Petri-Net, Neuro-Symbolic)."""
+    report = externalization_protocol.execute_network_dialectic()
+    return report
+
+@app.get("/network/externalize/report", tags=["Externalization Protocol & Network Effect"])
+def get_externalization_report():
+    """Retrieves the latest Externalization Protocol report on epistemic parallax and cross-system mutual information."""
+    report = externalization_protocol.get_latest_report()
+    return report
+
+@app.get("/network/externalize/insights", tags=["Externalization Protocol & Network Effect"])
+def get_emergent_network_insights():
+    """Returns the emergent epistemic breakthroughs generated exclusively through dialectics with external non-human intelligences."""
+    report = externalization_protocol.get_latest_report()
+    return {
+        "total_insights": len(report["emergent_insights"]),
+        "mean_epistemic_parallax_gain_bits": report["mean_epistemic_parallax_gain_bits"],
+        "emergent_insights": report["emergent_insights"]
+    }
 
 
 

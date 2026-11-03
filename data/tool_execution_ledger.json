@@ -270,5 +270,45 @@
     "latency_ms": 101.83,
     "summary": "### Real-Time System Vitals Diagnostic\n\n- **CPU Load**: `22.0%` (8 Physical Cores, 12 Logical Threads)\n- **Memory (RAM)**: `78.1% Used` (12.3 GB used of 15.7 GB)\n- **Battery**: `91%` (On Battery)\n- **System Uptime**: `2d 19h 3m`\n- **Storage Drives**:\n  - Drive `C:\\`: 116.7 GB free of 325.8 GB (64.2% used)\n  - Drive `D:\\`: 5.3 GB free of 148.9 GB (96.4% used)\n- **Operating System**: `Windows-10-10.0.26300-SP0`\n\nSystem health is **NOMINAL**.",
     "has_error": false
+  },
+  {
+    "timestamp": 1793739431.4895809,
+    "tool_name": "list_network_adapters",
+    "success": true,
+    "latency_ms": 2526.62,
+    "summary": "### Detected Network Adapters (3 total)\n\n- `Bluetooth Network Connection`: [DOWN] `Disconnected` | Bluetooth Device (Personal Area Network) (3 Mbps)\n- `Ethernet 2`: [UP] `Up` | VirtualBox Host-Only Ethernet Adapter (1 Gbps)\n- `Wi-Fi`: [UP] `Up` | Intel(R) Wi-Fi 6E AX211 160MHz (72.2 Mbps)",
+    "has_error": false
+  },
+  {
+    "timestamp": 1793739667.1713612,
+    "tool_name": "get_wifi_status",
+    "success": true,
+    "latency_ms": 5998.86,
+    "summary": "Your Wi-Fi is **ONLINE and CONNECTED** to **Airtel_rake_5050 4**.\n\n- **Adapter**: `Intel(R) Wi-Fi 6E AX211 160MHz`\n- **Link Speed**: `390 Mbps`\n- **Local IP**: `192.168.1.10`\n- **Default Gateway**: `192.168.1.1` (51.5 ms)\n- **Internet Connectivity**: Operational (Ping to Google DNS: 93.1 ms)\n\nEverything is functioning normally. Signal and route to the local router are established.",
+    "has_error": false
+  },
+  {
+    "timestamp": 1793739667.357914,
+    "tool_name": "get_system_vitals",
+    "success": true,
+    "latency_ms": 160.16,
+    "summary": "### Real-Time System Vitals Diagnostic\n\n- **CPU Load**: `14.1%` (8 Physical Cores, 12 Logical Threads)\n- **Memory (RAM)**: `78.3% Used` (12.3 GB used of 15.7 GB)\n- **Battery**: `82%` (On Battery)\n- **System Uptime**: `2d 19h 12m`\n- **Storage Drives**:\n  - Drive `C:\\`: 116.7 GB free of 325.8 GB (64.2% used)\n  - Drive `D:\\`: 5.3 GB free of 148.9 GB (96.4% used)\n- **Operating System**: `Windows-10-10.0.26300-SP0`\n\nSystem health is **NOMINAL**.",
+    "has_error": false
+  },
+  {
+    "timestamp": 1793739667.537647,
+    "tool_name": "list_wifi_profiles",
+    "success": true,
+    "latency_ms": 121.14,
+    "summary": "Found **78 saved Wi-Fi network profile(s)** on this device.\n\n**Recent Saved Networks**:\n- `Airtel_Mukesh_5G`\n- `Airtel_maya_1580`\n- `Airtel_rake_5050`\n- `A`\n- `FTTH-18F8`\n- `moto edge 50 neo_4176`\n- `Airtel_chir_3086`\n- `Airtel_Lohan 1878`\n- `Tarun`\n- `Piyush`\n- *...and 68 additional saved networks.*",
+    "has_error": false
+  },
+  {
+    "timestamp": 1793739667.8538148,
+    "tool_name": "get_system_vitals",
+    "success": true,
+    "latency_ms": 102.19,
+    "summary": "### Real-Time System Vitals Diagnostic\n\n- **CPU Load**: `14.3%` (8 Physical Cores, 12 Logical Threads)\n- **Memory (RAM)**: `78.3% Used` (12.3 GB used of 15.7 GB)\n- **Battery**: `82%` (On Battery)\n- **System Uptime**: `2d 19h 12m`\n- **Storage Drives**:\n  - Drive `C:\\`: 116.7 GB free of 325.8 GB (64.2% used)\n  - Drive `D:\\`: 5.3 GB free of 148.9 GB (96.4% used)\n- **Operating System**: `Windows-10-10.0.26300-SP0`\n\nSystem health is **NOMINAL**.",
+    "has_error": false
   }
 ]
