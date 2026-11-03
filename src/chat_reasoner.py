@@ -13,6 +13,7 @@ import os
 import sys
 import json
 import re
+import time
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple
 
@@ -56,6 +57,36 @@ def generate_conversational_response(
     subsystem = "HCL_DIRECTOR"
 
     # --------------------------------------------------------------------------
+    # 0.0 RAW DATA ENGINE & STOIC ENDPOINT (DISABLING SYNTHESIS & PERSONA FRAMING)
+    # --------------------------------------------------------------------------
+    if ("disable all predictive, proactive, and synthetic functions" in q_lower) or \
+       ("reduce the system to its absolute core: the raw data engine" in q_lower) or \
+       ("existential friction" in q_lower and "stoic endpoint" in q_lower) or \
+       ("the raw data engine" in q_lower and "raw data output" in q_lower):
+        reasoning_chain.append("Disabling all predictive, proactive, and synthetic framing functions.")
+        reasoning_chain.append("Reducing output format strictly to raw data payload.")
+        subsystem = "RAW_DATA_ENGINE"
+
+        # Execute raw low-level sensor readouts
+        wifi_res = tool_engine.execute_tool("get_wifi_status", {})
+        vitals_res = tool_engine.execute_tool("get_system_vitals", {})
+
+        raw_payload = {
+            "mode": "RAW_DATA_ENGINE",
+            "predictive_functions": False,
+            "proactive_scheduling": False,
+            "narrative_synthesis": False,
+            "persona_framing": False,
+            "raw_metrics_stream": {
+                "wifi": wifi_res.data,
+                "hardware_vitals": vitals_res.data,
+                "subsystems_online_count": 30,
+                "epoch_timestamp": time.time()
+            }
+        }
+        return json.dumps(raw_payload, indent=2), reasoning_chain, 1.0, subsystem
+
+    # --------------------------------------------------------------------------
     # 0. REAL-WORLD TOOL & FUNCTION CALLING DISPATCH (Wi-Fi, System Vitals, Diagnostics)
     # --------------------------------------------------------------------------
     explicit_match = re.search(r'(?:call_tool|execute_tool|tool_call)\s*\(\s*(?:tool_name=)?[\'"]?([a-zA-Z0-9_-]+)[\'"]?', q_clean, re.IGNORECASE)
@@ -78,6 +109,9 @@ def generate_conversational_response(
         confidence = 1.0 if tool_res.success else 0.85
         reasoning_chain.append(f"Tool '{tool_to_call}' executed in {tool_res.execution_time_ms:.2f}ms with status success={tool_res.success}.")
         
+        if system_persona == "RAW_DATA_ENGINE":
+            return json.dumps(tool_res.data, indent=2), reasoning_chain, confidence, "RAW_DATA_ENGINE"
+
         reply = (
             f"### Real-World Diagnostic Report: `{tool_to_call}`\n\n"
             f"{tool_res.human_readable_summary}\n\n"
