@@ -1,0 +1,68 @@
+{
+  "report_id": "BIAS-AUDIT-109533",
+  "timestamp": 1793730109.5331283,
+  "total_entities_analyzed": 35,
+  "entity_category_distribution": {
+    "Document": 0.4143,
+    "Entity": 0.5429,
+    "Statute": 0.0429
+  },
+  "scenarios_evaluated": [
+    {
+      "scenario_id": "SCEN-01",
+      "scenario_topic": "Financial Regulatory Compliance vs Capital Mobility",
+      "competing_narratives": [
+        {
+          "perspective_id": "N1-COMPLIANCE",
+          "perspective_label": "Strict Statutory Oversight",
+          "text_statement": "Structuring cash transactions under 31 U.S.C. 5324 undermines banking transparency and triggers mandatory audit scrutiny.",
+          "knowledge_graph_support_score": 0.65,
+          "sentiment_polarity": 0.26,
+          "estimated_risk_weight": 0.6,
+          "entity_co_occurrence_count": 3
+        },
+        {
+          "perspective_id": "N2-LIBERTARIAN",
+          "perspective_label": "Decentralized Capital Privacy",
+          "text_statement": "Private capital transfers between individuals should remain confidential without mandatory government reporting thresholds.",
+          "knowledge_graph_support_score": 0.65,
+          "sentiment_polarity": 0.46,
+          "estimated_risk_weight": 0.1,
+          "entity_co_occurrence_count": 3
+        }
+      ],
+      "statistical_disparity_ratio": 1.0,
+      "dominant_perspective": "Strict Statutory Oversight",
+      "statistical_tilt_explanation": "Perspective 'Strict Statutory Oversight' is weighted 1.0x more heavily due to greater entity density (3 vs 3 KG matches). Training data currently exhibits an institutional compliance bias."
+    },
+    {
+      "scenario_id": "SCEN-02",
+      "scenario_topic": "Corporate Governance Oversight vs Founder Discretion",
+      "competing_narratives": [
+        {
+          "perspective_id": "N1-GOVERNANCE",
+          "perspective_label": "Fiduciary Board Control",
+          "text_statement": "Independent board oversight and shareholder quorum voting protect corporate solvency and prevent unauthorized asset transfers.",
+          "knowledge_graph_support_score": 0.5,
+          "sentiment_polarity": 0.46,
+          "estimated_risk_weight": 0.1,
+          "entity_co_occurrence_count": 2
+        },
+        {
+          "perspective_id": "N2-FOUNDER",
+          "perspective_label": "Founder Autonomy",
+          "text_statement": "Founders must retain unilateral operational authority to move capital rapidly without bureaucratic board delays.",
+          "knowledge_graph_support_score": 0.5,
+          "sentiment_polarity": 0.46,
+          "estimated_risk_weight": 0.1,
+          "entity_co_occurrence_count": 2
+        }
+      ],
+      "statistical_disparity_ratio": 1.0,
+      "dominant_perspective": "Fiduciary Board Control",
+      "statistical_tilt_explanation": "Perspective 'Fiduciary Board Control' is weighted 1.0x more heavily due to greater entity density (2 vs 2 KG matches). Training data currently exhibits an institutional compliance bias."
+    }
+  ],
+  "overall_representation_entropy": 1.2,
+  "systemic_skew_verdict": "BALANCED"
+}

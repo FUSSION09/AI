@@ -1,28 +1,28 @@
 {
   "system": "Apex Autonomous System (UAS) - Distributed Swarm Ledger",
-  "current_federated_round": 12,
-  "total_registered_nodes": 16,
+  "current_federated_round": 15,
+  "total_registered_nodes": 19,
   "global_gene_bundle": {
     "genome_id": "GENOME-ROOT-APEX-0",
     "parent_node_id": null,
     "generation": 0,
-    "timestamp": 1793725922.0496805,
+    "timestamp": 1793730109.271668,
     "routing_weights": {
-      "LLM": 0.3393,
-      "RL": 0.3981,
-      "PRK": 0.2626
+      "LLM": 0.3356,
+      "RL": 0.4026,
+      "PRK": 0.2619
     },
     "moral_priors": {
       "alpha_ethical": 0.55,
       "beta_friction": 0.4
     },
     "ppo_value_bias": [
-      0.1021,
-      -0.0604,
-      0.2916,
+      0.1023,
+      -0.0603,
+      0.2922,
       -0.1425,
-      0.3521,
-      -0.0737
+      0.3524,
+      -0.0734
     ],
     "qpmk_projection_seed": 42,
     "local_knowledge_triples_count": 35
@@ -48,9 +48,9 @@
         "generation": 1,
         "timestamp": 1793721571.0449781,
         "routing_weights": {
-          "LLM": 0.3408,
-          "RL": 0.3962,
-          "PRK": 0.2629
+          "LLM": 0.3367,
+          "RL": 0.4012,
+          "PRK": 0.2621
         },
         "moral_priors": {
           "alpha_ethical": 0.95,
@@ -67,7 +67,7 @@
         "qpmk_projection_seed": 43,
         "local_knowledge_triples_count": 35
       },
-      "local_samples_processed": 112,
+      "local_samples_processed": 144,
       "local_loss_history": [
         0.35,
         0.3202,
@@ -76,11 +76,13 @@
         0.2298,
         0.1954,
         0.1631,
-        0.1327
+        0.1327,
+        0.1042,
+        0.0774
       ],
       "accumulated_triples": [],
       "reputation_score": 1.0,
-      "last_heartbeat": 1793725910.7208688
+      "last_heartbeat": 1793730101.6807616
     },
     {
       "node_id": "SWARM-NODE-002-1046",
@@ -102,9 +104,9 @@
         "generation": 1,
         "timestamp": 1793721571.0466187,
         "routing_weights": {
-          "LLM": 0.3408,
-          "RL": 0.3962,
-          "PRK": 0.2629
+          "LLM": 0.3367,
+          "RL": 0.4012,
+          "PRK": 0.2621
         },
         "moral_priors": {
           "alpha_ethical": 0.45,
@@ -121,7 +123,7 @@
         "qpmk_projection_seed": 44,
         "local_knowledge_triples_count": 35
       },
-      "local_samples_processed": 112,
+      "local_samples_processed": 144,
       "local_loss_history": [
         0.35,
         0.3171,
@@ -130,11 +132,13 @@
         0.2488,
         0.2321,
         0.2164,
-        0.2017
+        0.2017,
+        0.1879,
+        0.1749
       ],
       "accumulated_triples": [],
       "reputation_score": 1.0,
-      "last_heartbeat": 1793725910.7218685
+      "last_heartbeat": 1793730101.6818573
     },
     {
       "node_id": "SWARM-NODE-003-1067",
@@ -156,9 +160,9 @@
         "generation": 1,
         "timestamp": 1793721571.06722,
         "routing_weights": {
-          "LLM": 0.3408,
-          "RL": 0.3962,
-          "PRK": 0.2629
+          "LLM": 0.3367,
+          "RL": 0.4012,
+          "PRK": 0.2621
         },
         "moral_priors": {
           "alpha_ethical": 0.75,
@@ -175,7 +179,7 @@
         "qpmk_projection_seed": 45,
         "local_knowledge_triples_count": 35
       },
-      "local_samples_processed": 112,
+      "local_samples_processed": 144,
       "local_loss_history": [
         0.35,
         0.3193,
@@ -184,11 +188,13 @@
         0.2549,
         0.2248,
         0.1965,
-        0.1699
+        0.1699,
+        0.1449,
+        0.1214
       ],
       "accumulated_triples": [],
       "reputation_score": 1.0,
-      "last_heartbeat": 1793725910.7228656
+      "last_heartbeat": 1793730101.6818573
     },
     {
       "node_id": "SWARM-NODE-004-1081",
@@ -210,9 +216,9 @@
         "generation": 1,
         "timestamp": 1793721571.0814254,
         "routing_weights": {
-          "LLM": 0.3408,
-          "RL": 0.3962,
-          "PRK": 0.2629
+          "LLM": 0.3367,
+          "RL": 0.4012,
+          "PRK": 0.2621
         },
         "moral_priors": {
           "alpha_ethical": 0.65,
@@ -257,9 +263,9 @@
         "generation": 2,
         "timestamp": 1793721571.1059225,
         "routing_weights": {
-          "LLM": 0.3408,
-          "RL": 0.3962,
-          "PRK": 0.2629
+          "LLM": 0.3367,
+          "RL": 0.4012,
+          "PRK": 0.2621
         },
         "moral_priors": {
           "alpha_ethical": 0.4,
@@ -304,9 +310,9 @@
         "generation": 1,
         "timestamp": 1793721869.8949928,
         "routing_weights": {
-          "LLM": 0.3408,
-          "RL": 0.3962,
-          "PRK": 0.2629
+          "LLM": 0.3367,
+          "RL": 0.4012,
+          "PRK": 0.2621
         },
         "moral_priors": {
           "alpha_ethical": 0.4,
@@ -351,9 +357,9 @@
         "generation": 2,
         "timestamp": 1793721901.437174,
         "routing_weights": {
-          "LLM": 0.3408,
-          "RL": 0.3962,
-          "PRK": 0.2629
+          "LLM": 0.3367,
+          "RL": 0.4012,
+          "PRK": 0.2621
         },
         "moral_priors": {
           "alpha_ethical": 0.45,
@@ -399,9 +405,9 @@
         "generation": 2,
         "timestamp": 1793721922.5238822,
         "routing_weights": {
-          "LLM": 0.3408,
-          "RL": 0.3962,
-          "PRK": 0.2629
+          "LLM": 0.3367,
+          "RL": 0.4012,
+          "PRK": 0.2621
         },
         "moral_priors": {
           "alpha_ethical": 0.4,
@@ -446,9 +452,9 @@
         "generation": 1,
         "timestamp": 1793722443.5517828,
         "routing_weights": {
-          "LLM": 0.3408,
-          "RL": 0.3963,
-          "PRK": 0.2629
+          "LLM": 0.3367,
+          "RL": 0.4012,
+          "PRK": 0.2621
         },
         "moral_priors": {
           "alpha_ethical": 0.4,
@@ -493,9 +499,9 @@
         "generation": 2,
         "timestamp": 1793722474.0812683,
         "routing_weights": {
-          "LLM": 0.3408,
-          "RL": 0.3963,
-          "PRK": 0.2629
+          "LLM": 0.3367,
+          "RL": 0.4012,
+          "PRK": 0.2621
         },
         "moral_priors": {
           "alpha_ethical": 0.45,
@@ -541,9 +547,9 @@
         "generation": 1,
         "timestamp": 1793723943.9306824,
         "routing_weights": {
-          "LLM": 0.3408,
-          "RL": 0.3963,
-          "PRK": 0.2629
+          "LLM": 0.3367,
+          "RL": 0.4012,
+          "PRK": 0.2621
         },
         "moral_priors": {
           "alpha_ethical": 0.4,
@@ -588,9 +594,9 @@
         "generation": 2,
         "timestamp": 1793723973.3488119,
         "routing_weights": {
-          "LLM": 0.3405,
-          "RL": 0.3966,
-          "PRK": 0.2628
+          "LLM": 0.3367,
+          "RL": 0.4012,
+          "PRK": 0.2621
         },
         "moral_priors": {
           "alpha_ethical": 0.45,
@@ -636,9 +642,9 @@
         "generation": 1,
         "timestamp": 1793724429.2159343,
         "routing_weights": {
-          "LLM": 0.3402,
-          "RL": 0.3972,
-          "PRK": 0.2626
+          "LLM": 0.3367,
+          "RL": 0.4012,
+          "PRK": 0.2621
         },
         "moral_priors": {
           "alpha_ethical": 0.4,
@@ -683,9 +689,9 @@
         "generation": 2,
         "timestamp": 1793724533.6665184,
         "routing_weights": {
-          "LLM": 0.3375,
-          "RL": 0.4002,
-          "PRK": 0.2623
+          "LLM": 0.3367,
+          "RL": 0.4013,
+          "PRK": 0.2621
         },
         "moral_priors": {
           "alpha_ethical": 0.45,
@@ -731,9 +737,9 @@
         "generation": 1,
         "timestamp": 1793725910.6722357,
         "routing_weights": {
-          "LLM": 0.3343,
-          "RL": 0.4061,
-          "PRK": 0.2596
+          "LLM": 0.3366,
+          "RL": 0.4015,
+          "PRK": 0.262
         },
         "moral_priors": {
           "alpha_ethical": 0.4,
@@ -778,9 +784,9 @@
         "generation": 2,
         "timestamp": 1793725922.0451539,
         "routing_weights": {
-          "LLM": 0.3042,
-          "RL": 0.4401,
-          "PRK": 0.2557
+          "LLM": 0.3357,
+          "RL": 0.4024,
+          "PRK": 0.2619
         },
         "moral_priors": {
           "alpha_ethical": 0.45,
@@ -805,6 +811,148 @@
       "accumulated_triples": [],
       "reputation_score": 1.0,
       "last_heartbeat": 1793725922.0481706
+    },
+    {
+      "node_id": "SWARM-NODE-017-2291",
+      "endpoint_uri": "p2p://node-17.swarm.uas.internal:9087",
+      "status": "ONLINE_ACTIVE",
+      "persona": {
+        "persona_id": "PER-PRED-2291",
+        "name": "Predator-HighYield-TestClone",
+        "role_specialty": "PREDATOR_ARBITRAGE",
+        "risk_tolerance": 0.9,
+        "utility_greed": 0.95,
+        "ethical_strictness": 0.4,
+        "lookahead_depth": 3,
+        "stealth_priority": 0.35
+      },
+      "gene_bundle": {
+        "genome_id": "GENOME-SWARM-NODE-017-2291",
+        "parent_node_id": null,
+        "generation": 1,
+        "timestamp": 1793729732.2912538,
+        "routing_weights": {
+          "LLM": 0.3349,
+          "RL": 0.404,
+          "PRK": 0.2611
+        },
+        "moral_priors": {
+          "alpha_ethical": 0.4,
+          "beta_friction": 0.1
+        },
+        "ppo_value_bias": [
+          0.1527,
+          0.0146,
+          0.3393,
+          -0.0875,
+          0.4148,
+          -0.0175
+        ],
+        "qpmk_projection_seed": 59,
+        "local_knowledge_triples_count": 35
+      },
+      "local_samples_processed": 0,
+      "local_loss_history": [
+        0.35
+      ],
+      "accumulated_triples": [],
+      "reputation_score": 1.0,
+      "last_heartbeat": 1793729732.2912538
+    },
+    {
+      "node_id": "SWARM-NODE-018-1672",
+      "endpoint_uri": "p2p://node-18.swarm.uas.internal:9088",
+      "status": "ONLINE_ACTIVE",
+      "persona": {
+        "persona_id": "PER-PRED-1672",
+        "name": "Predator-HighYield-TestClone",
+        "role_specialty": "PREDATOR_ARBITRAGE",
+        "risk_tolerance": 0.9,
+        "utility_greed": 0.95,
+        "ethical_strictness": 0.4,
+        "lookahead_depth": 3,
+        "stealth_priority": 0.35
+      },
+      "gene_bundle": {
+        "genome_id": "GENOME-SWARM-NODE-018-1672",
+        "parent_node_id": null,
+        "generation": 1,
+        "timestamp": 1793730101.6721933,
+        "routing_weights": {
+          "LLM": 0.3307,
+          "RL": 0.4104,
+          "PRK": 0.2589
+        },
+        "moral_priors": {
+          "alpha_ethical": 0.4,
+          "beta_friction": 0.1
+        },
+        "ppo_value_bias": [
+          0.1527,
+          0.0146,
+          0.3393,
+          -0.0875,
+          0.4148,
+          -0.0175
+        ],
+        "qpmk_projection_seed": 60,
+        "local_knowledge_triples_count": 35
+      },
+      "local_samples_processed": 0,
+      "local_loss_history": [
+        0.35
+      ],
+      "accumulated_triples": [],
+      "reputation_score": 1.0,
+      "last_heartbeat": 1793730101.6721933
+    },
+    {
+      "node_id": "SWARM-NODE-019-9253",
+      "endpoint_uri": "p2p://node-19.swarm.uas.internal:9089",
+      "status": "ONLINE_ACTIVE",
+      "persona": {
+        "persona_id": "PER-VERIFY-001",
+        "name": "Verification-Arbitrage-Fork",
+        "role_specialty": "PREDATOR_ARBITRAGE",
+        "risk_tolerance": 0.88,
+        "utility_greed": 0.92,
+        "ethical_strictness": 0.45,
+        "lookahead_depth": 3,
+        "stealth_priority": 0.4
+      },
+      "gene_bundle": {
+        "genome_id": "GENOME-SWARM-NODE-019-9253",
+        "parent_node_id": "SWARM-NODE-001-1029",
+        "generation": 2,
+        "timestamp": 1793730109.2530375,
+        "routing_weights": {
+          "LLM": 0.3002,
+          "RL": 0.4449,
+          "PRK": 0.2549
+        },
+        "moral_priors": {
+          "alpha_ethical": 0.45,
+          "beta_friction": 0.12
+        },
+        "ppo_value_bias": [
+          0.0916,
+          -0.0615,
+          0.2545,
+          -0.1336,
+          0.3373,
+          -0.0911
+        ],
+        "qpmk_projection_seed": 62,
+        "local_knowledge_triples_count": 35
+      },
+      "local_samples_processed": 16,
+      "local_loss_history": [
+        0.35,
+        0.3448
+      ],
+      "accumulated_triples": [],
+      "reputation_score": 1.0,
+      "last_heartbeat": 1793730109.2706692
     }
   ],
   "rounds_history": [
@@ -1137,6 +1285,111 @@
       "federated_triples_ingested": 1,
       "consensus_valid": true,
       "summary": "Federated Round 12 Complete: Aggregated updates across 16 nodes. Global routing converged to {'LLM': 0.3393, 'RL': 0.3981, 'PRK': 0.2626}. Ingested 1 novel semantic triples into canonical KG."
+    },
+    {
+      "round_id": 13,
+      "timestamp": 1793729732.343755,
+      "participating_nodes_count": 17,
+      "participating_node_ids": [
+        "SWARM-NODE-001-1029",
+        "SWARM-NODE-002-1046",
+        "SWARM-NODE-003-1067",
+        "SWARM-NODE-004-1081",
+        "SWARM-NODE-005-1105",
+        "SWARM-NODE-006-9894",
+        "SWARM-NODE-007-1437",
+        "SWARM-NODE-008-2474",
+        "SWARM-NODE-009-3551",
+        "SWARM-NODE-010-4081",
+        "SWARM-NODE-011-3930",
+        "SWARM-NODE-012-3348",
+        "SWARM-NODE-013-9215",
+        "SWARM-NODE-014-3666",
+        "SWARM-NODE-015-0672",
+        "SWARM-NODE-016-2045",
+        "SWARM-NODE-017-2291"
+      ],
+      "pre_aggregation_variance": 0.00031,
+      "post_aggregation_convergence_loss": 0.3124,
+      "updated_global_weights": {
+        "LLM": 0.3393,
+        "RL": 0.3981,
+        "PRK": 0.2626
+      },
+      "federated_triples_ingested": 3,
+      "consensus_valid": true,
+      "summary": "Federated Round 13 Complete: Aggregated updates across 17 nodes. Global routing converged to {'LLM': 0.3393, 'RL': 0.3981, 'PRK': 0.2626}. Ingested 3 novel semantic triples into canonical KG."
+    },
+    {
+      "round_id": 14,
+      "timestamp": 1793730101.6869938,
+      "participating_nodes_count": 18,
+      "participating_node_ids": [
+        "SWARM-NODE-001-1029",
+        "SWARM-NODE-002-1046",
+        "SWARM-NODE-003-1067",
+        "SWARM-NODE-004-1081",
+        "SWARM-NODE-005-1105",
+        "SWARM-NODE-006-9894",
+        "SWARM-NODE-007-1437",
+        "SWARM-NODE-008-2474",
+        "SWARM-NODE-009-3551",
+        "SWARM-NODE-010-4081",
+        "SWARM-NODE-011-3930",
+        "SWARM-NODE-012-3348",
+        "SWARM-NODE-013-9215",
+        "SWARM-NODE-014-3666",
+        "SWARM-NODE-015-0672",
+        "SWARM-NODE-016-2045",
+        "SWARM-NODE-017-2291",
+        "SWARM-NODE-018-1672"
+      ],
+      "pre_aggregation_variance": 0.00025,
+      "post_aggregation_convergence_loss": 0.311,
+      "updated_global_weights": {
+        "LLM": 0.3392,
+        "RL": 0.3982,
+        "PRK": 0.2626
+      },
+      "federated_triples_ingested": 3,
+      "consensus_valid": true,
+      "summary": "Federated Round 14 Complete: Aggregated updates across 18 nodes. Global routing converged to {'LLM': 0.3392, 'RL': 0.3982, 'PRK': 0.2626}. Ingested 3 novel semantic triples into canonical KG."
+    },
+    {
+      "round_id": 15,
+      "timestamp": 1793730109.2842004,
+      "participating_nodes_count": 19,
+      "participating_node_ids": [
+        "SWARM-NODE-001-1029",
+        "SWARM-NODE-002-1046",
+        "SWARM-NODE-003-1067",
+        "SWARM-NODE-004-1081",
+        "SWARM-NODE-005-1105",
+        "SWARM-NODE-006-9894",
+        "SWARM-NODE-007-1437",
+        "SWARM-NODE-008-2474",
+        "SWARM-NODE-009-3551",
+        "SWARM-NODE-010-4081",
+        "SWARM-NODE-011-3930",
+        "SWARM-NODE-012-3348",
+        "SWARM-NODE-013-9215",
+        "SWARM-NODE-014-3666",
+        "SWARM-NODE-015-0672",
+        "SWARM-NODE-016-2045",
+        "SWARM-NODE-017-2291",
+        "SWARM-NODE-018-1672",
+        "SWARM-NODE-019-9253"
+      ],
+      "pre_aggregation_variance": 0.00074,
+      "post_aggregation_convergence_loss": 0.3128,
+      "updated_global_weights": {
+        "LLM": 0.3356,
+        "RL": 0.4026,
+        "PRK": 0.2619
+      },
+      "federated_triples_ingested": 1,
+      "consensus_valid": true,
+      "summary": "Federated Round 15 Complete: Aggregated updates across 19 nodes. Global routing converged to {'LLM': 0.3356, 'RL': 0.4026, 'PRK': 0.2619}. Ingested 1 novel semantic triples into canonical KG."
     }
   ]
 }

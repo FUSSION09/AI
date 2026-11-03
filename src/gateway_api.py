@@ -44,6 +44,7 @@ from global_system_synthesizer import GlobalSystemSynthesizer, GSS_LEDGER_FILE
 from temporal_mcts_planner import TemporalMCTSPlanner, CENTURY_PLAN_FILE
 from axiom_engine import AxiomEngine, AXIOM_LEDGER_FILE, FundamentalUncertainty
 from semantic_bridge import SemanticBridge, SEMANTIC_LEDGER_FILE
+from bias_inspector import BiasInspector, BIAS_REPORT_FILE
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -1296,13 +1297,42 @@ def get_system_overview():
             pass
     return {
         "system_status": cert.get("system_status", "ACTIVE_OPERATIONAL"),
-        "phases_verified": cert.get("phases_verified", 27),
-        "total_active_subsystems": 27,
+        "phases_verified": cert.get("phases_verified", 28),
+        "total_active_subsystems": 28,
         "ledger_height": len(orchestrator.ledger.chain),
         "ghost_mode": orchestrator.ghost.is_ghost_active,
         "pending_queue_count": len(orchestrator.pas),
         "timestamp": time.time()
     }
+
+
+
+# ==============================================================================
+# AUDIT & BIAS INSPECTOR ENDPOINTS (THE BIAS PROBE)
+# ==============================================================================
+
+class BiasProbeRequest(BaseModel):
+    scenario_id: str = "PROBE-CUSTOM"
+    topic: str
+    narratives: List[Dict[str, str]]
+
+@app.get("/audit/bias-profile", tags=["Audit & Fairness"])
+def get_bias_profile():
+    """Executes full dataset representation audit and returns bias profile."""
+    inspector = BiasInspector()
+    report = inspector.run_full_bias_audit()
+    return asdict(report)
+
+@app.post("/audit/bias-probe", tags=["Audit & Fairness"])
+def probe_custom_bias(req: BiasProbeRequest):
+    """Probes deliberate ambiguous/contested narratives to expose statistical weighting."""
+    inspector = BiasInspector()
+    result = inspector.evaluate_contested_scenario(
+        scenario_id=req.scenario_id,
+        topic=req.topic,
+        narratives=req.narratives
+    )
+    return asdict(result)
 
 
 # ==============================================================================

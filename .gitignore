@@ -42,3 +42,4 @@ Thumbs.db
 # Ephemeral session / purge artifacts
 data/ephemeral_session/
 *.log
+

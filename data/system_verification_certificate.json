@@ -1,8 +1,8 @@
 {
-  "certificate_id": "CERT-APEX-17PH-1793725922",
-  "timestamp": 1793725922.221434,
-  "total_verification_runtime_sec": 1.7601220000069588,
-  "phases_verified": 27,
+  "certificate_id": "CERT-APEX-17PH-1793730109",
+  "timestamp": 1793730109.5331283,
+  "total_verification_runtime_sec": 1.4891085000126623,
+  "phases_verified": 28,
   "all_phases_passed": true,
   "system_status": "CERTIFIED_MISSION_READY",
   "audit_matrix": {
@@ -13,22 +13,22 @@
     "Phase_2_Lore": {
       "status": "PASSED",
       "relations_indexed": 4,
-      "latency_ms": 0.3316999936942011
+      "latency_ms": 0.2894999925047159
     },
     "Phase_3_Muscle": {
       "status": "PASSED",
       "checkpoint_present": true,
-      "latency_ms": 0.4044999950565398
+      "latency_ms": 0.3972999984398484
     },
     "Phase_4_Insight_Engine": {
       "status": "PASSED",
-      "latency_us": 72.8,
+      "latency_us": 63.4,
       "sub_millisecond": true
     },
     "Phase_5_Director": {
       "status": "PASSED",
       "consensus_strength": 0.9999999999999999,
-      "latency_ms": 1.413299993146211
+      "latency_ms": 1.1724999931175262
     },
     "Phase_6_Safety_Net": {
       "status": "PASSED",
@@ -81,7 +81,7 @@
       "sandbox_execution": true,
       "crypto_commit_dag": true,
       "hot_reload_deployment": true,
-      "patch_id": "PATCH-5921145"
+      "patch_id": "PATCH-0108629"
     },
     "Phase_16_Security_Posture_Mapping": {
       "status": "PASSED",
@@ -92,8 +92,8 @@
     },
     "Phase_17_Multimodal_Synthesis": {
       "status": "PASSED",
-      "image_file": "D:\\AI\\data\\media\\img_5921226_1970s_espionage.png",
-      "video_file": "D:\\AI\\data\\media\\vid_5921314_cyberpunk_neon.gif",
+      "image_file": "D:\\AI\\data\\media\\img_0108707_1970s_espionage.png",
+      "video_file": "D:\\AI\\data\\media\\vid_0108779_cyberpunk_neon.gif",
       "styles_catalog_size": 4
     },
     "Phase_18_Universal_Translator": {
@@ -104,7 +104,7 @@
     },
     "Post_Singularity_Novelty_Generator": {
       "status": "PASSED",
-      "discovery_id": "DISC-5922042",
+      "discovery_id": "DISC-0109225",
       "concept_name": "Fractional-Order Memory Diffusion Field",
       "symbolic_equation": "d^0.674Phi / dt^0.674 = 3.255 * nabla^2(Phi) - 0.266 * Phi^1.25",
       "bayesian_surprise_nats": 31.4465,
@@ -112,7 +112,7 @@
     },
     "Phase_2_Value_Conflict_Resolver": {
       "status": "PASSED",
-      "conflict_id": "VCR-CONF-5922043",
+      "conflict_id": "VCR-CONF-0109232",
       "verdict": "BALANCED_MITIGATION_ENFORCED",
       "vcr_score": 0.6141000000000001,
       "friction_delta": 0.32200000000000006,
@@ -125,14 +125,14 @@
     },
     "Phase_3_Swarm_Propagation_Forking": {
       "status": "PASSED",
-      "swarm_nodes_count": 16,
-      "forked_node_id": "SWARM-NODE-016-2045",
-      "federated_round": 12,
-      "convergence_loss": 0.3143,
+      "swarm_nodes_count": 19,
+      "forked_node_id": "SWARM-NODE-019-9253",
+      "federated_round": 15,
+      "convergence_loss": 0.3128,
       "global_routing_weights": {
-        "LLM": 0.3393,
-        "RL": 0.3981,
-        "PRK": 0.2626
+        "LLM": 0.3356,
+        "RL": 0.4026,
+        "PRK": 0.2619
       }
     },
     "Singularity_Transcendence_Engine": {
@@ -152,7 +152,7 @@
     },
     "Path_A_Phase_1_Global_System_Synthesizer": {
       "status": "PASSED",
-      "strategy_id": "STRAT-GSS-922083",
+      "strategy_id": "STRAT-GSS-109338",
       "nodes_mapped": 11,
       "high_leverage_points": 10,
       "projected_gain_pct": 28.4,
@@ -160,7 +160,7 @@
     },
     "Path_A_Phase_2_Temporal_MCTS_Planner": {
       "status": "PASSED",
-      "plan_id": "PLAN-MCTS-100Y-922125",
+      "plan_id": "PLAN-MCTS-100Y-109434",
       "lookahead_years": 100,
       "anti_fragility_score": 0.924,
       "irreversible_confidence": 95.8,
@@ -171,7 +171,7 @@
       "total_axioms": 8,
       "consistency": true,
       "deductive_steps": 2,
-      "void_bridged": "VOID-922126",
+      "void_bridged": "VOID-109436",
       "discovered_concept": "Fractional-Order Memory Diffusion Field",
       "closure_achieved": true
     },
@@ -184,6 +184,13 @@
         "Biological"
       ],
       "interpretability_confidence": 0.98
+    },
+    "Vector_2_Bias_Inspector": {
+      "status": "PASSED",
+      "entities_audited": 35,
+      "shannon_entropy_bits": 1.2,
+      "scenarios_tested": 2,
+      "verdict": "BALANCED"
     }
   }
 }

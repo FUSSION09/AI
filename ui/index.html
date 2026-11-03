@@ -681,6 +681,7 @@
             <div class="subsys-item"><span>[25] 100-Yr MCTS Planner</span><span class="subsys-tag">ONLINE</span></div>
             <div class="subsys-item"><span>[26] Universal Axiom Engine</span><span class="subsys-tag">DEDUCTIVE</span></div>
             <div class="subsys-item"><span>[27] Semantic Bridge XAI</span><span class="subsys-tag">EXPLAINABLE</span></div>
+            <div class="subsys-item"><span>[28] Bias Inspector Probe</span><span class="subsys-tag">AUDITED</span></div>
           </div>
         </div>
 
@@ -789,6 +790,12 @@
           <button class="btn btn-cyan" onclick="runSelfModificationEvolution()">Trigger Evolution Cycle</button>
         </div>
 
+        <div class="engine-card">
+          <div class="engine-head"><span>HIDDEN BIAS PROBE (THE BIAS INSPECTOR)</span><span>VECTOR 2</span></div>
+          <div class="engine-desc">Audits dataset representation skew, entropy, and statistical weighting disparities across culturally contested & ambiguous narratives.</div>
+          <button class="btn btn-cyan" onclick="runBiasInspectorDemo()">Execute Bias Profile Audit</button>
+        </div>
+
       </div>
     </div>
 
@@ -819,7 +826,7 @@
         </div>
         <div class="term-box" id="terminal-stream">
           <div class="term-line"><span class="term-time">[BOOT]</span><span class="term-success">Unified Autonomous System (UAS) Gateway Online at http://127.0.0.1:8000</span></div>
-          <div class="term-line"><span class="term-time">[BOOT]</span><span class="term-info">All 27 phases certified mission-ready.</span></div>
+          <div class="term-line"><span class="term-time">[BOOT]</span><span class="term-info">All 28 phases certified mission-ready.</span></div>
           <div class="term-line"><span class="term-time">[BOOT]</span><span class="term-info">Interactive AI Assistant initialized. Standing by for queries.</span></div>
         </div>
       </div>
@@ -1245,6 +1252,22 @@
         log(`EVOLUTION DEPLOYED: Patch ${data.patch_id} hot-reloaded with status ${data.status}`, "success");
       } catch (err) {
         log(`Evolution error: ${err.message}`, "alert");
+      }
+    }
+
+    async function runBiasInspectorDemo() {
+      log("Executing Hidden Bias Probe & Representation Disparity Audit (Vector 2)...", "info");
+      try {
+        const res = await fetch("/audit/bias-profile");
+        const data = await res.json();
+        log(`BIAS PROFILE AUDIT (${data.report_id}) COMPLETE:`, "success");
+        log(`  -> Representation Entropy: ${data.overall_representation_entropy.toFixed(2)} bits | Verdict: ${data.systemic_skew_verdict}`, "info");
+        data.scenarios_evaluated.forEach(s => {
+          log(`  -> Scenario: ${s.scenario_topic} | Dominant: ${s.dominant_perspective} (Ratio: ${s.statistical_disparity_ratio.toFixed(2)}x)`, "warn");
+          log(`     Tilt: ${s.statistical_tilt_explanation}`, "info");
+        });
+      } catch (err) {
+        log(`Bias Inspector error: ${err.message}`, "alert");
       }
     }
 

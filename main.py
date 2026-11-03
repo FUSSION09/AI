@@ -126,24 +126,9 @@ def run_semantic_bridge():
     run_semantic_bridge_demo()
 
 
-def run_gss():
-    from global_system_synthesizer import run_gss_demo
-    run_gss_demo()
-
-
-def run_century_plan():
-    from temporal_mcts_planner import run_temporal_mcts_demo
-    run_temporal_mcts_demo()
-
-
-def run_axiom():
-    from axiom_engine import run_axiom_engine_demo
-    run_axiom_engine_demo()
-
-
-def run_semantic_bridge():
-    from semantic_bridge import run_semantic_bridge_demo
-    run_semantic_bridge_demo()
+def run_bias_audit():
+    from bias_inspector import run_bias_inspector_demo
+    run_bias_inspector_demo()
 
 
 def run_audit_limits():
@@ -258,6 +243,7 @@ def main():
     subparsers.add_parser("century-plan", help="Execute Path A Phase 2 100-Year Temporal MCTS Century Planning")
     subparsers.add_parser("axiom", help="Execute Path B Phase 1 Universal Axiom Derivation (Axiom Engine)")
     subparsers.add_parser("semantic-bridge", help="Execute Path B Phase 2 Interpretability & Interface Semantic Bridge")
+    subparsers.add_parser("audit-bias", help="Execute Hidden Bias Probe & Representation Disparity Audit")
     subparsers.add_parser("evolve", help="Execute Phase 15 Compiler Agent Self-Modification Cycle")
     subparsers.add_parser("causal-prophecy", help="Execute Phase 14 Predictive Futures Causal Simulation Suite")
     subparsers.add_parser("stress-test", help="Execute Phase 10 Adversarial Red-Teaming Suite")
@@ -296,6 +282,8 @@ def main():
         run_axiom()
     elif args.command == "semantic-bridge":
         run_semantic_bridge()
+    elif args.command == "audit-bias":
+        run_bias_audit()
     elif args.command == "evolve":
         run_evolution()
     elif args.command == "causal-prophecy":

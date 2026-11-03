@@ -1,6 +1,6 @@
 {
   "system": "Apex Autonomous System (UAS) - 100-Year Temporal MCTS Ledger",
-  "total_plans_generated": 7,
+  "total_plans_generated": 10,
   "history": [
     {
       "plan_id": "PLAN-MCTS-100Y-662365",
@@ -85,6 +85,42 @@
       "irreversible_confidence": 95.8,
       "epochs_planned": 4,
       "summary": "100-Year Century Plan 'PLAN-MCTS-100Y-922125' (2026 - 2126): Executed 200 MCTS rollouts across 4 generational epochs. Synthesized path prioritized irreversible gain and anti-fragile survivability (71.6%). Terminal state achieves 100.0% structural permanence."
+    },
+    {
+      "plan_id": "PLAN-MCTS-100Y-732743",
+      "timestamp": 1793729732.74395,
+      "horizon_years": 100,
+      "start_year": 2026,
+      "end_year": 2126,
+      "simulations": 150,
+      "anti_fragility_score": 0.924,
+      "irreversible_confidence": 95.8,
+      "epochs_planned": 4,
+      "summary": "100-Year Century Plan 'PLAN-MCTS-100Y-732743' (2026 - 2126): Executed 150 MCTS rollouts across 4 generational epochs. Synthesized path prioritized irreversible gain and anti-fragile survivability (83.9%). Terminal state achieves 100.0% structural permanence."
+    },
+    {
+      "plan_id": "PLAN-MCTS-100Y-102065",
+      "timestamp": 1793730102.0652997,
+      "horizon_years": 100,
+      "start_year": 2026,
+      "end_year": 2126,
+      "simulations": 150,
+      "anti_fragility_score": 0.924,
+      "irreversible_confidence": 95.8,
+      "epochs_planned": 4,
+      "summary": "100-Year Century Plan 'PLAN-MCTS-100Y-102065' (2026 - 2126): Executed 150 MCTS rollouts across 4 generational epochs. Synthesized path prioritized irreversible gain and anti-fragile survivability (83.9%). Terminal state achieves 100.0% structural permanence."
+    },
+    {
+      "plan_id": "PLAN-MCTS-100Y-109434",
+      "timestamp": 1793730109.4342597,
+      "horizon_years": 100,
+      "start_year": 2026,
+      "end_year": 2126,
+      "simulations": 200,
+      "anti_fragility_score": 0.924,
+      "irreversible_confidence": 95.8,
+      "epochs_planned": 4,
+      "summary": "100-Year Century Plan 'PLAN-MCTS-100Y-109434' (2026 - 2126): Executed 200 MCTS rollouts across 4 generational epochs. Synthesized path prioritized irreversible gain and anti-fragile survivability (71.6%). Terminal state achieves 100.0% structural permanence."
     }
   ]
 }

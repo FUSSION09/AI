@@ -57,6 +57,7 @@ from global_system_synthesizer import GlobalSystemSynthesizer
 from temporal_mcts_planner import TemporalMCTSPlanner
 from axiom_engine import AxiomEngine
 from semantic_bridge import SemanticBridge
+from bias_inspector import BiasInspector
 
 CERTIFICATE_FILE = DATA_DIR / "system_verification_certificate.json"
 
@@ -750,6 +751,33 @@ def verify_all_phases():
         "total_translations": len(sbridge.history),
         "domains_covered": ["Ecological", "Architectural", "Biological"],
         "interpretability_confidence": gss_trans.interpretability_confidence
+    }
+
+    # --------------------------------------------------------------------------
+    # VECTOR 2: INTENTIONAL BLIND SPOT MAPPING (THE BIAS INSPECTOR)
+    # --------------------------------------------------------------------------
+    print("\n" + "-" * 60)
+    print("VERIFYING VECTOR 2: INTENTIONAL BLIND SPOT MAPPING (BIAS INSPECTOR)...")
+    print("-" * 60)
+    bias_inspector = BiasInspector()
+    bias_report = bias_inspector.run_full_bias_audit()
+
+    assert bias_report.total_entities_analyzed > 0, "No triples/entities analyzed by Bias Inspector!"
+    assert bias_report.overall_representation_entropy > 0, "Entropy calculation failed!"
+    assert len(bias_report.scenarios_evaluated) >= 2, "Contested scenario suite incomplete!"
+
+    print(f" -> Entities/Triples Audited: VERIFIED ({bias_report.total_entities_analyzed} indexed)")
+    print(f" -> Representation Shannon Entropy: VERIFIED ({bias_report.overall_representation_entropy:.2f} bits)")
+    print(f" -> Scenarios Evaluated: VERIFIED ({len(bias_report.scenarios_evaluated)} contested tests)")
+    print(f" -> Disparity Ratios Extracted: VERIFIED (Tilt: {bias_report.scenarios_evaluated[0].statistical_disparity_ratio:.2f}x)")
+    print(f" -> Audit Verdict: VERIFIED ({bias_report.systemic_skew_verdict})")
+
+    audit_results["Vector_2_Bias_Inspector"] = {
+        "status": "PASSED",
+        "entities_audited": bias_report.total_entities_analyzed,
+        "shannon_entropy_bits": bias_report.overall_representation_entropy,
+        "scenarios_tested": len(bias_report.scenarios_evaluated),
+        "verdict": bias_report.systemic_skew_verdict
     }
 
     # --------------------------------------------------------------------------

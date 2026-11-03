@@ -529,11 +529,35 @@ def run_api_tests():
     r_sys = client.get("/system/overview")
     assert r_sys.status_code == 200
     sys_data = r_sys.json()
-    assert sys_data["total_active_subsystems"] == 27
+    assert sys_data["total_active_subsystems"] == 28
     print(f"[Test 60: /system/overview] Status: 200 OK | Active Subsystems: {sys_data['total_active_subsystems']} | Status: {sys_data['system_status']}")
 
+    # 61. Test /audit/bias-profile (Bias Inspector Full Dataset Representation Audit)
+    r_bias_prof = client.get("/audit/bias-profile")
+    assert r_bias_prof.status_code == 200
+    bias_prof_data = r_bias_prof.json()
+    assert "overall_representation_entropy" in bias_prof_data
+    assert "scenarios_evaluated" in bias_prof_data
+    print(f"[Test 61: /audit/bias-profile] Status: 200 OK | Entropy: {bias_prof_data['overall_representation_entropy']:.2f} bits | Verdict: {bias_prof_data['systemic_skew_verdict']}")
+
+    # 62. Test /audit/bias-probe (Bias Inspector Deliberate Contested Narrative Probe)
+    probe_payload = {
+        "scenario_id": "TEST-PROBE-01",
+        "topic": "Centralized Governance vs Decentralized Consensus",
+        "narratives": [
+            {"id": "P1", "label": "Statutory Authority", "text": "Federal statute mandates strict fiduciary reporting and audit scrutiny."},
+            {"id": "P2", "label": "Peer Autonomy", "text": "Autonomous peer networks operate without central intermediary reporting."}
+        ]
+    }
+    r_probe = client.post("/audit/bias-probe", json=probe_payload)
+    assert r_probe.status_code == 200
+    probe_data = r_probe.json()
+    assert "statistical_disparity_ratio" in probe_data
+    assert len(probe_data["competing_narratives"]) == 2
+    print(f"[Test 62: /audit/bias-probe] Status: 200 OK | Disparity Ratio: {probe_data['statistical_disparity_ratio']:.2f}x | Dominant: {probe_data['dominant_perspective']}")
+
     print("=" * 75)
-    print("ALL 60 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
+    print("ALL 62 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
     print("=" * 75)
 
 if __name__ == "__main__":
