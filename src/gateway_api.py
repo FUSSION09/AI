@@ -1230,6 +1230,31 @@ def chat_with_ai(req: ChatRequest):
         "timestamp": time.time()
     }
 
+@app.get("/chat", tags=["Interactive AI Assistant"])
+def chat_with_ai_get(
+    message: str = "Hello",
+    system_persona: str = "STRATEGIC_ANALYST",
+    temperature: float = 0.30,
+    max_tokens: int = 256,
+    reasoning_depth: int = 3,
+    consensus_quorum: float = 0.75,
+    mode: str = "AUTO"
+):
+    """
+    Interactive AI reasoning GET endpoint with explicit query parameters displayed in Swagger UI.
+    Allows testing hyperparameter tuning directly from URL query parameters.
+    """
+    req = ChatRequest(
+        message=message,
+        mode=mode,
+        temperature=temperature,
+        max_tokens=max_tokens,
+        reasoning_depth=reasoning_depth,
+        system_persona=system_persona,
+        consensus_quorum=consensus_quorum
+    )
+    return chat_with_ai(req)
+
 @app.get("/graph/search", tags=["Knowledge Graph Interaction"])
 def search_knowledge_graph(q: str = ""):
     """Live entity and triple search in the Contextual Knowledge Graph."""

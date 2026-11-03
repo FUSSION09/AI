@@ -1,5 +1,5 @@
 {
-  "total_events": 42,
+  "total_events": 45,
   "events": [
     {
       "timestamp": 1793724160.0292645,
@@ -953,6 +953,75 @@
         ],
         "recommended_discovery_domain": "AXIOM_CLOSURE_THROTTLED",
         "detected_at": 1793732949.751978
+      }
+    },
+    {
+      "timestamp": 1793733249.4037695,
+      "type": "UNCERTAINTY_FLAGGED",
+      "data": {
+        "void_id": "VOID-249402",
+        "unprovable_proposition": "Throttled(rogue_subroutine)",
+        "epistemic_entropy": 0.8607,
+        "missing_predicates": [
+          "Throttled",
+          "ComplementaryLaw(Throttled)"
+        ],
+        "candidate_guidance_vector": [
+          2.9687,
+          2.097,
+          1.4898,
+          6.3223,
+          4.6307,
+          10.0112,
+          -0.5359,
+          -0.0501
+        ],
+        "recommended_discovery_domain": "AXIOM_CLOSURE_THROTTLED",
+        "detected_at": 1793733249.402764
+      }
+    },
+    {
+      "timestamp": 1793733249.4341948,
+      "type": "UNCERTAINTY_FLAGGED",
+      "data": {
+        "void_id": "VOID-249411",
+        "unprovable_proposition": "ResilientZeroPointCoupling(quantum_node)",
+        "epistemic_entropy": 0.9221,
+        "missing_predicates": [
+          "ResilientZeroPointCoupling",
+          "ComplementaryLaw(ResilientZeroPointCoupling)"
+        ],
+        "candidate_guidance_vector": [
+          6.8118,
+          2.2696,
+          5.1162,
+          1.062,
+          1.1053,
+          3.8925,
+          0.8662,
+          7.8423
+        ],
+        "recommended_discovery_domain": "AXIOM_CLOSURE_RESILIENTZEROPOINTCOUPLING",
+        "detected_at": 1793733249.4115021
+      }
+    },
+    {
+      "timestamp": 1793733249.454753,
+      "type": "UNCERTAINTY_RESOLVED",
+      "data": {
+        "void_id": "VOID-249411",
+        "target_proposition": "ResilientZeroPointCoupling(quantum_node)",
+        "discovery_id": "DISC-3249435",
+        "discovered_concept": "Fractional-Order Memory Diffusion Field",
+        "discovered_equation": "d^0.879Phi / dt^0.879 = 3.071 * nabla^2(Phi) - 0.361 * Phi^1.25",
+        "formalized_axioms": [
+          "ResilientZeroPointCoupling(quantum_node) | ~Fractional_Order_Memory_Diffusion_Field(target_system)",
+          "Fractional_Order_Memory_Diffusion_Field(target_system)"
+        ],
+        "post_discovery_status": "PROVEN_TRUE",
+        "confidence_score": 1.0,
+        "proof_summary": "Proposition 'ResilientZeroPointCoupling(quantum_node)' deductively PROVEN from first principles in 2 steps (depth 2).",
+        "closure_achieved": true
       }
     }
   ]

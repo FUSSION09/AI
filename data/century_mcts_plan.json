@@ -1,6 +1,6 @@
 {
   "system": "Apex Autonomous System (UAS) - 100-Year Temporal MCTS Ledger",
-  "total_plans_generated": 17,
+  "total_plans_generated": 18,
   "history": [
     {
       "plan_id": "PLAN-MCTS-100Y-662365",
@@ -205,6 +205,18 @@
       "irreversible_confidence": 95.8,
       "epochs_planned": 4,
       "summary": "100-Year Century Plan 'PLAN-MCTS-100Y-849840' (2026 - 2126): Executed 500 MCTS rollouts across 4 generational epochs. Synthesized path prioritized irreversible gain and anti-fragile survivability (79.8%). Terminal state achieves 100.0% structural permanence."
+    },
+    {
+      "plan_id": "PLAN-MCTS-100Y-249294",
+      "timestamp": 1793733249.294216,
+      "horizon_years": 100,
+      "start_year": 2026,
+      "end_year": 2126,
+      "simulations": 150,
+      "anti_fragility_score": 0.924,
+      "irreversible_confidence": 95.8,
+      "epochs_planned": 4,
+      "summary": "100-Year Century Plan 'PLAN-MCTS-100Y-249294' (2026 - 2126): Executed 150 MCTS rollouts across 4 generational epochs. Synthesized path prioritized irreversible gain and anti-fragile survivability (83.9%). Terminal state achieves 100.0% structural permanence."
     }
   ]
 }

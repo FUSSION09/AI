@@ -1,122 +1,51 @@
 {
-  "audit_id": "AUDIT-2805044",
-  "timestamp": 1793732805.0443995,
+  "audit_id": "AUDIT-3248586",
+  "timestamp": 1793733248.5862823,
   "target_asset": {
-    "asset_id": "ASSET-GATEWAY-MESH-01",
-    "hostname": "gateway-core.uas.internal",
-    "network_zone": "DMZ",
+    "asset_id": "TEST-VAULT-ASSET-01",
+    "hostname": "vault-node.uas.internal",
+    "network_zone": "INTERNAL_CORE",
     "listening_services": [
       {
-        "service": "api_gateway",
-        "port": 80,
-        "tls_enabled": false
-      },
-      {
-        "service": "internal_relay",
-        "port": 8080,
-        "auth_required": false
-      },
-      {
-        "service": "mesh_router",
-        "port": 1883,
-        "network_isolation": false
+        "service": "posix_vault",
+        "port": 22,
+        "permissions": "0777"
       }
     ],
-    "dependencies": [
-      "fastapi",
-      "uvicorn",
-      "pydantic"
-    ],
-    "privilege_tier": "RESTRICTED_OPERATOR",
-    "criticality_score": 0.92
+    "dependencies": [],
+    "privilege_tier": "UNPRIVILEGED_SERVICE",
+    "criticality_score": 0.85
   },
-  "threats_identified_count": 4,
+  "threats_identified_count": 1,
   "threat_surface_vectors": [
     {
-      "threat_id": "THREAT-ASSET-GA-01",
-      "asset_id": "ASSET-GATEWAY-MESH-01",
-      "weakness_class": "CWE-319",
-      "affected_component": "api_gateway",
-      "vulnerability_title": "Cleartext Transmission of Sensitive Telemetry",
-      "exploitability_score": 0.85,
-      "causal_impact_score": 0.75,
-      "composite_risk_rating": "ELEVATED"
-    },
-    {
-      "threat_id": "THREAT-ASSET-GA-02",
-      "asset_id": "ASSET-GATEWAY-MESH-01",
-      "weakness_class": "CWE-319",
-      "affected_component": "internal_relay",
-      "vulnerability_title": "Cleartext Transmission of Sensitive Telemetry",
-      "exploitability_score": 0.85,
-      "causal_impact_score": 0.75,
-      "composite_risk_rating": "ELEVATED"
-    },
-    {
-      "threat_id": "THREAT-ASSET-GA-03",
-      "asset_id": "ASSET-GATEWAY-MESH-01",
-      "weakness_class": "CWE-306",
-      "affected_component": "internal_relay",
-      "vulnerability_title": "Missing Authentication for Critical Internal Relay Service",
-      "exploitability_score": 0.9,
-      "causal_impact_score": 0.95,
-      "composite_risk_rating": "CRITICAL"
-    },
-    {
-      "threat_id": "THREAT-ASSET-GA-04",
-      "asset_id": "ASSET-GATEWAY-MESH-01",
-      "weakness_class": "CWE-918",
-      "affected_component": "mesh_router",
-      "vulnerability_title": "Unrestricted Lateral Network Egress Between Service Tiers",
-      "exploitability_score": 0.75,
-      "causal_impact_score": 0.88,
+      "threat_id": "THREAT-TEST-VAU-01",
+      "asset_id": "TEST-VAULT-ASSET-01",
+      "weakness_class": "CWE-276",
+      "affected_component": "posix_vault",
+      "vulnerability_title": "Incorrect Default Permissions on Cryptographic Key Storage",
+      "exploitability_score": 0.7,
+      "causal_impact_score": 0.98,
       "composite_risk_rating": "CRITICAL"
     }
   ],
-  "defensive_mitigations_count": 4,
+  "defensive_mitigations_count": 1,
   "defensive_mitigation_patches": [
     {
-      "patch_id": "SEC-PATCH-2805044",
-      "threat_id": "THREAT-ASSET-GA-01",
-      "asset_id": "ASSET-GATEWAY-MESH-01",
-      "mitigation_type": "MTLS_ENFORCEMENT",
-      "configuration_content": "apiVersion: networking.k8s.io/v1\nkind: Ingress\nmetadata:\n  name: gateway-core.uas.internal-tls-enforce\n  annotations:\n    ingress.kubernetes.io/ssl-redirect: 'true'\n    cert-manager.io/cluster-issuer: 'letsencrypt-prod'\nspec:\n  tls:\n  - hosts: ['gateway-core.uas.internal.uas.internal']\n    secretName: gateway-core.uas.internal-tls-cert\n",
-      "post_mitigation_risk": 0.068,
-      "verification_status": "VERIFIED_HARDENED"
-    },
-    {
-      "patch_id": "SEC-PATCH-2805044",
-      "threat_id": "THREAT-ASSET-GA-02",
-      "asset_id": "ASSET-GATEWAY-MESH-01",
-      "mitigation_type": "MTLS_ENFORCEMENT",
-      "configuration_content": "apiVersion: networking.k8s.io/v1\nkind: Ingress\nmetadata:\n  name: gateway-core.uas.internal-tls-enforce\n  annotations:\n    ingress.kubernetes.io/ssl-redirect: 'true'\n    cert-manager.io/cluster-issuer: 'letsencrypt-prod'\nspec:\n  tls:\n  - hosts: ['gateway-core.uas.internal.uas.internal']\n    secretName: gateway-core.uas.internal-tls-cert\n",
-      "post_mitigation_risk": 0.068,
-      "verification_status": "VERIFIED_HARDENED"
-    },
-    {
-      "patch_id": "SEC-PATCH-2805044",
-      "threat_id": "THREAT-ASSET-GA-03",
-      "asset_id": "ASSET-GATEWAY-MESH-01",
-      "mitigation_type": "IAM_LEAST_PRIVILEGE",
-      "configuration_content": "# Zero-Trust Workload Identity Policy\nworkload_id: spiffe://uas.internal/ns/production/sa/gateway-core.uas.internal\nenforce_jwt_validation: true\nrequired_audience: 'uas.internal.core'\nallowed_callers:\n  - 'spiffe://uas.internal/ns/production/sa/orchestrator'\n  - 'spiffe://uas.internal/ns/production/sa/gateway'\n",
-      "post_mitigation_risk": 0.072,
-      "verification_status": "VERIFIED_HARDENED"
-    },
-    {
-      "patch_id": "SEC-PATCH-2805044",
-      "threat_id": "THREAT-ASSET-GA-04",
-      "asset_id": "ASSET-GATEWAY-MESH-01",
-      "mitigation_type": "NETWORK_POLICY",
-      "configuration_content": "apiVersion: networking.k8s.io/v1\nkind: NetworkPolicy\nmetadata:\n  name: gateway-core.uas.internal-default-deny-ingress\nspec:\n  podSelector:\n    matchLabels:\n      app: gateway-core.uas.internal\n  policyTypes:\n  - Ingress\n  ingress:\n  - from:\n    - podSelector:\n        matchLabels:\n          tier: gateway-mesh\n",
-      "post_mitigation_risk": 0.06,
+      "patch_id": "SEC-PATCH-3248586",
+      "threat_id": "THREAT-TEST-VAU-01",
+      "asset_id": "TEST-VAULT-ASSET-01",
+      "mitigation_type": "PARAM_CLAMP",
+      "configuration_content": "#!/bin/bash\n# POSIX Vault Permissions Lockdown\nchmod 0700 /d/AI/data/ephemeral_session\nfind /d/AI/checkpoints -type f -exec chmod 0600 {} +\nchown -R uas_daemon:uas_daemon /d/AI/data\n",
+      "post_mitigation_risk": 0.056,
       "verification_status": "VERIFIED_HARDENED"
     }
   ],
   "risk_metrics": {
-    "baseline_composite_risk": 0.6975,
-    "hardened_post_mitigation_risk": 0.067,
-    "risk_reduction_percentage": 90.39
+    "baseline_composite_risk": 0.686,
+    "hardened_post_mitigation_risk": 0.056,
+    "risk_reduction_percentage": 91.84
   },
   "audit_verdict": "SECURITY_POSTURE_HARDENED",
-  "workflow_latency_ms": 0.32
+  "workflow_latency_ms": 0.12
 }
