@@ -1,6 +1,6 @@
 {
-  "audit_id": "AUDIT-4551990",
-  "timestamp": 1793734551.9901185,
+  "audit_id": "AUDIT-4804097",
+  "timestamp": 1793734804.097838,
   "target_asset": {
     "asset_id": "TEST-VAULT-ASSET-01",
     "hostname": "vault-node.uas.internal",
@@ -32,7 +32,7 @@
   "defensive_mitigations_count": 1,
   "defensive_mitigation_patches": [
     {
-      "patch_id": "SEC-PATCH-4551990",
+      "patch_id": "SEC-PATCH-4804096",
       "threat_id": "THREAT-TEST-VAU-01",
       "asset_id": "TEST-VAULT-ASSET-01",
       "mitigation_type": "PARAM_CLAMP",
@@ -47,5 +47,5 @@
     "risk_reduction_percentage": 91.84
   },
   "audit_verdict": "SECURITY_POSTURE_HARDENED",
-  "workflow_latency_ms": 0.41
+  "workflow_latency_ms": 0.24
 }
