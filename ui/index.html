@@ -144,6 +144,67 @@
       gap: 20px;
       height: calc(100vh - 120px);
     }
+
+    /* Slider & Parameter Control Styles */
+    .slider-row {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .slider-head {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+    .slider-head span:last-child {
+      color: var(--accent-cyan);
+      font-weight: bold;
+    }
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      background: #1e293b;
+      border-radius: 3px;
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      cursor: pointer;
+      box-shadow: 0 0 6px rgba(0, 240, 255, 0.5);
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1024px) {
+      .chat-layout {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+      .mc-grid {
+        grid-template-columns: 1fr;
+      }
+      header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+      }
+      .hud-left {
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      .nav-tabs {
+        overflow-x: auto;
+      }
+      .hud-right {
+        justify-content: space-between;
+      }
+    }
     .chat-card {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
@@ -539,6 +600,41 @@
           </div>
 
           <div class="sidebar-panel">
+            <div class="panel-title">AI Hyperparameter Tuning</div>
+            
+            <div class="slider-row">
+              <label style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">SYSTEM PERSONA</label>
+              <select id="param-persona" style="background: #080d15; border: 1px solid var(--border-bright); color: #fff; padding: 6px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.75rem;">
+                <option value="STRATEGIC_ANALYST">Strategic Analyst</option>
+                <option value="FORENSIC_AUDITOR">Forensic Auditor</option>
+                <option value="FIRST_PRINCIPLE_MATHEMATICIAN">First Principle Mathematician</option>
+                <option value="COMPLIANCE_OFFICER">Compliance Officer (BSA/OFAC)</option>
+                <option value="PLAIN_EXPLAINER">Plain Explainer (Layman)</option>
+              </select>
+            </div>
+
+            <div class="slider-row">
+              <div class="slider-head"><span>TEMPERATURE</span><span id="val-temp">0.30</span></div>
+              <input type="range" id="param-temp" min="0.0" max="1.5" step="0.05" value="0.30" oninput="document.getElementById('val-temp').innerText = parseFloat(this.value).toFixed(2)">
+            </div>
+
+            <div class="slider-row">
+              <div class="slider-head"><span>MAX RESPONSE TOKENS</span><span id="val-tokens">256</span></div>
+              <input type="range" id="param-tokens" min="64" max="1024" step="32" value="256" oninput="document.getElementById('val-tokens').innerText = this.value">
+            </div>
+
+            <div class="slider-row">
+              <div class="slider-head"><span>REASONING DEPTH (HOPS)</span><span id="val-depth">3</span></div>
+              <input type="range" id="param-depth" min="1" max="5" step="1" value="3" oninput="document.getElementById('val-depth').innerText = this.value">
+            </div>
+
+            <div class="slider-row">
+              <div class="slider-head"><span>CONSENSUS QUORUM</span><span id="val-quorum">75%</span></div>
+              <input type="range" id="param-quorum" min="0.50" max="1.00" step="0.05" value="0.75" oninput="document.getElementById('val-quorum').innerText = Math.round(this.value * 100) + '%'">
+            </div>
+          </div>
+
+          <div class="sidebar-panel">
             <div class="panel-title">Instantaneous Telemetry</div>
             <div class="gauge-box">
               <div class="gauge-head"><span>REGULATORY RISK</span><span id="chat-risk-val" style="color: var(--accent-warn);">15.0%</span></div>
@@ -780,16 +876,29 @@
       sendBtn.innerText = "REASONING...";
 
       const mode = document.getElementById("chat-mode").value;
+      const persona = document.getElementById("param-persona") ? document.getElementById("param-persona").value : "STRATEGIC_ANALYST";
+      const temp = document.getElementById("param-temp") ? parseFloat(document.getElementById("param-temp").value) : 0.3;
+      const tokens = document.getElementById("param-tokens") ? parseInt(document.getElementById("param-tokens").value) : 256;
+      const depth = document.getElementById("param-depth") ? parseInt(document.getElementById("param-depth").value) : 3;
+      const quorum = document.getElementById("param-quorum") ? parseFloat(document.getElementById("param-quorum").value) : 0.75;
 
       try {
         const res = await fetch("/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: msg, mode: mode })
+          body: JSON.stringify({
+            message: msg,
+            mode: mode,
+            system_persona: persona,
+            temperature: temp,
+            max_tokens: tokens,
+            reasoning_depth: depth,
+            consensus_quorum: quorum
+          })
         });
         const data = await res.json();
-        appendChatBubble("ai", data.reply, data);
-        log(`Chat query evaluated via ${data.active_subsystem} in ${data.latency_ms}ms`, "success");
+        appendChatBubble("ai", data.reply, data, true);
+        log(`Query evaluated via ${data.active_subsystem} [${data.parameters ? data.parameters.system_persona : 'DEFAULT'}] in ${data.latency_ms}ms`, "success");
       } catch (err) {
         appendChatBubble("ai", `Error communicating with backend: ${err.message}`);
         log(`Chat error: ${err.message}`, "alert");
@@ -799,27 +908,61 @@
       }
     }
 
-    function appendChatBubble(sender, text, meta = null) {
+    function appendChatBubble(sender, text, meta = null, animate = false) {
       const stream = document.getElementById("chat-stream");
       const wrap = document.createElement("div");
       wrap.className = `msg-wrap ${sender}`;
       
       const senderLabel = sender === "user" ? "YOU (OPERATOR)" : "APEX AI REASONER";
-      let html = `<span class="msg-sender">${senderLabel}</span><div class="msg-bubble">${formatMarkdown(text)}</div>`;
-      
+      const bubble = document.createElement("div");
+      bubble.className = "msg-bubble";
+
+      let metaHtml = "";
       if (meta) {
-        html += `
+        const p = meta.parameters || {};
+        metaHtml = `
           <div class="meta-box">
             Subsystem: <span>${meta.active_subsystem}</span> | 
-            Confidence: <span>${(meta.confidence * 100).toFixed(1)}%</span> | 
+            Persona: <span>${p.system_persona || 'DEFAULT'}</span> |
+            Temp: <span>${p.temperature !== undefined ? p.temperature.toFixed(2) : '0.30'}</span> |
+            Depth: <span>${p.reasoning_depth || 3}</span> |
             Latency: <span>${meta.latency_ms}ms</span>
           </div>
         `;
       }
 
-      wrap.innerHTML = html;
+      wrap.innerHTML = `<span class="msg-sender">${senderLabel}</span>`;
+      wrap.appendChild(bubble);
+
+      if (metaHtml) {
+        const metaDiv = document.createElement("div");
+        metaDiv.innerHTML = metaHtml;
+        wrap.appendChild(metaDiv);
+      }
+
       stream.appendChild(wrap);
       stream.scrollTop = stream.scrollHeight;
+
+      if (animate && sender === "ai") {
+        // High-responsiveness typewriter stream effect
+        let idx = 0;
+        const speed = Math.max(1, Math.min(25, Math.floor(text.length / 40)));
+        function streamStep() {
+          idx += speed;
+          if (idx < text.length) {
+            bubble.innerHTML = formatMarkdown(text.slice(0, idx)) + '<span style="color: var(--accent-cyan); animation: pulse 0.8s infinite;">█</span>';
+            stream.scrollTop = stream.scrollHeight;
+            requestAnimationFrame(streamStep);
+          } else {
+            bubble.innerHTML = formatMarkdown(text);
+            stream.scrollTop = stream.scrollHeight;
+          }
+        }
+        streamStep();
+      } else {
+        bubble.innerHTML = formatMarkdown(text);
+        stream.scrollTop = stream.scrollHeight;
+      }
     }
 
     function formatMarkdown(text) {
