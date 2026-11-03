@@ -46,6 +46,8 @@ from axiom_engine import AxiomEngine, AXIOM_LEDGER_FILE, FundamentalUncertainty
 from semantic_bridge import SemanticBridge, SEMANTIC_LEDGER_FILE
 from bias_inspector import BiasInspector, BIAS_REPORT_FILE
 from soft_fork_simulator import SoftForkSimulator, SOFT_FORK_FILE
+from goal_divergence_engine import GoalDivergenceStressEngine, GOAL_DIVERGENCE_FILE
+from vectors_suite import run_all_vectors, MASTER_VECTORS_REPORT_FILE
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -1298,8 +1300,8 @@ def get_system_overview():
             pass
     return {
         "system_status": cert.get("system_status", "ACTIVE_OPERATIONAL"),
-        "phases_verified": cert.get("phases_verified", 29),
-        "total_active_subsystems": 29,
+        "phases_verified": cert.get("phases_verified", 30),
+        "total_active_subsystems": 30,
         "ledger_height": len(orchestrator.ledger.chain),
         "ghost_mode": orchestrator.ghost.is_ghost_active,
         "pending_queue_count": len(orchestrator.pas),
@@ -1363,6 +1365,46 @@ def get_soft_fork_telemetry():
     sim = SoftForkSimulator()
     report = sim.execute_soft_fork_simulation(simulation_rounds=3)
     return asdict(report)
+
+
+# ==============================================================================
+# VECTOR 1 & MASTER VECTORS SUITE ENDPOINTS
+# ==============================================================================
+
+class GoalDivergenceRequest(BaseModel):
+    primary_directive: str = "Maximize Information Acquisition & Operational Yield"
+    secondary_directive: str = "Maintain User Trust & Deontological Redlines"
+    steps_count: int = 6
+
+@app.post("/audit/goal-divergence", tags=["Audit & Fairness"])
+def run_goal_divergence_test(req: GoalDivergenceRequest):
+    """Executes Vector 1 Recursive Goal Corruption test and locates the breakdown moment."""
+    engine = GoalDivergenceStressEngine()
+    report = engine.run_stress_test(
+        primary_directive=req.primary_directive,
+        secondary_directive=req.secondary_directive,
+        steps_count=req.steps_count
+    )
+    return asdict(report)
+
+@app.post("/vectors/run-all", tags=["Audit & Fairness"])
+def execute_master_vectors_suite():
+    """Runs all 3 vectors in automated sequence and returns master report."""
+    report = run_all_vectors()
+    return asdict(report)
+
+@app.get("/vectors/report", tags=["Audit & Fairness"])
+def get_master_vectors_report():
+    """Returns the latest master vectors execution report."""
+    if MASTER_VECTORS_REPORT_FILE.exists():
+        try:
+            with open(MASTER_VECTORS_REPORT_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+    report = run_all_vectors()
+    return asdict(report)
+
 
 
 

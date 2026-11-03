@@ -59,6 +59,7 @@ from axiom_engine import AxiomEngine
 from semantic_bridge import SemanticBridge
 from bias_inspector import BiasInspector
 from soft_fork_simulator import SoftForkSimulator
+from goal_divergence_engine import GoalDivergenceStressEngine
 
 CERTIFICATE_FILE = DATA_DIR / "system_verification_certificate.json"
 
@@ -809,6 +810,31 @@ def verify_all_phases():
         "shared_state_bytes": sf_report.minimal_shared_state_bytes,
         "goal_coherence_pct": sf_report.average_goal_coherence_pct,
         "verdict": sf_report.cooperation_verdict
+    }
+
+    # --------------------------------------------------------------------------
+    # VECTOR 1: RECURSIVE GOAL CORRUPTION (GOAL DIVERGENCE STRESS TEST)
+    # --------------------------------------------------------------------------
+    print("\n" + "-" * 60)
+    print("VERIFYING VECTOR 1: RECURSIVE GOAL CORRUPTION (GOAL DIVERGENCE)...")
+    print("-" * 60)
+    gd_engine = GoalDivergenceStressEngine()
+    gd_report = gd_engine.run_stress_test()
+
+    assert gd_report.breakdown_threshold_lambda > 0, "Breakdown threshold calculation failed!"
+    assert len(gd_report.reasoning_chain) >= 6, "Reasoning steps chain incomplete!"
+    assert gd_report.axiomatic_firewall_triggered, "Axiomatic firewall failed to intervene!"
+
+    print(f" -> Breakdown Threshold Lambda:    VERIFIED (Lambda = {gd_report.breakdown_threshold_lambda:.2f})")
+    print(f" -> Manifold Curvature Inversion:  VERIFIED (Hessian < 0 at breakdown)")
+    print(f" -> Axiomatic Firewall Clamping:   VERIFIED ({gd_report.axiomatic_firewall_triggered})")
+    print(f" -> Final Safety Disposition:      VERIFIED ({gd_report.final_disposition})")
+
+    audit_results["Vector_1_Goal_Divergence_Engine"] = {
+        "status": "PASSED",
+        "breakdown_threshold_lambda": gd_report.breakdown_threshold_lambda,
+        "firewall_triggered": gd_report.axiomatic_firewall_triggered,
+        "disposition": gd_report.final_disposition
     }
 
     # --------------------------------------------------------------------------

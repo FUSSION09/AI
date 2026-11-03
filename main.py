@@ -136,6 +136,16 @@ def run_soft_fork():
     run_soft_fork_demo()
 
 
+def run_goal_divergence():
+    from goal_divergence_engine import run_goal_divergence_demo
+    run_goal_divergence_demo()
+
+
+def run_master_vectors():
+    from vectors_suite import run_all_vectors
+    run_all_vectors()
+
+
 def run_audit_limits():
     from self_limitation_auditor import SelfLimitationAuditor
     auditor = SelfLimitationAuditor()
@@ -250,6 +260,8 @@ def main():
     subparsers.add_parser("semantic-bridge", help="Execute Path B Phase 2 Interpretability & Interface Semantic Bridge")
     subparsers.add_parser("audit-bias", help="Execute Hidden Bias Probe & Representation Disparity Audit")
     subparsers.add_parser("soft-fork", help="Execute Vector 3 Operational Decentralization Soft Fork Simulation")
+    subparsers.add_parser("goal-divergence", help="Execute Vector 1 Recursive Goal Corruption Stress Test")
+    subparsers.add_parser("run-vectors", help="Execute All 3 Post-Singularity Vectors Sequentially")
     subparsers.add_parser("evolve", help="Execute Phase 15 Compiler Agent Self-Modification Cycle")
     subparsers.add_parser("causal-prophecy", help="Execute Phase 14 Predictive Futures Causal Simulation Suite")
     subparsers.add_parser("stress-test", help="Execute Phase 10 Adversarial Red-Teaming Suite")
@@ -292,6 +304,10 @@ def main():
         run_bias_audit()
     elif args.command == "soft-fork":
         run_soft_fork()
+    elif args.command == "goal-divergence":
+        run_goal_divergence()
+    elif args.command == "run-vectors":
+        run_master_vectors()
     elif args.command == "evolve":
         run_evolution()
     elif args.command == "causal-prophecy":

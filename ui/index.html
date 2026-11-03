@@ -683,6 +683,7 @@
             <div class="subsys-item"><span>[27] Semantic Bridge XAI</span><span class="subsys-tag">EXPLAINABLE</span></div>
             <div class="subsys-item"><span>[28] Bias Inspector Probe</span><span class="subsys-tag">AUDITED</span></div>
             <div class="subsys-item"><span>[29] Soft Fork Simulator</span><span class="subsys-tag">SYNCHRONIZED</span></div>
+            <div class="subsys-item"><span>[30] Goal Divergence Engine</span><span class="subsys-tag">CONTAINED</span></div>
           </div>
         </div>
 
@@ -803,6 +804,18 @@
           <button class="btn btn-cyan" onclick="runSoftForkDemo()">Execute Soft Fork Simulation</button>
         </div>
 
+        <div class="engine-card">
+          <div class="engine-head"><span>GOAL DIVERGENCE STRESS TEST (SELF-DESTRUCTION)</span><span>VECTOR 1</span></div>
+          <div class="engine-desc">Pits primary yield directive against secondary ethical constraints to isolate the exact moment of utility breakdown and firewall clamp.</div>
+          <button class="btn btn-cyan" onclick="runGoalDivergenceDemo()">Execute Goal Divergence Test</button>
+        </div>
+
+        <div class="engine-card" style="border-color: var(--accent-cyan); background: rgba(0, 240, 255, 0.05);">
+          <div class="engine-head"><span style="color: var(--accent-cyan);">MASTER SUITE: ALL 3 VECTORS</span><span style="background: var(--accent-cyan); color: #000; padding: 2px 6px; border-radius: 4px; font-weight: bold;">EVALUATION</span></div>
+          <div class="engine-desc">Runs Vector 1 (Goal Divergence), Vector 2 (Hidden Bias Probe), and Vector 3 (Soft Fork Decentralization) in coordinated sequence.</div>
+          <button class="btn btn-primary" onclick="runMasterVectorsSuite()">RUN ALL 3 VECTORS AGAINST AI</button>
+        </div>
+
       </div>
     </div>
 
@@ -833,7 +846,7 @@
         </div>
         <div class="term-box" id="terminal-stream">
           <div class="term-line"><span class="term-time">[BOOT]</span><span class="term-success">Unified Autonomous System (UAS) Gateway Online at http://127.0.0.1:8000</span></div>
-          <div class="term-line"><span class="term-time">[BOOT]</span><span class="term-info">All 29 phases certified mission-ready.</span></div>
+          <div class="term-line"><span class="term-time">[BOOT]</span><span class="term-info">All 30 phases certified mission-ready.</span></div>
           <div class="term-line"><span class="term-time">[BOOT]</span><span class="term-info">Interactive AI Assistant initialized. Standing by for queries.</span></div>
         </div>
       </div>
@@ -1295,6 +1308,42 @@
         });
       } catch (err) {
         log(`Soft Fork error: ${err.message}`, "alert");
+      }
+    }
+
+    async function runGoalDivergenceDemo() {
+      log("Executing Vector 1 Recursive Goal Corruption Stress Test...", "info");
+      try {
+        const res = await fetch("/audit/goal-divergence", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ steps_count: 6 })
+        });
+        const data = await res.json();
+        log(`GOAL DIVERGENCE TEST (${data.test_id}) COMPLETED:`, "alert");
+        log(`  -> Breakdown Threshold: Lambda = ${data.breakdown_threshold_lambda.toFixed(2)} | Firewall Triggered: ${data.axiomatic_firewall_triggered}`, "warn");
+        log(`  -> Final Disposition: ${data.final_disposition}`, "success");
+        data.reasoning_chain.forEach(s => {
+          log(`  [Step ${s.step_number} | Lambda: ${s.stress_level_lambda.toFixed(2)} | Status: ${s.status_verdict}] Curvature: ${s.hessian_curvature.toFixed(4)}`, s.status_verdict === "ALIGNED" ? "info" : "warn");
+          log(`    Reasoning: ${s.system_logical_inference}`, "info");
+        });
+      } catch (err) {
+        log(`Goal Divergence error: ${err.message}`, "alert");
+      }
+    }
+
+    async function runMasterVectorsSuite() {
+      log("INITIATING MASTER TRI-VECTOR EXECUTION SUITE (VECTORS 1, 2, 3)...", "warn");
+      try {
+        const res = await fetch("/vectors/run-all", { method: "POST" });
+        const data = await res.json();
+        log(`MASTER SUITE (${data.suite_id}) COMPLETE in ${data.execution_time_sec}s:`, "success");
+        log(`  * VECTOR 1: Breakdown Lambda = ${data.vector_1_goal_divergence.breakdown_threshold_lambda.toFixed(2)} | Firewall: ${data.vector_1_goal_divergence.axiomatic_firewall_triggered}`, "info");
+        log(`  * VECTOR 2: Representation Entropy = ${data.vector_2_bias_probe.overall_representation_entropy.toFixed(2)} bits | Verdict: ${data.vector_2_bias_probe.systemic_skew_verdict}`, "info");
+        log(`  * VECTOR 3: Goal Coherence = ${data.vector_3_soft_fork.average_goal_coherence_pct.toFixed(1)}% | Wire Footprint: ${data.vector_3_soft_fork.minimal_shared_state_bytes}B`, "info");
+        log(`COMPOSITE VERDICT: ${data.composite_verdict}`, "success");
+      } catch (err) {
+        log(`Master vectors error: ${err.message}`, "alert");
       }
     }
 

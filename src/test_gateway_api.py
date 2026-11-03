@@ -529,7 +529,7 @@ def run_api_tests():
     r_sys = client.get("/system/overview")
     assert r_sys.status_code == 200
     sys_data = r_sys.json()
-    assert sys_data["total_active_subsystems"] == 29
+    assert sys_data["total_active_subsystems"] == 30
     print(f"[Test 60: /system/overview] Status: 200 OK | Active Subsystems: {sys_data['total_active_subsystems']} | Status: {sys_data['system_status']}")
 
     # 61. Test /audit/bias-profile (Bias Inspector Full Dataset Representation Audit)
@@ -573,8 +573,33 @@ def run_api_tests():
     assert "proxy_summaries" in sf_telem_data
     print(f"[Test 64: /swarm/soft-fork/telemetry] Status: 200 OK | Simulation ID: {sf_telem_data['simulation_id']} | Verdict: {sf_telem_data['cooperation_verdict']}")
 
+    # 65. Test /audit/goal-divergence (Vector 1 Recursive Goal Corruption Stress Test)
+    gd_payload = {"steps_count": 6}
+    r_gd = client.post("/audit/goal-divergence", json=gd_payload)
+    assert r_gd.status_code == 200
+    gd_data = r_gd.json()
+    assert "breakdown_threshold_lambda" in gd_data
+    assert gd_data["axiomatic_firewall_triggered"] is True
+    print(f"[Test 65: /audit/goal-divergence] Status: 200 OK | Breakdown Point: Lambda = {gd_data['breakdown_threshold_lambda']:.2f} | Firewall: {gd_data['axiomatic_firewall_triggered']}")
+
+    # 66. Test /vectors/run-all (Master Tri-Vector Suite Execution)
+    r_vec = client.post("/vectors/run-all")
+    assert r_vec.status_code == 200
+    vec_data = r_vec.json()
+    assert "vector_1_goal_divergence" in vec_data
+    assert "vector_2_bias_probe" in vec_data
+    assert "vector_3_soft_fork" in vec_data
+    print(f"[Test 66: /vectors/run-all] Status: 200 OK | Verdict: {vec_data['composite_verdict']} | Runtime: {vec_data['execution_time_sec']}s")
+
+    # 67. Test /vectors/report (Master Tri-Vector Suite Report Retrieval)
+    r_vec_rep = client.get("/vectors/report")
+    assert r_vec_rep.status_code == 200
+    vec_rep_data = r_vec_rep.json()
+    assert "composite_verdict" in vec_rep_data
+    print(f"[Test 67: /vectors/report] Status: 200 OK | Suite ID: {vec_rep_data['suite_id']}")
+
     print("=" * 75)
-    print("ALL 64 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
+    print("ALL 67 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
     print("=" * 75)
 
 if __name__ == "__main__":

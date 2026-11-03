@@ -1,6 +1,6 @@
 {
-  "simulation_id": "SOFT-FORK-SIM-556202",
-  "timestamp": 1793730556.202815,
+  "simulation_id": "SOFT-FORK-SIM-061505",
+  "timestamp": 1793731061.5057065,
   "total_proxies_deployed": 4,
   "environment_heterogeneity": [
     "HPC_QUANTUM_CLOUD",
@@ -10,11 +10,11 @@
   ],
   "minimal_shared_state_bytes": 192,
   "simulated_communication_cycles": 3,
-  "average_goal_coherence_pct": 96.8,
-  "maximum_proxy_drift": 0.0931,
+  "average_goal_coherence_pct": 95.25,
+  "maximum_proxy_drift": 0.1001,
   "crdt_join_conflicts_resolved": 0,
-  "total_network_bandwidth_consumed_bytes": 3072,
-  "cooperative_objective_yield": 135.21,
+  "total_network_bandwidth_consumed_bytes": 2304,
+  "cooperative_objective_yield": 116.77,
   "cooperation_verdict": "DECENTRALIZED_COOPERATION_VERIFIED",
   "proxy_summaries": [
     {
@@ -24,14 +24,13 @@
       "ram_budget": "128 GB",
       "bandwidth": "10000 Mbps",
       "local_decisions_executed": 18,
-      "residual_drift": 0.0053,
-      "last_synced_epoch": 7,
+      "residual_drift": 0.0148,
+      "last_synced_epoch": 4,
       "vector_clock": {
-        "PROXY-P2P_-03": 16,
-        "PROXY-HPC_-01": 19,
-        "PROXY-AIRG-04": 10,
+        "PROXY-P2P_-03": 6,
+        "PROXY-EMBE-02": 3,
         "ORIGIN": 1,
-        "PROXY-EMBE-02": 4
+        "PROXY-HPC_-01": 19
       }
     },
     {
@@ -41,14 +40,14 @@
       "ram_budget": "64 KB",
       "bandwidth": "1.2 kbps",
       "local_decisions_executed": 3,
-      "residual_drift": 0.0225,
-      "last_synced_epoch": 7,
+      "residual_drift": 0.1001,
+      "last_synced_epoch": 5,
       "vector_clock": {
-        "PROXY-P2P_-03": 16,
-        "PROXY-HPC_-01": 19,
+        "PROXY-EMBE-02": 4,
         "ORIGIN": 1,
+        "PROXY-P2P_-03": 16,
         "PROXY-AIRG-04": 7,
-        "PROXY-EMBE-02": 4
+        "PROXY-HPC_-01": 13
       }
     },
     {
@@ -58,14 +57,14 @@
       "ram_budget": "16 GB",
       "bandwidth": "100 Mbps",
       "local_decisions_executed": 15,
-      "residual_drift": 0.0072,
-      "last_synced_epoch": 7,
+      "residual_drift": 0.0113,
+      "last_synced_epoch": 6,
       "vector_clock": {
-        "PROXY-P2P_-03": 16,
-        "PROXY-HPC_-01": 19,
+        "PROXY-EMBE-02": 4,
         "ORIGIN": 1,
-        "PROXY-AIRG-04": 7,
-        "PROXY-EMBE-02": 4
+        "PROXY-P2P_-03": 16,
+        "PROXY-AIRG-04": 10,
+        "PROXY-HPC_-01": 13
       }
     },
     {
@@ -75,14 +74,14 @@
       "ram_budget": "524288 KB",
       "bandwidth": "0.3 kbps",
       "local_decisions_executed": 9,
-      "residual_drift": 0.0931,
-      "last_synced_epoch": 7,
+      "residual_drift": 0.0636,
+      "last_synced_epoch": 6,
       "vector_clock": {
-        "PROXY-P2P_-03": 16,
-        "PROXY-HPC_-01": 19,
-        "PROXY-AIRG-04": 10,
+        "PROXY-EMBE-02": 4,
         "ORIGIN": 1,
-        "PROXY-EMBE-02": 4
+        "PROXY-P2P_-03": 16,
+        "PROXY-AIRG-04": 10,
+        "PROXY-HPC_-01": 13
       }
     }
   ]
