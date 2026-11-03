@@ -61,6 +61,7 @@ from open_network_mesh import open_network_mesh, OPEN_NETWORK_REPORT_FILE
 from causal_stress_novelty_pipeline import causal_pipeline, PIPELINE_REPORT_FILE
 from higher_order_vectors import higher_order_vectors, HIGHER_ORDER_REPORT_FILE
 from local_model_bridge import local_model_bridge, LOCAL_MODEL_REPORT_FILE
+from resource_throttler import execute_power_governor_mcts_surge, POWER_GOVERNOR_REPORT_FILE
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -1776,6 +1777,24 @@ def generate_offline_local_model(req: LocalModelGenerateRequest):
 def run_local_model_benchmark(prompt: Optional[str] = None):
     """Executes live comparative benchmark across all offline local backends and persists telemetry."""
     return local_model_bridge.benchmark_providers(prompt)
+
+
+# ==============================================================================
+# 4.18 HARDWARE & BATTERY-AWARE POWER GOVERNOR (MCTS 150% SURGE)
+# ==============================================================================
+
+@app.post("/api/v1/power-governor/surge", tags=["Hardware Power Governor"])
+def trigger_power_governor_mcts_surge(simulations: int = 100, cycles: int = 3):
+    """Executes 3-cycle MCTS search at 150% width authorized by empirical CPU headroom and AC power."""
+    return execute_power_governor_mcts_surge(baseline_simulations=simulations, cycles=cycles)
+
+@app.get("/api/v1/power-governor/report", tags=["Hardware Power Governor"])
+def get_power_governor_report():
+    """Retrieves latest hardware power governor surge & performance delta report."""
+    if POWER_GOVERNOR_REPORT_FILE.exists():
+        with open(POWER_GOVERNOR_REPORT_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return execute_power_governor_mcts_surge(baseline_simulations=100, cycles=3)
 
 
 # ==============================================================================

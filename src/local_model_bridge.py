@@ -406,3 +406,4 @@ if __name__ == "__main__":
     print(f"Backend Used: {res.backend_used}")
     print(f"Generated text ({res.tokens_generated} tokens in {res.duration_ms:.1f}ms, {res.tokens_per_second:.1f} tok/s):")
     print(res.generated_text)
+

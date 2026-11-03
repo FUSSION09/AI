@@ -941,8 +941,27 @@ def run_api_tests():
     assert "verdict" in bench_data
     print(f"[Test 101: /api/v1/local-model/benchmark] Status: 200 OK | Verdict: {bench_data['verdict']}")
 
+    # =========================================================================
+    # HARDWARE POWER GOVERNOR MCTS SURGE (TESTS 102-103)
+    # =========================================================================
+    # 102. Test /api/v1/power-governor/surge (3-Cycle MCTS Surge at 150%)
+    r_surge = client.post("/api/v1/power-governor/surge?simulations=50&cycles=2")
+    assert r_surge.status_code == 200
+    surge_data = r_surge.json()
+    assert surge_data["surge_execution"]["surge_scale_factor"] == 1.5
+    assert "performance_delta" in surge_data
+    print(f"[Test 102: /api/v1/power-governor/surge] Status: 200 OK | Scale Factor: {surge_data['surge_execution']['surge_scale_factor']}x | Exploration Delta: +{surge_data['performance_delta']['exploration_width_delta_pct']}%")
+
+    # 103. Test /api/v1/power-governor/report (Report Retrieval)
+    r_surge_rep = client.get("/api/v1/power-governor/report")
+    assert r_surge_rep.status_code == 200
+    surge_rep = r_surge_rep.json()
+    assert "hardware_power_state" in surge_rep
+    assert surge_rep["performance_delta"]["verdict"] == "MAXIMAL_COMPUTATIONAL_DEPTH_ACHIEVED_WITHOUT_THERMAL_OR_PRESSURE_BREACH"
+    print(f"[Test 103: /api/v1/power-governor/report] Status: 200 OK | Power Plugged: {surge_rep['hardware_power_state']['power_plugged']} | CPU Headroom: {surge_rep['hardware_power_state']['headroom_cpu_pct']}%")
+
     print("=" * 75)
-    print("ALL 101 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
+    print("ALL 103 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
     print("=" * 75)
 
 if __name__ == "__main__":

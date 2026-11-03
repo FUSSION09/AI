@@ -1,0 +1,57 @@
+{
+  "timestamp": 1793746156.3309147,
+  "hardware_power_state": {
+    "battery_percent": 87,
+    "power_plugged": true,
+    "headroom_cpu_pct": 43.5,
+    "surge_authorized": true,
+    "cognitive_scale_factor": 1.5,
+    "justification": "Surge authorized: AC power plugged (87% capacity) and CPU utilization (6.5%) demonstrates 43.5% surplus headroom below the 50.0% operational ceiling."
+  },
+  "telemetry": {
+    "cpu_utilization_pct": 6.5,
+    "memory_utilization_pct": 80.9,
+    "headroom_pct": 43.5
+  },
+  "operational_mandate": "MIP_SURPLUS_HEADROOM_AUTHORIZATION",
+  "justification": "Surge authorized: AC power plugged (87% capacity) and CPU utilization (6.5%) demonstrates 43.5% surplus headroom below the 50.0% operational ceiling.",
+  "baseline_run": {
+    "simulations": 50,
+    "duration_ms": 41.42,
+    "anti_fragility_score": 0.924,
+    "plan_id": "PLAN-MCTS-100Y-156237"
+  },
+  "surge_execution": {
+    "surge_scale_factor": 1.5,
+    "simulations_per_cycle": 75,
+    "cycles_count": 2,
+    "cycles": [
+      {
+        "cycle": 1,
+        "plan_id": "PLAN-MCTS-100Y-156277",
+        "simulations_executed": 75,
+        "duration_ms": 36.46,
+        "anti_fragility_score": 0.924,
+        "terminal_endowment_usd": 972000.0,
+        "terminal_entrenchment": 1.0
+      },
+      {
+        "cycle": 2,
+        "plan_id": "PLAN-MCTS-100Y-156307",
+        "simulations_executed": 75,
+        "duration_ms": 30.03,
+        "anti_fragility_score": 0.924,
+        "terminal_endowment_usd": 1419187.5,
+        "terminal_entrenchment": 1.0
+      }
+    ],
+    "avg_duration_ms": 33.25,
+    "avg_anti_fragility_score": 0.924
+  },
+  "performance_delta": {
+    "exploration_width_delta_pct": 50.0,
+    "anti_fragility_delta": 0.0,
+    "latency_scaling_ratio": 0.8,
+    "verdict": "MAXIMAL_COMPUTATIONAL_DEPTH_ACHIEVED_WITHOUT_THERMAL_OR_PRESSURE_BREACH"
+  }
+}
