@@ -1148,8 +1148,8 @@ def chat_with_ai(req: ChatRequest):
     except Exception:
         pass
 
-    # 2. Mode-specific dispatch
-    if mode == "AXIOM_PROVE" or query.lower().startswith("prove "):
+    # 2. Mode-specific dispatch or Dynamic Conversational Reasoning
+    if mode == "AXIOM_PROVE" or (mode != "AUTO" and query.lower().startswith("prove ")):
         subsystem = "AXIOM_ENGINE"
         prop = query[6:].strip() if query.lower().startswith("prove ") else query
         proof = axiom_engine.prove_proposition(prop, max_depth=req.reasoning_depth * 4)
@@ -1164,7 +1164,7 @@ def chat_with_ai(req: ChatRequest):
         reasoning_chain = [f"Step {s.step_num}: Resolved {s.resolved_predicate} -> {s.resulting_clause}" for s in proof.derivation_steps[:5]]
         confidence = proof.confidence_score
 
-    elif mode == "EXPLAIN_ANALOGY" or any(k in query.lower() for k in ["analogy", "why it thinks", "metaphor"]):
+    elif mode == "EXPLAIN_ANALOGY":
         subsystem = "SEMANTIC_BRIDGE"
         artifact = semantic_bridge.translate_gss_state({
             "top_leverage_node": "regulatory_compliance_clearing",
@@ -1187,7 +1187,7 @@ def chat_with_ai(req: ChatRequest):
         ]
         confidence = artifact.interpretability_confidence
 
-    elif mode == "TRANSLATE" or query.lower().startswith("translate "):
+    elif mode == "TRANSLATE":
         subsystem = "UNIVERSAL_TRANSLATOR"
         target_text = query[10:].strip() if query.lower().startswith("translate ") else query
         tr = uts.translate(target_text, target_lang="zh")

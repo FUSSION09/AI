@@ -1,5 +1,5 @@
 {
-  "total_events": 51,
+  "total_events": 55,
   "events": [
     {
       "timestamp": 1793724160.0292645,
@@ -1152,6 +1152,100 @@
         "discovery_id": "DISC-4804549",
         "discovered_concept": "Fractional-Order Memory Diffusion Field",
         "discovered_equation": "d^0.716Phi / dt^0.716 = 2.707 * nabla^2(Phi) - 0.269 * Phi^1.25",
+        "formalized_axioms": [
+          "ResilientZeroPointCoupling(quantum_node) | ~Fractional_Order_Memory_Diffusion_Field(target_system)",
+          "Fractional_Order_Memory_Diffusion_Field(target_system)"
+        ],
+        "post_discovery_status": "PROVEN_TRUE",
+        "confidence_score": 1.0,
+        "proof_summary": "Proposition 'ResilientZeroPointCoupling(quantum_node)' deductively PROVEN from first principles in 2 steps (depth 2).",
+        "closure_achieved": true
+      }
+    },
+    {
+      "timestamp": 1793735064.1545146,
+      "type": "UNCERTAINTY_FLAGGED",
+      "data": {
+        "void_id": "VOID-064152",
+        "unprovable_proposition": "Throttled(rogue_subroutine)",
+        "epistemic_entropy": 0.8223,
+        "missing_predicates": [
+          "Throttled",
+          "ComplementaryLaw(Throttled)"
+        ],
+        "candidate_guidance_vector": [
+          7.4733,
+          6.3848,
+          6.6147,
+          -2.4574,
+          6.6425,
+          2.1094,
+          4.4672,
+          6.6491
+        ],
+        "recommended_discovery_domain": "AXIOM_CLOSURE_THROTTLED",
+        "detected_at": 1793735064.1525276
+      }
+    },
+    {
+      "timestamp": 1793735132.869902,
+      "type": "UNCERTAINTY_FLAGGED",
+      "data": {
+        "void_id": "VOID-132841",
+        "unprovable_proposition": "Throttled(rogue_subroutine)",
+        "epistemic_entropy": 0.9338,
+        "missing_predicates": [
+          "Throttled",
+          "ComplementaryLaw(Throttled)"
+        ],
+        "candidate_guidance_vector": [
+          3.545,
+          -0.9028,
+          0.7753,
+          1.7746,
+          10.9613,
+          1.3663,
+          -4.3921,
+          5.4679
+        ],
+        "recommended_discovery_domain": "AXIOM_CLOSURE_THROTTLED",
+        "detected_at": 1793735132.84167
+      }
+    },
+    {
+      "timestamp": 1793735132.9220319,
+      "type": "UNCERTAINTY_FLAGGED",
+      "data": {
+        "void_id": "VOID-132898",
+        "unprovable_proposition": "ResilientZeroPointCoupling(quantum_node)",
+        "epistemic_entropy": 0.7924,
+        "missing_predicates": [
+          "ResilientZeroPointCoupling",
+          "ComplementaryLaw(ResilientZeroPointCoupling)"
+        ],
+        "candidate_guidance_vector": [
+          9.304,
+          1.5086,
+          0.9704,
+          7.6537,
+          10.9028,
+          2.591,
+          4.9594,
+          6.333
+        ],
+        "recommended_discovery_domain": "AXIOM_CLOSURE_RESILIENTZEROPOINTCOUPLING",
+        "detected_at": 1793735132.8987806
+      }
+    },
+    {
+      "timestamp": 1793735132.9686122,
+      "type": "UNCERTAINTY_RESOLVED",
+      "data": {
+        "void_id": "VOID-132898",
+        "target_proposition": "ResilientZeroPointCoupling(quantum_node)",
+        "discovery_id": "DISC-5132932",
+        "discovered_concept": "Fractional-Order Memory Diffusion Field",
+        "discovered_equation": "d^0.719Phi / dt^0.719 = 3.901 * nabla^2(Phi) - 0.456 * Phi^1.25",
         "formalized_axioms": [
           "ResilientZeroPointCoupling(quantum_node) | ~Fractional_Order_Memory_Diffusion_Field(target_system)",
           "Fractional_Order_Memory_Diffusion_Field(target_system)"
