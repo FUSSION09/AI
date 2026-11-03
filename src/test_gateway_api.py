@@ -516,7 +516,14 @@ def run_api_tests():
     chat_data = r_chat.json()
     assert "reply" in chat_data
     assert len(chat_data["reply"]) > 0
-    print(f"[Test 58: /chat] Status: 200 OK | Subsystem: {chat_data['active_subsystem']} | Latency: {chat_data['latency_ms']:.2f}ms")
+
+    # Test conversational greeting responsiveness
+    r_greet = client.post("/chat", json={"message": "hlo", "system_persona": "PLAIN_EXPLAINER"})
+    assert r_greet.status_code == 200
+    greet_reply = r_greet.json()["reply"]
+    assert "Hello" in greet_reply or "AI Assistant" in greet_reply
+    assert "System Telemetry Summary" not in greet_reply
+    print(f"[Test 58: /chat] Status: 200 OK | Subsystem: {chat_data['active_subsystem']} | Conversational Response Verified | Latency: {chat_data['latency_ms']:.2f}ms")
 
     # 59. Test /graph/search (Knowledge Graph Entity Search)
     r_search = client.get("/graph/search?q=Marcus")

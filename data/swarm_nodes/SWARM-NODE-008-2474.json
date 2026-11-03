@@ -18,9 +18,9 @@
     "generation": 2,
     "timestamp": 1793721922.5238822,
     "routing_weights": {
-      "LLM": 0.3304,
-      "RL": 0.4088,
-      "PRK": 0.2609
+      "LLM": 0.3297,
+      "RL": 0.4096,
+      "PRK": 0.2607
     },
     "moral_priors": {
       "alpha_ethical": 0.4,
@@ -38,5 +38,5 @@
     "local_knowledge_triples_count": 35
   },
   "reputation_score": 1.0,
-  "timestamp": 1793731061.120764
+  "timestamp": 1793731845.7255104
 }

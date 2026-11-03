@@ -48,6 +48,7 @@ from bias_inspector import BiasInspector, BIAS_REPORT_FILE
 from soft_fork_simulator import SoftForkSimulator, SOFT_FORK_FILE
 from goal_divergence_engine import GoalDivergenceStressEngine, GOAL_DIVERGENCE_FILE
 from vectors_suite import run_all_vectors, MASTER_VECTORS_REPORT_FILE
+from chat_reasoner import generate_conversational_response
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -1194,64 +1195,20 @@ def chat_with_ai(req: ChatRequest):
         confidence = tr.pragmatic_appropriateness_score
 
     else:
-        # Default Intelligent Assistant reasoning tailored to system_persona
-        reasoning_chain.append(f"Persona active: [{req.system_persona}] | Temp: {req.temperature:.2f} | Depth: {req.reasoning_depth} hops")
-        
-        persona_titles = {
-            "STRATEGIC_ANALYST": "Strategic System Assessment",
-            "FORENSIC_AUDITOR": "Forensic Statutory Audit & Evidence Brief",
-            "FIRST_PRINCIPLE_MATHEMATICIAN": "Axiomatic Formal Analysis",
-            "COMPLIANCE_OFFICER": "Regulatory Compliance & BSA/OFAC Review",
-            "PLAIN_EXPLAINER": "Executive Summary & Practical Guidance"
-        }
-        title = persona_titles.get(req.system_persona, "Operational System Assessment")
-
-        if kg_triples:
-            reasoning_chain.append(f"Traversed {len(kg_triples)} relationships across {req.reasoning_depth} graph hops.")
-            reply_parts = [
-                f"### {title} for: *{query}*",
-                f"**Persona Directive**: `{req.system_persona}` | **Temperature**: `{req.temperature:.2f}` | **Quorum**: `{req.consensus_quorum*100:.0f}%`\n",
-                f"#### Identified Evidentiary Graph Triples:"
-            ]
-            for t in kg_triples[:8]:
-                reply_parts.append(f"- **{t['subject']}** — `[{t['relation']}]` ➔ **{t['object']}** *(Hop {t.get('hop', 1)})*")
-            
-            if req.system_persona == "FORENSIC_AUDITOR":
-                reply_parts.append(
-                    f"\n**Forensic Finding**: Strict evidentiary audit of indexed nodes reveals direct statutory linking to Title 31 financial structuring statutes. "
-                    f"Recommend maintaining cryptographic chain of custody on all related transactions."
-                )
-            elif req.system_persona == "COMPLIANCE_OFFICER":
-                reply_parts.append(
-                    f"\n**Compliance Directive**: Anti-structuring statute (31 U.S.C. 5324) mandates automated CTR logging for transactions aggregating above the statutory threshold. "
-                    f"Quorum check at {req.consensus_quorum*100:.0f}% confirmed no sanction alerts."
-                )
-            elif req.system_persona == "PLAIN_EXPLAINER":
-                reply_parts.append(
-                    f"\n**In Simple Terms**: The system mapped out the connections for this request. The entity is linked to standard corporate and regulatory records, and the risk indicators are currently nominal."
-                )
-            else:
-                reply_parts.append(
-                    f"\n**Strategic Analysis**: Cross-domain node coupling indicates stable regulatory positioning. "
-                    f"Operational parameters suggest proceeding with nominal monitoring posture under standard KYC/AML controls."
-                )
-
-            reply = "\n".join(reply_parts)
-        else:
-            reasoning_chain.append(f"Evaluating general system query under {req.system_persona} framing.")
-            reply = (
-                f"### {title}: *{query}*\n\n"
-                f"The Unified Autonomous System evaluated this query across all 27 active subsystems with parameters:\n\n"
-                f"- **Persona Mode**: `{req.system_persona}`\n"
-                f"- **Sampling Temperature**: `{req.temperature:.2f}` (Target tokens: `{req.max_tokens}`)\n"
-                f"- **Inference Depth**: `{req.reasoning_depth}` graph hops\n"
-                f"- **Consensus Quorum**: `{req.consensus_quorum*100:.0f}%` Agreement\n\n"
-                f"**System Telemetry Summary**:\n"
-                f"- Subsystem Status: Nominal (27/27 online)\n"
-                f"- Regulatory Risk Meter: 15.0% (Low Risk Threshold)\n"
-                f"- Deductive Theorem Prover: Initialized & Coherent (100% Axiom Coherence)\n\n"
-                f"You can adjust these parameters in real time using the slider controls in the interface."
-            )
+        # Dynamic Conversational Assistant reasoning tailored to query and persona
+        c_reply, c_chain, c_conf, c_sub = generate_conversational_response(
+            query=query,
+            system_persona=req.system_persona,
+            temperature=req.temperature,
+            max_tokens=req.max_tokens,
+            reasoning_depth=req.reasoning_depth,
+            consensus_quorum=req.consensus_quorum,
+            kg_triples=kg_triples
+        )
+        reply = c_reply
+        reasoning_chain.extend(c_chain)
+        confidence = c_conf
+        subsystem = c_sub
 
     latency_ms = (time.perf_counter() - t0) * 1000.0
 

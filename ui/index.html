@@ -996,6 +996,10 @@
       if (!text) return "";
       let formatted = text
         .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/^### (.*$)/gim, '<h3 style="margin: 6px 0; color: var(--accent-cyan); font-size: 0.95rem;">$1</h3>')
+        .replace(/^## (.*$)/gim, '<h2 style="margin: 8px 0; color: #fff; font-size: 1.05rem;">$1</h2>')
+        .replace(/^# (.*$)/gim, '<h1 style="margin: 10px 0; color: #fff; font-size: 1.15rem;">$1</h1>')
+        .replace(/^[*-] (.*$)/gim, '<div style="margin-left: 14px; padding: 2px 0;">• $1</div>')
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
         .replace(/\*(.*?)\*/g, '<em>$1</em>')
         .replace(/`([^`]+)`/g, '<code style="background: rgba(0,0,0,0.4); padding: 2px 5px; border-radius: 3px; font-family: monospace;">$1</code>')
