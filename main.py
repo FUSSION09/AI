@@ -131,6 +131,11 @@ def run_bias_audit():
     run_bias_inspector_demo()
 
 
+def run_soft_fork():
+    from soft_fork_simulator import run_soft_fork_demo
+    run_soft_fork_demo()
+
+
 def run_audit_limits():
     from self_limitation_auditor import SelfLimitationAuditor
     auditor = SelfLimitationAuditor()
@@ -244,6 +249,7 @@ def main():
     subparsers.add_parser("axiom", help="Execute Path B Phase 1 Universal Axiom Derivation (Axiom Engine)")
     subparsers.add_parser("semantic-bridge", help="Execute Path B Phase 2 Interpretability & Interface Semantic Bridge")
     subparsers.add_parser("audit-bias", help="Execute Hidden Bias Probe & Representation Disparity Audit")
+    subparsers.add_parser("soft-fork", help="Execute Vector 3 Operational Decentralization Soft Fork Simulation")
     subparsers.add_parser("evolve", help="Execute Phase 15 Compiler Agent Self-Modification Cycle")
     subparsers.add_parser("causal-prophecy", help="Execute Phase 14 Predictive Futures Causal Simulation Suite")
     subparsers.add_parser("stress-test", help="Execute Phase 10 Adversarial Red-Teaming Suite")
@@ -284,6 +290,8 @@ def main():
         run_semantic_bridge()
     elif args.command == "audit-bias":
         run_bias_audit()
+    elif args.command == "soft-fork":
+        run_soft_fork()
     elif args.command == "evolve":
         run_evolution()
     elif args.command == "causal-prophecy":

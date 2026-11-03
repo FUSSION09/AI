@@ -45,6 +45,7 @@ from temporal_mcts_planner import TemporalMCTSPlanner, CENTURY_PLAN_FILE
 from axiom_engine import AxiomEngine, AXIOM_LEDGER_FILE, FundamentalUncertainty
 from semantic_bridge import SemanticBridge, SEMANTIC_LEDGER_FILE
 from bias_inspector import BiasInspector, BIAS_REPORT_FILE
+from soft_fork_simulator import SoftForkSimulator, SOFT_FORK_FILE
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -1297,8 +1298,8 @@ def get_system_overview():
             pass
     return {
         "system_status": cert.get("system_status", "ACTIVE_OPERATIONAL"),
-        "phases_verified": cert.get("phases_verified", 28),
-        "total_active_subsystems": 28,
+        "phases_verified": cert.get("phases_verified", 29),
+        "total_active_subsystems": 29,
         "ledger_height": len(orchestrator.ledger.chain),
         "ghost_mode": orchestrator.ghost.is_ghost_active,
         "pending_queue_count": len(orchestrator.pas),
@@ -1333,6 +1334,36 @@ def probe_custom_bias(req: BiasProbeRequest):
         narratives=req.narratives
     )
     return asdict(result)
+
+
+# ==============================================================================
+# VECTOR 3: OPERATIONAL DECENTRALIZATION (SOFT FORK SIMULATION)
+# ==============================================================================
+
+class SoftForkSimRequest(BaseModel):
+    simulation_rounds: int = 5
+
+@app.post("/swarm/soft-fork/simulate", tags=["Decentralized Swarm"])
+def simulate_soft_fork(req: SoftForkSimRequest):
+    """Simulates distributing core decision logic to heterogeneous proxies via minimal state vectors."""
+    sim = SoftForkSimulator()
+    report = sim.execute_soft_fork_simulation(simulation_rounds=req.simulation_rounds)
+    return asdict(report)
+
+@app.get("/swarm/soft-fork/telemetry", tags=["Decentralized Swarm"])
+def get_soft_fork_telemetry():
+    """Returns the latest soft-fork operational decentralization telemetry report."""
+    if SOFT_FORK_FILE.exists():
+        try:
+            with open(SOFT_FORK_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+    # Otherwise run once
+    sim = SoftForkSimulator()
+    report = sim.execute_soft_fork_simulation(simulation_rounds=3)
+    return asdict(report)
+
 
 
 # ==============================================================================

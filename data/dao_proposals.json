@@ -1200,5 +1200,68 @@
         "timestamp": 1793730108.5281346
       }
     }
+  },
+  "DAO-PROP-32A693E5": {
+    "proposal_id": "DAO-PROP-32A693E5",
+    "proposer": "0x1E673BC35D98f19D25cBDeeE6f5ACF1A12967869",
+    "title": "Decentralized Liquidity Expansion",
+    "description": "Expand liquidity pool allocation across cross-border settlement rails.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.1,
+        "price": 64500.0
+      }
+    },
+    "votes_for": 12000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793730456.3302011,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "549f928ab0d698498c2436c3e3d766763428e1b5cc25eae61d364dba835aa02d5925798ac1e4c1219e30cab5d10239b2b775b4fb2dc9aa44ab4c0093d54c3b971c",
+    "voters": {
+      "0x1234567890abcdef1234567890abcdef12345678": {
+        "support": true,
+        "weight": 12000.0,
+        "timestamp": 1793730456.3572097
+      }
+    }
+  },
+  "DAO-PROP-349ED84D": {
+    "proposal_id": "DAO-PROP-349ED84D",
+    "proposer": "0x013fb893e470aAB1447Ad24f64d8Bfcd46aB8584",
+    "title": "Decentralized Autonomous Treasury Balancing",
+    "description": "Autonomous reallocation ratified by token-weighted peer quorum.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.5,
+        "price": 64000.0
+      }
+    },
+    "votes_for": 55000.0,
+    "votes_against": 0.0,
+    "quorum_required": 50000.0,
+    "start_time": 1793730551.2115195,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "5f1b7a190c183db3ee5cbb58906cb978c3e9cab0a820c9ec50817b8b52c00f797f1747444298d3937d0867a7de57bc43f5a583ae7ac9da6c4202839fbc4745081b",
+    "voters": {
+      "0xc922489a99883B717acCe531D3324208A0d221EB": {
+        "support": true,
+        "weight": 30000.0,
+        "timestamp": 1793730551.2200513
+      },
+      "0xB9E257A4A40Fe79C8d33395dd6Da4410Aa71e72B": {
+        "support": true,
+        "weight": 25000.0,
+        "timestamp": 1793730551.2220812
+      }
+    }
   }
 }

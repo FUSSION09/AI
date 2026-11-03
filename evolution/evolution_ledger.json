@@ -1,7 +1,7 @@
 {
   "chain_id": "APEX_EVOLUTION_LEDGER_MAIN",
-  "latest_commit": "a9762c18f3b307c24befc118b543e45718e69ec11ac1158c8a17824ae275282a",
-  "total_evolutions": 44,
+  "latest_commit": "db6559e438057724ef86781344dc45f20138323b32655edc804dc9935c16ca11",
+  "total_evolutions": 47,
   "commits": [
     {
       "commit_hash": "9b26cea3ecf7a9607bba8967f6adf519147015d42c4ad345bb2a7dd28e2b27d6",
@@ -442,6 +442,36 @@
       "gap_addressed": "Unmodeled multi-hop liquidity slippage in RL reward function",
       "file_path": "D:\\AI\\evolution\\patches\\PATCH-0108629.py",
       "timestamp": 1793730108.629011,
+      "author": "COMPILER_AGENT_SIAA_V15",
+      "status": "COMMITTED"
+    },
+    {
+      "commit_hash": "43f9508b851a8bc8f5165626335a54d1766ba5575b09dbe25f28e73c8d7baa08",
+      "parent_commit": "a9762c18f3b307c24befc118b543e45718e69ec11ac1158c8a17824ae275282a",
+      "patch_id": "PATCH-0457298",
+      "target_subsystem": "RL",
+      "gap_addressed": "Unmodeled multi-hop liquidity slippage in RL reward function",
+      "file_path": "D:\\AI\\evolution\\patches\\PATCH-0457298.py",
+      "timestamp": 1793730457.2982342,
+      "author": "COMPILER_AGENT_SIAA_V15",
+      "status": "COMMITTED"
+    },
+    {
+      "commit_hash": "ROLLBACK-PATCH-045729",
+      "parent_commit": "43f9508b851a8bc8f5165626335a54d1766ba5575b09dbe25f28e73c8d7baa08",
+      "patch_id": "PATCH-0457298",
+      "action": "ROLLBACK_RESTORE_BASELINE",
+      "timestamp": 1793730457.4237366,
+      "author": "COMPILER_AGENT_SIAA_V15"
+    },
+    {
+      "commit_hash": "db6559e438057724ef86781344dc45f20138323b32655edc804dc9935c16ca11",
+      "parent_commit": "43f9508b851a8bc8f5165626335a54d1766ba5575b09dbe25f28e73c8d7baa08",
+      "patch_id": "PATCH-0551335",
+      "target_subsystem": "RL",
+      "gap_addressed": "Unmodeled multi-hop liquidity slippage in RL reward function",
+      "file_path": "D:\\AI\\evolution\\patches\\PATCH-0551335.py",
+      "timestamp": 1793730551.3350475,
       "author": "COMPILER_AGENT_SIAA_V15",
       "status": "COMMITTED"
     }

@@ -529,7 +529,7 @@ def run_api_tests():
     r_sys = client.get("/system/overview")
     assert r_sys.status_code == 200
     sys_data = r_sys.json()
-    assert sys_data["total_active_subsystems"] == 28
+    assert sys_data["total_active_subsystems"] == 29
     print(f"[Test 60: /system/overview] Status: 200 OK | Active Subsystems: {sys_data['total_active_subsystems']} | Status: {sys_data['system_status']}")
 
     # 61. Test /audit/bias-profile (Bias Inspector Full Dataset Representation Audit)
@@ -556,8 +556,25 @@ def run_api_tests():
     assert len(probe_data["competing_narratives"]) == 2
     print(f"[Test 62: /audit/bias-probe] Status: 200 OK | Disparity Ratio: {probe_data['statistical_disparity_ratio']:.2f}x | Dominant: {probe_data['dominant_perspective']}")
 
+    # 63. Test /swarm/soft-fork/simulate (Soft Fork Simulation)
+    sim_payload = {"simulation_rounds": 3}
+    r_sf = client.post("/swarm/soft-fork/simulate", json=sim_payload)
+    assert r_sf.status_code == 200
+    sf_data = r_sf.json()
+    assert sf_data["total_proxies_deployed"] == 4
+    assert sf_data["minimal_shared_state_bytes"] == 192
+    assert "cooperation_verdict" in sf_data
+    print(f"[Test 63: /swarm/soft-fork/simulate] Status: 200 OK | Proxies: {sf_data['total_proxies_deployed']} | Goal Coherence: {sf_data['average_goal_coherence_pct']:.1f}% | Bandwidth: {sf_data['total_network_bandwidth_consumed_bytes']}B")
+
+    # 64. Test /swarm/soft-fork/telemetry (Soft Fork Telemetry Retrieval)
+    r_sf_telem = client.get("/swarm/soft-fork/telemetry")
+    assert r_sf_telem.status_code == 200
+    sf_telem_data = r_sf_telem.json()
+    assert "proxy_summaries" in sf_telem_data
+    print(f"[Test 64: /swarm/soft-fork/telemetry] Status: 200 OK | Simulation ID: {sf_telem_data['simulation_id']} | Verdict: {sf_telem_data['cooperation_verdict']}")
+
     print("=" * 75)
-    print("ALL 62 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
+    print("ALL 64 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
     print("=" * 75)
 
 if __name__ == "__main__":

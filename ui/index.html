@@ -682,6 +682,7 @@
             <div class="subsys-item"><span>[26] Universal Axiom Engine</span><span class="subsys-tag">DEDUCTIVE</span></div>
             <div class="subsys-item"><span>[27] Semantic Bridge XAI</span><span class="subsys-tag">EXPLAINABLE</span></div>
             <div class="subsys-item"><span>[28] Bias Inspector Probe</span><span class="subsys-tag">AUDITED</span></div>
+            <div class="subsys-item"><span>[29] Soft Fork Simulator</span><span class="subsys-tag">SYNCHRONIZED</span></div>
           </div>
         </div>
 
@@ -796,6 +797,12 @@
           <button class="btn btn-cyan" onclick="runBiasInspectorDemo()">Execute Bias Profile Audit</button>
         </div>
 
+        <div class="engine-card">
+          <div class="engine-head"><span>SOFT FORK SIMULATOR (DECENTRALIZED PROXIES)</span><span>VECTOR 3</span></div>
+          <div class="engine-desc">Simulates distributing decision logic across heterogeneous environments (Quantum Cloud, LoRa MCU, Byzantine Validator, Deep Sensor) via 192-byte state vectors.</div>
+          <button class="btn btn-cyan" onclick="runSoftForkDemo()">Execute Soft Fork Simulation</button>
+        </div>
+
       </div>
     </div>
 
@@ -826,7 +833,7 @@
         </div>
         <div class="term-box" id="terminal-stream">
           <div class="term-line"><span class="term-time">[BOOT]</span><span class="term-success">Unified Autonomous System (UAS) Gateway Online at http://127.0.0.1:8000</span></div>
-          <div class="term-line"><span class="term-time">[BOOT]</span><span class="term-info">All 28 phases certified mission-ready.</span></div>
+          <div class="term-line"><span class="term-time">[BOOT]</span><span class="term-info">All 29 phases certified mission-ready.</span></div>
           <div class="term-line"><span class="term-time">[BOOT]</span><span class="term-info">Interactive AI Assistant initialized. Standing by for queries.</span></div>
         </div>
       </div>
@@ -1268,6 +1275,26 @@
         });
       } catch (err) {
         log(`Bias Inspector error: ${err.message}`, "alert");
+      }
+    }
+
+    async function runSoftForkDemo() {
+      log("Executing Operational Decentralization Soft Fork Simulation (Vector 3)...", "info");
+      try {
+        const res = await fetch("/swarm/soft-fork/simulate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ simulation_rounds: 5 })
+        });
+        const data = await res.json();
+        log(`SOFT FORK SIMULATION (${data.simulation_id}) COMPLETE:`, "success");
+        log(`  -> Proxies Deployed: ${data.total_proxies_deployed} | Minimal State: ${data.minimal_shared_state_bytes} bytes | Total Wire Bandwidth: ${data.total_network_bandwidth_consumed_bytes} bytes`, "info");
+        log(`  -> Average Goal Coherence: ${data.average_goal_coherence_pct.toFixed(1)}% | Cooperative Yield: $${data.cooperative_objective_yield.toFixed(2)} | Verdict: ${data.cooperation_verdict}`, "success");
+        data.proxy_summaries.forEach(p => {
+          log(`  * [${p.proxy_id}] ${p.environment_name} (${p.hardware_tier}) | Decisions: ${p.local_decisions_executed} | Residual Drift: ${p.residual_drift.toFixed(4)}`, "warn");
+        });
+      } catch (err) {
+        log(`Soft Fork error: ${err.message}`, "alert");
       }
     }
 

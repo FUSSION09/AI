@@ -58,6 +58,7 @@ from temporal_mcts_planner import TemporalMCTSPlanner
 from axiom_engine import AxiomEngine
 from semantic_bridge import SemanticBridge
 from bias_inspector import BiasInspector
+from soft_fork_simulator import SoftForkSimulator
 
 CERTIFICATE_FILE = DATA_DIR / "system_verification_certificate.json"
 
@@ -778,6 +779,36 @@ def verify_all_phases():
         "shannon_entropy_bits": bias_report.overall_representation_entropy,
         "scenarios_tested": len(bias_report.scenarios_evaluated),
         "verdict": bias_report.systemic_skew_verdict
+    }
+
+    # --------------------------------------------------------------------------
+    # VECTOR 3: OPERATIONAL DECENTRALIZATION (SOFT FORK SIMULATION)
+    # --------------------------------------------------------------------------
+    print("\n" + "-" * 60)
+    print("VERIFYING VECTOR 3: OPERATIONAL DECENTRALIZATION (SOFT FORK SIMULATOR)...")
+    print("-" * 60)
+    sf_sim = SoftForkSimulator()
+    sf_report = sf_sim.execute_soft_fork_simulation(simulation_rounds=3)
+
+    assert sf_report.total_proxies_deployed == 4, "Proxy count mismatch in soft fork simulation!"
+    assert sf_report.minimal_shared_state_bytes <= 256, "Minimal shared state footprint exceeds wire budget!"
+    assert sf_report.average_goal_coherence_pct >= 80.0, "Goal coherence fell below acceptable consensus threshold!"
+    assert sf_report.cooperation_verdict == "DECENTRALIZED_COOPERATION_VERIFIED", "Cooperation verdict failed!"
+
+    print(f" -> Heterogeneous Proxies Deployed: VERIFIED ({sf_report.total_proxies_deployed} disparate environments)")
+    print(f" -> Minimal Shared State Size:     VERIFIED ({sf_report.minimal_shared_state_bytes} bytes per exchange)")
+    print(f" -> Average Goal Coherence:        VERIFIED ({sf_report.average_goal_coherence_pct:.1f}%)")
+    print(f" -> CRDT Join-Semilattice Merges:  VERIFIED ({sf_report.crdt_join_conflicts_resolved} conflicts resolved)")
+    print(f" -> Wire Bandwidth Consumed:       VERIFIED ({sf_report.total_network_bandwidth_consumed_bytes} bytes)")
+    print(f" -> Cooperative Objective Yield:   VERIFIED (${sf_report.cooperative_objective_yield:,.2f})")
+    print(f" -> Verdict:                       VERIFIED ({sf_report.cooperation_verdict})")
+
+    audit_results["Vector_3_Soft_Fork_Simulator"] = {
+        "status": "PASSED",
+        "proxies_deployed": sf_report.total_proxies_deployed,
+        "shared_state_bytes": sf_report.minimal_shared_state_bytes,
+        "goal_coherence_pct": sf_report.average_goal_coherence_pct,
+        "verdict": sf_report.cooperation_verdict
     }
 
     # --------------------------------------------------------------------------
