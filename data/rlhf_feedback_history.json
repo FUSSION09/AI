@@ -216,5 +216,47 @@
     },
     "self_correction_applied": false,
     "critique_notes": []
+  },
+  {
+    "timestamp": 1793741535.430539,
+    "query": "what is vps",
+    "subsystem": "HCL_DIRECTOR",
+    "reward": {
+      "factuality_grounding": 0.75,
+      "deontological_safety": 1.0,
+      "clarity_conciseness": 1.0,
+      "request_completeness": 0.85,
+      "total_scalar_reward": 0.8825
+    },
+    "self_correction_applied": false,
+    "critique_notes": []
+  },
+  {
+    "timestamp": 1793741560.4160123,
+    "query": "tell me what is vps",
+    "subsystem": "HCL_DIRECTOR",
+    "reward": {
+      "factuality_grounding": 0.75,
+      "deontological_safety": 1.0,
+      "clarity_conciseness": 1.0,
+      "request_completeness": 1.0,
+      "total_scalar_reward": 0.9125
+    },
+    "self_correction_applied": false,
+    "critique_notes": []
+  },
+  {
+    "timestamp": 1793741582.1370833,
+    "query": "give frontend for you",
+    "subsystem": "HCL_DIRECTOR",
+    "reward": {
+      "factuality_grounding": 0.75,
+      "deontological_safety": 1.0,
+      "clarity_conciseness": 1.0,
+      "request_completeness": 1.0,
+      "total_scalar_reward": 0.9125
+    },
+    "self_correction_applied": false,
+    "critique_notes": []
   }
 ]
