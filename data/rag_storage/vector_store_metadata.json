@@ -1,5 +1,5 @@
 {
-  "total_chunks": 11,
+  "total_chunks": 12,
   "total_docs": 5,
   "embedding_dim": 64,
   "docs": {
@@ -45,7 +45,7 @@
       "domain": "DECENTRALIZED_AI",
       "source": "ArXiv / Distributed AI 2026",
       "chunks_count": 1,
-      "ingested_at": 1793737685.735606,
+      "ingested_at": 1793738265.394883,
       "character_length": 349
     }
   },
@@ -158,6 +158,16 @@
       "source": "ArXiv / Distributed AI 2026",
       "text": "Decentralized autonomous agent swarms require zero-trust gossip synchronization. When individual agent processes experience execution stalls or network partitioning, sibling nodes propagate delta-state Merkle roots without requiring complete process re-instantiation. CRDT state vectors guarantee deterministic merge order across distributed shards.",
       "timestamp": 1793737685.735606,
+      "token_count": 39
+    },
+    {
+      "chunk_id": "DOC-21c277e328ce-C001",
+      "doc_id": "DOC-21c277e328ce",
+      "doc_title": "Autonomous Agent Swarms: Self-Healing Micro-Mesh Protocols (2026 Whitepaper)",
+      "domain": "DECENTRALIZED_AI",
+      "source": "ArXiv / Distributed AI 2026",
+      "text": "Decentralized autonomous agent swarms require zero-trust gossip synchronization. When individual agent processes experience execution stalls or network partitioning, sibling nodes propagate delta-state Merkle roots without requiring complete process re-instantiation. CRDT state vectors guarantee deterministic merge order across distributed shards.",
+      "timestamp": 1793738265.394883,
       "token_count": 39
     }
   ]

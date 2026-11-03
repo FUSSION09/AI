@@ -110,5 +110,31 @@
       "reasoning_depth_delta": 0.0,
       "advantage": 0.0657
     }
+  },
+  {
+    "timestamp": 1793737795.117755,
+    "query": "what is virtual private server",
+    "subsystem": "HCL_DIRECTOR",
+    "reward": {
+      "factuality_grounding": 0.75,
+      "deontological_safety": 1.0,
+      "clarity_conciseness": 1.0,
+      "request_completeness": 1.0,
+      "total_scalar_reward": 0.9125
+    },
+    "self_correction_applied": false,
+    "critique_notes": []
+  },
+  {
+    "timestamp": 1793738265.4094093,
+    "type": "EXPLICIT_RLHF_HUMAN_FEEDBACK",
+    "query": "What is my WiFi status?",
+    "rating": 0.95,
+    "comments": "Accurate, instant, and directly answered the prompt.",
+    "policy_delta": {
+      "temperature_delta": -0.00014,
+      "reasoning_depth_delta": 0.0,
+      "advantage": 0.0553
+    }
   }
 ]

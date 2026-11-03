@@ -733,8 +733,25 @@ def run_api_tests():
     assert "total_interactions" in hist_data
     print(f"[Test 79: /rlhf/history] Status: 200 OK | Recorded Interactions: {hist_data['total_interactions']}")
 
+    # =========================================================================
+    # THE PROACTIVE DIRECTOR: PREDICTIVE INTERVENTION ENDPOINTS (TESTS 80-81)
+    # =========================================================================
+    # 80. Test /proactive/alerts (Pre-Emptive Action Alerts Generation)
+    r_alerts = client.get("/proactive/alerts")
+    assert r_alerts.status_code == 200
+    alerts_data = r_alerts.json()
+    assert alerts_data["total_preemptive_alerts"] == 3
+    print(f"[Test 80: /proactive/alerts] Status: 200 OK | Pre-Emptive Alerts Generated: {alerts_data['total_preemptive_alerts']}")
+
+    # 81. Test /proactive/triggers (Formal Mathematical Trigger Matrix)
+    r_trig = client.get("/proactive/triggers")
+    assert r_trig.status_code == 200
+    trig_data = r_trig.json()
+    assert trig_data["total_triggers"] >= 3
+    print(f"[Test 81: /proactive/triggers] Status: 200 OK | Formal Triggers Defined: {trig_data['total_triggers']}")
+
     print("=" * 75)
-    print("ALL 79 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
+    print("ALL 81 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
     print("=" * 75)
 
 if __name__ == "__main__":

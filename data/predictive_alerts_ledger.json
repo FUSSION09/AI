@@ -1,0 +1,53 @@
+[
+  {
+    "alert_id": "ALERT-PREEMPT-01-STORAGE",
+    "severity": "HIGH",
+    "subsystem_origin": "RESOURCE_THROTTLER_AND_EQEL",
+    "trigger_condition": "StorageUtilization(D:) \\ge 90.0\\% \\land FreeCapacity(D:) \\le 10.0\\text{ GB}",
+    "preemptive_action_statement": "Storage capacity on Drive D: has reached 96.4% (5.3 GB remaining). Vector database re-indexing and snapshot delta logging are within 72 hours of encountering write stalls.",
+    "recommended_remediation": "Execute the NIST SP 800-88 Ephemeral Cryptographic Purge (EQEL) on temporary test artifacts or re-route cold artifact ledgers to secondary storage before the next batch training epoch.",
+    "urgency_horizon": "< 24 Hours",
+    "telemetry_metrics": {
+      "drive": "D:",
+      "utilization_pct": 96.4,
+      "free_gb": 5.3,
+      "total_gb": 148.9
+    },
+    "timestamp": 1793738294.7647805
+  },
+  {
+    "alert_id": "ALERT-PREEMPT-02-COMPLIANCE",
+    "severity": "CRITICAL",
+    "subsystem_origin": "COMPLIANCE_EVALUATOR_AXIOMS",
+    "trigger_condition": "FinCEN\\_BOI\\_Directives(2026) \\land BeneficialOwnershipGTE(25\\%) \\land CTR\\_Clustering(31\\,\\text{USC}\\,5324)",
+    "preemptive_action_statement": "Based on regulatory trend velocity under the newly internalized FinCEN 2026 BOI Directives, you should preemptively audit Vanguard Horizon Ltd and verify beneficial ownership declaration before the next multi-jurisdictional clearing cycle.",
+    "recommended_remediation": "Generate an on-chain DAO compliance attestation and dispatch an evidentiary triplestore traversal for all transactions between $9,000 and $9,999 to preempt automatic FinCEN SAR triggers.",
+    "urgency_horizon": "< 48 Hours",
+    "telemetry_metrics": {
+      "target_entity": "Vanguard Horizon Ltd",
+      "governing_statutes": [
+        "FinCEN 2026 BOI",
+        "31 U.S.C. \u00a7 5324"
+      ],
+      "active_scrutiny_pct": 20.0,
+      "consensus_quorum": 0.75
+    },
+    "timestamp": 1793738294.7647805
+  },
+  {
+    "alert_id": "ALERT-PREEMPT-03-SWARM-DRIFT",
+    "severity": "ELEVATED",
+    "subsystem_origin": "SWARM_FORKING_AND_BFT_MESH",
+    "trigger_condition": "ActiveSwarmNodes \\ge 30 \\land VectorClockDivergence > 0.05 \\land StateWireBytes \\le 256",
+    "preemptive_action_statement": "Swarm network height has expanded to 33 peer nodes with 12 active RAG chunks. Gossip gossip round 26 requires a scheduled FedAvg weight consolidation to prevent CRDT semilattice clock drift.",
+    "recommended_remediation": "Trigger the automated `/swarm/federate` routine to compute global FedAvg weights and commit the Merkle root to the Ephemeral Ledger before deploying additional proxy clones.",
+    "urgency_horizon": "< 12 Hours",
+    "telemetry_metrics": {
+      "active_nodes_count": 33,
+      "total_rag_chunks": 12,
+      "running_average_reward": 0.9002,
+      "strategy_temperature": 0.29880975
+    },
+    "timestamp": 1793738294.7647805
+  }
+]

@@ -1,9 +1,9 @@
 {
-  "temperature_scaling": 0.298998,
+  "temperature_scaling": 0.29880975,
   "reasoning_depth_weight": 3.0006375,
-  "evidence_strictness": 0.8005283,
+  "evidence_strictness": 0.8006036,
   "conciseness_penalty_weight": 0.15,
   "learning_rate": 0.05,
-  "total_evaluations": 8,
-  "average_reward": 0.8925
+  "total_evaluations": 10,
+  "average_reward": 0.9002
 }

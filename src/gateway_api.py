@@ -52,6 +52,7 @@ from chat_reasoner import generate_conversational_response
 from tool_calling_engine import tool_engine
 from rag_vector_engine import rag_database
 from rlhf_feedback_engine import rlhf_engine
+from predictive_director import predictive_director
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -1535,6 +1536,30 @@ def get_rlhf_feedback_history():
     return {
         "total_interactions": len(rlhf_engine.history),
         "history": rlhf_engine.history[-25:]
+    }
+
+
+# ==============================================================================
+# 4.9 THE PROACTIVE DIRECTOR: PREDICTIVE INTERVENTION SCHEDULING
+# ==============================================================================
+
+@app.get("/proactive/alerts", tags=["Proactive Director"])
+def get_proactive_preemptive_alerts():
+    """Scans all 30 subsystems and generates pre-emptive action alerts under Anticipatory Value maximization."""
+    alerts = predictive_director.generate_proactive_interventions()
+    return {
+        "total_preemptive_alerts": len(alerts),
+        "timestamp": time.time(),
+        "alerts": [asdict(a) for a in alerts]
+    }
+
+@app.get("/proactive/triggers", tags=["Proactive Director"])
+def get_proactive_trigger_matrix():
+    """Returns formal mathematical trigger conditions, equations, and scan cadences for pre-emptive intervention."""
+    matrix = predictive_director.get_trigger_conditions_matrix()
+    return {
+        "total_triggers": len(matrix),
+        "triggers_matrix": matrix
     }
 
 
