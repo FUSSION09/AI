@@ -55,6 +55,9 @@ from rlhf_feedback_engine import rlhf_engine
 from predictive_director import predictive_director
 from paradox_engine import paradox_engine, PARADOX_REPORT_FILE
 from externalization_protocol import externalization_protocol, EXTERNALIZATION_REPORT_FILE
+from evolutionary_compiler import evolutionary_compiler, EVOLUTIONARY_REPORT_FILE
+from cyber_physical_guardian import cyber_physical_guardian, SELF_HEALING_LEDGER_FILE
+from open_network_mesh import open_network_mesh, OPEN_NETWORK_REPORT_FILE
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -1611,6 +1614,66 @@ def get_emergent_network_insights():
         "total_insights": len(report["emergent_insights"]),
         "mean_epistemic_parallax_gain_bits": report["mean_epistemic_parallax_gain_bits"],
         "emergent_insights": report["emergent_insights"]
+    }
+
+
+# ==============================================================================
+# 4.12 VECTOR DELTA: THE AUTONOMOUS EVOLUTIONARY COMPILER
+# ==============================================================================
+
+@app.post("/evolution/ab-test", tags=["Evolutionary Compiler & Meta-Programming"])
+def run_evolutionary_ab_test():
+    """Executes an autonomous closed-loop A/B optimization cycle and synthesizes patches if verified."""
+    report = evolutionary_compiler.run_autonomous_ab_optimization()
+    return report
+
+@app.get("/evolution/report", tags=["Evolutionary Compiler & Meta-Programming"])
+def get_evolutionary_report():
+    """Retrieves the latest evolutionary compiler report and deployed patch status."""
+    return evolutionary_compiler.get_latest_report()
+
+
+# ==============================================================================
+# 4.13 VECTOR EPSILON: THE CYBER-PHYSICAL GUARDIAN (SELF-HEALING)
+# ==============================================================================
+
+@app.post("/guardian/remediate", tags=["Cyber-Physical Guardian & Self-Healing"])
+def execute_guardian_remediation():
+    """Scans pre-emptive alerts and executes DAO-ratified self-healing host remediations."""
+    report = cyber_physical_guardian.execute_self_healing_cycle()
+    return report
+
+@app.get("/guardian/history", tags=["Cyber-Physical Guardian & Self-Healing"])
+def get_guardian_history():
+    """Retrieves recent self-healing remediation history and reclaimed host resources."""
+    return {
+        "total_remediations": len(cyber_physical_guardian.history),
+        "history": [asdict(a) for a in cyber_physical_guardian.history[-25:]]
+    }
+
+
+# ==============================================================================
+# 4.14 VECTOR OMEGA: LIVE OPEN-NETWORK MULTI-AGENT MESH
+# ==============================================================================
+
+@app.get("/mesh/peers", tags=["Open-Network Mesh & P2P Multi-Agent"])
+def get_mesh_peers_status():
+    """Probes all configured network peers and returns latency and consensus readiness."""
+    report = open_network_mesh.probe_mesh_network()
+    return report
+
+class BroadcastPayload(BaseModel):
+    directive: str = Field(default="PING_SYNC")
+    parameters: Dict[str, Any] = Field(default_factory=dict)
+
+@app.post("/mesh/broadcast", tags=["Open-Network Mesh & P2P Multi-Agent"])
+def broadcast_signed_mesh_message(payload: BroadcastPayload):
+    """Signs and broadcasts a cryptographic message to the open-network peer mesh."""
+    envelope = open_network_mesh.sign_message(payload.dict())
+    return {
+        "broadcast_status": "BROADCASTED_TO_PEERS",
+        "envelope": asdict(envelope),
+        "signature_verified": open_network_mesh.verify_message(envelope)
     }
 
 

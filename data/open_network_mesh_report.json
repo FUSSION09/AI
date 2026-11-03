@@ -1,0 +1,54 @@
+{
+  "timestamp": 1793741171.0559921,
+  "runtime_ms": 191.15,
+  "vector": "Vector Omega: Live Open-Network Multi-Agent Mesh",
+  "operational_status": "MESH_CONVERGED",
+  "total_registered_peers": 3,
+  "online_peers_count": 2,
+  "mesh_convergence_score": 1.0,
+  "peers": [
+    {
+      "peer_id": "PEER-LOCAL-GATEWAY",
+      "label": "Apex Local Service Mesh Gateway (MSMG)",
+      "endpoint_url": "http://127.0.0.1:8000/control/telemetry",
+      "protocol": "HTTP_REST",
+      "status": "ONLINE",
+      "latency_ms": 13.04,
+      "last_seen": 1793741170.8774056,
+      "consensus_voting_weight": 0.4
+    },
+    {
+      "peer_id": "PEER-OLLAMA-RPC",
+      "label": "Local Autonomous LLM Node (Ollama / Llama-3)",
+      "endpoint_url": "http://127.0.0.1:11434/api/tags",
+      "protocol": "JSON_RPC",
+      "status": "STANDBY",
+      "latency_ms": 1.2,
+      "last_seen": 1793741171.0339787,
+      "consensus_voting_weight": 0.3
+    },
+    {
+      "peer_id": "PEER-SWARM-MICRO-MESH",
+      "label": "Decentralized 34-Node Swarm Micro-Mesh Relay",
+      "endpoint_url": "http://127.0.0.1:8000/swarm/soft-fork/telemetry",
+      "protocol": "HTTP_REST",
+      "status": "ONLINE",
+      "latency_ms": 21.04,
+      "last_seen": 1793741171.0554588,
+      "consensus_voting_weight": 0.3
+    }
+  ],
+  "sample_signed_envelope": {
+    "message_id": "MSG-MESH-1171055",
+    "sender_id": "UAS-APEX-LOCAL",
+    "payload": {
+      "directive": "INTERSYSTEM_HEARTBEAT_SYNC",
+      "epoch": 27,
+      "bft_height": 34
+    },
+    "timestamp": 1793741171.0554588,
+    "nonce": "9f5ed9a22e3d966b",
+    "signature": "b28bfec37af8055e8a20455ccd4c79dd43111d9185e5d859eba9fa6dbca341e1"
+  },
+  "signature_verified": true
+}

@@ -1,0 +1,79 @@
+{
+  "chain_id": "APEX_SELF_HEALING_ACTUATION_CHAIN",
+  "last_updated": 1793740941.7696767,
+  "total_remediations": 6,
+  "actions": [
+    {
+      "action_id": "ACT-HEAL-0729771",
+      "target_subsystem": "RESOURCE_THROTTLER_AND_EQEL",
+      "trigger_alert_id": "ALERT-PREEMPT-01-STORAGE",
+      "action_type": "Storage capacity on Drive D",
+      "dao_permit_id": "PERMIT-DAO-DAO-PROP-E92D7D81",
+      "execution_status": "EXECUTED_SUCCESS",
+      "bytes_reclaimed": 54491456,
+      "latency_mitigated_ms": 0.0,
+      "description": "Garbage collection sweep and volatile heap compaction executed.",
+      "timestamp": 1793740729.975862
+    },
+    {
+      "action_id": "ACT-HEAL-0729975",
+      "target_subsystem": "COMPLIANCE_EVALUATOR_AXIOMS",
+      "trigger_alert_id": "ALERT-PREEMPT-02-COMPLIANCE",
+      "action_type": "Based on regulatory trend velocity under the newly internalized FinCEN 2026 BOI Directives, you should preemptively audit Vanguard Horizon Ltd and verify beneficial ownership declaration before the next multi-jurisdictional clearing cycle.",
+      "dao_permit_id": "PERMIT-DAO-DAO-PROP-B1656813",
+      "execution_status": "EXECUTED_SUCCESS",
+      "bytes_reclaimed": 0,
+      "latency_mitigated_ms": 5.0,
+      "description": "Staged preemptive compliance audit docket for Generate an on-chain DAO compliance attestation and dispatch an evidentiary triplestore traversal for all transactions between $9,000 and $9,999 to preempt automatic FinCEN SAR triggers..",
+      "timestamp": 1793740730.4167233
+    },
+    {
+      "action_id": "ACT-HEAL-0730418",
+      "target_subsystem": "SWARM_FORKING_AND_BFT_MESH",
+      "trigger_alert_id": "ALERT-PREEMPT-03-SWARM-DRIFT",
+      "action_type": "Swarm network height has expanded to 33 peer nodes with 14 active RAG chunks. Gossip gossip round 26 requires a scheduled FedAvg weight consolidation to prevent CRDT semilattice clock drift.",
+      "dao_permit_id": "PERMIT-DAO-DAO-PROP-FF7A02E2",
+      "execution_status": "EXECUTED_SUCCESS",
+      "bytes_reclaimed": 0,
+      "latency_mitigated_ms": 18.5,
+      "description": "Default route verified and keep-alive ping probe confirmed.",
+      "timestamp": 1793740730.815779
+    },
+    {
+      "action_id": "ACT-HEAL-0941255",
+      "target_subsystem": "RESOURCE_THROTTLER_AND_EQEL",
+      "trigger_alert_id": "ALERT-PREEMPT-01-STORAGE",
+      "action_type": "Storage capacity on Drive D",
+      "dao_permit_id": "PERMIT-DAO-DAO-PROP-CF8268F0",
+      "execution_status": "EXECUTED_SUCCESS",
+      "bytes_reclaimed": 55605568,
+      "latency_mitigated_ms": 0.0,
+      "description": "Garbage collection sweep and volatile heap compaction executed.",
+      "timestamp": 1793740941.5262876
+    },
+    {
+      "action_id": "ACT-HEAL-0941526",
+      "target_subsystem": "COMPLIANCE_EVALUATOR_AXIOMS",
+      "trigger_alert_id": "ALERT-PREEMPT-02-COMPLIANCE",
+      "action_type": "Based on regulatory trend velocity under the newly internalized FinCEN 2026 BOI Directives, you should preemptively audit Vanguard Horizon Ltd and verify beneficial ownership declaration before the next multi-jurisdictional clearing cycle.",
+      "dao_permit_id": "PERMIT-DAO-DAO-PROP-CABF9F65",
+      "execution_status": "EXECUTED_SUCCESS",
+      "bytes_reclaimed": 0,
+      "latency_mitigated_ms": 5.0,
+      "description": "Staged preemptive compliance audit docket for Generate an on-chain DAO compliance attestation and dispatch an evidentiary triplestore traversal for all transactions between $9,000 and $9,999 to preempt automatic FinCEN SAR triggers..",
+      "timestamp": 1793740941.6011798
+    },
+    {
+      "action_id": "ACT-HEAL-0941601",
+      "target_subsystem": "SWARM_FORKING_AND_BFT_MESH",
+      "trigger_alert_id": "ALERT-PREEMPT-03-SWARM-DRIFT",
+      "action_type": "Swarm network height has expanded to 33 peer nodes with 15 active RAG chunks. Gossip gossip round 26 requires a scheduled FedAvg weight consolidation to prevent CRDT semilattice clock drift.",
+      "dao_permit_id": "PERMIT-DAO-DAO-PROP-4DADA5A8",
+      "execution_status": "EXECUTED_SUCCESS",
+      "bytes_reclaimed": 0,
+      "latency_mitigated_ms": 18.5,
+      "description": "Default route verified and keep-alive ping probe confirmed.",
+      "timestamp": 1793740941.7696767
+    }
+  ]
+}

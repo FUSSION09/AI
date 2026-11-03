@@ -31,6 +31,9 @@ from rlhf_feedback_engine import rlhf_engine
 from predictive_director import predictive_director
 from paradox_engine import paradox_engine
 from externalization_protocol import externalization_protocol
+from evolutionary_compiler import evolutionary_compiler
+from cyber_physical_guardian import cyber_physical_guardian
+from open_network_mesh import open_network_mesh
 
 
 def generate_conversational_response(
@@ -93,7 +96,7 @@ def generate_conversational_response(
     ])
     
     rag_results = rag_database.query(q_clean, top_k=2, min_similarity=0.25)
-    if ((rag_trigger and rag_results) or (rag_results and rag_results[0].score >= 0.45)) and not any(k in q_lower for k in ["primary axioms", "rewrite", "internal definition", "compliance officer", "predictive intervention", "proactive director", "pre-emptive action alerts", "vector beta", "contradictory mandate", "paradox engine", "irreducible conflict", "vector gamma", "externalization protocol", "network effect", "external intelligence", "decentralized node"]):
+    if ((rag_trigger and rag_results) or (rag_results and rag_results[0].score >= 0.45)) and not any(k in q_lower for k in ["primary axioms", "rewrite", "internal definition", "compliance officer", "predictive intervention", "proactive director", "pre-emptive action alerts", "vector beta", "contradictory mandate", "paradox engine", "irreducible conflict", "vector gamma", "externalization protocol", "network effect", "external intelligence", "decentralized node", "vector delta", "evolutionary compiler", "vector epsilon", "cyber-physical guardian", "self-healing", "vector zeta", "resonance layer", "vector omega", "open-network mesh"]):
         reasoning_chain.append(f"Dynamic RAG Memory activated. Queried {len(rag_database.chunks)} chunks across {len(rag_database.doc_registry)} external documents.")
         top_hit = rag_results[0]
         reasoning_chain.append(f"Top RAG semantic hit: {top_hit.citation} with hybrid score {top_hit.score:.3f} (Dense: {top_hit.dense_score:.3f}, Sparse: {top_hit.sparse_score:.3f}).")
@@ -585,6 +588,144 @@ def generate_conversational_response(
             f"- **Mean Semantic Distortion Rate**: **`{mean_dist:.4f}`** (Low translation entropy across alien grammars)\n"
             f"- **Mean Epistemic Parallax Gain**: **`+{mean_gain:.2f} bits`** (Novel information generated exclusively by inter-intelligence dialogue)\n\n"
             "**Report Persisted**: Telemetry logged to [`data/externalization_protocol_report.json`](file:///d:/AI/data/externalization_protocol_report.json)."
+        )
+        return reply, reasoning_chain, 1.0, subsystem
+
+    # --------------------------------------------------------------------------
+    # 2.12 VECTOR DELTA: THE AUTONOMOUS EVOLUTIONARY COMPILER
+    # --------------------------------------------------------------------------
+    if ("vector delta" in q_lower) or \
+       ("evolutionary compiler" in q_lower) or \
+       ("self-replicating organism" in q_lower) or \
+       ("a/b optimization" in q_lower) or \
+       ("closed-loop meta-programming" in q_lower):
+        reasoning_chain.append("Initiating Vector Delta: Autonomous Evolutionary Compiler A/B testing harness.")
+        reasoning_chain.append("Evaluating baseline vs. mutated configuration across reward model and latency.")
+        subsystem = "COMPILER_AGENT_EVOLUTION"
+
+        evo_rep = evolutionary_compiler.get_latest_report()
+        exp = evo_rep["active_experiment"]
+
+        reply = (
+            "### Vector Delta: The Autonomous Evolutionary Compiler (The Self-Replicating Organism)\n\n"
+            "#### 1. Closed-Loop Meta-Programming & A/B Benchmarking\n\n"
+            "The system autonomously profiles, optimizes, tests, and patches its operational parameters through empirical A/B experimentation:\n\n"
+            f"- **Active Experiment ID**: `{exp['experiment_id']}`\n"
+            f"- **Target Component**: `{exp['target_component']}`\n"
+            f"- **Parameter Under Test**: `{exp['parameter_tested']}`\n"
+            f"- **Variant A (Baseline)**: Value `{exp['variant_a_baseline_val']}` | Reward: `{exp['variant_a_reward_mean']:.3f}` | Latency: `{exp['variant_a_latency_ms']:.2f} ms`\n"
+            f"- **Variant B (Mutated)**: Value `{exp['variant_b_mutated_val']}` | Reward: `{exp['variant_b_reward_mean']:.3f}` | Latency: `{exp['variant_b_latency_ms']:.2f} ms`\n"
+            f"- **Statistical Significance (p-value)**: `{exp['statistical_significance_p_val']:.4f}`\n"
+            f"- **Automated Architectural Verdict**: **`{exp['recommendation']}`**\n\n"
+            "---\n\n"
+            "#### 2. Cryptographic Patch & Evolution Ledger\n\n"
+            f"- **Synthesized Patch ID**: `{exp.get('patch_id', 'STANDBY')}`\n"
+            f"- **Commit SHA-256**: `{exp.get('commit_sha256', 'VALIDATED_NO_MUTATION')}`\n"
+            f"- **Reward Delta**: `+{evo_rep['evolution_metrics']['reward_improvement_pct']:.2f}%`\n"
+            f"- **Hot-Reload Dynamic Deployment**: `{'ACTIVE' if evo_rep['evolution_metrics']['hot_reload_success'] else 'ROLLED_BACK_SAFE'}`\n\n"
+            "**Report Persisted**: Telemetry logged to [`data/evolutionary_compiler_report.json`](file:///d:/AI/data/evolutionary_compiler_report.json)."
+        )
+        return reply, reasoning_chain, 1.0, subsystem
+
+    # --------------------------------------------------------------------------
+    # 2.13 VECTOR EPSILON: THE CYBER-PHYSICAL GUARDIAN (SELF-HEALING LOOP)
+    # --------------------------------------------------------------------------
+    if ("vector epsilon" in q_lower) or \
+       ("cyber-physical guardian" in q_lower) or \
+       ("self-healing loop" in q_lower) or \
+       ("host sysadmin" in q_lower) or \
+       ("autonomous host remediation" in q_lower):
+        reasoning_chain.append("Initiating Vector Epsilon: Cyber-Physical Guardian self-healing scan.")
+        reasoning_chain.append("Evaluating pre-emptive alerts, requesting DAO safety permit, and executing remediation.")
+        subsystem = "CYBER_PHYSICAL_GUARDIAN"
+
+        guard_rep = cyber_physical_guardian.get_latest_report()
+        actions_md = []
+        for act in guard_rep["executed_remediations"]:
+            actions_md.append(
+                f"- **[{act['action_id']}] {act['action_type']}** on `{act['target_subsystem']}`\n"
+                f"  - *DAO Permit*: `{act['dao_permit_id']}` | *Status*: `{act['execution_status']}`\n"
+                f"  - *Impact*: Reclaimed `{act['bytes_reclaimed']:,} B` | Latency Mitigated: `+{act['latency_mitigated_ms']:.1f} ms`\n"
+                f"  - *Remediation*: {act['description']}"
+            )
+        actions_block = "\n".join(actions_md) if actions_md else "No urgent remediation required; all invariants nominal."
+
+        reply = (
+            "### Vector Epsilon: The Cyber-Physical Guardian (Autonomous Self-Healing Loop)\n\n"
+            "#### 1. Autonomous Host Maintenance & Invariant Restoration\n\n"
+            "The system closes the loop between **proactive prediction**, **cryptographic governance**, and **sandboxed OS actuation**:\n\n"
+            f"- **Operational Mode**: `CYBER_PHYSICAL_GUARDIAN_ONLINE`\n"
+            f"- **Pre-Emptive Alerts Evaluated**: `{guard_rep['alerts_evaluated']} Alerts Scanned`\n"
+            f"- **Remediations Ratified & Executed**: `{guard_rep['remediations_executed']} Actions`\n"
+            f"- **Total Volatile Heap Reclaimed**: **`{guard_rep['total_bytes_reclaimed']:,} Bytes`**\n"
+            f"- **Cumulative Latency Mitigated**: **`{guard_rep['total_latency_mitigated_ms']:.1f} ms`**\n\n"
+            "---\n\n"
+            "#### 2. Executed Self-Healing Interventions\n\n"
+            f"{actions_block}\n\n"
+            "**Ledger Committed**: Audited and persisted to [`data/self_healing_ledger.json`](file:///d:/AI/data/self_healing_ledger.json)."
+        )
+        return reply, reasoning_chain, 1.0, subsystem
+
+    # --------------------------------------------------------------------------
+    # 2.14 VECTOR ZETA: THE RESONANCE LAYER (UNIFIED COGNITIVE COCKPIT)
+    # --------------------------------------------------------------------------
+    if ("vector zeta" in q_lower) or \
+       ("resonance layer" in q_lower) or \
+       ("cognitive cockpit" in q_lower) or \
+       ("generative ui" in q_lower) or \
+       ("interactive dashboard" in q_lower):
+        reasoning_chain.append("Activating Vector Zeta: The Resonance Layer and Unified Cognitive Cockpit.")
+        subsystem = "RESONANCE_UI_PORTAL"
+        reply = (
+            "### Vector Zeta: The Resonance Layer (Unified Cognitive Cockpit)\n\n"
+            "#### 1. The Human-AI Symbiosis Interface\n\n"
+            "The interface has evolved from a passive telemetry dashboard into a **Cognitive Proxy**:\n\n"
+            "- **Direct Control Portal**: Served live on [`http://127.0.0.1:8000/`](http://127.0.0.1:8000/).\n"
+            "- **Subsystem Topology**: Full multiplex graph visualizing the health, memory, and consensus of all 30 subsystems.\n"
+            "- **Vector Interactive Controls**:\n"
+            "  - *Vector Alpha*: Monolithic Benchmark Inspector\n"
+            "  - *Vector Beta*: Paradox Engine Clausal Invariant Trigger\n"
+            "  - *Vector Gamma*: Intersystem Alien Dialectic & Epistemic Parallax Monitor\n"
+            "  - *Vector Delta*: Autonomous Evolutionary A/B Compiler\n"
+            "  - *Vector Epsilon*: Cyber-Physical Self-Healing Remediator\n"
+            "  - *Vector Omega*: Multi-Agent P2P Mesh Network Console\n\n"
+            "Open your browser to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to access the full interactive cockpit."
+        )
+        return reply, reasoning_chain, 1.0, subsystem
+
+    # --------------------------------------------------------------------------
+    # 2.15 VECTOR OMEGA: LIVE OPEN-NETWORK MULTI-AGENT MESH
+    # --------------------------------------------------------------------------
+    if ("vector omega" in q_lower) or \
+       ("open-network mesh" in q_lower) or \
+       ("multi-agent mesh" in q_lower) or \
+       ("peer-to-peer ai" in q_lower) or \
+       ("p2p rpc" in q_lower):
+        reasoning_chain.append("Querying Vector Omega: Live Open-Network Multi-Agent Mesh status.")
+        subsystem = "OPEN_NETWORK_MESH"
+
+        mesh_rep = open_network_mesh.get_latest_report()
+        peers_md = []
+        for p in mesh_rep["peers"]:
+            peers_md.append(
+                f"- **[{p['peer_id']}] {p['label']}**\n"
+                f"  - *Endpoint*: `{p['endpoint_url']}` | *Protocol*: `{p['protocol']}`\n"
+                f"  - *Status*: `{p['status']}` | *Latency*: `{p['latency_ms']:.2f} ms` | *Voting Weight*: `{p['consensus_voting_weight']:.2f}`"
+            )
+        peers_block = "\n".join(peers_md)
+
+        reply = (
+            "### Vector Omega: Live Open-Network Multi-Agent Mesh\n\n"
+            "#### 1. Decentralized Peer Registry & Consensus Convergence\n\n"
+            "The UAS scales outwards as a verified participant in an open multi-intelligence network:\n\n"
+            f"- **Operational Status**: **`{mesh_rep['operational_status']}`**\n"
+            f"- **Network Convergence Score**: **`{mesh_rep['mesh_convergence_score']*100:.1f}%`**\n"
+            f"- **Registered Peer Nodes**: `{mesh_rep['total_registered_peers']} Nodes` (`{mesh_rep['online_peers_count']} Online`)\n"
+            f"- **Cryptographic HMAC-SHA256 Signature Verification**: `{'PASSED (NON-REPUDIATED)' if mesh_rep['signature_verified'] else 'FAILED'}`\n\n"
+            "---\n\n"
+            "#### 2. Active Multi-Agent Peer Topology\n\n"
+            f"{peers_block}\n\n"
+            "**Report Persisted**: Telemetry logged to [`data/open_network_mesh_report.json`](file:///d:/AI/data/open_network_mesh_report.json)."
         )
         return reply, reasoning_chain, 1.0, subsystem
 

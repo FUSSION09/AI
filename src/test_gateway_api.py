@@ -796,8 +796,63 @@ def run_api_tests():
     assert len(ins_data["emergent_insights"]) == 3
     print(f"[Test 86: /network/externalize/insights] Status: 200 OK | Total Emergent Insights: {ins_data['total_insights']} | Anti-Solipsism Confirmed.")
 
+    # =========================================================================
+    # VECTOR DELTA: THE AUTONOMOUS EVOLUTIONARY COMPILER (TESTS 87-88)
+    # =========================================================================
+    # 87. Test /evolution/ab-test (A/B Optimization Cycle)
+    r_evo = client.post("/evolution/ab-test")
+    assert r_evo.status_code == 200
+    evo_data = r_evo.json()
+    assert "active_experiment" in evo_data
+    assert "recommendation" in evo_data["active_experiment"]
+    print(f"[Test 87: /evolution/ab-test] Status: 200 OK | Rec: {evo_data['active_experiment']['recommendation']} | Runtime: {evo_data['runtime_ms']:.2f} ms")
+
+    # 88. Test /evolution/report (Evolutionary Report Retrieval)
+    r_evo_rep = client.get("/evolution/report")
+    assert r_evo_rep.status_code == 200
+    evo_rep_data = r_evo_rep.json()
+    assert "evolution_metrics" in evo_rep_data
+    print(f"[Test 88: /evolution/report] Status: 200 OK | Operational: {evo_rep_data['operational_status']}")
+
+    # =========================================================================
+    # VECTOR EPSILON: THE CYBER-PHYSICAL GUARDIAN (TESTS 89-90)
+    # =========================================================================
+    # 89. Test /guardian/remediate (Host Remediation Execution)
+    r_guard = client.post("/guardian/remediate")
+    assert r_guard.status_code == 200
+    guard_data = r_guard.json()
+    assert guard_data["remediations_executed"] >= 1
+    assert guard_data["total_bytes_reclaimed"] > 0
+    print(f"[Test 89: /guardian/remediate] Status: 200 OK | Remediations: {guard_data['remediations_executed']} | Bytes Reclaimed: {guard_data['total_bytes_reclaimed']:,} B")
+
+    # 90. Test /guardian/history (Guardian Remediation Ledger)
+    r_ghist = client.get("/guardian/history")
+    assert r_ghist.status_code == 200
+    ghist_data = r_ghist.json()
+    assert ghist_data["total_remediations"] >= 1
+    print(f"[Test 90: /guardian/history] Status: 200 OK | Total Recorded Remediations: {ghist_data['total_remediations']}")
+
+    # =========================================================================
+    # VECTOR OMEGA: OPEN-NETWORK MULTI-AGENT MESH (TESTS 91-92)
+    # =========================================================================
+    # 91. Test /mesh/peers (Mesh Peer Status & Convergence)
+    r_mesh = client.get("/mesh/peers")
+    assert r_mesh.status_code == 200
+    mesh_data = r_mesh.json()
+    assert mesh_data["total_registered_peers"] >= 3
+    assert "mesh_convergence_score" in mesh_data
+    print(f"[Test 91: /mesh/peers] Status: 200 OK | Peers: {mesh_data['total_registered_peers']} | Conv: {mesh_data['mesh_convergence_score']*100:.1f}%")
+
+    # 92. Test /mesh/broadcast (Cryptographic HMAC Message Broadcast)
+    bc_payload = {"directive": "EPISTEMIC_STATE_SYNC", "parameters": {"epoch": 28, "quorum": 0.85}}
+    r_bc = client.post("/mesh/broadcast", json=bc_payload)
+    assert r_bc.status_code == 200
+    bc_data = r_bc.json()
+    assert bc_data["signature_verified"] is True
+    print(f"[Test 92: /mesh/broadcast] Status: 200 OK | Signature Verified: {bc_data['signature_verified']} | ID: {bc_data['envelope']['message_id']}")
+
     print("=" * 75)
-    print("ALL 86 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
+    print("ALL 92 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
     print("=" * 75)
 
 if __name__ == "__main__":

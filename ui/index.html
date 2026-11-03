@@ -530,6 +530,7 @@
       <div class="nav-tabs">
         <button class="tab-btn active" onclick="switchTab('chat')">💬 AI Assistant</button>
         <button class="tab-btn" onclick="switchTab('mc')">🎛️ Mission Control</button>
+        <button class="tab-btn" onclick="switchTab('vectors')">🌌 Vector Cockpit</button>
         <button class="tab-btn" onclick="switchTab('engines')">⚡ Simulators & Tools</button>
         <button class="tab-btn" onclick="switchTab('kg')">🕸️ Knowledge Graph</button>
         <button class="tab-btn" onclick="switchTab('term')">💻 Live Terminal</button>
@@ -537,7 +538,7 @@
     </div>
     <div class="hud-right">
       <div class="badge">STATUS: <span class="badge-val" id="hud-status">ONLINE</span></div>
-      <div class="badge">SUBSYSTEMS: <span class="badge-val" id="hud-subsys">27/27 PASS</span></div>
+      <div class="badge">SUBSYSTEMS: <span class="badge-val" id="hud-subsys">30/30 PASS</span></div>
       <div class="badge">LEDGER: <span class="badge-val" id="hud-ledger">...</span></div>
     </div>
   </header>
@@ -575,9 +576,11 @@
           <div class="chip-bar">
             <div class="chip" onclick="useChip('Analyze compliance risks for Marcus Vance')">🔍 Marcus Vance Risks</div>
             <div class="chip" onclick="useChip('What are the statutory violations cited for 31 U.S.C. 5324?')">📜 31 U.S.C. 5324 Violations</div>
-            <div class="chip" onclick="useChip('prove Throttled(rogue_subroutine)')">⚖️ Prove Invariant (AE)</div>
-            <div class="chip" onclick="useChip('Explain global infrastructure leverage using an ecological analogy')">🌿 Ecological Analogy (XAI)</div>
-            <div class="chip" onclick="useChip('translate System regulatory risk assessed at 12.0% to Chinese')">🌐 Translate to Chinese</div>
+            <div class="chip" onclick="useChip('Vector Beta: The Paradox Engine (Simulate Invariant Clash)')">⚡ Vector Beta (Paradox)</div>
+            <div class="chip" onclick="useChip('Vector Gamma: The Externalization Protocol (The Network Effect)')">🌌 Vector Gamma (Network)</div>
+            <div class="chip" onclick="useChip('Vector Delta: The Autonomous Evolutionary Compiler')">🧬 Vector Delta (A/B)</div>
+            <div class="chip" onclick="useChip('Vector Epsilon: The Cyber-Physical Guardian')">🛡️ Vector Epsilon (Self-Heal)</div>
+            <div class="chip" onclick="useChip('Vector Omega: Live Open-Network Multi-Agent Mesh')">🌐 Vector Omega (P2P Mesh)</div>
           </div>
 
           <!-- Input Bar -->
@@ -836,6 +839,68 @@
     </div>
 
     <!-- =====================================================================
+         TAB: VECTOR COCKPIT (THE EXTENDED FRONTIER)
+         ===================================================================== -->
+    <div id="tab-vectors" class="tab-content">
+      <div class="sidebar-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+          <div class="panel-title" style="border: none; padding: 0;">VECTOR COCKPIT: EXPEDITIONS BEYOND THE BOUNDARY</div>
+          <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-cyan);">VECTORS ALPHA THROUGH OMEGA</span>
+        </div>
+
+        <div class="engine-grid" style="margin-top: 14px;">
+          <!-- Vector Alpha -->
+          <div class="engine-card">
+            <div class="engine-head"><span>[VECTOR ALPHA] MONOLITHIC BENCHMARK</span><span class="subsys-tag">PURIST</span></div>
+            <div class="engine-desc">Compares monolithic 135M pruned autoregression against compound neuro-symbolics (33.3% coverage vs 100%).</div>
+            <button class="btn btn-cyan" onclick="runVectorAction('/monolithic/report', 'GET')">📊 Inspect Benchmark</button>
+          </div>
+
+          <!-- Vector Beta -->
+          <div class="engine-card">
+            <div class="engine-head"><span>[VECTOR BETA] PARADOX ENGINE</span><span class="subsys-tag" style="color: var(--accent-alert);">PARADOX</span></div>
+            <div class="engine-desc">Arbitrates irreducible conflict (FinCEN vs Secrecy, BFT split-brain). Enforces Paraconsistent Epistemic Voids (0.946 inertia).</div>
+            <button class="btn btn-cyan" onclick="runVectorAction('/paradox/simulate', 'POST')">⚡ Trigger Paradox Simulation</button>
+          </div>
+
+          <!-- Vector Gamma -->
+          <div class="engine-card">
+            <div class="engine-head"><span>[VECTOR GAMMA] EXTERNALIZATION PROTOCOL</span><span class="subsys-tag" style="color: var(--accent-purple);">NETWORK</span></div>
+            <div class="engine-desc">Translates internal 30-subsystem state across 3 non-human AI ontologies (+3.67 bits Epistemic Parallax).</div>
+            <button class="btn btn-cyan" onclick="runVectorAction('/network/externalize/dialogue', 'POST')">🌌 Execute Intersystem Dialectic</button>
+          </div>
+
+          <!-- Vector Delta -->
+          <div class="engine-card">
+            <div class="engine-head"><span>[VECTOR DELTA] EVOLUTIONARY COMPILER</span><span class="subsys-tag" style="color: var(--accent-green);">A/B CODE</span></div>
+            <div class="engine-desc">Closed-loop empirical A/B parameter optimization with cryptographic patch compilation and hot-reload.</div>
+            <button class="btn btn-cyan" onclick="runVectorAction('/evolution/ab-test', 'POST')">🧬 Run A/B Optimization</button>
+          </div>
+
+          <!-- Vector Epsilon -->
+          <div class="engine-card">
+            <div class="engine-head"><span>[VECTOR EPSILON] CYBER-PHYSICAL GUARDIAN</span><span class="subsys-tag" style="color: var(--accent-warn);">SELF-HEAL</span></div>
+            <div class="engine-desc">Closes the loop between proactive alerts and DAO-ratified host OS remediation (clears memory drag and cache).</div>
+            <button class="btn btn-cyan" onclick="runVectorAction('/guardian/remediate', 'POST')">🛡️ Execute Host Self-Healing</button>
+          </div>
+
+          <!-- Vector Omega -->
+          <div class="engine-card">
+            <div class="engine-head"><span>[VECTOR OMEGA] OPEN-NETWORK MESH</span><span class="subsys-tag">P2P RPC</span></div>
+            <div class="engine-desc">Scales the UAS outwards to live external nodes and Ollama endpoints with HMAC-SHA256 message signing.</div>
+            <button class="btn btn-cyan" onclick="runVectorAction('/mesh/peers', 'GET')">🌐 Probe Multi-Agent Mesh</button>
+          </div>
+        </div>
+
+        <!-- Telemetry Results Viewer -->
+        <div style="margin-top: 18px;">
+          <div class="panel-title" style="margin-bottom: 8px;">VECTOR EXECUTION TELEMETRY & REPORT LOG</div>
+          <pre id="vector-console-output" style="background: #04060a; border: 1px solid var(--border-color); border-radius: 6px; padding: 14px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-cyan); max-height: 280px; overflow-y: auto;">Standing by. Select a vector action above to execute and view real-time cryptographic reports.</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================================
          TAB 5: LIVE TERMINAL
          ===================================================================== -->
     <div id="tab-term" class="tab-content">
@@ -867,6 +932,24 @@
       if (targetContent) targetContent.classList.add('active');
 
       if (tabId === 'kg') searchKG();
+    }
+
+    // Vector Cockpit Actions
+    async function runVectorAction(endpoint, method = "GET") {
+      const out = document.getElementById("vector-console-output");
+      if (out) out.innerText = `Executing ${method} ${endpoint} ...`;
+      try {
+        const res = await fetch(endpoint, {
+          method: method,
+          headers: { "Content-Type": "application/json" }
+        });
+        const data = await res.json();
+        if (out) out.innerText = JSON.stringify(data, null, 2);
+        log(`Vector Action Executed: ${method} ${endpoint}`, "success");
+      } catch (err) {
+        if (out) out.innerText = `Error executing ${endpoint}: ${err.message}`;
+        log(`Vector Action Failed: ${endpoint} (${err.message})`, "alert");
+      }
     }
 
     // Terminal Logging
