@@ -207,3 +207,4 @@ class PredictiveDirectorEngine:
 
 # Global singleton instance
 predictive_director = PredictiveDirectorEngine()
+
