@@ -136,5 +136,19 @@
       "reasoning_depth_delta": 0.0,
       "advantage": 0.0553
     }
+  },
+  {
+    "timestamp": 1793738356.5987282,
+    "query": "what is vps",
+    "subsystem": "HCL_DIRECTOR",
+    "reward": {
+      "factuality_grounding": 0.75,
+      "deontological_safety": 1.0,
+      "clarity_conciseness": 1.0,
+      "request_completeness": 0.85,
+      "total_scalar_reward": 0.8825
+    },
+    "self_correction_applied": false,
+    "critique_notes": []
   }
 ]
