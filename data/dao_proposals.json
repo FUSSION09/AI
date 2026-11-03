@@ -1592,5 +1592,34 @@
         "timestamp": 1793736413.8191054
       }
     }
+  },
+  "DAO-PROP-ED8DF8C7": {
+    "proposal_id": "DAO-PROP-ED8DF8C7",
+    "proposer": "0xe6f8B730EA9b9599Ef2123718A81CbDa88aBBa93",
+    "title": "Decentralized Liquidity Expansion",
+    "description": "Expand liquidity pool allocation across cross-border settlement rails.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.1,
+        "price": 64500.0
+      }
+    },
+    "votes_for": 12000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793737679.3265176,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "2f3a241204b051de6c1eac8082d9547bf1c72a677966e6394f514bfcbac57bf91c576c01f1c2a97d0de40083477f3061d0d9c43ce55ed26071ad545e16ee565d1c",
+    "voters": {
+      "0x1234567890abcdef1234567890abcdef12345678": {
+        "support": true,
+        "weight": 12000.0,
+        "timestamp": 1793737679.3380647
+      }
+    }
   }
 }

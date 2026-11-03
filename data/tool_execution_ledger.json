@@ -110,5 +110,69 @@
     "latency_ms": 99.86,
     "summary": "Found **78 saved Wi-Fi network profile(s)** on this device.\n\n**Recent Saved Networks**:\n- `Airtel_Mukesh_5G`\n- `Airtel_maya_1580`\n- `Airtel_rake_5050`\n- `A`\n- `FTTH-18F8`\n- `moto edge 50 neo_4176`\n- `Airtel_chir_3086`\n- `Airtel_Lohan 1878`\n- `Tarun`\n- `Piyush`\n- *...and 68 additional saved networks.*",
     "has_error": false
+  },
+  {
+    "timestamp": 1793736701.6793356,
+    "tool_name": "get_wifi_status",
+    "success": true,
+    "latency_ms": 4796.34,
+    "summary": "Your Wi-Fi is **ONLINE and CONNECTED** to **Airtel_rake_5050 4**.\n\n- **Adapter**: `Intel(R) Wi-Fi 6E AX211 160MHz`\n- **Link Speed**: `293 Mbps`\n- **Local IP**: `192.168.1.10`\n- **Default Gateway**: `192.168.1.1` (35.6 ms)\n- **Internet Connectivity**: Operational (Ping to Google DNS: 85.6 ms)\n\nEverything is functioning normally. Signal and route to the local router are established.",
+    "has_error": false
+  },
+  {
+    "timestamp": 1793736734.865761,
+    "tool_name": "get_wifi_status",
+    "success": true,
+    "latency_ms": 4135.09,
+    "summary": "Your Wi-Fi is **ONLINE and CONNECTED** to **Airtel_rake_5050 4**.\n\n- **Adapter**: `Intel(R) Wi-Fi 6E AX211 160MHz`\n- **Link Speed**: `293 Mbps`\n- **Local IP**: `192.168.1.10`\n- **Default Gateway**: `192.168.1.1` (34.6 ms)\n- **Internet Connectivity**: Operational (Ping to Google DNS: 56.3 ms)\n\nEverything is functioning normally. Signal and route to the local router are established.",
+    "has_error": false
+  },
+  {
+    "timestamp": 1793736774.5864184,
+    "tool_name": "get_wifi_status",
+    "success": true,
+    "latency_ms": 6241.42,
+    "summary": "Wi-Fi appears to be **DISCONNECTED or INACTIVE**.\n\nSuggestions to restore connection:\n1. Check if the Wi-Fi physical switch or function key (Fn) is enabled.\n2. Open Windows Network Settings (`ms-settings:network-wifi`).\n3. Verify that your router is powered on and broadcasting its SSID.",
+    "has_error": false
+  },
+  {
+    "timestamp": 1793736796.0892484,
+    "tool_name": "get_wifi_status",
+    "success": true,
+    "latency_ms": 6100.37,
+    "summary": "Wi-Fi appears to be **DISCONNECTED or INACTIVE**.\n\nSuggestions to restore connection:\n1. Check if the Wi-Fi physical switch or function key (Fn) is enabled.\n2. Open Windows Network Settings (`ms-settings:network-wifi`).\n3. Verify that your router is powered on and broadcasting its SSID.",
+    "has_error": false
+  },
+  {
+    "timestamp": 1793736848.5991488,
+    "tool_name": "get_wifi_status",
+    "success": true,
+    "latency_ms": 6062.27,
+    "summary": "Wi-Fi appears to be **DISCONNECTED or INACTIVE**.\n\nSuggestions to restore connection:\n1. Check if the Wi-Fi physical switch or function key (Fn) is enabled.\n2. Open Windows Network Settings (`ms-settings:network-wifi`).\n3. Verify that your router is powered on and broadcasting its SSID.",
+    "has_error": false
+  },
+  {
+    "timestamp": 1793737685.462722,
+    "tool_name": "get_wifi_status",
+    "success": true,
+    "latency_ms": 4705.59,
+    "summary": "Your Wi-Fi is **ONLINE and CONNECTED** to **Airtel_rake_5050 4**.\n\n- **Adapter**: `Intel(R) Wi-Fi 6E AX211 160MHz`\n- **Link Speed**: `244 Mbps`\n- **Local IP**: `192.168.1.10`\n- **Default Gateway**: `192.168.1.1` (22.9 ms)\n- **Internet Connectivity**: Operational (Ping to Google DNS: 68.7 ms)\n\nEverything is functioning normally. Signal and route to the local router are established.",
+    "has_error": false
+  },
+  {
+    "timestamp": 1793737685.5976298,
+    "tool_name": "get_system_vitals",
+    "success": true,
+    "latency_ms": 119.87,
+    "summary": "### Real-Time System Vitals Diagnostic\n\n- **CPU Load**: `10.0%` (8 Physical Cores, 12 Logical Threads)\n- **Memory (RAM)**: `75.3% Used` (11.9 GB used of 15.7 GB)\n- **Battery**: `90%` (Plugged In / AC Power)\n- **System Uptime**: `2d 18h 39m`\n- **Storage Drives**:\n  - Drive `C:\\`: 116.7 GB free of 325.8 GB (64.2% used)\n  - Drive `D:\\`: 5.3 GB free of 148.9 GB (96.4% used)\n- **Operating System**: `Windows-10-10.0.26300-SP0`\n\nSystem health is **NOMINAL**.",
+    "has_error": false
+  },
+  {
+    "timestamp": 1793737685.712294,
+    "tool_name": "list_wifi_profiles",
+    "success": true,
+    "latency_ms": 90.13,
+    "summary": "Found **78 saved Wi-Fi network profile(s)** on this device.\n\n**Recent Saved Networks**:\n- `Airtel_Mukesh_5G`\n- `Airtel_maya_1580`\n- `Airtel_rake_5050`\n- `A`\n- `FTTH-18F8`\n- `moto edge 50 neo_4176`\n- `Airtel_chir_3086`\n- `Airtel_Lohan 1878`\n- `Tarun`\n- `Piyush`\n- *...and 68 additional saved networks.*",
+    "has_error": false
   }
 ]

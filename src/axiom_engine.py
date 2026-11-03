@@ -299,7 +299,12 @@ class AxiomEngine:
                 ground_clause = f"{clean_pred}({clean_subj}, {clean_obj})"
                 self.add_axiom(ground_clause, self._next_cid("KG"))
         except Exception:
-            pass
+            pass
+
+        # 6. Dynamic RAG Ingested Primary Axioms (FinCEN 2026 Directives & BFT Mesh)
+        self.add_axiom("MandatoryBOIDisclosure(?Company, ?Owner) :- EquityOwnershipGTE25Pct(?Owner, ?Company)", "AX-FINCEN-BOI-01")
+        self.add_axiom("CriminalStructuringFlagged(?Batch) :- TransactionSumUnder10k(?Batch), EvadesReportingIntent(?Batch)", "AX-FINCEN-STRUCT-02")
+        self.add_axiom("ConsensusAdmissible(?State) :- ByzantineQuorumGTE(?Nodes, 0.67), WireFootprintLTE256B(?State)", "AX-BFT-CONSENSUS-01")
 
     # =========================================================================
     # 4. RESOLUTION THEOREM PROVING CORE
