@@ -1,0 +1,42 @@
+{
+  "node_id": "SWARM-NODE-004-1081",
+  "endpoint_uri": "p2p://node-4.swarm.uas.internal:9084",
+  "status": "ONLINE_ACTIVE",
+  "persona": {
+    "persona_id": "PER-GHOS-1081",
+    "name": "Ghost-CovertOps",
+    "role_specialty": "GHOST_INFILTRATION",
+    "risk_tolerance": 0.3,
+    "utility_greed": 0.6,
+    "ethical_strictness": 0.65,
+    "lookahead_depth": 3,
+    "stealth_priority": 0.98
+  },
+  "gene_bundle": {
+    "genome_id": "GENOME-SWARM-NODE-004-1081",
+    "parent_node_id": null,
+    "generation": 1,
+    "timestamp": 1793721571.0814254,
+    "routing_weights": {
+      "LLM": 0.3408,
+      "RL": 0.3962,
+      "PRK": 0.2629
+    },
+    "moral_priors": {
+      "alpha_ethical": 0.65,
+      "beta_friction": 0.7
+    },
+    "ppo_value_bias": [
+      0.1191,
+      -0.0287,
+      0.2708,
+      -0.1654,
+      0.3291,
+      -0.1008
+    ],
+    "qpmk_projection_seed": 46,
+    "local_knowledge_triples_count": 35
+  },
+  "reputation_score": 1.0,
+  "timestamp": 1793725922.0516858
+}

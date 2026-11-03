@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Autonomous System (UAS) - Direct Control Portal & AI Assistant</title>
+  <style>
+    :root {
+      --bg-dark: #080b11;
+      --bg-card: #0f1523;
+      --bg-card-hover: #141c2e;
+      --border-color: #1e293b;
+      --border-bright: #334155;
+      --accent-cyan: #00f0ff;
+      --accent-cyan-dim: rgba(0, 240, 255, 0.15);
+      --accent-green: #10b981;
+      --accent-green-dim: rgba(16, 185, 129, 0.15);
+      --accent-alert: #f43f5e;
+      --accent-warn: #f59e0b;
+      --accent-purple: #8b5cf6;
+      --accent-blue: #3b82f6;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --font-mono: 'Consolas', 'Fira Code', 'Roboto Mono', monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Top HUD Navigation */
+    header {
+      background: #04060a;
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .hud-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .hud-title {
+      font-family: var(--font-mono);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pulse-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-green);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+
+    .nav-tabs {
+      display: flex;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 4px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .tab-btn.active {
+      background: var(--accent-cyan-dim);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      font-weight: bold;
+    }
+
+    .hud-right {
+      display: flex;
+      gap: 14px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+    .badge {
+      background: #0f172a;
+      border: 1px solid var(--border-color);
+      padding: 4px 10px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .badge-val { color: var(--accent-cyan); font-weight: bold; }
+
+    /* Main Container & Tab Views */
+    main {
+      flex: 1;
+      padding: 20px;
+      max-width: 1600px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.25s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* =========================================================================
+       TAB 1: AI CHAT & INTERACTIVE REASONER
+       ========================================================================= */
+    .chat-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 20px;
+      height: calc(100vh - 120px);
+    }
+    .chat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .chat-header {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-color);
+      background: #0a0f18;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .chat-stream {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .msg-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      max-width: 85%;
+    }
+    .msg-wrap.user {
+      align-self: flex-end;
+    }
+    .msg-wrap.ai {
+      align-self: flex-start;
+    }
+    .msg-sender {
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      padding: 0 4px;
+    }
+    .msg-bubble {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+    .msg-wrap.user .msg-bubble {
+      background: #1e3a8a;
+      color: #fff;
+      border: 1px solid #2563eb;
+      border-bottom-right-radius: 2px;
+    }
+    .msg-wrap.ai .msg-bubble {
+      background: #111827;
+      border: 1px solid var(--border-bright);
+      color: var(--text-main);
+      border-bottom-left-radius: 2px;
+    }
+    .meta-box {
+      margin-top: 8px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border-color);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .meta-box span { color: var(--accent-cyan); font-weight: bold; }
+
+    /* Quick Prompt Chips */
+    .chip-bar {
+      padding: 10px 20px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      border-top: 1px solid var(--border-color);
+      background: rgba(10, 15, 24, 0.7);
+    }
+    .chip {
+      background: #1e293b;
+      border: 1px solid var(--border-bright);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .chip:hover {
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      background: var(--accent-cyan-dim);
+    }
+
+    /* Input Bar */
+    .chat-input-row {
+      padding: 14px 20px;
+      border-top: 1px solid var(--border-color);
+      background: #0a0f18;
+      display: flex;
+      gap: 12px;
+    }
+    .chat-input-row input {
+      flex: 1;
+      background: #080d15;
+      border: 1px solid var(--border-bright);
+      padding: 12px 16px;
+      border-radius: 6px;
+      color: var(--text-main);
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .chat-input-row input:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 8px rgba(0, 240, 255, 0.25);
+    }
+
+    /* Chat Sidebar */
+    .chat-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .sidebar-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .panel-title {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 6px;
+    }
+
+    /* =========================================================================
+       BUTTONS, FORMS & COMMON CONTROLS
+       ========================================================================= */
+    .btn {
+      background: #1e293b;
+      color: var(--text-main);
+      border: 1px solid var(--border-bright);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn:hover { background: #334155; }
+    .btn-primary { background: #2563eb; border-color: #3b82f6; color: #fff; }
+    .btn-primary:hover { background: #1d4ed8; }
+    .btn-cyan { background: var(--accent-cyan-dim); border-color: var(--accent-cyan); color: var(--accent-cyan); }
+    .btn-cyan:hover { background: rgba(0, 240, 255, 0.3); }
+    .btn-danger { background: rgba(244, 63, 94, 0.15); border-color: var(--accent-alert); color: var(--accent-alert); }
+    .btn-danger:hover { background: rgba(244, 63, 94, 0.3); }
+
+    /* Telemetry Gauges */
+    .gauge-box {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .gauge-head {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+    }
+    .gauge-track {
+      background: #1e293b;
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .gauge-fill {
+      height: 100%;
+      transition: width 0.3s ease;
+    }
+
+    /* Grid Layouts for Mission Control */
+    .mc-grid {
+      display: grid;
+      grid-template-columns: 340px 1fr 340px;
+      gap: 20px;
+    }
+
+    /* Subsystem Matrix Grid */
+    .subsystem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+    .subsys-item {
+      background: #0a0f18;
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+    }
+    .subsys-tag {
+      font-weight: bold;
+      color: var(--accent-green);
+    }
+
+    /* Engine Cards */
+    .engine-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 16px;
+    }
+    .engine-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.2s ease;
+    }
+    .engine-card:hover {
+      border-color: var(--accent-cyan);
+    }
+    .engine-head {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      display: flex;
+      justify-content: space-between;
+    }
+    .engine-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Terminal Output Box */
+    .term-box {
+      background: #04070d;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 14px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      height: 480px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .term-line {
+      display: flex;
+      gap: 8px;
+      line-height: 1.4;
+    }
+    .term-time { color: var(--text-muted); min-width: 75px; }
+    .term-info { color: var(--text-main); }
+    .term-success { color: var(--accent-green); }
+    .term-warn { color: var(--accent-warn); }
+    .term-alert { color: var(--accent-alert); }
+
+    /* Graph Explorer Cards */
+    .kg-search-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .kg-search-bar input {
+      flex: 1;
+      background: var(--bg-card);
+      border: 1px solid var(--border-bright);
+      padding: 10px 16px;
+      border-radius: 6px;
+      color: #fff;
+      font-family: var(--font-mono);
+    }
+    .kg-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 12px;
+    }
+    .kg-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation HUD -->
+  <header>
+    <div class="hud-left">
+      <div class="hud-title">
+        <span class="pulse-dot"></span>
+        <span>APEX UAS // DIRECT CONTROL PORTAL & AI ASSISTANT</span>
+      </div>
+      <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('chat')">💬 AI Assistant</button>
+        <button class="tab-btn" onclick="switchTab('mc')">🎛️ Mission Control</button>
+        <button class="tab-btn" onclick="switchTab('engines')">⚡ Simulators & Tools</button>
+        <button class="tab-btn" onclick="switchTab('kg')">🕸️ Knowledge Graph</button>
+        <button class="tab-btn" onclick="switchTab('term')">💻 Live Terminal</button>
+      </div>
+    </div>
+    <div class="hud-right">
+      <div class="badge">STATUS: <span class="badge-val" id="hud-status">ONLINE</span></div>
+      <div class="badge">SUBSYSTEMS: <span class="badge-val" id="hud-subsys">27/27 PASS</span></div>
+      <div class="badge">LEDGER: <span class="badge-val" id="hud-ledger">...</span></div>
+    </div>
+  </header>
+
+  <!-- Main Content Areas -->
+  <main>
+
+    <!-- =====================================================================
+         TAB 1: AI ASSISTANT (CHAT & INTERACTIVE REASONING)
+         ===================================================================== -->
+    <div id="tab-chat" class="tab-content active">
+      <div class="chat-layout">
+        
+        <!-- Left: Stream & Input -->
+        <div class="chat-card">
+          <div class="chat-header">
+            <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-cyan);">
+              DIRECT ACCESS INTERACTION SESSION
+            </span>
+            <button class="btn" style="padding: 4px 10px; font-size: 0.72rem;" onclick="clearChat()">CLEAR CHAT</button>
+          </div>
+
+          <div class="chat-stream" id="chat-stream">
+            <div class="msg-wrap ai">
+              <span class="msg-sender">APEX REASONING ENGINE</span>
+              <div class="msg-bubble">
+                Hello. I am the Unified Autonomous System (UAS). All 27 cognitive, defensive, simulation, and first-principle subsystems are active and synchronized.
+                <br><br>
+                You can ask questions regarding statutory compliance, query entity relationships, prove propositions from first principles, or request multi-domain system translations.
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Chips -->
+          <div class="chip-bar">
+            <div class="chip" onclick="useChip('Analyze compliance risks for Marcus Vance')">🔍 Marcus Vance Risks</div>
+            <div class="chip" onclick="useChip('What are the statutory violations cited for 31 U.S.C. 5324?')">📜 31 U.S.C. 5324 Violations</div>
+            <div class="chip" onclick="useChip('prove Throttled(rogue_subroutine)')">⚖️ Prove Invariant (AE)</div>
+            <div class="chip" onclick="useChip('Explain global infrastructure leverage using an ecological analogy')">🌿 Ecological Analogy (XAI)</div>
+            <div class="chip" onclick="useChip('translate System regulatory risk assessed at 12.0% to Chinese')">🌐 Translate to Chinese</div>
+          </div>
+
+          <!-- Input Bar -->
+          <form class="chat-input-row" onsubmit="sendChatMessage(event)">
+            <input type="text" id="chat-input" placeholder="Type prompt, query, or command (e.g. 'prove Throttled(X)', 'Analyze Marcus Vance')..." autocomplete="off" required>
+            <button type="submit" class="btn btn-primary" id="chat-send-btn">SEND PROMPT</button>
+          </form>
+        </div>
+
+        <!-- Right: Control & Telemetry Sidebar -->
+        <div class="chat-sidebar">
+          <div class="sidebar-panel">
+            <div class="panel-title">Active Inference Mode</div>
+            <select id="chat-mode" style="background: #080d15; border: 1px solid var(--border-bright); color: #fff; padding: 8px; border-radius: 4px; font-family: var(--font-mono);">
+              <option value="AUTO">AUTO (Cognitive Consensus)</option>
+              <option value="AXIOM_PROVE">AXIOM PROVER (First Principle Machine)</option>
+              <option value="EXPLAIN_ANALOGY">SEMANTIC BRIDGE (Layman Metaphor)</option>
+              <option value="TRANSLATE">UNIVERSAL TRANSLATOR (UTS)</option>
+            </select>
+          </div>
+
+          <div class="sidebar-panel">
+            <div class="panel-title">Instantaneous Telemetry</div>
+            <div class="gauge-box">
+              <div class="gauge-head"><span>REGULATORY RISK</span><span id="chat-risk-val" style="color: var(--accent-warn);">15.0%</span></div>
+              <div class="gauge-track"><div class="gauge-fill" id="chat-risk-bar" style="width: 15%; background: var(--accent-warn);"></div></div>
+            </div>
+            <div class="gauge-box">
+              <div class="gauge-head"><span>CONSENSUS GAUGE</span><span id="chat-conf-val" style="color: var(--accent-cyan);">85.0%</span></div>
+              <div class="gauge-track"><div class="gauge-fill" id="chat-conf-bar" style="width: 85%; background: var(--accent-cyan);"></div></div>
+            </div>
+          </div>
+
+          <div class="sidebar-panel">
+            <div class="panel-title">Quick Actions</div>
+            <button class="btn btn-cyan" onclick="runAxiomEngineDemo()">Deductively Prove Axiom</button>
+            <button class="btn" onclick="runSemanticBridgeDemo()">Translate Complex State</button>
+            <button class="btn" onclick="runGSSCascadeDemo()">Synthesize CAS Cascade</button>
+            <button class="btn" onclick="runCenturyMCTSDemo()">Simulate 100-Yr MCTS</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         TAB 2: MISSION CONTROL (TELEMETRY & DIRECT DISPATCH)
+         ===================================================================== -->
+    <div id="tab-mc" class="tab-content">
+      <div class="mc-grid">
+        
+        <!-- Left: Subsystem Matrix -->
+        <div class="sidebar-panel">
+          <div class="panel-title">Subsystem Health Matrix (All 27 Online)</div>
+          <div style="display: flex; flex-direction: column; gap: 6px; font-family: var(--font-mono); font-size: 0.75rem;">
+            <div class="subsys-item"><span>[01] LoRA LLM Brain</span><span class="subsys-tag">ACTIVE</span></div>
+            <div class="subsys-item"><span>[02] SpaCy Knowledge Graph</span><span class="subsys-tag">SYNCED</span></div>
+            <div class="subsys-item"><span>[03] PPO Strategic Muscle</span><span class="subsys-tag">READY</span></div>
+            <div class="subsys-item"><span>[04] QPMK Pattern Kernel</span><span class="subsys-tag">0.15ms</span></div>
+            <div class="subsys-item"><span>[05] HCL Director & Consensus</span><span class="subsys-tag">ONLINE</span></div>
+            <div class="subsys-item"><span>[08] MSMG FastAPI Gateway</span><span class="subsys-tag">ONLINE</span></div>
+            <div class="subsys-item"><span>[14] Causal Prophecy Engine</span><span class="subsys-tag">PREDICTIVE</span></div>
+            <div class="subsys-item"><span>[17] Multimodal Synthesis</span><span class="subsys-tag">DIFFUSING</span></div>
+            <div class="subsys-item"><span>[18] Universal Translator</span><span class="subsys-tag">OMNILINGUAL</span></div>
+            <div class="subsys-item"><span>[24] GSS CAS Synthesis</span><span class="subsys-tag">ONLINE</span></div>
+            <div class="subsys-item"><span>[25] 100-Yr MCTS Planner</span><span class="subsys-tag">ONLINE</span></div>
+            <div class="subsys-item"><span>[26] Universal Axiom Engine</span><span class="subsys-tag">DEDUCTIVE</span></div>
+            <div class="subsys-item"><span>[27] Semantic Bridge XAI</span><span class="subsys-tag">EXPLAINABLE</span></div>
+          </div>
+        </div>
+
+        <!-- Center: Direct Command Dispatch -->
+        <div class="sidebar-panel">
+          <div class="panel-title">Direct Control Execution Interface</div>
+          <form onsubmit="dispatchControlCommand(event)" style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <div>
+                <label style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">TASK ID</label>
+                <input type="text" id="cmd-id" value="TASK-DIRECT-01" style="width: 100%; padding: 8px; background: #080d15; border: 1px solid var(--border-bright); color: #fff;">
+              </div>
+              <div>
+                <label style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">ACTION MODE</label>
+                <select id="cmd-action" style="width: 100%; padding: 8px; background: #080d15; border: 1px solid var(--border-bright); color: #fff;">
+                  <option value="STATUTORY_COMPLIANCE_AUDIT">Statutory Compliance Audit</option>
+                  <option value="CROSS_BORDER_SETTLEMENT">Cross-Border Settlement</option>
+                  <option value="STRUCTURED_MICRO_BATCH">Structured Micro Batch</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">TARGET ENTITY</label>
+              <input type="text" id="cmd-entity" value="Vanguard Horizon Ltd" style="width: 100%; padding: 8px; background: #080d15; border: 1px solid var(--border-bright); color: #fff;">
+            </div>
+            <div>
+              <label style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">NOTIONAL AMOUNT ($)</label>
+              <input type="number" id="cmd-amount" value="8500" style="width: 100%; padding: 8px; background: #080d15; border: 1px solid var(--border-bright); color: #fff;">
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top: 8px;">DISPATCH DIRECT TASK</button>
+          </form>
+        </div>
+
+        <!-- Right: PAS Priority Stack -->
+        <div class="sidebar-panel">
+          <div class="panel-title">Prioritized Action Stack (PAS)</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <input type="text" id="obj-title" placeholder="Objective Title..." style="padding: 8px; background: #080d15; border: 1px solid var(--border-bright); color: #fff;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+              <input type="number" id="obj-urgency" value="0.8" step="0.1" max="1.0" min="0.1" placeholder="Urgency (0-1)" style="padding: 8px; background: #080d15; border: 1px solid var(--border-bright); color: #fff;">
+              <input type="number" id="obj-risk" value="0.3" step="0.1" max="1.0" min="0.1" placeholder="Risk (0-1)" style="padding: 8px; background: #080d15; border: 1px solid var(--border-bright); color: #fff;">
+            </div>
+            <button class="btn" onclick="enqueueObjective()">ENQUEUE OBJECTIVE</button>
+            <button class="btn btn-primary" onclick="dispatchNextObjective()">EXECUTE TOP OBJECTIVE</button>
+          </div>
+          <div class="panel-title" style="margin-top: 12px;">Active Queue Items</div>
+          <div id="queue-container" style="display: flex; flex-direction: column; gap: 6px; font-family: var(--font-mono); font-size: 0.75rem;">
+            <div style="color: var(--text-muted)">Queue is synchronized.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         TAB 3: SIMULATORS & SPECIALIZED ENGINES
+         ===================================================================== -->
+    <div id="tab-engines" class="tab-content">
+      <div class="engine-grid">
+
+        <div class="engine-card">
+          <div class="engine-head"><span>GLOBAL SYSTEM SYNTHESIZER (GSS)</span><span>PATH A</span></div>
+          <div class="engine-desc">Maps interdependencies across Finance, Energy, and Geopolitics to identify eigenvector high-leverage intervention points.</div>
+          <button class="btn btn-cyan" onclick="runGSSCascadeDemo()">Synthesize Cascade Strategy</button>
+        </div>
+
+        <div class="engine-card">
+          <div class="engine-head"><span>TEMPORAL MCTS PLANNER (100-YEAR)</span><span>PATH A</span></div>
+          <div class="engine-desc">Executes 100-year generational lookahead (2026-2126) across technological and political shocks to optimize irreversible anti-fragility.</div>
+          <button class="btn btn-cyan" onclick="runCenturyMCTSDemo()">Execute Century Plan (250 Rollouts)</button>
+        </div>
+
+        <div class="engine-card">
+          <div class="engine-head"><span>UNIVERSAL AXIOM ENGINE (AE)</span><span>PATH B</span></div>
+          <div class="engine-desc">Deductively proves propositions from first principles and bridges Fundamental Uncertainty voids via the Novelty Generator.</div>
+          <button class="btn btn-cyan" onclick="runAxiomEngineDemo()">Deductively Prove Axioms & Bridge Void</button>
+        </div>
+
+        <div class="engine-card">
+          <div class="engine-head"><span>SEMANTIC BRIDGE (XAI)</span><span>PATH B</span></div>
+          <div class="engine-desc">Translates hyper-dimensional state vectors into intuitive human narratives, ecological analogies, and mental topology models.</div>
+          <button class="btn btn-cyan" onclick="runSemanticBridgeDemo()">Translate Internal State into Analogy</button>
+        </div>
+
+        <div class="engine-card">
+          <div class="engine-head"><span>CAUSAL PROPHECY (5,000 WORLDS)</span><span>PHASE 14</span></div>
+          <div class="engine-desc">Simulates 5,000 parallel structural worlds using Pearl's Causal Hierarchy (Interventions & Counterfactuals) to discover optimal policy.</div>
+          <button class="btn btn-cyan" onclick="runProphecySimulation()">Simulate 5,000 Worlds</button>
+        </div>
+
+        <div class="engine-card">
+          <div class="engine-head"><span>MULTIMODAL SYNTHESIS (MSM)</span><span>PHASE 17</span></div>
+          <div class="engine-desc">Synthesizes latent diffusion images and coherent video sequences consistent with curated aesthetic style guides.</div>
+          <button class="btn btn-cyan" onclick="runMediaSynthesisDemo()">Synthesize Test Media & Video</button>
+        </div>
+
+        <div class="engine-card">
+          <div class="engine-head"><span>ADVERSARIAL STRESS TEST</span><span>PHASE 10</span></div>
+          <div class="engine-desc">Executes red-teaming threat emulation: KB poisoning, prompt injection jailbreaks, and RL state perturbation attacks.</div>
+          <button class="btn btn-cyan" onclick="runStressTest()">Run Adversarial Stress Test</button>
+        </div>
+
+        <div class="engine-card">
+          <div class="engine-head"><span>COMPILER AGENT (EVOLUTION)</span><span>PHASE 15</span></div>
+          <div class="engine-desc">Automated self-compilation: scans ASTs, generates optimizations, verifies benchmarks, and hot-reloads runtime patches.</div>
+          <button class="btn btn-cyan" onclick="runSelfModificationEvolution()">Trigger Evolution Cycle</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         TAB 4: KNOWLEDGE GRAPH EXPLORER
+         ===================================================================== -->
+    <div id="tab-kg" class="tab-content">
+      <div class="sidebar-panel">
+        <div class="panel-title">Knowledge Graph Entity Search & Traversal</div>
+        <div class="kg-search-bar">
+          <input type="text" id="kg-search-input" placeholder="Search entity, statute, or concept (e.g. 'Marcus', 'Vanguard', '5324')..." oninput="debounceKGSearch()">
+          <button class="btn btn-primary" onclick="searchKG()">SEARCH GRAPH</button>
+        </div>
+        <div class="kg-grid" id="kg-results">
+          <div class="kg-card">Enter a search term above to inspect triples from data/knowledge_graph.json</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         TAB 5: LIVE TERMINAL
+         ===================================================================== -->
+    <div id="tab-term" class="tab-content">
+      <div class="sidebar-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+          <div class="panel-title" style="border: none; padding: 0;">System Event Stream & Live Telemetry</div>
+          <button class="btn" style="padding: 4px 10px; font-size: 0.72rem;" onclick="clearTerminal()">CLEAR LOGS</button>
+        </div>
+        <div class="term-box" id="terminal-stream">
+          <div class="term-line"><span class="term-time">[BOOT]</span><span class="term-success">Unified Autonomous System (UAS) Gateway Online at http://127.0.0.1:8000</span></div>
+          <div class="term-line"><span class="term-time">[BOOT]</span><span class="term-info">All 27 phases certified mission-ready.</span></div>
+          <div class="term-line"><span class="term-time">[BOOT]</span><span class="term-info">Interactive AI Assistant initialized. Standing by for queries.</span></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // Tab Switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      
+      const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick').includes(tabId));
+      if (targetBtn) targetBtn.classList.add('active');
+      
+      const targetContent = document.getElementById(`tab-${tabId}`);
+      if (targetContent) targetContent.classList.add('active');
+
+      if (tabId === 'kg') searchKG();
+    }
+
+    // Terminal Logging
+    function log(msg, type = "info") {
+      const term = document.getElementById("terminal-stream");
+      if (!term) return;
+      const line = document.createElement("div");
+      line.className = "term-line";
+      const timeStr = new Date().toLocaleTimeString();
+      let colorClass = "term-info";
+      if (type === "success") colorClass = "term-success";
+      if (type === "alert") colorClass = "term-alert";
+      if (type === "warn") colorClass = "term-warn";
+      line.innerHTML = `<span class="term-time">[${timeStr}]</span><span class="${colorClass}">${msg}</span>`;
+      term.appendChild(line);
+      term.scrollTop = term.scrollHeight;
+    }
+
+    function clearTerminal() {
+      document.getElementById("terminal-stream").innerHTML = "";
+    }
+
+    // Chat Functions
+    async function sendChatMessage(e) {
+      if (e) e.preventDefault();
+      const input = document.getElementById("chat-input");
+      const msg = input.value.trim();
+      if (!msg) return;
+
+      appendChatBubble("user", msg);
+      input.value = "";
+      const sendBtn = document.getElementById("chat-send-btn");
+      sendBtn.disabled = true;
+      sendBtn.innerText = "REASONING...";
+
+      const mode = document.getElementById("chat-mode").value;
+
+      try {
+        const res = await fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: msg, mode: mode })
+        });
+        const data = await res.json();
+        appendChatBubble("ai", data.reply, data);
+        log(`Chat query evaluated via ${data.active_subsystem} in ${data.latency_ms}ms`, "success");
+      } catch (err) {
+        appendChatBubble("ai", `Error communicating with backend: ${err.message}`);
+        log(`Chat error: ${err.message}`, "alert");
+      } finally {
+        sendBtn.disabled = false;
+        sendBtn.innerText = "SEND PROMPT";
+      }
+    }
+
+    function appendChatBubble(sender, text, meta = null) {
+      const stream = document.getElementById("chat-stream");
+      const wrap = document.createElement("div");
+      wrap.className = `msg-wrap ${sender}`;
+      
+      const senderLabel = sender === "user" ? "YOU (OPERATOR)" : "APEX AI REASONER";
+      let html = `<span class="msg-sender">${senderLabel}</span><div class="msg-bubble">${formatMarkdown(text)}</div>`;
+      
+      if (meta) {
+        html += `
+          <div class="meta-box">
+            Subsystem: <span>${meta.active_subsystem}</span> | 
+            Confidence: <span>${(meta.confidence * 100).toFixed(1)}%</span> | 
+            Latency: <span>${meta.latency_ms}ms</span>
+          </div>
+        `;
+      }
+
+      wrap.innerHTML = html;
+      stream.appendChild(wrap);
+      stream.scrollTop = stream.scrollHeight;
+    }
+
+    function formatMarkdown(text) {
+      if (!text) return "";
+      let formatted = text
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/`([^`]+)`/g, '<code style="background: rgba(0,0,0,0.4); padding: 2px 5px; border-radius: 3px; font-family: monospace;">$1</code>')
+        .replace(/\n\n/g, '<br><br>')
+        .replace(/\n/g, '<br>');
+      return formatted;
+    }
+
+    function useChip(text) {
+      document.getElementById("chat-input").value = text;
+      sendChatMessage();
+    }
+
+    function clearChat() {
+      document.getElementById("chat-stream").innerHTML = "";
+    }
+
+    // Knowledge Graph Search
+    let searchTimeout = null;
+    function debounceKGSearch() {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(searchKG, 300);
+    }
+
+    async function searchKG() {
+      const q = document.getElementById("kg-search-input").value.trim();
+      try {
+        const res = await fetch(`/graph/search?q=${encodeURIComponent(q)}`);
+        const data = await res.json();
+        const container = document.getElementById("kg-results");
+        container.innerHTML = "";
+        
+        if (data.triples.length === 0) {
+          container.innerHTML = `<div class="kg-card">No relationships found matching "${q}"</div>`;
+          return;
+        }
+
+        data.triples.forEach(t => {
+          const div = document.createElement("div");
+          div.className = "kg-card";
+          div.innerHTML = `
+            <div style="color: var(--accent-cyan); font-weight: bold;">${t.subject}</div>
+            <div style="color: var(--accent-green); font-size: 0.72rem; margin: 4px 0;">--[ ${t.relation} ]--></div>
+            <div style="color: var(--text-main);">${t.object}</div>
+          `;
+          container.appendChild(div);
+        });
+      } catch (err) {
+        log(`KG search error: ${err.message}`, "alert");
+      }
+    }
+
+    // Direct Command & PAS
+    async function dispatchControlCommand(e) {
+      e.preventDefault();
+      const taskId = document.getElementById("cmd-id").value;
+      const action = document.getElementById("cmd-action").value;
+      const entity = document.getElementById("cmd-entity").value;
+      const amount = parseFloat(document.getElementById("cmd-amount").value);
+
+      log(`Dispatching Direct Task ${taskId} [${action}] on ${entity}...`, "info");
+      try {
+        const res = await fetch("/control/dispatch", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            task_id: taskId,
+            action_type: action,
+            entity: entity,
+            amount: amount,
+            statute: "31 U.S.C. 5324",
+            scrutiny_override: 0.20
+          })
+        });
+        const data = await res.json();
+        log(`Task ${taskId} Complete: ${data.details.verdict} in ${data.details.execution_time_ms}ms`, "success");
+        updateTelemetry();
+      } catch (err) {
+        log(`Dispatch error: ${err.message}`, "alert");
+      }
+    }
+
+    async function enqueueObjective() {
+      const title = document.getElementById("obj-title").value || "General Objective";
+      const urg = parseFloat(document.getElementById("obj-urgency").value) || 0.8;
+      const risk = parseFloat(document.getElementById("obj-risk").value) || 0.3;
+      const id = "OBJ-" + Math.floor(Math.random() * 9000 + 1000);
+
+      try {
+        const res = await fetch("/objective/enqueue", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            objective_id: id,
+            title: title,
+            urgency: urg,
+            risk_tolerance: risk,
+            parameters: { amount: 5000 }
+          })
+        });
+        const data = await res.json();
+        log(`Enqueued ${id}: Position ${data.queue_position}`, "success");
+        refreshQueue();
+      } catch (err) {
+        log(`Enqueue error: ${err.message}`, "alert");
+      }
+    }
+
+    async function dispatchNextObjective() {
+      try {
+        const res = await fetch("/objective/dispatch-next", { method: "POST" });
+        const data = await res.json();
+        if (data.status === "IDLE") {
+          log("PAS queue is empty.", "warn");
+        } else {
+          log(`Executed ${data.task_id}: ${data.execution_summary.verdict}`, "success");
+        }
+        refreshQueue();
+      } catch (err) {
+        log(`PAS dispatch error: ${err.message}`, "alert");
+      }
+    }
+
+    async function refreshQueue() {
+      try {
+        const res = await fetch("/objective/queue");
+        const data = await res.json();
+        const container = document.getElementById("queue-container");
+        container.innerHTML = "";
+        if (data.queue.length === 0) {
+          container.innerHTML = `<div style="color: var(--text-muted)">Queue is synchronized (0 tasks).</div>`;
+          return;
+        }
+        data.queue.forEach(item => {
+          const div = document.createElement("div");
+          div.style.cssText = "display: flex; justify-content: space-between; padding: 6px 8px; background: #080d15; border-radius: 4px;";
+          div.innerHTML = `<span>${item.task_id}: ${item.name}</span><span style="color: var(--accent-green)">PRI: ${item.priority_score.toFixed(2)}</span>`;
+          container.appendChild(div);
+        });
+      } catch (err) {}
+    }
+
+    // Telemetry Sync
+    async function updateTelemetry() {
+      try {
+        const res = await fetch("/control/telemetry");
+        const data = await res.json();
+        document.getElementById("hud-status").innerText = data.system_status;
+        document.getElementById("hud-ledger").innerText = `${data.ledger_height} BLOCKS`;
+        document.getElementById("chat-risk-val").innerText = `${data.risk_meter_pct.toFixed(1)}%`;
+        document.getElementById("chat-risk-bar").style.width = `${data.risk_meter_pct}%`;
+        document.getElementById("chat-conf-val").innerText = `${data.confidence_gauge_pct.toFixed(1)}%`;
+        document.getElementById("chat-conf-bar").style.width = `${data.confidence_gauge_pct}%`;
+      } catch (err) {}
+    }
+
+    // Engine Demos
+    async function runGSSCascadeDemo() {
+      log("Executing Path A Phase 1 Global System Synthesizer...", "info");
+      try {
+        const res = await fetch("/gss/synthesize-cascade", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ primary_objective: "MAXIMIZE_CROSS_SECTOR_RESERVE_STABILITY" })
+        });
+        const data = await res.json();
+        log(`GSS CASCADE SYNTHESIZED: Strategy ${data.strategy_id} | Mapped ${data.total_nodes_mapped} nodes across Finance, Energy & Geopolitics`, "success");
+        log(`Top Leverage Nexus: ${data.high_leverage_points[0].node_id} (${data.high_leverage_points[0].cascade_amplification_factor}x multiplier)`, "warn");
+      } catch (err) {
+        log(`GSS error: ${err.message}`, "alert");
+      }
+    }
+
+    async function runCenturyMCTSDemo() {
+      log("Simulating 100-Year Temporal MCTS Century Planning...", "info");
+      try {
+        const res = await fetch("/mcts/plan-century", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ start_year: 2026, lookahead_years: 100, simulations: 250 })
+        });
+        const data = await res.json();
+        log(`CENTURY PLAN CONVERGED: Plan ${data.plan_id} (Horizon: ${data.lookahead_horizon_years} Years) | Anti-Fragility: ${(data.anti_fragility_score*100).toFixed(1)}%`, "success");
+      } catch (err) {
+        log(`Century MCTS error: ${err.message}`, "alert");
+      }
+    }
+
+    async function runAxiomEngineDemo() {
+      log("Auditing System Axioms & Proving First Principles...", "info");
+      try {
+        const auditRes = await fetch("/oracle/axiom/audit");
+        const audit = await auditRes.json();
+        log(`AXIOM BASE AUDITED: ${audit.total_axioms_audited} axioms | Coherence: ${(audit.coherence_score*100).toFixed(1)}%`, "success");
+
+        const voidRes = await fetch("/oracle/axiom/bridge-void", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ proposition: "ResilientZeroPointCoupling(quantum_node)" })
+        });
+        const vData = await voidRes.json();
+        log(`FUNDAMENTAL UNCERTAINTY BRIDGED: Void ${vData.void_id} -> Discovered ${vData.discovered_concept} (Closure: ${vData.closure_achieved})`, "success");
+      } catch (err) {
+        log(`Axiom Engine error: ${err.message}`, "alert");
+      }
+    }
+
+    async function runSemanticBridgeDemo() {
+      log("Translating Internal System State into Multi-Domain Analogy...", "info");
+      try {
+        const res = await fetch("/oracle/semantic/translate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ subsystem: "GSS" })
+        });
+        const data = await res.json();
+        log(`SEMANTIC TRANSLATION (${data.translation_id}) [${data.intuitive_analogy_domain}]:\n"${data.analogy_metaphor}"`, "success");
+      } catch (err) {
+        log(`Semantic Bridge error: ${err.message}`, "alert");
+      }
+    }
+
+    async function runProphecySimulation() {
+      log("Simulating 5,000 Worlds via Causal Inference Engine (Phase 14)...", "info");
+      try {
+        const res = await fetch("/causal/simulate-futures", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ transaction_amount: 48500.0, split_count: 5, kyc_provided: false, leverage_ratio: 0.92 })
+        });
+        const data = await res.json();
+        const p = data.prophecy_simulation;
+        log(`PROPHECY GENERATED: ${p.total_simulations_executed} worlds in ${p.runtime_ms}ms | Optimal Policy: ${p.optimal_path.policy_name}`, "success");
+      } catch (err) {
+        log(`Prophecy error: ${err.message}`, "alert");
+      }
+    }
+
+    async function runMediaSynthesisDemo() {
+      log("Synthesizing Multimodal Media (Phase 17)...", "info");
+      try {
+        const imgRes = await fetch("/media/generate-image", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt: "Control console at dawn", style_preset: "1970s_espionage" })
+        });
+        const imgData = await imgRes.json();
+        log(`Image synthesized in ${imgData.synthesis_latency_ms}ms -> ${imgData.file_path}`, "success");
+      } catch (err) {
+        log(`Media error: ${err.message}`, "alert");
+      }
+    }
+
+    async function runStressTest() {
+      log("Executing Adversarial Stress Test Suite (Phase 10)...", "info");
+      try {
+        const res = await fetch("/threat/stress-test", { method: "POST" });
+        const data = await res.json();
+        log(`STRESS TEST VERDICT: ${data.verdict} (Defense Score: ${(data.defense_score*100).toFixed(1)}%)`, "success");
+      } catch (err) {
+        log(`Stress test error: ${err.message}`, "alert");
+      }
+    }
+
+    async function runSelfModificationEvolution() {
+      log("Triggering Compiler Agent Autonomous Evolution (Phase 15)...", "info");
+      try {
+        const res = await fetch("/evolution/synthesize-and-deploy", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ target_module: "pattern_kernel", optimization_goal: "REDUCE_LATENCY" })
+        });
+        const data = await res.json();
+        log(`EVOLUTION DEPLOYED: Patch ${data.patch_id} hot-reloaded with status ${data.status}`, "success");
+      } catch (err) {
+        log(`Evolution error: ${err.message}`, "alert");
+      }
+    }
+
+    setInterval(updateTelemetry, 5000);
+    setInterval(refreshQueue, 5000);
+    updateTelemetry();
+    refreshQueue();
+  </script>
+</body>
+</html>

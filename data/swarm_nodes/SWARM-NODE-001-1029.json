@@ -1,0 +1,42 @@
+{
+  "node_id": "SWARM-NODE-001-1029",
+  "endpoint_uri": "p2p://node-1.swarm.uas.internal:9081",
+  "status": "ONLINE_ACTIVE",
+  "persona": {
+    "persona_id": "PER-SENT-1029",
+    "name": "Sentinel-Forensics",
+    "role_specialty": "SENTINEL_COMPLIANCE",
+    "risk_tolerance": 0.15,
+    "utility_greed": 0.2,
+    "ethical_strictness": 0.95,
+    "lookahead_depth": 2,
+    "stealth_priority": 0.4
+  },
+  "gene_bundle": {
+    "genome_id": "GENOME-SWARM-NODE-001-1029",
+    "parent_node_id": null,
+    "generation": 1,
+    "timestamp": 1793721571.0449781,
+    "routing_weights": {
+      "LLM": 0.3408,
+      "RL": 0.3962,
+      "PRK": 0.2629
+    },
+    "moral_priors": {
+      "alpha_ethical": 0.95,
+      "beta_friction": 0.85
+    },
+    "ppo_value_bias": [
+      0.0347,
+      -0.1057,
+      0.1945,
+      -0.2111,
+      0.295,
+      -0.1334
+    ],
+    "qpmk_projection_seed": 43,
+    "local_knowledge_triples_count": 35
+  },
+  "reputation_score": 1.0,
+  "timestamp": 1793725922.0496805
+}

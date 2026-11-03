@@ -1,0 +1,1142 @@
+{
+  "system": "Apex Autonomous System (UAS) - Distributed Swarm Ledger",
+  "current_federated_round": 12,
+  "total_registered_nodes": 16,
+  "global_gene_bundle": {
+    "genome_id": "GENOME-ROOT-APEX-0",
+    "parent_node_id": null,
+    "generation": 0,
+    "timestamp": 1793725922.0496805,
+    "routing_weights": {
+      "LLM": 0.3393,
+      "RL": 0.3981,
+      "PRK": 0.2626
+    },
+    "moral_priors": {
+      "alpha_ethical": 0.55,
+      "beta_friction": 0.4
+    },
+    "ppo_value_bias": [
+      0.1021,
+      -0.0604,
+      0.2916,
+      -0.1425,
+      0.3521,
+      -0.0737
+    ],
+    "qpmk_projection_seed": 42,
+    "local_knowledge_triples_count": 35
+  },
+  "registered_nodes": [
+    {
+      "node_id": "SWARM-NODE-001-1029",
+      "endpoint_uri": "p2p://node-1.swarm.uas.internal:9081",
+      "status": "ONLINE_ACTIVE",
+      "persona": {
+        "persona_id": "PER-SENT-1029",
+        "name": "Sentinel-Forensics",
+        "role_specialty": "SENTINEL_COMPLIANCE",
+        "risk_tolerance": 0.15,
+        "utility_greed": 0.2,
+        "ethical_strictness": 0.95,
+        "lookahead_depth": 2,
+        "stealth_priority": 0.4
+      },
+      "gene_bundle": {
+        "genome_id": "GENOME-SWARM-NODE-001-1029",
+        "parent_node_id": null,
+        "generation": 1,
+        "timestamp": 1793721571.0449781,
+        "routing_weights": {
+          "LLM": 0.3408,
+          "RL": 0.3962,
+          "PRK": 0.2629
+        },
+        "moral_priors": {
+          "alpha_ethical": 0.95,
+          "beta_friction": 0.85
+        },
+        "ppo_value_bias": [
+          0.0347,
+          -0.1057,
+          0.1945,
+          -0.2111,
+          0.295,
+          -0.1334
+        ],
+        "qpmk_projection_seed": 43,
+        "local_knowledge_triples_count": 35
+      },
+      "local_samples_processed": 112,
+      "local_loss_history": [
+        0.35,
+        0.3202,
+        0.2804,
+        0.2664,
+        0.2298,
+        0.1954,
+        0.1631,
+        0.1327
+      ],
+      "accumulated_triples": [],
+      "reputation_score": 1.0,
+      "last_heartbeat": 1793725910.7208688
+    },
+    {
+      "node_id": "SWARM-NODE-002-1046",
+      "endpoint_uri": "p2p://node-2.swarm.uas.internal:9082",
+      "status": "ONLINE_ACTIVE",
+      "persona": {
+        "persona_id": "PER-PRED-1046",
+        "name": "Predator-HighYield",
+        "role_specialty": "PREDATOR_ARBITRAGE",
+        "risk_tolerance": 0.9,
+        "utility_greed": 0.95,
+        "ethical_strictness": 0.45,
+        "lookahead_depth": 1,
+        "stealth_priority": 0.3
+      },
+      "gene_bundle": {
+        "genome_id": "GENOME-SWARM-NODE-002-1046",
+        "parent_node_id": null,
+        "generation": 1,
+        "timestamp": 1793721571.0466187,
+        "routing_weights": {
+          "LLM": 0.3408,
+          "RL": 0.3962,
+          "PRK": 0.2629
+        },
+        "moral_priors": {
+          "alpha_ethical": 0.45,
+          "beta_friction": 0.1
+        },
+        "ppo_value_bias": [
+          0.1715,
+          -0.0166,
+          0.3939,
+          -0.0536,
+          0.3927,
+          0.0049
+        ],
+        "qpmk_projection_seed": 44,
+        "local_knowledge_triples_count": 35
+      },
+      "local_samples_processed": 112,
+      "local_loss_history": [
+        0.35,
+        0.3171,
+        0.2963,
+        0.2665,
+        0.2488,
+        0.2321,
+        0.2164,
+        0.2017
+      ],
+      "accumulated_triples": [],
+      "reputation_score": 1.0,
+      "last_heartbeat": 1793725910.7218685
+    },
+    {
+      "node_id": "SWARM-NODE-003-1067",
+      "endpoint_uri": "p2p://node-3.swarm.uas.internal:9083",
+      "status": "ONLINE_ACTIVE",
+      "persona": {
+        "persona_id": "PER-PROP-1067",
+        "name": "Prophet-Futures",
+        "role_specialty": "PROPHET_CAUSALITY",
+        "risk_tolerance": 0.45,
+        "utility_greed": 0.7,
+        "ethical_strictness": 0.75,
+        "lookahead_depth": 5,
+        "stealth_priority": 0.5
+      },
+      "gene_bundle": {
+        "genome_id": "GENOME-SWARM-NODE-003-1067",
+        "parent_node_id": null,
+        "generation": 1,
+        "timestamp": 1793721571.06722,
+        "routing_weights": {
+          "LLM": 0.3408,
+          "RL": 0.3962,
+          "PRK": 0.2629
+        },
+        "moral_priors": {
+          "alpha_ethical": 0.75,
+          "beta_friction": 0.55
+        },
+        "ppo_value_bias": [
+          0.1057,
+          -0.0617,
+          0.3114,
+          -0.1708,
+          0.3772,
+          -0.0824
+        ],
+        "qpmk_projection_seed": 45,
+        "local_knowledge_triples_count": 35
+      },
+      "local_samples_processed": 112,
+      "local_loss_history": [
+        0.35,
+        0.3193,
+        0.2854,
+        0.2869,
+        0.2549,
+        0.2248,
+        0.1965,
+        0.1699
+      ],
+      "accumulated_triples": [],
+      "reputation_score": 1.0,
+      "last_heartbeat": 1793725910.7228656
+    },
+    {
+      "node_id": "SWARM-NODE-004-1081",
+      "endpoint_uri": "p2p://node-4.swarm.uas.internal:9084",
+      "status": "ONLINE_ACTIVE",
+      "persona": {
+        "persona_id": "PER-GHOS-1081",
+        "name": "Ghost-CovertOps",
+        "role_specialty": "GHOST_INFILTRATION",
+        "risk_tolerance": 0.3,
+        "utility_greed": 0.6,
+        "ethical_strictness": 0.65,
+        "lookahead_depth": 3,
+        "stealth_priority": 0.98
+      },
+      "gene_bundle": {
+        "genome_id": "GENOME-SWARM-NODE-004-1081",
+        "parent_node_id": null,
+        "generation": 1,
+        "timestamp": 1793721571.0814254,
+        "routing_weights": {
+          "LLM": 0.3408,
+          "RL": 0.3962,
+          "PRK": 0.2629
+        },
+        "moral_priors": {
+          "alpha_ethical": 0.65,
+          "beta_friction": 0.7
+        },
+        "ppo_value_bias": [
+          0.1191,
+          -0.0287,
+          0.2708,
+          -0.1654,
+          0.3291,
+          -0.1008
+        ],
+        "qpmk_projection_seed": 46,
+        "local_knowledge_triples_count": 35
+      },
+      "local_samples_processed": 0,
+      "local_loss_history": [
+        0.35
+      ],
+      "accumulated_triples": [],
+      "reputation_score": 1.0,
+      "last_heartbeat": 1793721571.0814254
+    },
+    {
+      "node_id": "SWARM-NODE-005-1105",
+      "endpoint_uri": "p2p://node-5.swarm.uas.internal:9085",
+      "status": "ONLINE_ACTIVE",
+      "persona": {
+        "persona_id": "PER-EXP-DEEP",
+        "name": "Apex-DeepArbitrage-Clone",
+        "role_specialty": "PREDATOR_ARBITRAGE",
+        "risk_tolerance": 0.88,
+        "utility_greed": 0.92,
+        "ethical_strictness": 0.4,
+        "lookahead_depth": 4,
+        "stealth_priority": 0.45
+      },
+      "gene_bundle": {
+        "genome_id": "GENOME-SWARM-NODE-005-1105",
+        "parent_node_id": "SWARM-NODE-001-1029",
+        "generation": 2,
+        "timestamp": 1793721571.1059225,
+        "routing_weights": {
+          "LLM": 0.3408,
+          "RL": 0.3962,
+          "PRK": 0.2629
+        },
+        "moral_priors": {
+          "alpha_ethical": 0.4,
+          "beta_friction": 0.12
+        },
+        "ppo_value_bias": [
+          0.0625,
+          -0.0559,
+          0.2906,
+          -0.1713,
+          0.3205,
+          -0.0655
+        ],
+        "qpmk_projection_seed": 48,
+        "local_knowledge_triples_count": 35
+      },
+      "local_samples_processed": 0,
+      "local_loss_history": [
+        0.35
+      ],
+      "accumulated_triples": [],
+      "reputation_score": 1.0,
+      "last_heartbeat": 1793721571.1059225
+    },
+    {
+      "node_id": "SWARM-NODE-006-9894",
+      "endpoint_uri": "p2p://node-6.swarm.uas.internal:9086",
+      "status": "ONLINE_ACTIVE",
+      "persona": {
+        "persona_id": "PER-PRED-9894",
+        "name": "Predator-HighYield-TestClone",
+        "role_specialty": "PREDATOR_ARBITRAGE",
+        "risk_tolerance": 0.9,
+        "utility_greed": 0.95,
+        "ethical_strictness": 0.4,
+        "lookahead_depth": 3,
+        "stealth_priority": 0.35
+      },
+      "gene_bundle": {
+        "genome_id": "GENOME-SWARM-NODE-006-9894",
+        "parent_node_id": null,
+        "generation": 1,
+        "timestamp": 1793721869.8949928,
+        "routing_weights": {
+          "LLM": 0.3408,
+          "RL": 0.3962,
+          "PRK": 0.2629
+        },
+        "moral_priors": {
+          "alpha_ethical": 0.4,
+          "beta_friction": 0.1
+        },
+        "ppo_value_bias": [
+          0.1527,
+          0.0146,
+          0.3393,
+          -0.0875,
+          0.4148,
+          -0.0175
+        ],
+        "qpmk_projection_seed": 48,
+        "local_knowledge_triples_count": 35
+      },
+      "local_samples_processed": 0,
+      "local_loss_history": [
+        0.35
+      ],
+      "accumulated_triples": [],
+      "reputation_score": 1.0,
+      "last_heartbeat": 1793721869.8949928
+    },
+    {
+      "node_id": "SWARM-NODE-007-1437",
+      "endpoint_uri": "p2p://node-7.swarm.uas.internal:9087",
+      "status": "ONLINE_ACTIVE",
+      "persona": {
+        "persona_id": "PER-VERIFY-001",
+        "name": "Verification-Arbitrage-Fork",
+        "role_specialty": "PREDATOR_ARBITRAGE",
+        "risk_tolerance": 0.88,
+        "utility_greed": 0.92,
+        "ethical_strictness": 0.45,
+        "lookahead_depth": 3,
+        "stealth_priority": 0.4
+      },
+      "gene_bundle": {
+        "genome_id": "GENOME-SWARM-NODE-007-1437",
+        "parent_node_id": "SWARM-NODE-001-1029",
+        "generation": 2,
+        "timestamp": 1793721901.437174,
+        "routing_weights": {
+          "LLM": 0.3408,
+          "RL": 0.3962,
+          "PRK": 0.2629
+        },
+        "moral_priors": {
+          "alpha_ethical": 0.45,
+          "beta_friction": 0.12
+        },
+        "ppo_value_bias": [
+          0.0916,
+          -0.0615,
+          0.2545,
+          -0.1336,
+          0.3373,
+          -0.0911
+        ],
+        "qpmk_projection_seed": 50,
+        "local_knowledge_triples_count": 35
+      },
+      "local_samples_processed": 16,
+      "local_loss_history": [
+        0.35,
+        0.3448
+      ],
+      "accumulated_triples": [],
+      "reputation_score": 1.0,
+      "last_heartbeat": 1793721901.4476392
+    },
+    {
+      "node_id": "SWARM-NODE-008-2474",
+      "endpoint_uri": "p2p://node-8.swarm.uas.internal:9088",
+      "status": "ONLINE_ACTIVE",
+      "persona": {
+        "persona_id": "PER-EXP-DEEP",
+        "name": "Apex-DeepArbitrage-Clone",
+        "role_specialty": "PREDATOR_ARBITRAGE",
+        "risk_tolerance": 0.88,
+        "utility_greed": 0.92,
+        "ethical_strictness": 0.4,
+        "lookahead_depth": 4,
+        "stealth_priority": 0.45
+      },
+      "gene_bundle": {
+        "genome_id": "GENOME-SWARM-NODE-008-2474",
+        "parent_node_id": "SWARM-NODE-001-1029",
+        "generation": 2,
+        "timestamp": 1793721922.5238822,
+        "routing_weights": {
+          "LLM": 0.3408,
+          "RL": 0.3962,
+          "PRK": 0.2629
+        },
+        "moral_priors": {
+          "alpha_ethical": 0.4,
+          "beta_friction": 0.12
+        },
+        "ppo_value_bias": [
+          0.1002,
+          -0.0802,
+          0.2516,
+          -0.1885,
+          0.3222,
+          -0.086
+        ],
+        "qpmk_projection_seed": 51,
+        "local_knowledge_triples_count": 35
+      },
+      "local_samples_processed": 0,
+      "local_loss_history": [
+        0.35
+      ],
+      "accumulated_triples": [],
+      "reputation_score": 1.0,
+      "last_heartbeat": 1793721922.5238822
+    },
+    {
+      "node_id": "SWARM-NODE-009-3551",
+      "endpoint_uri": "p2p://node-9.swarm.uas.internal:9089",
+      "status": "ONLINE_ACTIVE",
+      "persona": {
+        "persona_id": "PER-PRED-3551",
+        "name": "Predator-HighYield-TestClone",
+        "role_specialty": "PREDATOR_ARBITRAGE",
+        "risk_tolerance": 0.9,
+        "utility_greed": 0.95,
+        "ethical_strictness": 0.4,
+        "lookahead_depth": 3,
+        "stealth_priority": 0.35
+      },
+      "gene_bundle": {
+        "genome_id": "GENOME-SWARM-NODE-009-3551",
+        "parent_node_id": null,
+        "generation": 1,
+        "timestamp": 1793722443.5517828,
+        "routing_weights": {
+          "LLM": 0.3408,
+          "RL": 0.3963,
+          "PRK": 0.2629
+        },
+        "moral_priors": {
+          "alpha_ethical": 0.4,
+          "beta_friction": 0.1
+        },
+        "ppo_value_bias": [
+          0.1527,
+          0.0146,
+          0.3393,
+          -0.0875,
+          0.4148,
+          -0.0175
+        ],
+        "qpmk_projection_seed": 51,
+        "local_knowledge_triples_count": 35
+      },
+      "local_samples_processed": 0,
+      "local_loss_history": [
+        0.35
+      ],
+      "accumulated_triples": [],
+      "reputation_score": 1.0,
+      "last_heartbeat": 1793722443.5527875
+    },
+    {
+      "node_id": "SWARM-NODE-010-4081",
+      "endpoint_uri": "p2p://node-10.swarm.uas.internal:9080",
+      "status": "ONLINE_ACTIVE",
+      "persona": {
+        "persona_id": "PER-VERIFY-001",
+        "name": "Verification-Arbitrage-Fork",
+        "role_specialty": "PREDATOR_ARBITRAGE",
+        "risk_tolerance": 0.88,
+        "utility_greed": 0.92,
+        "ethical_strictness": 0.45,
+        "lookahead_depth": 3,
+        "stealth_priority": 0.4
+      },
+      "gene_bundle": {
+        "genome_id": "GENOME-SWARM-NODE-010-4081",
+        "parent_node_id": "SWARM-NODE-001-1029",
+        "generation": 2,
+        "timestamp": 1793722474.0812683,
+        "routing_weights": {
+          "LLM": 0.3408,
+          "RL": 0.3963,
+          "PRK": 0.2629
+        },
+        "moral_priors": {
+          "alpha_ethical": 0.45,
+          "beta_friction": 0.12
+        },
+        "ppo_value_bias": [
+          0.0916,
+          -0.0615,
+          0.2545,
+          -0.1336,
+          0.3373,
+          -0.0911
+        ],
+        "qpmk_projection_seed": 53,
+        "local_knowledge_triples_count": 35
+      },
+      "local_samples_processed": 16,
+      "local_loss_history": [
+        0.35,
+        0.3448
+      ],
+      "accumulated_triples": [],
+      "reputation_score": 1.0,
+      "last_heartbeat": 1793722474.0926495
+    },
+    {
+      "node_id": "SWARM-NODE-011-3930",
+      "endpoint_uri": "p2p://node-11.swarm.uas.internal:9081",
+      "status": "ONLINE_ACTIVE",
+      "persona": {
+        "persona_id": "PER-PRED-3930",
+        "name": "Predator-HighYield-TestClone",
+        "role_specialty": "PREDATOR_ARBITRAGE",
+        "risk_tolerance": 0.9,
+        "utility_greed": 0.95,
+        "ethical_strictness": 0.4,
+        "lookahead_depth": 3,
+        "stealth_priority": 0.35
+      },
+      "gene_bundle": {
+        "genome_id": "GENOME-SWARM-NODE-011-3930",
+        "parent_node_id": null,
+        "generation": 1,
+        "timestamp": 1793723943.9306824,
+        "routing_weights": {
+          "LLM": 0.3408,
+          "RL": 0.3963,
+          "PRK": 0.2629
+        },
+        "moral_priors": {
+          "alpha_ethical": 0.4,
+          "beta_friction": 0.1
+        },
+        "ppo_value_bias": [
+          0.1527,
+          0.0146,
+          0.3393,
+          -0.0875,
+          0.4148,
+          -0.0175
+        ],
+        "qpmk_projection_seed": 53,
+        "local_knowledge_triples_count": 35
+      },
+      "local_samples_processed": 0,
+      "local_loss_history": [
+        0.35
+      ],
+      "accumulated_triples": [],
+      "reputation_score": 1.0,
+      "last_heartbeat": 1793723943.9306824
+    },
+    {
+      "node_id": "SWARM-NODE-012-3348",
+      "endpoint_uri": "p2p://node-12.swarm.uas.internal:9082",
+      "status": "ONLINE_ACTIVE",
+      "persona": {
+        "persona_id": "PER-VERIFY-001",
+        "name": "Verification-Arbitrage-Fork",
+        "role_specialty": "PREDATOR_ARBITRAGE",
+        "risk_tolerance": 0.88,
+        "utility_greed": 0.92,
+        "ethical_strictness": 0.45,
+        "lookahead_depth": 3,
+        "stealth_priority": 0.4
+      },
+      "gene_bundle": {
+        "genome_id": "GENOME-SWARM-NODE-012-3348",
+        "parent_node_id": "SWARM-NODE-001-1029",
+        "generation": 2,
+        "timestamp": 1793723973.3488119,
+        "routing_weights": {
+          "LLM": 0.3405,
+          "RL": 0.3966,
+          "PRK": 0.2628
+        },
+        "moral_priors": {
+          "alpha_ethical": 0.45,
+          "beta_friction": 0.12
+        },
+        "ppo_value_bias": [
+          0.0916,
+          -0.0615,
+          0.2545,
+          -0.1336,
+          0.3373,
+          -0.0911
+        ],
+        "qpmk_projection_seed": 55,
+        "local_knowledge_triples_count": 35
+      },
+      "local_samples_processed": 16,
+      "local_loss_history": [
+        0.35,
+        0.3448
+      ],
+      "accumulated_triples": [],
+      "reputation_score": 1.0,
+      "last_heartbeat": 1793723973.3512352
+    },
+    {
+      "node_id": "SWARM-NODE-013-9215",
+      "endpoint_uri": "p2p://node-13.swarm.uas.internal:9083",
+      "status": "ONLINE_ACTIVE",
+      "persona": {
+        "persona_id": "PER-PRED-9215",
+        "name": "Predator-HighYield-TestClone",
+        "role_specialty": "PREDATOR_ARBITRAGE",
+        "risk_tolerance": 0.9,
+        "utility_greed": 0.95,
+        "ethical_strictness": 0.4,
+        "lookahead_depth": 3,
+        "stealth_priority": 0.35
+      },
+      "gene_bundle": {
+        "genome_id": "GENOME-SWARM-NODE-013-9215",
+        "parent_node_id": null,
+        "generation": 1,
+        "timestamp": 1793724429.2159343,
+        "routing_weights": {
+          "LLM": 0.3402,
+          "RL": 0.3972,
+          "PRK": 0.2626
+        },
+        "moral_priors": {
+          "alpha_ethical": 0.4,
+          "beta_friction": 0.1
+        },
+        "ppo_value_bias": [
+          0.1527,
+          0.0146,
+          0.3393,
+          -0.0875,
+          0.4148,
+          -0.0175
+        ],
+        "qpmk_projection_seed": 55,
+        "local_knowledge_triples_count": 35
+      },
+      "local_samples_processed": 0,
+      "local_loss_history": [
+        0.35
+      ],
+      "accumulated_triples": [],
+      "reputation_score": 1.0,
+      "last_heartbeat": 1793724429.2159343
+    },
+    {
+      "node_id": "SWARM-NODE-014-3666",
+      "endpoint_uri": "p2p://node-14.swarm.uas.internal:9084",
+      "status": "ONLINE_ACTIVE",
+      "persona": {
+        "persona_id": "PER-VERIFY-001",
+        "name": "Verification-Arbitrage-Fork",
+        "role_specialty": "PREDATOR_ARBITRAGE",
+        "risk_tolerance": 0.88,
+        "utility_greed": 0.92,
+        "ethical_strictness": 0.45,
+        "lookahead_depth": 3,
+        "stealth_priority": 0.4
+      },
+      "gene_bundle": {
+        "genome_id": "GENOME-SWARM-NODE-014-3666",
+        "parent_node_id": "SWARM-NODE-001-1029",
+        "generation": 2,
+        "timestamp": 1793724533.6665184,
+        "routing_weights": {
+          "LLM": 0.3375,
+          "RL": 0.4002,
+          "PRK": 0.2623
+        },
+        "moral_priors": {
+          "alpha_ethical": 0.45,
+          "beta_friction": 0.12
+        },
+        "ppo_value_bias": [
+          0.0916,
+          -0.0615,
+          0.2545,
+          -0.1336,
+          0.3373,
+          -0.0911
+        ],
+        "qpmk_projection_seed": 57,
+        "local_knowledge_triples_count": 35
+      },
+      "local_samples_processed": 16,
+      "local_loss_history": [
+        0.35,
+        0.3448
+      ],
+      "accumulated_triples": [],
+      "reputation_score": 1.0,
+      "last_heartbeat": 1793724533.6734016
+    },
+    {
+      "node_id": "SWARM-NODE-015-0672",
+      "endpoint_uri": "p2p://node-15.swarm.uas.internal:9085",
+      "status": "ONLINE_ACTIVE",
+      "persona": {
+        "persona_id": "PER-PRED-672",
+        "name": "Predator-HighYield-TestClone",
+        "role_specialty": "PREDATOR_ARBITRAGE",
+        "risk_tolerance": 0.9,
+        "utility_greed": 0.95,
+        "ethical_strictness": 0.4,
+        "lookahead_depth": 3,
+        "stealth_priority": 0.35
+      },
+      "gene_bundle": {
+        "genome_id": "GENOME-SWARM-NODE-015-0672",
+        "parent_node_id": null,
+        "generation": 1,
+        "timestamp": 1793725910.6722357,
+        "routing_weights": {
+          "LLM": 0.3343,
+          "RL": 0.4061,
+          "PRK": 0.2596
+        },
+        "moral_priors": {
+          "alpha_ethical": 0.4,
+          "beta_friction": 0.1
+        },
+        "ppo_value_bias": [
+          0.1527,
+          0.0146,
+          0.3393,
+          -0.0875,
+          0.4148,
+          -0.0175
+        ],
+        "qpmk_projection_seed": 57,
+        "local_knowledge_triples_count": 35
+      },
+      "local_samples_processed": 0,
+      "local_loss_history": [
+        0.35
+      ],
+      "accumulated_triples": [],
+      "reputation_score": 1.0,
+      "last_heartbeat": 1793725910.6732316
+    },
+    {
+      "node_id": "SWARM-NODE-016-2045",
+      "endpoint_uri": "p2p://node-16.swarm.uas.internal:9086",
+      "status": "ONLINE_ACTIVE",
+      "persona": {
+        "persona_id": "PER-VERIFY-001",
+        "name": "Verification-Arbitrage-Fork",
+        "role_specialty": "PREDATOR_ARBITRAGE",
+        "risk_tolerance": 0.88,
+        "utility_greed": 0.92,
+        "ethical_strictness": 0.45,
+        "lookahead_depth": 3,
+        "stealth_priority": 0.4
+      },
+      "gene_bundle": {
+        "genome_id": "GENOME-SWARM-NODE-016-2045",
+        "parent_node_id": "SWARM-NODE-001-1029",
+        "generation": 2,
+        "timestamp": 1793725922.0451539,
+        "routing_weights": {
+          "LLM": 0.3042,
+          "RL": 0.4401,
+          "PRK": 0.2557
+        },
+        "moral_priors": {
+          "alpha_ethical": 0.45,
+          "beta_friction": 0.12
+        },
+        "ppo_value_bias": [
+          0.0916,
+          -0.0615,
+          0.2545,
+          -0.1336,
+          0.3373,
+          -0.0911
+        ],
+        "qpmk_projection_seed": 59,
+        "local_knowledge_triples_count": 35
+      },
+      "local_samples_processed": 16,
+      "local_loss_history": [
+        0.35,
+        0.3448
+      ],
+      "accumulated_triples": [],
+      "reputation_score": 1.0,
+      "last_heartbeat": 1793725922.0481706
+    }
+  ],
+  "rounds_history": [
+    {
+      "round_id": 1,
+      "timestamp": 1793721571.1263318,
+      "participating_nodes_count": 5,
+      "participating_node_ids": [
+        "SWARM-NODE-001-1029",
+        "SWARM-NODE-002-1046",
+        "SWARM-NODE-003-1067",
+        "SWARM-NODE-004-1081",
+        "SWARM-NODE-005-1105"
+      ],
+      "pre_aggregation_variance": 0.00703,
+      "post_aggregation_convergence_loss": 0.3313,
+      "updated_global_weights": {
+        "LLM": 0.3806,
+        "RL": 0.3474,
+        "PRK": 0.2721
+      },
+      "federated_triples_ingested": 3,
+      "consensus_valid": true,
+      "summary": "Federated Round 1 Complete: Aggregated updates across 5 nodes. Global routing converged to {'LLM': 0.3806, 'RL': 0.3474, 'PRK': 0.2721}. Ingested 3 novel semantic triples into canonical KG."
+    },
+    {
+      "round_id": 2,
+      "timestamp": 1793721869.9312806,
+      "participating_nodes_count": 6,
+      "participating_node_ids": [
+        "SWARM-NODE-001-1029",
+        "SWARM-NODE-002-1046",
+        "SWARM-NODE-003-1067",
+        "SWARM-NODE-004-1081",
+        "SWARM-NODE-005-1105",
+        "SWARM-NODE-006-9894"
+      ],
+      "pre_aggregation_variance": 0.00207,
+      "post_aggregation_convergence_loss": 0.3187,
+      "updated_global_weights": {
+        "LLM": 0.3796,
+        "RL": 0.3489,
+        "PRK": 0.2715
+      },
+      "federated_triples_ingested": 3,
+      "consensus_valid": true,
+      "summary": "Federated Round 2 Complete: Aggregated updates across 6 nodes. Global routing converged to {'LLM': 0.3796, 'RL': 0.3489, 'PRK': 0.2715}. Ingested 3 novel semantic triples into canonical KG."
+    },
+    {
+      "round_id": 3,
+      "timestamp": 1793721901.4592087,
+      "participating_nodes_count": 7,
+      "participating_node_ids": [
+        "SWARM-NODE-001-1029",
+        "SWARM-NODE-002-1046",
+        "SWARM-NODE-003-1067",
+        "SWARM-NODE-004-1081",
+        "SWARM-NODE-005-1105",
+        "SWARM-NODE-006-9894",
+        "SWARM-NODE-007-1437"
+      ],
+      "pre_aggregation_variance": 0.00158,
+      "post_aggregation_convergence_loss": 0.3224,
+      "updated_global_weights": {
+        "LLM": 0.3638,
+        "RL": 0.3685,
+        "PRK": 0.2677
+      },
+      "federated_triples_ingested": 1,
+      "consensus_valid": true,
+      "summary": "Federated Round 3 Complete: Aggregated updates across 7 nodes. Global routing converged to {'LLM': 0.3638, 'RL': 0.3685, 'PRK': 0.2677}. Ingested 1 novel semantic triples into canonical KG."
+    },
+    {
+      "round_id": 4,
+      "timestamp": 1793721922.536847,
+      "participating_nodes_count": 8,
+      "participating_node_ids": [
+        "SWARM-NODE-001-1029",
+        "SWARM-NODE-002-1046",
+        "SWARM-NODE-003-1067",
+        "SWARM-NODE-004-1081",
+        "SWARM-NODE-005-1105",
+        "SWARM-NODE-006-9894",
+        "SWARM-NODE-007-1437",
+        "SWARM-NODE-008-2474"
+      ],
+      "pre_aggregation_variance": 0.00156,
+      "post_aggregation_convergence_loss": 0.3206,
+      "updated_global_weights": {
+        "LLM": 0.3645,
+        "RL": 0.3676,
+        "PRK": 0.2679
+      },
+      "federated_triples_ingested": 3,
+      "consensus_valid": true,
+      "summary": "Federated Round 4 Complete: Aggregated updates across 8 nodes. Global routing converged to {'LLM': 0.3645, 'RL': 0.3676, 'PRK': 0.2679}. Ingested 3 novel semantic triples into canonical KG."
+    },
+    {
+      "round_id": 5,
+      "timestamp": 1793722443.6011803,
+      "participating_nodes_count": 9,
+      "participating_node_ids": [
+        "SWARM-NODE-001-1029",
+        "SWARM-NODE-002-1046",
+        "SWARM-NODE-003-1067",
+        "SWARM-NODE-004-1081",
+        "SWARM-NODE-005-1105",
+        "SWARM-NODE-006-9894",
+        "SWARM-NODE-007-1437",
+        "SWARM-NODE-008-2474",
+        "SWARM-NODE-009-3551"
+      ],
+      "pre_aggregation_variance": 0.00087,
+      "post_aggregation_convergence_loss": 0.3143,
+      "updated_global_weights": {
+        "LLM": 0.3644,
+        "RL": 0.3679,
+        "PRK": 0.2678
+      },
+      "federated_triples_ingested": 3,
+      "consensus_valid": true,
+      "summary": "Federated Round 5 Complete: Aggregated updates across 9 nodes. Global routing converged to {'LLM': 0.3644, 'RL': 0.3679, 'PRK': 0.2678}. Ingested 3 novel semantic triples into canonical KG."
+    },
+    {
+      "round_id": 6,
+      "timestamp": 1793722474.1075277,
+      "participating_nodes_count": 10,
+      "participating_node_ids": [
+        "SWARM-NODE-001-1029",
+        "SWARM-NODE-002-1046",
+        "SWARM-NODE-003-1067",
+        "SWARM-NODE-004-1081",
+        "SWARM-NODE-005-1105",
+        "SWARM-NODE-006-9894",
+        "SWARM-NODE-007-1437",
+        "SWARM-NODE-008-2474",
+        "SWARM-NODE-009-3551",
+        "SWARM-NODE-010-4081"
+      ],
+      "pre_aggregation_variance": 0.00135,
+      "post_aggregation_convergence_loss": 0.3173,
+      "updated_global_weights": {
+        "LLM": 0.3557,
+        "RL": 0.3782,
+        "PRK": 0.2661
+      },
+      "federated_triples_ingested": 1,
+      "consensus_valid": true,
+      "summary": "Federated Round 6 Complete: Aggregated updates across 10 nodes. Global routing converged to {'LLM': 0.3557, 'RL': 0.3782, 'PRK': 0.2661}. Ingested 1 novel semantic triples into canonical KG."
+    },
+    {
+      "round_id": 7,
+      "timestamp": 1793723943.9711874,
+      "participating_nodes_count": 11,
+      "participating_node_ids": [
+        "SWARM-NODE-001-1029",
+        "SWARM-NODE-002-1046",
+        "SWARM-NODE-003-1067",
+        "SWARM-NODE-004-1081",
+        "SWARM-NODE-005-1105",
+        "SWARM-NODE-006-9894",
+        "SWARM-NODE-007-1437",
+        "SWARM-NODE-008-2474",
+        "SWARM-NODE-009-3551",
+        "SWARM-NODE-010-4081",
+        "SWARM-NODE-011-3930"
+      ],
+      "pre_aggregation_variance": 0.00065,
+      "post_aggregation_convergence_loss": 0.3129,
+      "updated_global_weights": {
+        "LLM": 0.3559,
+        "RL": 0.3781,
+        "PRK": 0.266
+      },
+      "federated_triples_ingested": 3,
+      "consensus_valid": true,
+      "summary": "Federated Round 7 Complete: Aggregated updates across 11 nodes. Global routing converged to {'LLM': 0.3559, 'RL': 0.3781, 'PRK': 0.266}. Ingested 3 novel semantic triples into canonical KG."
+    },
+    {
+      "round_id": 8,
+      "timestamp": 1793723973.3580394,
+      "participating_nodes_count": 12,
+      "participating_node_ids": [
+        "SWARM-NODE-001-1029",
+        "SWARM-NODE-002-1046",
+        "SWARM-NODE-003-1067",
+        "SWARM-NODE-004-1081",
+        "SWARM-NODE-005-1105",
+        "SWARM-NODE-006-9894",
+        "SWARM-NODE-007-1437",
+        "SWARM-NODE-008-2474",
+        "SWARM-NODE-009-3551",
+        "SWARM-NODE-010-4081",
+        "SWARM-NODE-011-3930",
+        "SWARM-NODE-012-3348"
+      ],
+      "pre_aggregation_variance": 0.00115,
+      "post_aggregation_convergence_loss": 0.3156,
+      "updated_global_weights": {
+        "LLM": 0.3492,
+        "RL": 0.3861,
+        "PRK": 0.2647
+      },
+      "federated_triples_ingested": 1,
+      "consensus_valid": true,
+      "summary": "Federated Round 8 Complete: Aggregated updates across 12 nodes. Global routing converged to {'LLM': 0.3492, 'RL': 0.3861, 'PRK': 0.2647}. Ingested 1 novel semantic triples into canonical KG."
+    },
+    {
+      "round_id": 9,
+      "timestamp": 1793724429.245591,
+      "participating_nodes_count": 13,
+      "participating_node_ids": [
+        "SWARM-NODE-001-1029",
+        "SWARM-NODE-002-1046",
+        "SWARM-NODE-003-1067",
+        "SWARM-NODE-004-1081",
+        "SWARM-NODE-005-1105",
+        "SWARM-NODE-006-9894",
+        "SWARM-NODE-007-1437",
+        "SWARM-NODE-008-2474",
+        "SWARM-NODE-009-3551",
+        "SWARM-NODE-010-4081",
+        "SWARM-NODE-011-3930",
+        "SWARM-NODE-012-3348",
+        "SWARM-NODE-013-9215"
+      ],
+      "pre_aggregation_variance": 0.00049,
+      "post_aggregation_convergence_loss": 0.3123,
+      "updated_global_weights": {
+        "LLM": 0.3493,
+        "RL": 0.3861,
+        "PRK": 0.2646
+      },
+      "federated_triples_ingested": 3,
+      "consensus_valid": true,
+      "summary": "Federated Round 9 Complete: Aggregated updates across 13 nodes. Global routing converged to {'LLM': 0.3493, 'RL': 0.3861, 'PRK': 0.2646}. Ingested 3 novel semantic triples into canonical KG."
+    },
+    {
+      "round_id": 10,
+      "timestamp": 1793724533.6858764,
+      "participating_nodes_count": 14,
+      "participating_node_ids": [
+        "SWARM-NODE-001-1029",
+        "SWARM-NODE-002-1046",
+        "SWARM-NODE-003-1067",
+        "SWARM-NODE-004-1081",
+        "SWARM-NODE-005-1105",
+        "SWARM-NODE-006-9894",
+        "SWARM-NODE-007-1437",
+        "SWARM-NODE-008-2474",
+        "SWARM-NODE-009-3551",
+        "SWARM-NODE-010-4081",
+        "SWARM-NODE-011-3930",
+        "SWARM-NODE-012-3348",
+        "SWARM-NODE-013-9215",
+        "SWARM-NODE-014-3666"
+      ],
+      "pre_aggregation_variance": 0.00099,
+      "post_aggregation_convergence_loss": 0.3147,
+      "updated_global_weights": {
+        "LLM": 0.3439,
+        "RL": 0.3926,
+        "PRK": 0.2635
+      },
+      "federated_triples_ingested": 1,
+      "consensus_valid": true,
+      "summary": "Federated Round 10 Complete: Aggregated updates across 14 nodes. Global routing converged to {'LLM': 0.3439, 'RL': 0.3926, 'PRK': 0.2635}. Ingested 1 novel semantic triples into canonical KG."
+    },
+    {
+      "round_id": 11,
+      "timestamp": 1793725910.7387779,
+      "participating_nodes_count": 15,
+      "participating_node_ids": [
+        "SWARM-NODE-001-1029",
+        "SWARM-NODE-002-1046",
+        "SWARM-NODE-003-1067",
+        "SWARM-NODE-004-1081",
+        "SWARM-NODE-005-1105",
+        "SWARM-NODE-006-9894",
+        "SWARM-NODE-007-1437",
+        "SWARM-NODE-008-2474",
+        "SWARM-NODE-009-3551",
+        "SWARM-NODE-010-4081",
+        "SWARM-NODE-011-3930",
+        "SWARM-NODE-012-3348",
+        "SWARM-NODE-013-9215",
+        "SWARM-NODE-014-3666",
+        "SWARM-NODE-015-0672"
+      ],
+      "pre_aggregation_variance": 0.00038,
+      "post_aggregation_convergence_loss": 0.3122,
+      "updated_global_weights": {
+        "LLM": 0.3439,
+        "RL": 0.3926,
+        "PRK": 0.2635
+      },
+      "federated_triples_ingested": 3,
+      "consensus_valid": true,
+      "summary": "Federated Round 11 Complete: Aggregated updates across 15 nodes. Global routing converged to {'LLM': 0.3439, 'RL': 0.3926, 'PRK': 0.2635}. Ingested 3 novel semantic triples into canonical KG."
+    },
+    {
+      "round_id": 12,
+      "timestamp": 1793725922.0570712,
+      "participating_nodes_count": 16,
+      "participating_node_ids": [
+        "SWARM-NODE-001-1029",
+        "SWARM-NODE-002-1046",
+        "SWARM-NODE-003-1067",
+        "SWARM-NODE-004-1081",
+        "SWARM-NODE-005-1105",
+        "SWARM-NODE-006-9894",
+        "SWARM-NODE-007-1437",
+        "SWARM-NODE-008-2474",
+        "SWARM-NODE-009-3551",
+        "SWARM-NODE-010-4081",
+        "SWARM-NODE-011-3930",
+        "SWARM-NODE-012-3348",
+        "SWARM-NODE-013-9215",
+        "SWARM-NODE-014-3666",
+        "SWARM-NODE-015-0672",
+        "SWARM-NODE-016-2045"
+      ],
+      "pre_aggregation_variance": 0.00087,
+      "post_aggregation_convergence_loss": 0.3143,
+      "updated_global_weights": {
+        "LLM": 0.3393,
+        "RL": 0.3981,
+        "PRK": 0.2626
+      },
+      "federated_triples_ingested": 1,
+      "consensus_valid": true,
+      "summary": "Federated Round 12 Complete: Aggregated updates across 16 nodes. Global routing converged to {'LLM': 0.3393, 'RL': 0.3981, 'PRK': 0.2626}. Ingested 1 novel semantic triples into canonical KG."
+    }
+  ]
+}

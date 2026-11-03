@@ -1,0 +1,42 @@
+{
+  "node_id": "SWARM-NODE-013-9215",
+  "endpoint_uri": "p2p://node-13.swarm.uas.internal:9083",
+  "status": "ONLINE_ACTIVE",
+  "persona": {
+    "persona_id": "PER-PRED-9215",
+    "name": "Predator-HighYield-TestClone",
+    "role_specialty": "PREDATOR_ARBITRAGE",
+    "risk_tolerance": 0.9,
+    "utility_greed": 0.95,
+    "ethical_strictness": 0.4,
+    "lookahead_depth": 3,
+    "stealth_priority": 0.35
+  },
+  "gene_bundle": {
+    "genome_id": "GENOME-SWARM-NODE-013-9215",
+    "parent_node_id": null,
+    "generation": 1,
+    "timestamp": 1793724429.2159343,
+    "routing_weights": {
+      "LLM": 0.3402,
+      "RL": 0.3972,
+      "PRK": 0.2626
+    },
+    "moral_priors": {
+      "alpha_ethical": 0.4,
+      "beta_friction": 0.1
+    },
+    "ppo_value_bias": [
+      0.1527,
+      0.0146,
+      0.3393,
+      -0.0875,
+      0.4148,
+      -0.0175
+    ],
+    "qpmk_projection_seed": 55,
+    "local_knowledge_triples_count": 35
+  },
+  "reputation_score": 1.0,
+  "timestamp": 1793725922.0560708
+}

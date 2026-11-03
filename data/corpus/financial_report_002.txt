@@ -1,0 +1,13 @@
+SECURITIES AND EXCHANGE COMMISSION
+DIVISION OF ENFORCEMENT - COMPLIANCE AUDIT REPORT
+
+Target Entity: Meridian Trust Holdings
+Related Entities: Vanguard Horizon Ltd, Apex Capital Group, Helena Vance
+Date: November 2024
+
+FINDINGS OF INVESTIGATION:
+1. Meridian Trust Holdings maintains undocumented correspondent accounts in Zurich and Panama City.
+2. Helena Vance authorized a $450,000 disbursement categorized as consulting retainers, conflicting with 15 U.S.C. 78dd-1 (Foreign Corrupt Practices Act).
+3. Cross-entity auditing confirms that Vanguard Horizon Ltd transferred funds directly into offshore shell accounts controlled by Marcus Vance.
+4. The compliance committee recommends full disclosure under SEC regulations and prompt referral to FinCEN.
+

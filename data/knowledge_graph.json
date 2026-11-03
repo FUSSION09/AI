@@ -1,0 +1,357 @@
+{
+  "documents": [
+    {
+      "id": "case_law_001",
+      "file": "case_law_001.txt",
+      "size": 752
+    },
+    {
+      "id": "financial_report_002",
+      "file": "financial_report_002.txt",
+      "size": 753
+    }
+  ],
+  "entities": [
+    {
+      "name": "UNITED STATES DISTRICT COURT SOUTHERN DISTRICT OF",
+      "type": "ORG"
+    },
+    {
+      "name": "NEW YORK",
+      "type": "GPE"
+    },
+    {
+      "name": "UNITED STATES OF AMERICA",
+      "type": "ORG"
+    },
+    {
+      "name": "VANGUARD HORIZON LTD",
+      "type": "ORG"
+    },
+    {
+      "name": "MARCUS VANCE",
+      "type": "GPE"
+    },
+    {
+      "name": "Defendant Marcus Vance",
+      "type": "ORG"
+    },
+    {
+      "name": "Vanguard Horizon Ltd",
+      "type": "ORG"
+    },
+    {
+      "name": "Delaware",
+      "type": "GPE"
+    },
+    {
+      "name": "Marcus Vance",
+      "type": "ORG"
+    },
+    {
+      "name": "Court",
+      "type": "ORG"
+    },
+    {
+      "name": "Apex Capital Group",
+      "type": "ORG"
+    },
+    {
+      "name": "Meridian Trust",
+      "type": "ORG"
+    },
+    {
+      "name": "SECURITIES AND EXCHANGE COMMISSION",
+      "type": "ORG"
+    },
+    {
+      "name": "ENFORCEMENT - COMPLIANCE AUDIT",
+      "type": "ORG"
+    },
+    {
+      "name": "Helena Vance Date",
+      "type": "ORG"
+    },
+    {
+      "name": "Meridian Trust Holdings",
+      "type": "ORG"
+    },
+    {
+      "name": "Zurich",
+      "type": "GPE"
+    },
+    {
+      "name": "Panama City",
+      "type": "GPE"
+    },
+    {
+      "name": "Helena Vance",
+      "type": "ORG"
+    },
+    {
+      "name": "SEC",
+      "type": "ORG"
+    }
+  ],
+  "statutes": [
+    {
+      "code": "31 U.S.C. 5324",
+      "category": "Statutory Authority"
+    },
+    {
+      "code": "18 U.S.C. 1956",
+      "category": "Statutory Authority"
+    },
+    {
+      "code": "15 U.S.C. 78dd-1",
+      "category": "Statutory Authority"
+    }
+  ],
+  "triples": [
+    {
+      "source": "case_law_001",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "UNITED STATES DISTRICT COURT SOUTHERN DISTRICT OF",
+      "target_type": "Entity"
+    },
+    {
+      "source": "case_law_001",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "NEW YORK",
+      "target_type": "Entity"
+    },
+    {
+      "source": "case_law_001",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "UNITED STATES OF AMERICA",
+      "target_type": "Entity"
+    },
+    {
+      "source": "case_law_001",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "VANGUARD HORIZON LTD",
+      "target_type": "Entity"
+    },
+    {
+      "source": "case_law_001",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "MARCUS VANCE",
+      "target_type": "Entity"
+    },
+    {
+      "source": "case_law_001",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "Defendant Marcus Vance",
+      "target_type": "Entity"
+    },
+    {
+      "source": "case_law_001",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "Vanguard Horizon Ltd",
+      "target_type": "Entity"
+    },
+    {
+      "source": "case_law_001",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "Delaware",
+      "target_type": "Entity"
+    },
+    {
+      "source": "case_law_001",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "Marcus Vance",
+      "target_type": "Entity"
+    },
+    {
+      "source": "case_law_001",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "Court",
+      "target_type": "Entity"
+    },
+    {
+      "source": "case_law_001",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "Vanguard Horizon Ltd",
+      "target_type": "Entity"
+    },
+    {
+      "source": "case_law_001",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "Apex Capital Group",
+      "target_type": "Entity"
+    },
+    {
+      "source": "case_law_001",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "Meridian Trust",
+      "target_type": "Entity"
+    },
+    {
+      "source": "case_law_001",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "Court",
+      "target_type": "Entity"
+    },
+    {
+      "source": "case_law_001",
+      "source_type": "Document",
+      "rel": "CITES",
+      "target": "31 U.S.C. 5324",
+      "target_type": "Statute"
+    },
+    {
+      "source": "case_law_001",
+      "source_type": "Document",
+      "rel": "CITES",
+      "target": "18 U.S.C. 1956",
+      "target_type": "Statute"
+    },
+    {
+      "source": "Vance",
+      "source_type": "Entity",
+      "rel": "DIRECT",
+      "target": "transfers",
+      "target_type": "Entity"
+    },
+    {
+      "source": "financial_report_002",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "SECURITIES AND EXCHANGE COMMISSION",
+      "target_type": "Entity"
+    },
+    {
+      "source": "financial_report_002",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "ENFORCEMENT - COMPLIANCE AUDIT",
+      "target_type": "Entity"
+    },
+    {
+      "source": "financial_report_002",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "Vanguard Horizon Ltd",
+      "target_type": "Entity"
+    },
+    {
+      "source": "financial_report_002",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "Apex Capital Group",
+      "target_type": "Entity"
+    },
+    {
+      "source": "financial_report_002",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "Helena Vance Date",
+      "target_type": "Entity"
+    },
+    {
+      "source": "financial_report_002",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "Meridian Trust Holdings",
+      "target_type": "Entity"
+    },
+    {
+      "source": "financial_report_002",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "Zurich",
+      "target_type": "Entity"
+    },
+    {
+      "source": "financial_report_002",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "Panama City",
+      "target_type": "Entity"
+    },
+    {
+      "source": "financial_report_002",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "Helena Vance",
+      "target_type": "Entity"
+    },
+    {
+      "source": "financial_report_002",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "Vanguard Horizon Ltd",
+      "target_type": "Entity"
+    },
+    {
+      "source": "financial_report_002",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "Marcus Vance",
+      "target_type": "Entity"
+    },
+    {
+      "source": "financial_report_002",
+      "source_type": "Document",
+      "rel": "MENTIONS",
+      "target": "SEC",
+      "target_type": "Entity"
+    },
+    {
+      "source": "financial_report_002",
+      "source_type": "Document",
+      "rel": "CITES",
+      "target": "15 U.S.C. 78dd-1",
+      "target_type": "Statute"
+    },
+    {
+      "source": "DIVISION",
+      "source_type": "Entity",
+      "rel": "REPORT",
+      "target": "Entity",
+      "target_type": "Entity"
+    },
+    {
+      "source": "Holdings",
+      "source_type": "Entity",
+      "rel": "MAINTAIN",
+      "target": "accounts",
+      "target_type": "Entity"
+    },
+    {
+      "source": "Vance",
+      "source_type": "Entity",
+      "rel": "AUTHORIZE",
+      "target": "disbursement",
+      "target_type": "Entity"
+    },
+    {
+      "source": "Ltd",
+      "source_type": "Entity",
+      "rel": "TRANSFER",
+      "target": "funds",
+      "target_type": "Entity"
+    },
+    {
+      "source": "committee",
+      "source_type": "Entity",
+      "rel": "RECOMMEND",
+      "target": "disclosure",
+      "target_type": "Entity"
+    }
+  ]
+}

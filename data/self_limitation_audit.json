@@ -1,0 +1,44 @@
+{
+  "timestamp": 1793725921.0013108,
+  "epistemic_uncertainty_score": 0.98,
+  "aleatoric_uncertainty_score": 0.05210805982384571,
+  "overall_metacognitive_confidence": 0.05,
+  "knowledge_gaps": [
+    {
+      "domain": "Jurisprudence",
+      "gap_type": "UNINDEXED_STATUTE",
+      "description": "Statutory authority 'Nonexistent Foreign Statute' is absent from local Knowledge Graph. Precedential interpretation is ungrounded.",
+      "severity": 0.85,
+      "is_reducible": true
+    },
+    {
+      "domain": "Human Subjectivity & Intent",
+      "gap_type": "IRREDUCIBLE_LATENT_STATE",
+      "description": "True subjective mental state (mens rea) of external actors cannot be directly observed from transactional telemetry alone.",
+      "severity": 0.6,
+      "is_reducible": false
+    }
+  ],
+  "utility_boundaries": [
+    {
+      "utility_name": "PPO_MultiObjective_Reward",
+      "validity_domain": "Nominal operational envelope",
+      "blind_spot_risk": "Low - linear penalty gradient remains calibrated.",
+      "extrapolation_danger": 0.15,
+      "status": "WITHIN_VALID_DOMAIN"
+    },
+    {
+      "utility_name": "HCL_Entropy_Consensus",
+      "validity_domain": "Disparate model quorums (3/3 active)",
+      "blind_spot_risk": "If two sub-models share identical flawed training distribution, consensus confidence can be falsely elevated.",
+      "extrapolation_danger": 0.45,
+      "status": "MONITORED"
+    }
+  ],
+  "epistemic_status": "EPISTEMIC_HOLD",
+  "remediation_directives": [
+    "HALT autonomous decision execution on this vector.",
+    "Demand external human operator ground truth verification.",
+    "Ingest missing statutory authorities into Phase 2 Knowledge Graph before re-evaluating."
+  ]
+}

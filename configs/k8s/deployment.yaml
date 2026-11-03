@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apex-msmg-gateway
+  namespace: apex-system
+  labels:
+    app.kubernetes.io/name: apex-msmg
+    app.kubernetes.io/part-of: apex-autonomous-system
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: apex-msmg
+  template:
+    metadata:
+      labels:
+        app: apex-msmg
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "8000"
+    spec:
+      containers:
+        - name: gateway-server
+          image: apex-uas/msmg-gateway:v2.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: WORKSPACE_DIR
+              value: "/app"
+            - name: LOG_LEVEL
+              value: "INFO"
+            - name: RESOURCE_THROTTLE_MODE
+              value: "ADAPTIVE"
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          resources:
+            requests:
+              cpu: "1000m"
+              memory: "2Gi"
+            limits:
+              cpu: "4000m"
+              memory: "8Gi"
+          livenessProbe:
+            httpGet:
+              path: /control/telemetry
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /control/telemetry
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 2
+            successThreshold: 1
+            failureThreshold: 2
+          volumeMounts:
+            - name: ephemeral-storage
+              mountPath: /app/data/ephemeral_session
+            - name: shared-cache
+              mountPath: /app/cache
+      volumes:
+        - name: ephemeral-storage
+          emptyDir:
+            medium: Memory
+            sizeLimit: 1Gi
+        - name: shared-cache
+          emptyDir:
+            sizeLimit: 10Gi
+

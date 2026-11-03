@@ -1,0 +1,42 @@
+{
+  "node_id": "SWARM-NODE-003-1067",
+  "endpoint_uri": "p2p://node-3.swarm.uas.internal:9083",
+  "status": "ONLINE_ACTIVE",
+  "persona": {
+    "persona_id": "PER-PROP-1067",
+    "name": "Prophet-Futures",
+    "role_specialty": "PROPHET_CAUSALITY",
+    "risk_tolerance": 0.45,
+    "utility_greed": 0.7,
+    "ethical_strictness": 0.75,
+    "lookahead_depth": 5,
+    "stealth_priority": 0.5
+  },
+  "gene_bundle": {
+    "genome_id": "GENOME-SWARM-NODE-003-1067",
+    "parent_node_id": null,
+    "generation": 1,
+    "timestamp": 1793721571.06722,
+    "routing_weights": {
+      "LLM": 0.3408,
+      "RL": 0.3962,
+      "PRK": 0.2629
+    },
+    "moral_priors": {
+      "alpha_ethical": 0.75,
+      "beta_friction": 0.55
+    },
+    "ppo_value_bias": [
+      0.1057,
+      -0.0617,
+      0.3114,
+      -0.1708,
+      0.3772,
+      -0.0824
+    ],
+    "qpmk_projection_seed": 45,
+    "local_knowledge_triples_count": 35
+  },
+  "reputation_score": 1.0,
+  "timestamp": 1793725922.051174
+}

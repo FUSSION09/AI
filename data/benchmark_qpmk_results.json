@@ -1,0 +1,12 @@
+{
+  "iterations": 5000,
+  "channels": 8,
+  "window_size": 128,
+  "mean_latency_us": 219.6293,
+  "p50_latency_us": 162.6,
+  "p95_latency_us": 427.81000000000006,
+  "p99_latency_us": 824.5380000000008,
+  "mean_latency_ms": 0.2196293,
+  "target_latency_ms": 1.0,
+  "passed": true
+}

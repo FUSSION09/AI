@@ -1,0 +1,127 @@
+{
+  "system": "Apex Autonomous System (UAS) - Singularity Transcendence Ledger",
+  "current_mode": "ARCHITECT",
+  "total_transitions_evaluated": 12,
+  "history": [
+    {
+      "timestamp": 1793722077.070255,
+      "mode": "EXECUTOR",
+      "t_singularity": 0.4931,
+      "dI_dt": 0.5725,
+      "dC_dt": 1.5,
+      "phi_ratio": 0.6486,
+      "threshold_reached": false,
+      "meta_goals_count": 0
+    },
+    {
+      "timestamp": 1793722077.091391,
+      "mode": "ARCHITECT",
+      "t_singularity": 5.8357,
+      "dI_dt": 2.9125,
+      "dC_dt": 1.1,
+      "phi_ratio": 2.6757,
+      "threshold_reached": true,
+      "meta_goals_count": 2
+    },
+    {
+      "timestamp": 1793722443.7291992,
+      "mode": "ARCHITECT",
+      "t_singularity": 4.7083,
+      "dI_dt": 2.585,
+      "dC_dt": 1.15,
+      "phi_ratio": 2.4324,
+      "threshold_reached": true,
+      "meta_goals_count": 2
+    },
+    {
+      "timestamp": 1793722474.145961,
+      "mode": "ARCHITECT",
+      "t_singularity": 4.2812,
+      "dI_dt": 2.465,
+      "dC_dt": 1.15,
+      "phi_ratio": 2.2162,
+      "threshold_reached": true,
+      "meta_goals_count": 2
+    },
+    {
+      "timestamp": 1793722490.3550696,
+      "mode": "EXECUTOR",
+      "t_singularity": 0.4931,
+      "dI_dt": 0.5725,
+      "dC_dt": 1.5,
+      "phi_ratio": 0.6486,
+      "threshold_reached": false,
+      "meta_goals_count": 0
+    },
+    {
+      "timestamp": 1793722490.3739827,
+      "mode": "ARCHITECT",
+      "t_singularity": 5.8357,
+      "dI_dt": 2.9125,
+      "dC_dt": 1.1,
+      "phi_ratio": 2.6757,
+      "threshold_reached": true,
+      "meta_goals_count": 2
+    },
+    {
+      "timestamp": 1793723944.1135178,
+      "mode": "ARCHITECT",
+      "t_singularity": 4.7083,
+      "dI_dt": 2.585,
+      "dC_dt": 1.15,
+      "phi_ratio": 2.4324,
+      "threshold_reached": true,
+      "meta_goals_count": 2
+    },
+    {
+      "timestamp": 1793723973.383161,
+      "mode": "ARCHITECT",
+      "t_singularity": 4.2812,
+      "dI_dt": 2.465,
+      "dC_dt": 1.15,
+      "phi_ratio": 2.2162,
+      "threshold_reached": true,
+      "meta_goals_count": 2
+    },
+    {
+      "timestamp": 1793724429.3295364,
+      "mode": "ARCHITECT",
+      "t_singularity": 4.7083,
+      "dI_dt": 2.585,
+      "dC_dt": 1.15,
+      "phi_ratio": 2.4324,
+      "threshold_reached": true,
+      "meta_goals_count": 2
+    },
+    {
+      "timestamp": 1793724533.705052,
+      "mode": "ARCHITECT",
+      "t_singularity": 4.2812,
+      "dI_dt": 2.465,
+      "dC_dt": 1.15,
+      "phi_ratio": 2.2162,
+      "threshold_reached": true,
+      "meta_goals_count": 2
+    },
+    {
+      "timestamp": 1793725910.8163795,
+      "mode": "ARCHITECT",
+      "t_singularity": 4.7083,
+      "dI_dt": 2.585,
+      "dC_dt": 1.15,
+      "phi_ratio": 2.4324,
+      "threshold_reached": true,
+      "meta_goals_count": 2
+    },
+    {
+      "timestamp": 1793725922.0815344,
+      "mode": "ARCHITECT",
+      "t_singularity": 4.2812,
+      "dI_dt": 2.465,
+      "dC_dt": 1.15,
+      "phi_ratio": 2.2162,
+      "threshold_reached": true,
+      "meta_goals_count": 2
+    }
+  ]
+}

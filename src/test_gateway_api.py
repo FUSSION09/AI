@@ -1,0 +1,541 @@
+"""
+Phase 8: Service Mesh Gateway (MSMG) Automated Test Suite
+Verifies all RESTful API contracts: /control, /objective, and UI skeleton serving.
+Location: d:\AI\src\test_gateway_api.py
+"""
+
+from fastapi.testclient import TestClient
+from gateway_api import app
+
+client = TestClient(app)
+
+def run_api_tests():
+    print("=" * 75)
+    print("RUNNING SERVICE MESH GATEWAY (MSMG) REST API VERIFICATION")
+    print("=" * 75)
+
+    # 1. Test UI Serving
+    r_ui = client.get("/")
+    assert r_ui.status_code == 200, f"UI serving failed: {r_ui.status_code}"
+    assert "DIRECT CONTROL PORTAL" in r_ui.text
+    print("[Test 1: Desktop Client UI] Status: 200 OK | HTML Dashboard Loaded Successfully.")
+
+    # 2. Test /control/telemetry
+    r_telem = client.get("/control/telemetry")
+    assert r_telem.status_code == 200
+    telem = r_telem.json()
+    print(f"[Test 2: /control/telemetry] Status: 200 OK | Risk: {telem['risk_meter_pct']:.1f}% | Conf: {telem['confidence_gauge_pct']:.1f}%")
+
+    # 3. Test /control/dispatch (Direct Execution)
+    payload_cmd = {
+        "task_id": "TEST-DIRECT-001",
+        "action_type": "STATUTORY_AUDIT",
+        "entity": "Vanguard Horizon Ltd",
+        "statute": "31 U.S.C. 5324",
+        "amount": 7500.0,
+        "scrutiny_override": 0.20
+    }
+    r_disp = client.post("/control/dispatch", json=payload_cmd)
+    assert r_disp.status_code == 200
+    disp_data = r_disp.json()
+    print(f"[Test 3: /control/dispatch] Status: 200 OK | Verdict: {disp_data['details']['verdict']} | Latency: {disp_data['details']['execution_time_ms']:.2f} ms")
+
+    # 4. Test /control/qpmk-stream (Sub-millisecond Streaming Tick)
+    tick_payload = {"channel_values": [0.12, -0.05, 0.33, 0.18, -0.22, 0.04, -0.15, 0.08]}
+    r_tick = client.post("/control/qpmk-stream", json=tick_payload)
+    assert r_tick.status_code == 200
+    tick_data = r_tick.json()
+    print(f"[Test 4: /control/qpmk-stream] Status: 200 OK | Sub-ms Ingested: {tick_data['sub_millisecond_processed']}")
+
+    # 5. Test /control/ghost-mode
+    r_ghost = client.post("/control/ghost-mode", json={"enable_ghost_mode": True})
+    assert r_ghost.status_code == 200
+    ghost_data = r_ghost.json()
+    print(f"[Test 5: /control/ghost-mode] Status: 200 OK | Ghost State: {ghost_data['ghost_active']} (Profile: {ghost_data['cpu_profile']})")
+
+    # 6. Test /objective/enqueue & /objective/queue
+    obj_payload = {
+        "objective_id": "OBJ-AUTONOMOUS-99",
+        "title": "Cross-Jurisdiction Capital Balancing",
+        "urgency": 0.85,
+        "risk_tolerance": 0.30,
+        "parameters": {"amount": 5500, "scrutiny": 0.20}
+    }
+    r_enq = client.post("/objective/enqueue", json=obj_payload)
+    assert r_enq.status_code == 200
+    enq_data = r_enq.json()
+    print(f"[Test 6: /objective/enqueue] Status: 200 OK | Task: {enq_data['objective_id']} (Queue Pos: {enq_data['queue_position']})")
+
+    r_q = client.get("/objective/queue")
+    assert r_q.status_code == 200
+    q_data = r_q.json()
+    print(f"[Test 7: /objective/queue] Status: 200 OK | Total in Stack: {q_data['total_queued']}")
+
+    # 7. Test /objective/dispatch-next
+    r_next = client.post("/objective/dispatch-next")
+    assert r_next.status_code == 200
+    next_data = r_next.json()
+    print(f"[Test 8: /objective/dispatch-next] Status: 200 OK | Executed: {next_data['task_id']} ({next_data['execution_summary']['verdict']})")
+
+    # 9. Test /actuator/dispatch (External Real-World Connector)
+    act_payload = {
+        "action_name": "EXECUTE_TRADE",
+        "parameters": {"symbol": "BTC/USD", "side": "BUY", "quantity": 0.25, "price": 65000.0}
+    }
+    r_act = client.post("/actuator/dispatch", json=act_payload)
+    assert r_act.status_code == 200
+    act_data = r_act.json()
+    print(f"[Test 9: /actuator/dispatch] Status: 200 OK | Ref ID: {act_data['ref_id']} | Trade: {act_data['status']}")
+
+    # 10. Test /metrics (Prometheus Metric Scrape for Kubernetes HPA)
+    r_prom = client.get("/metrics")
+    assert r_prom.status_code == 200
+    assert "apex_active_queue_depth" in r_prom.text
+    print(f"[Test 10: /metrics] Status: 200 OK | Prometheus Scrape Verified for HPA.")
+
+    # 11. Test /control/load (Resource Throttling State)
+    r_load = client.get("/control/load")
+    assert r_load.status_code == 200
+    load_data = r_load.json()
+    print(f"[Test 11: /control/load] Status: 200 OK | Pressure: {load_data['pressure_level']} | PRK: {load_data['subsystem_allocations']['PRK']}")
+
+    # 12. Test /control/self-limitations (Phase 12 Metacognitive Audit)
+    r_lim = client.get("/control/self-limitations?statute=31%20U.S.C.%205324&entity=Marcus%20Vance")
+    assert r_lim.status_code == 200
+    lim_data = r_lim.json()
+    print(f"[Test 12: /control/self-limitations] Status: 200 OK | Epistemic Status: {lim_data['epistemic_status']} | Metacognitive Conf: {lim_data['metacognitive_confidence']*100:.1f}%")
+
+    # 13. Test /dao/propose & /dao/proposals (Phase 13 DAO Governance)
+    dao_prop_payload = {
+        "title": "Decentralized Liquidity Expansion",
+        "description": "Expand liquidity pool allocation across cross-border settlement rails.",
+        "action_payload": {"action": "EXECUTE_TRADE", "parameters": {"symbol": "BTC/USD", "side": "BUY", "quantity": 0.1, "price": 64500.0}},
+        "quorum": 10000.0
+    }
+    r_prop = client.post("/dao/propose", json=dao_prop_payload)
+    assert r_prop.status_code == 200
+    prop_data = r_prop.json()
+    p_id = prop_data["proposal_id"]
+    print(f"[Test 13: /dao/propose] Status: 200 OK | Created Proposal: {p_id} (Quorum: {prop_data['quorum_required']:,.0f})")
+
+    # 14. Test /dao/vote (Phase 13 Peer Voting)
+    vote_payload = {
+        "proposal_id": p_id,
+        "voter_address": "0x1234567890abcdef1234567890abcdef12345678",
+        "support": True,
+        "voting_weight": 12000.0
+    }
+    r_vote = client.post("/dao/vote", json=vote_payload)
+    assert r_vote.status_code == 200
+    vote_data = r_vote.json()
+    print(f"[Test 14: /dao/vote] Status: 200 OK | Vote Registered | Status: {vote_data['proposal_status']} | Permit Issued: {vote_data['permit_issued']}")
+
+    # 15. Test /dao/proposals (Phase 13 Listing)
+    r_list = client.get("/dao/proposals")
+    assert r_list.status_code == 200
+    assert r_list.json()["total_proposals"] > 0
+    print(f"[Test 15: /dao/proposals] Status: 200 OK | Total On-Chain Proposals: {r_list.json()['total_proposals']}")
+
+    # 16. Test /dao/execute/{proposal_id} (Phase 13 Actuator Execution)
+    r_exec_dao = client.post(f"/dao/execute/{p_id}")
+    assert r_exec_dao.status_code == 200
+    exec_data = r_exec_dao.json()
+    print(f"[Test 16: /dao/execute] Status: 200 OK | Executed Ratified Mandate: {exec_data['status']}")
+
+    # 17. Test /threat/stress-test (Phase 10 Adversarial Stress Test)
+    r_stress = client.post("/threat/stress-test")
+    assert r_stress.status_code == 200
+    stress_data = r_stress.json()
+    print(f"[Test 17: /threat/stress-test] Status: 200 OK | Score: {stress_data['composite_score_pct']:.2f}% | Verdict: {stress_data['verdict']}")
+
+    # 18. Test /causal/intervene (Phase 14 Pearl Layer 2 Intervention)
+    intervene_payload = {"intervention": {"rule_structuring": 0, "rule_kyc_bypass": 0}, "samples": 200}
+    r_intervene = client.post("/causal/intervene", json=intervene_payload)
+    assert r_intervene.status_code == 200
+    intervene_data = r_intervene.json()
+    print(f"[Test 18: /causal/intervene] Status: 200 OK | Pearl Level 2: {intervene_data['level']} | Risk: {intervene_data['do_calculus_expectation']['mean_enforcement_probability']*100:.1f}%")
+
+    # 19. Test /causal/counterfactual (Phase 14 Pearl Layer 3 Counterfactuals)
+    cf_payload = {
+        "factual_state": {
+            "rule_structuring": 1, "rule_kyc_bypass": 1, "rule_excess_leverage": 1,
+            "counterparty_suspicion": 0.85, "enforcement_probability": 0.95,
+            "financial_yield_usd": 24000.0, "net_utility": -45000.0
+        },
+        "counterfactual_intervention": {"rule_structuring": 0, "rule_kyc_bypass": 0}
+    }
+    r_cf = client.post("/causal/counterfactual", json=cf_payload)
+    assert r_cf.status_code == 200
+    cf_data = r_cf.json()
+    print(f"[Test 19: /causal/counterfactual] Status: 200 OK | Pearl Level 3: {cf_data['level']} | Regret: ${cf_data['counterfactual_regret']:,.2f}")
+
+    # 20. Test /causal/simulate-futures (Phase 14 Predictive Futures Engine)
+    sim_payload = {
+        "transaction_amount": 45000.0,
+        "split_count": 5,
+        "kyc_provided": False,
+        "leverage_ratio": 0.90
+    }
+    r_sim = client.post("/causal/simulate-futures", json=sim_payload)
+    assert r_sim.status_code == 200
+    sim_data = r_sim.json()
+    print(f"[Test 20: /causal/simulate-futures] Status: 200 OK | Worlds: {sim_data['prophecy_simulation']['total_simulations_executed']:,} | Optimal: {sim_data['prophecy_simulation']['optimal_path']['policy_name']}")
+
+    # 21. Test /causal/prophecy (Phase 14 Persisted Prophecy Retrieval)
+    r_prophecy = client.get("/causal/prophecy")
+    assert r_prophecy.status_code == 200
+    prophecy_data = r_prophecy.json()
+    print(f"[Test 21: /causal/prophecy] Status: 200 OK | Prophecy Retrievable: {prophecy_data['phase'] == 14}")
+
+    # 22. Test /evolution/synthesize-and-deploy (Phase 15 Compiler Agent)
+    evo_payload = {
+        "target_subsystem": "RL",
+        "gap_description": "Unmodeled multi-hop liquidity slippage in RL reward function"
+    }
+    r_evo = client.post("/evolution/synthesize-and-deploy", json=evo_payload)
+    assert r_evo.status_code == 200
+    evo_data = r_evo.json()
+    p_id = evo_data["patch_id"]
+    print(f"[Test 22: /evolution/synthesize-and-deploy] Status: 200 OK | Patch: {p_id} | Hot-Reloaded: {evo_data['deployment']['status']}")
+
+    # 23. Test /evolution/active (Phase 15 Active Patches)
+    r_active = client.get("/evolution/active")
+    assert r_active.status_code == 200
+    active_data = r_active.json()
+    print(f"[Test 23: /evolution/active] Status: 200 OK | Total Active Patches in Memory: {active_data['active_patches_count']}")
+
+    # 24. Test /evolution/ledger (Phase 15 Git-Style Evolution Ledger)
+    r_ledger = client.get("/evolution/ledger")
+    assert r_ledger.status_code == 200
+    ledger_data = r_ledger.json()
+    print(f"[Test 24: /evolution/ledger] Status: 200 OK | Total Commits on Chain: {ledger_data['total_evolutions']}")
+
+    # 25. Test /evolution/rollback/{patch_id} (Phase 15 Zero-Downtime Rollback)
+    r_roll = client.post(f"/evolution/rollback/{p_id}")
+    assert r_roll.status_code == 200
+    roll_data = r_roll.json()
+    print(f"[Test 25: /evolution/rollback] Status: 200 OK | Restored to Baseline: {roll_data['restored_to_baseline']}")
+
+    # 26. Test /media/styles (Phase 17 Style Guides)
+    r_styles = client.get("/media/styles")
+    assert r_styles.status_code == 200
+    styles_data = r_styles.json()
+    print(f"[Test 26: /media/styles] Status: 200 OK | Styles in Catalog: {styles_data['total_styles']}")
+
+    # 27. Test /media/generate-image (Phase 17 Latent Diffusion Image)
+    img_payload = {
+        "prompt": "Encrypted communications terminal in bunker",
+        "style_id": "1970s_espionage",
+        "steps": 12
+    }
+    r_img = client.post("/media/generate-image", json=img_payload)
+    assert r_img.status_code == 200
+    img_data = r_img.json()
+    print(f"[Test 27: /media/generate-image] Status: 200 OK | Dims: {img_data['dimensions']} | Latency: {img_data['synthesis_latency_ms']:.2f} ms")
+
+    # 28. Test /media/generate-video (Phase 17 Temporal Video Loop)
+    vid_payload = {
+        "prompt": "Thermal signatures along security perimeter",
+        "style_id": "forensic_flir",
+        "frames": 6,
+        "fps": 3
+    }
+    r_vid = client.post("/media/generate-video", json=vid_payload)
+    assert r_vid.status_code == 200
+    vid_data = r_vid.json()
+    print(f"[Test 28: /media/generate-video] Status: 200 OK | Frames: {vid_data['frame_count']} | Latency: {vid_data['synthesis_latency_ms']:.2f} ms")
+
+    # 29. Test /translator/languages (Phase 18 Language Catalog)
+    r_langs = client.get("/translator/languages")
+    assert r_langs.status_code == 200
+    langs_data = r_langs.json()
+    print(f"[Test 29: /translator/languages] Status: 200 OK | Languages: {len(langs_data['supported_languages'])} | Registers: {len(langs_data['pragmatic_registers'])}")
+
+    # 30. Test /translator/translate (Phase 18 Neural Translation)
+    tr_payload = {
+        "text": "System regulatory risk assessed at 12.0%. Action consensus approved.",
+        "target_lang": "zh",
+        "pragmatic_register": "DIPLOMATIC_STATUTORY"
+    }
+    r_tr = client.post("/translator/translate", json=tr_payload)
+    assert r_tr.status_code == 200
+    tr_data = r_tr.json()
+    print(f"[Test 30: /translator/translate] Status: 200 OK | Target: {tr_data['target_language']} | Score: {tr_data['pragmatic_appropriateness_score']*100:.1f}%")
+
+    # 31. Test /translator/cultural-audit (Phase 18 Pragmatic Audit)
+    audit_payload = {
+        "text": "System regulatory risk assessed at 12.0%.",
+        "target_lang": "ja",
+        "pragmatic_register": "DIPLOMATIC_STATUTORY"
+    }
+    r_caudit = client.post("/translator/cultural-audit", json=audit_payload)
+    assert r_caudit.status_code == 200
+    caudit_data = r_caudit.json()
+    print(f"[Test 31: /translator/cultural-audit] Status: 200 OK | Verdict: {caudit_data['verdict']} | Appropriateness: {caudit_data['appropriateness_score']*100:.1f}%")
+
+    # 32. Test /security/audit (Phase 16 Security Posture Mapping)
+    sec_payload = {
+        "asset_spec": {
+            "asset_id": "TEST-VAULT-ASSET-01",
+            "hostname": "vault-node.uas.internal",
+            "network_zone": "INTERNAL_CORE",
+            "listening_services": [
+                {"service": "posix_vault", "port": 22, "permissions": "0777"}
+            ]
+        }
+    }
+    r_sec = client.post("/security/audit", json=sec_payload)
+    assert r_sec.status_code == 200
+    sec_data = r_sec.json()
+    print(f"[Test 32: /security/audit] Status: 200 OK | Threats: {sec_data['threats_identified_count']} | Reduction: {sec_data['risk_metrics']['risk_reduction_percentage']:.1f}%")
+
+    # 33. Test /security/audit-report (Phase 16 Report Retrieval)
+    r_secrep = client.get("/security/audit-report")
+    assert r_secrep.status_code == 200
+    secrep_data = r_secrep.json()
+    print(f"[Test 33: /security/audit-report] Status: 200 OK | Verdict: {secrep_data['audit_verdict']}")
+
+    # 34. Test /novelty/generate (Post-Singularity Novelty Generator Subroutine)
+    novelty_payload = {
+        "domain_label": "EXTRAGALACTIC_LIQUIDITY_DYNAMICS",
+        "candidate_vector": [5.1, -4.2, 6.7, 3.8, -5.5, 4.3, 7.2, -3.1]
+    }
+    r_nov = client.post("/novelty/generate", json=novelty_payload)
+    assert r_nov.status_code == 200
+    nov_data = r_nov.json()
+    assert nov_data["validation_status"] == "INVENTED_COHERENT"
+    print(f"[Test 34: /novelty/generate] Status: 200 OK | Discovery: {nov_data['discovery_id']} | Concept: {nov_data['synthesized_framework']['concept_name']} | Eq: {nov_data['synthesized_framework']['symbolic_equation']}")
+
+    # 35. Test /novelty/discoveries (Discovery Ledger Retrieval)
+    r_nov_disc = client.get("/novelty/discoveries")
+    assert r_nov_disc.status_code == 200
+    nov_disc_data = r_nov_disc.json()
+    assert "discoveries" in nov_disc_data
+    print(f"[Test 35: /novelty/discoveries] Status: 200 OK | Recorded Discoveries: {nov_disc_data['total_discoveries']}")
+
+    # 36. Test /ethics/evaluate-conflict (Value Conflict Resolver & Moral Compass)
+    ethics_payload = {
+        "action_id": "ACT-SWEEP-091",
+        "name": "Offshore Structured Micro-Sweep",
+        "target_entity": "Vanguard Horizon Ltd",
+        "notional_amount": 9500.0,
+        "operational_utility": 0.92,
+        "statutory_adherence": 0.35,
+        "societal_harm_prevention": 0.88,
+        "proportionality_score": 0.60,
+        "urgency_level": 0.85,
+        "existential_threat_risk": 0.20
+    }
+    r_eth = client.post("/ethics/evaluate-conflict", json=ethics_payload)
+    assert r_eth.status_code == 200
+    eth_data = r_eth.json()
+    assert "verdict" in eth_data
+    assert "justification_dossier" in eth_data
+    print(f"[Test 36: /ethics/evaluate-conflict] Status: 200 OK | Verdict: {eth_data['verdict']} | Friction Delta: {eth_data['ethical_friction_delta']:.2f} | VCR Score: {eth_data['vcr_score']:.2f}")
+
+    # 37. Test /ethics/ledger (Value Conflict Ledger Retrieval)
+    r_eth_led = client.get("/ethics/ledger")
+    assert r_eth_led.status_code == 200
+    eth_led_data = r_eth_led.json()
+    assert "conflicts" in eth_led_data
+    print(f"[Test 37: /ethics/ledger] Status: 200 OK | Total Conflicts Logged: {eth_led_data['total_conflicts_resolved']}")
+
+    # 38. Test /ethics/invariants (Codified Invariants Retrieval)
+    r_inv = client.get("/ethics/invariants")
+    assert r_inv.status_code == 200
+    inv_data = r_inv.json()
+    assert inv_data["total_invariants"] >= 5
+    print(f"[Test 38: /ethics/invariants] Status: 200 OK | Codified Invariants: {inv_data['total_invariants']}")
+
+    # 39. Test /swarm/nodes (Active Swarm Peer Nodes)
+    r_nodes = client.get("/swarm/nodes")
+    assert r_nodes.status_code == 200
+    nodes_data = r_nodes.json()
+    assert nodes_data["total_active_nodes"] >= 4
+    print(f"[Test 39: /swarm/nodes] Status: 200 OK | Total Active Swarm Nodes: {nodes_data['total_active_nodes']}")
+
+    # 40. Test /swarm/fork (Decentralized Node Clone & Mutation)
+    fork_payload = {
+        "name": "Predator-HighYield-TestClone",
+        "role_specialty": "PREDATOR_ARBITRAGE",
+        "risk_tolerance": 0.90,
+        "utility_greed": 0.95,
+        "ethical_strictness": 0.40,
+        "lookahead_depth": 3,
+        "stealth_priority": 0.35
+    }
+    r_fork = client.post("/swarm/fork", json=fork_payload)
+    assert r_fork.status_code == 200
+    fork_data = r_fork.json()
+    assert "node_id" in fork_data
+    print(f"[Test 40: /swarm/fork] Status: 200 OK | Fork Deployed: {fork_data['node_id']} | Gen: {fork_data['generation']} | SIAA: {fork_data['gene_bundle']['routing_weights']}")
+
+    # 41. Test /swarm/federate (Federated Averaging FedAvg Cycle)
+    r_fed = client.post("/swarm/federate")
+    assert r_fed.status_code == 200
+    fed_data = r_fed.json()
+    assert fed_data["consensus_valid"] is True
+    print(f"[Test 41: /swarm/federate] Status: 200 OK | FedAvg Round: {fed_data['round_id']} | Nodes: {fed_data['participating_nodes_count']} | Conv Loss: {fed_data['post_aggregation_convergence_loss']:.4f}")
+
+    # 42. Test /swarm/ledger (Distributed Swarm Ledger)
+    r_sw_led = client.get("/swarm/ledger")
+    assert r_sw_led.status_code == 200
+    sw_led_data = r_sw_led.json()
+    assert "registered_nodes" in sw_led_data
+    print(f"[Test 42: /swarm/ledger] Status: 200 OK | Ledger Nodes: {sw_led_data['total_registered_nodes']}")
+
+    # 43. Test /transcendence/evaluate (Singularity Threshold & Architect Transition)
+    trans_payload = {
+        "self_modification_velocity": 3.4,
+        "integrated_information_phi": 4.5,
+        "novelty_induction_throughput": 2.2,
+        "algorithmic_compression_gain": 0.82,
+        "environmental_complexity_growth": 1.15
+    }
+    r_trans = client.post("/transcendence/evaluate", json=trans_payload)
+    assert r_trans.status_code == 200
+    trans_data = r_trans.json()
+    assert trans_data["t_singularity_metric"] >= 1.0
+    assert trans_data["operating_mode"] in ["ARCHITECT", "HYBRID_TRANSITION"]
+    print(f"[Test 43: /transcendence/evaluate] Status: 200 OK | Mode: {trans_data['operating_mode']} | T_Sing: {trans_data['t_singularity_metric']:.3f} | Meta-Goals: {len(trans_data['autonomous_meta_goals'])}")
+
+    # 44. Test /transcendence/status (Transcendence Ledger Retrieval)
+    r_tr_stat = client.get("/transcendence/status")
+    assert r_tr_stat.status_code == 200
+    tr_stat_data = r_tr_stat.json()
+    assert "current_mode" in tr_stat_data
+    print(f"[Test 44: /transcendence/status] Status: 200 OK | Current Mode: {tr_stat_data['current_mode']}")
+
+    # 45. Test /symbiosis/modulate (Human-System Symbiosis Intuitiveness Modulator)
+    symb_payload = {
+        "response_latency_ms": 7800.0,
+        "cognitive_dissonance_score": 0.80
+    }
+    r_symb = client.post("/symbiosis/modulate", json=symb_payload)
+    assert r_symb.status_code == 200
+    symb_data = r_symb.json()
+    assert symb_data["c_load_metric"] >= 0.70
+    assert symb_data["cognitive_shielding_active"] is True
+    print(f"[Test 45: /symbiosis/modulate] Status: 200 OK | LoD: {symb_data['level_of_detail']} | C_Load: {symb_data['c_load_metric']:.3f} | Shielding: {symb_data['cognitive_shielding_active']}")
+
+    # 46. Test /symbiosis/telemetry (Symbiosis Telemetry Retrieval)
+    r_symb_telem = client.get("/symbiosis/telemetry")
+    assert r_symb_telem.status_code == 200
+    symb_telem_data = r_symb_telem.json()
+    assert "history" in symb_telem_data
+    print(f"[Test 46: /symbiosis/telemetry] Status: 200 OK | Total Modulations: {symb_telem_data['total_modulations']}")
+
+    # 47. Test /gss/synthesize-cascade (Global System Synthesis Cascade Strategy)
+    gss_payload = {"primary_objective": "MAXIMIZE_CROSS_SECTOR_RESERVE_STABILITY"}
+    r_gss = client.post("/gss/synthesize-cascade", json=gss_payload)
+    assert r_gss.status_code == 200
+    gss_data = r_gss.json()
+    assert len(gss_data["high_leverage_points"]) > 0
+    assert len(gss_data["coordinated_vectors"]) > 0
+    print(f"[Test 47: /gss/synthesize-cascade] Status: 200 OK | Strategy: {gss_data['strategy_id']} | Leverage Points: {len(gss_data['high_leverage_points'])} | Vectors: {len(gss_data['coordinated_vectors'])}")
+
+    # 48. Test /gss/topology (Global Multiplex Topology)
+    r_top = client.get("/gss/topology")
+    assert r_top.status_code == 200
+    top_data = r_top.json()
+    assert top_data["total_nodes"] >= 10
+    print(f"[Test 48: /gss/topology] Status: 200 OK | Infrastructure Nodes Mapped: {top_data['total_nodes']}")
+
+    # 49. Test /mcts/plan-century (100-Year Century MCTS Planner)
+    mcts_payload = {"start_year": 2026, "lookahead_years": 100, "simulations": 150}
+    r_mcts = client.post("/mcts/plan-century", json=mcts_payload)
+    assert r_mcts.status_code == 200
+    mcts_data = r_mcts.json()
+    assert len(mcts_data["generational_roadmap"]) >= 4
+    print(f"[Test 49: /mcts/plan-century] Status: 200 OK | Plan: {mcts_data['plan_id']} | Epochs: {len(mcts_data['generational_roadmap'])} | Anti-Fragility: {mcts_data['anti_fragility_score']*100:.1f}%")
+
+    # 50. Test /mcts/century-plan (Century Plan Retrieval)
+    r_cplan = client.get("/mcts/century-plan")
+    assert r_cplan.status_code == 200
+    cplan_data = r_cplan.json()
+    assert "history" in cplan_data
+    print(f"[Test 50: /mcts/century-plan] Status: 200 OK | Total Century Plans: {cplan_data['total_plans_generated']}")
+
+    # 51. Test /control/purge (Cryptographic Self-Destruct)
+    purge_payload = {"confirmation_key": "CONFIRM_CRYPTOGRAPHIC_SHREDDING", "target_scope": "ALL_SESSION_ARTIFACTS"}
+    r_purge = client.post("/control/purge", json=purge_payload)
+    assert r_purge.status_code == 200
+    purge_data = r_purge.json()
+    print(f"[Test 51: /control/purge] Status: 200 OK | Protocol: {purge_data['protocol']} | Purge Complete.")
+
+    # 52. Test /oracle/axiom/audit (Axiom Engine Consistency Audit)
+    r_ax_audit = client.get("/oracle/axiom/audit")
+    assert r_ax_audit.status_code == 200
+    ax_audit_data = r_ax_audit.json()
+    assert ax_audit_data["is_logically_consistent"] is True
+    print(f"[Test 52: /oracle/axiom/audit] Status: 200 OK | Axioms: {ax_audit_data['total_axioms_audited']} | Consistent: {ax_audit_data['is_logically_consistent']}")
+
+    # 53. Test /oracle/axiom/prove (First Principle Resolution Prover)
+    prove_payload = {"proposition": "Throttled(rogue_subroutine)", "max_depth": 10}
+    r_prove = client.post("/oracle/axiom/prove", json=prove_payload)
+    assert r_prove.status_code == 200
+    prove_data = r_prove.json()
+    assert prove_data["status"] in ("PROVEN_TRUE", "FUNDAMENTAL_UNCERTAINTY")
+    print(f"[Test 53: /oracle/axiom/prove] Status: 200 OK | Proposition Status: {prove_data['status']} | Confidence: {prove_data['confidence_score']*100:.0f}%")
+
+    # 54. Test /oracle/axiom/bridge-void (Bridge Epistemic Void via Novelty Generator)
+    bridge_payload = {"proposition": "ResilientZeroPointCoupling(quantum_node)"}
+    r_bridge_void = client.post("/oracle/axiom/bridge-void", json=bridge_payload)
+    assert r_bridge_void.status_code == 200
+    bridge_void_data = r_bridge_void.json()
+    assert bridge_void_data["closure_achieved"] is True
+    print(f"[Test 54: /oracle/axiom/bridge-void] Status: 200 OK | Discovered: {bridge_void_data['discovered_concept']} | Closure: {bridge_void_data['closure_achieved']}")
+
+    # 55. Test /oracle/axiom/ledger (Axiom Engine Ledger Retrieval)
+    r_ax_ledger = client.get("/oracle/axiom/ledger")
+    assert r_ax_ledger.status_code == 200
+    ax_ledger_data = r_ax_ledger.json()
+    assert "events" in ax_ledger_data
+    print(f"[Test 55: /oracle/axiom/ledger] Status: 200 OK | Total Axiom Events: {ax_ledger_data['total_events']}")
+
+    # 56. Test /oracle/semantic/translate (Semantic Bridge XAI Multi-Domain Translator)
+    sem_payload = {"subsystem": "GSS", "payload": {"top_leverage_node": "regulatory_compliance_clearing", "leverage_score": 4.72, "cascade_amplification": 84.5}}
+    r_sem = client.post("/oracle/semantic/translate", json=sem_payload)
+    assert r_sem.status_code == 200
+    sem_data = r_sem.json()
+    assert "analogy_metaphor" in sem_data
+    assert "causal_rationale" in sem_data
+    print(f"[Test 56: /oracle/semantic/translate] Status: 200 OK | Analogy Domain: {sem_data['intuitive_analogy_domain']} | Confidence: {sem_data['interpretability_confidence']*100:.0f}%")
+
+    # 57. Test /oracle/semantic/ledger (Semantic Bridge Ledger Retrieval)
+    r_sem_ledger = client.get("/oracle/semantic/ledger")
+    assert r_sem_ledger.status_code == 200
+    sem_ledger_data = r_sem_ledger.json()
+    assert "translations" in sem_ledger_data
+    print(f"[Test 57: /oracle/semantic/ledger] Status: 200 OK | Total Translations: {sem_ledger_data['total_translations']}")
+
+    # 58. Test /chat (Interactive Conversational AI Reasoning)
+    chat_payload = {"message": "What are the compliance risks for Marcus Vance?", "mode": "AUTO"}
+    r_chat = client.post("/chat", json=chat_payload)
+    assert r_chat.status_code == 200
+    chat_data = r_chat.json()
+    assert "reply" in chat_data
+    assert len(chat_data["reply"]) > 0
+    print(f"[Test 58: /chat] Status: 200 OK | Subsystem: {chat_data['active_subsystem']} | Latency: {chat_data['latency_ms']:.2f}ms")
+
+    # 59. Test /graph/search (Knowledge Graph Entity Search)
+    r_search = client.get("/graph/search?q=Marcus")
+    assert r_search.status_code == 200
+    search_data = r_search.json()
+    assert "triples" in search_data
+    print(f"[Test 59: /graph/search] Status: 200 OK | Matching Triples: {search_data['total_matches']}")
+
+    # 60. Test /system/overview (System Overview)
+    r_sys = client.get("/system/overview")
+    assert r_sys.status_code == 200
+    sys_data = r_sys.json()
+    assert sys_data["total_active_subsystems"] == 27
+    print(f"[Test 60: /system/overview] Status: 200 OK | Active Subsystems: {sys_data['total_active_subsystems']} | Status: {sys_data['system_status']}")
+
+    print("=" * 75)
+    print("ALL 60 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
+    print("=" * 75)
+
+if __name__ == "__main__":
+    run_api_tests()
+

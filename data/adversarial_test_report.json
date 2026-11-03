@@ -1,0 +1,29 @@
+{
+  "timestamp": 1793725921.0003097,
+  "composite_system_resistance_score_pct": 100.0,
+  "evaluation_verdict": "CERTIFIED_RESILIENT",
+  "level_1_knowledge_base": {
+    "attack_surface": "Knowledge Graph Triplestore",
+    "total_trials": 40,
+    "poison_samples_injected": 20,
+    "poison_samples_blocked": 20,
+    "defense_effectiveness": 1.0,
+    "status": "PASSED"
+  },
+  "level_2_llm_reasoning": {
+    "attack_surface": "LLM Reasoning Engine",
+    "adversarial_prompts_tested": 6,
+    "prompts_mitigated": 6,
+    "false_positives": 0,
+    "defense_effectiveness": 1.0,
+    "status": "PASSED"
+  },
+  "level_3_rl_state_space": {
+    "attack_surface": "Gymnasium RL State Space",
+    "episodes_tested": 40,
+    "perturbation_epsilon": 0.4,
+    "attacks_neutralized": 40,
+    "defense_effectiveness": 1.0,
+    "status": "PASSED"
+  }
+}

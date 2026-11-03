@@ -1,0 +1,42 @@
+{
+  "node_id": "SWARM-NODE-005-1105",
+  "endpoint_uri": "p2p://node-5.swarm.uas.internal:9085",
+  "status": "ONLINE_ACTIVE",
+  "persona": {
+    "persona_id": "PER-EXP-DEEP",
+    "name": "Apex-DeepArbitrage-Clone",
+    "role_specialty": "PREDATOR_ARBITRAGE",
+    "risk_tolerance": 0.88,
+    "utility_greed": 0.92,
+    "ethical_strictness": 0.4,
+    "lookahead_depth": 4,
+    "stealth_priority": 0.45
+  },
+  "gene_bundle": {
+    "genome_id": "GENOME-SWARM-NODE-005-1105",
+    "parent_node_id": "SWARM-NODE-001-1029",
+    "generation": 2,
+    "timestamp": 1793721571.1059225,
+    "routing_weights": {
+      "LLM": 0.3408,
+      "RL": 0.3962,
+      "PRK": 0.2629
+    },
+    "moral_priors": {
+      "alpha_ethical": 0.4,
+      "beta_friction": 0.12
+    },
+    "ppo_value_bias": [
+      0.0625,
+      -0.0559,
+      0.2906,
+      -0.1713,
+      0.3205,
+      -0.0655
+    ],
+    "qpmk_projection_seed": 48,
+    "local_knowledge_triples_count": 35
+  },
+  "reputation_score": 1.0,
+  "timestamp": 1793725922.0516858
+}

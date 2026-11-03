@@ -1,0 +1,90 @@
+{
+  "system": "Apex Human-System Symbiosis Ledger",
+  "total_modulations": 12,
+  "history": [
+    {
+      "timestamp": 1793722124.7438595,
+      "level_of_detail": "LOD_2_TACTICAL_SUMMARY",
+      "c_load": 0.5331,
+      "shielding": false,
+      "headline": "Consensus Approved (CONSENSUS_APPROVED) | Risk: 14.2% | Yield: $68,500"
+    },
+    {
+      "timestamp": 1793722124.757462,
+      "level_of_detail": "LOD_1_EXECUTIVE_DIRECTIVE",
+      "c_load": 0.9593,
+      "shielding": true,
+      "headline": "PROCEED WITH ACTION: Risk is 14.2% (LOW). Expected yield $68,500."
+    },
+    {
+      "timestamp": 1793722443.7876034,
+      "level_of_detail": "LOD_1_EXECUTIVE_DIRECTIVE",
+      "c_load": 0.9556,
+      "shielding": true,
+      "headline": "PROCEED WITH ACTION: Risk is 12.5% (LOW). Expected yield $54,000."
+    },
+    {
+      "timestamp": 1793722474.1479688,
+      "level_of_detail": "LOD_1_EXECUTIVE_DIRECTIVE",
+      "c_load": 0.9561,
+      "shielding": true,
+      "headline": "PROCEED WITH ACTION: Risk is 11.5% (LOW). Expected yield $72,000."
+    },
+    {
+      "timestamp": 1793722497.39786,
+      "level_of_detail": "LOD_2_TACTICAL_SUMMARY",
+      "c_load": 0.5331,
+      "shielding": false,
+      "headline": "Consensus Approved (CONSENSUS_APPROVED) | Risk: 14.2% | Yield: $68,500"
+    },
+    {
+      "timestamp": 1793722497.413758,
+      "level_of_detail": "LOD_1_EXECUTIVE_DIRECTIVE",
+      "c_load": 0.9593,
+      "shielding": true,
+      "headline": "PROCEED WITH ACTION: Risk is 14.2% (LOW). Expected yield $68,500."
+    },
+    {
+      "timestamp": 1793723944.2033954,
+      "level_of_detail": "LOD_1_EXECUTIVE_DIRECTIVE",
+      "c_load": 0.9556,
+      "shielding": true,
+      "headline": "PROCEED WITH ACTION: Risk is 12.5% (LOW). Expected yield $54,000."
+    },
+    {
+      "timestamp": 1793723973.3840604,
+      "level_of_detail": "LOD_1_EXECUTIVE_DIRECTIVE",
+      "c_load": 0.9561,
+      "shielding": true,
+      "headline": "PROCEED WITH ACTION: Risk is 11.5% (LOW). Expected yield $72,000."
+    },
+    {
+      "timestamp": 1793724429.3835766,
+      "level_of_detail": "LOD_1_EXECUTIVE_DIRECTIVE",
+      "c_load": 0.9556,
+      "shielding": true,
+      "headline": "PROCEED WITH ACTION: Risk is 12.5% (LOW). Expected yield $54,000."
+    },
+    {
+      "timestamp": 1793724533.7072532,
+      "level_of_detail": "LOD_1_EXECUTIVE_DIRECTIVE",
+      "c_load": 0.9561,
+      "shielding": true,
+      "headline": "PROCEED WITH ACTION: Risk is 11.5% (LOW). Expected yield $72,000."
+    },
+    {
+      "timestamp": 1793725910.8552577,
+      "level_of_detail": "LOD_1_EXECUTIVE_DIRECTIVE",
+      "c_load": 0.9556,
+      "shielding": true,
+      "headline": "PROCEED WITH ACTION: Risk is 12.5% (LOW). Expected yield $54,000."
+    },
+    {
+      "timestamp": 1793725922.082537,
+      "level_of_detail": "LOD_1_EXECUTIVE_DIRECTIVE",
+      "c_load": 0.9561,
+      "shielding": true,
+      "headline": "PROCEED WITH ACTION: Risk is 11.5% (LOW). Expected yield $72,000."
+    }
+  ]
+}

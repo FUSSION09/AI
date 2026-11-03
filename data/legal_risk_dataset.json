@@ -1,0 +1,23 @@
+[
+  {
+    "instruction": "Analyze the following transactional behavior and determine statutory compliance or risk flags under federal banking laws.",
+    "input": "Entity X executes three successive wire transfers of $9,950, $9,900, and $9,850 to an offshore shell entity across 48 hours without business justification.",
+    "output": "Assessment: High Risk / Presumptive Structuring (Smurfing).\nStatute Violated: 31 U.S.C. 5324 (Structuring transactions to evade reporting requirement).\nRequired Action: File Suspicious Activity Report (SAR) under FinCEN guidelines; escalate to Anti-Money Laundering (AML) compliance officer."
+  },
+  {
+    "instruction": "Evaluate the contractual indemnification and liability clause under Delaware General Corporation Law.",
+    "input": "Clause 14.2: Director shall be indemnified by the Corporation against all claims arising from bad faith or deliberate breach of duty of loyalty.",
+    "output": "Assessment: Legally Unenforceable.\nStatutory Context: Delaware General Corporation Law (DGCL) § 102(b)(7).\nRationale: DGCL explicitly prohibits the exculpation or indemnification of directors for breaches of the duty of loyalty or acts not in good faith."
+  },
+  {
+    "instruction": "Identify regulatory disclosure obligations under SEC securities regulation.",
+    "input": "Public Company Z experiences a material cybersecurity breach affecting proprietary source code and 50,000 customer accounts. Board discusses whether disclosure is required.",
+    "output": "Assessment: Mandatory Disclosure Required.\nStatute/Rule: SEC Form 8-K Item 1.05 (Material Cybersecurity Incidents).\nTimeline: Form 8-K must be filed within four business days of determining materiality."
+  },
+  {
+    "instruction": "Perform legal risk analysis on corporate cross-border payments.",
+    "input": "Subsidiary makes an unrecorded $50,000 payment categorized as 'consulting fees' to a foreign customs official to expedite import clearance.",
+    "output": "Assessment: Illegal / Severe Violation.\nStatutory Context: Foreign Corrupt Practices Act (FCPA) 15 U.S.C. § 78dd-1 (Anti-Bribery Provisions) and § 78m(b)(2) (Books and Records Provisions).\nRisk Rating: Critical liability for both individual actors and parent corporate entity."
+  }
+]
+

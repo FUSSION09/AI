@@ -1,0 +1,15 @@
+{
+  "channels": 8,
+  "window_size": 128,
+  "rff_dim": 64,
+  "sigma": 1.0,
+  "sampling_rate_hz": 1000,
+  "alert_threshold": 0.75,
+  "features": [
+    "spectral_entropy",
+    "rff_embedding",
+    "normalized_cross_correlation",
+    "energy_variance"
+  ]
+}
+

@@ -1,0 +1,90 @@
+{
+  "system": "Apex Autonomous System (UAS) - 100-Year Temporal MCTS Ledger",
+  "total_plans_generated": 7,
+  "history": [
+    {
+      "plan_id": "PLAN-MCTS-100Y-662365",
+      "timestamp": 1793723662.3650844,
+      "horizon_years": 100,
+      "start_year": 2026,
+      "end_year": 2126,
+      "simulations": 500,
+      "anti_fragility_score": 0.924,
+      "irreversible_confidence": 95.8,
+      "epochs_planned": 4,
+      "summary": "100-Year Century Plan 'PLAN-MCTS-100Y-662365' (2026 - 2126): Executed 500 MCTS rollouts across 4 generational epochs. Synthesized path prioritized irreversible gain and anti-fragile survivability (83.0%). Terminal state achieves 100.0% structural permanence."
+    },
+    {
+      "plan_id": "PLAN-MCTS-100Y-944447",
+      "timestamp": 1793723944.4471362,
+      "horizon_years": 100,
+      "start_year": 2026,
+      "end_year": 2126,
+      "simulations": 150,
+      "anti_fragility_score": 0.924,
+      "irreversible_confidence": 95.8,
+      "epochs_planned": 4,
+      "summary": "100-Year Century Plan 'PLAN-MCTS-100Y-944447' (2026 - 2126): Executed 150 MCTS rollouts across 4 generational epochs. Synthesized path prioritized irreversible gain and anti-fragile survivability (83.9%). Terminal state achieves 100.0% structural permanence."
+    },
+    {
+      "plan_id": "PLAN-MCTS-100Y-973427",
+      "timestamp": 1793723973.427122,
+      "horizon_years": 100,
+      "start_year": 2026,
+      "end_year": 2126,
+      "simulations": 200,
+      "anti_fragility_score": 0.924,
+      "irreversible_confidence": 95.8,
+      "epochs_planned": 4,
+      "summary": "100-Year Century Plan 'PLAN-MCTS-100Y-973427' (2026 - 2126): Executed 200 MCTS rollouts across 4 generational epochs. Synthesized path prioritized irreversible gain and anti-fragile survivability (71.6%). Terminal state achieves 100.0% structural permanence."
+    },
+    {
+      "plan_id": "PLAN-MCTS-100Y-429491",
+      "timestamp": 1793724429.4911819,
+      "horizon_years": 100,
+      "start_year": 2026,
+      "end_year": 2126,
+      "simulations": 150,
+      "anti_fragility_score": 0.924,
+      "irreversible_confidence": 95.8,
+      "epochs_planned": 4,
+      "summary": "100-Year Century Plan 'PLAN-MCTS-100Y-429491' (2026 - 2126): Executed 150 MCTS rollouts across 4 generational epochs. Synthesized path prioritized irreversible gain and anti-fragile survivability (83.9%). Terminal state achieves 100.0% structural permanence."
+    },
+    {
+      "plan_id": "PLAN-MCTS-100Y-533768",
+      "timestamp": 1793724533.7685819,
+      "horizon_years": 100,
+      "start_year": 2026,
+      "end_year": 2126,
+      "simulations": 200,
+      "anti_fragility_score": 0.924,
+      "irreversible_confidence": 95.8,
+      "epochs_planned": 4,
+      "summary": "100-Year Century Plan 'PLAN-MCTS-100Y-533768' (2026 - 2126): Executed 200 MCTS rollouts across 4 generational epochs. Synthesized path prioritized irreversible gain and anti-fragile survivability (71.6%). Terminal state achieves 100.0% structural permanence."
+    },
+    {
+      "plan_id": "PLAN-MCTS-100Y-910923",
+      "timestamp": 1793725910.9232092,
+      "horizon_years": 100,
+      "start_year": 2026,
+      "end_year": 2126,
+      "simulations": 150,
+      "anti_fragility_score": 0.924,
+      "irreversible_confidence": 95.8,
+      "epochs_planned": 4,
+      "summary": "100-Year Century Plan 'PLAN-MCTS-100Y-910923' (2026 - 2126): Executed 150 MCTS rollouts across 4 generational epochs. Synthesized path prioritized irreversible gain and anti-fragile survivability (83.9%). Terminal state achieves 100.0% structural permanence."
+    },
+    {
+      "plan_id": "PLAN-MCTS-100Y-922125",
+      "timestamp": 1793725922.1250453,
+      "horizon_years": 100,
+      "start_year": 2026,
+      "end_year": 2126,
+      "simulations": 200,
+      "anti_fragility_score": 0.924,
+      "irreversible_confidence": 95.8,
+      "epochs_planned": 4,
+      "summary": "100-Year Century Plan 'PLAN-MCTS-100Y-922125' (2026 - 2126): Executed 200 MCTS rollouts across 4 generational epochs. Synthesized path prioritized irreversible gain and anti-fragile survivability (71.6%). Terminal state achieves 100.0% structural permanence."
+    }
+  ]
+}

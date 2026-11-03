@@ -1,0 +1,1112 @@
+{
+  "DAO-PROP-1C39A5D3": {
+    "proposal_id": "DAO-PROP-1C39A5D3",
+    "proposer": "0x99ABc70a56A3206696D0fDbD223f9810dd189f75",
+    "title": "APEX Treasury Strategy: Strategic Bitcoin Reserve Allocation",
+    "description": "Allocate $162,000 from autonomous treasury to strategic spot Bitcoin reserve.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 2.5,
+        "price": 64800.0
+      }
+    },
+    "votes_for": 165000.0,
+    "votes_against": 0.0,
+    "quorum_required": 150000.0,
+    "start_time": 1793712632.5700805,
+    "voting_period_sec": 3600.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "91a3023ca640d74a587bb9dc8d481539e3873928cfb5a850e26035c002ab932720fecd1a2da7eb0a9f8aaab2faa8bd5a0ec161db2e0803fabdec1b8ab55539c31b",
+    "voters": {
+      "0x61a8271C13f84fD4dF3bdD6fA1E7E49282EFf4fB": {
+        "support": true,
+        "weight": 90000.0,
+        "timestamp": 1793712632.5759916
+      },
+      "0x5B6b0687c958b9c2139d3B911D847AF44a9aa70F": {
+        "support": true,
+        "weight": 75000.0,
+        "timestamp": 1793712632.5819743
+      }
+    }
+  },
+  "DAO-PROP-1D677396": {
+    "proposal_id": "DAO-PROP-1D677396",
+    "proposer": "0x54E96ffe674CE10eEB4E13D194cb2a54FBEC65a7",
+    "title": "Decentralized Autonomous Treasury Balancing",
+    "description": "Autonomous reallocation ratified by token-weighted peer quorum.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.5,
+        "price": 64000.0
+      }
+    },
+    "votes_for": 55000.0,
+    "votes_against": 0.0,
+    "quorum_required": 50000.0,
+    "start_time": 1793712721.9455876,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "2071047ad9b240fea21e139166a3c9ce334cd60f4907633835e5081b20c506614b6c81499bef9cd2fbc66cba9c29dbac267b58edca682603bdcf4ce87d098a761c",
+    "voters": {
+      "0x5f480C397FA1FA3be86104FF89745F60A73f969F": {
+        "support": true,
+        "weight": 30000.0,
+        "timestamp": 1793712721.9525833
+      },
+      "0x6462aA23A7C5a3a45F29D410ee7D46e86a04BFc5": {
+        "support": true,
+        "weight": 25000.0,
+        "timestamp": 1793712721.9525833
+      }
+    }
+  },
+  "DAO-PROP-3561E335": {
+    "proposal_id": "DAO-PROP-3561E335",
+    "proposer": "0xE181561A2D06309DCb62fdFAc7e96A07818Ace82",
+    "title": "Decentralized Liquidity Expansion",
+    "description": "Expand liquidity pool allocation across cross-border settlement rails.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.1,
+        "price": 64500.0
+      }
+    },
+    "votes_for": 12000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793712930.6896164,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "6c78603992a204b8d56bd36092b3c72f6fdcaac1e19606ed28497c4ca011001d1874deabd4ce6ffe806b3067ad8401e741212ee4cec1345e4f85d40da388211d1b",
+    "voters": {
+      "0x1234567890abcdef1234567890abcdef12345678": {
+        "support": true,
+        "weight": 12000.0,
+        "timestamp": 1793712930.6937706
+      }
+    }
+  },
+  "DAO-PROP-3FE3E87D": {
+    "proposal_id": "DAO-PROP-3FE3E87D",
+    "proposer": "0x68F4fa2Cc01d2093BdCF07ae6a70A4A524d7cFa9",
+    "title": "Decentralized Autonomous Treasury Balancing",
+    "description": "Autonomous reallocation ratified by token-weighted peer quorum.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.5,
+        "price": 64000.0
+      }
+    },
+    "votes_for": 55000.0,
+    "votes_against": 0.0,
+    "quorum_required": 50000.0,
+    "start_time": 1793712963.3312564,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "760eb7c87f50459fa50b31ede3b9858581ea009ebc104a0b82e71a9d10eec1410b4b648b5f84631433baef7373f95ef44159e5f1dfd9f11d068b79fa7462830f1b",
+    "voters": {
+      "0xa4378aC50b0C40aFf10433b180fe74EFfD7144E9": {
+        "support": true,
+        "weight": 30000.0,
+        "timestamp": 1793712963.3352623
+      },
+      "0x37B93807DfF851061eE1705B1FcdBf8a5927Ed8c": {
+        "support": true,
+        "weight": 25000.0,
+        "timestamp": 1793712963.3352623
+      }
+    }
+  },
+  "DAO-PROP-3C38095E": {
+    "proposal_id": "DAO-PROP-3C38095E",
+    "proposer": "0x5177a1540DFb324EEcB98177343FD505c37234b7",
+    "title": "Decentralized Autonomous Treasury Balancing",
+    "description": "Autonomous reallocation ratified by token-weighted peer quorum.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.5,
+        "price": 64000.0
+      }
+    },
+    "votes_for": 55000.0,
+    "votes_against": 0.0,
+    "quorum_required": 50000.0,
+    "start_time": 1793713152.6801536,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "7fb716eda559e258d6e49362a5f718990c13ed0d5842ab0111c7cf9e64ffb6257c89e3828bccb1ef450298035c9ec0340faf6eb65a6a008bc6c9a861a21264651c",
+    "voters": {
+      "0x4c511a2bd776E8f202A57532360e7A89B06FfDCc": {
+        "support": true,
+        "weight": 30000.0,
+        "timestamp": 1793713152.6866918
+      },
+      "0xB435E413d2aA38f7072F870aB46a97DD3B1F6cBA": {
+        "support": true,
+        "weight": 25000.0,
+        "timestamp": 1793713152.687707
+      }
+    }
+  },
+  "DAO-PROP-DA7B2B52": {
+    "proposal_id": "DAO-PROP-DA7B2B52",
+    "proposer": "0xC3830F1cF17362E0AF844FB1b732Ac0650C01ED1",
+    "title": "Decentralized Autonomous Treasury Balancing",
+    "description": "Autonomous reallocation ratified by token-weighted peer quorum.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.5,
+        "price": 64000.0
+      }
+    },
+    "votes_for": 55000.0,
+    "votes_against": 0.0,
+    "quorum_required": 50000.0,
+    "start_time": 1793713438.1273673,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "90fa1537c45f82544c36c520d9ece8ce4dbd24f7ac5a8a271e8cbc9e72294b174fe1de768349da7203b51136dc9b506bcd0cd628381470a726067f35a9ac4cd71c",
+    "voters": {
+      "0xfb8de36EF29c5a18b17879cb1Eef6F0aEE7D225C": {
+        "support": true,
+        "weight": 30000.0,
+        "timestamp": 1793713438.1323626
+      },
+      "0x00b6D486f6F39927720b3a811Def9A27f72c6d3e": {
+        "support": true,
+        "weight": 25000.0,
+        "timestamp": 1793713438.1323626
+      }
+    }
+  },
+  "DAO-PROP-F6802492": {
+    "proposal_id": "DAO-PROP-F6802492",
+    "proposer": "0x34D1e12DD69cf45f9630320ecBC14fAb4AF530e4",
+    "title": "Decentralized Liquidity Expansion",
+    "description": "Expand liquidity pool allocation across cross-border settlement rails.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.1,
+        "price": 64500.0
+      }
+    },
+    "votes_for": 12000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793713444.1889083,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "8bb0ecbbee87140174d0bda208115efaf25f1d4bcafb05086fc56c8c92c9314e06f47bf2651d2df02d3d2e7933aeae981a0dd7804f2a0278d8f996ff712012321c",
+    "voters": {
+      "0x1234567890abcdef1234567890abcdef12345678": {
+        "support": true,
+        "weight": 12000.0,
+        "timestamp": 1793713444.1959097
+      }
+    }
+  },
+  "DAO-PROP-B79A585F": {
+    "proposal_id": "DAO-PROP-B79A585F",
+    "proposer": "0x2d2a92718202dbca03823Beb04f868B976699a73",
+    "title": "Decentralized Autonomous Treasury Balancing",
+    "description": "Autonomous reallocation ratified by token-weighted peer quorum.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.5,
+        "price": 64000.0
+      }
+    },
+    "votes_for": 55000.0,
+    "votes_against": 0.0,
+    "quorum_required": 50000.0,
+    "start_time": 1793713538.5254176,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "d18f812505f24c3b128358ef403bec19817c9e32a10f59e77ade34f3b78e0d820681ad465ee7b1ee0248980456d7ea8262f8a278e6c8f42aad6ef4ec956578801c",
+    "voters": {
+      "0x7C4ce2bf67dbE888e1B94f0fbAa8A28018dFaD72": {
+        "support": true,
+        "weight": 30000.0,
+        "timestamp": 1793713538.5330007
+      },
+      "0x121512d67b1998EE953f50f54a46c01bC61A001c": {
+        "support": true,
+        "weight": 25000.0,
+        "timestamp": 1793713538.5350034
+      }
+    }
+  },
+  "DAO-PROP-3A9CA248": {
+    "proposal_id": "DAO-PROP-3A9CA248",
+    "proposer": "0x5bf091CEd5f2b6B0C667c551e3Ce25d61618FF39",
+    "title": "Decentralized Liquidity Expansion",
+    "description": "Expand liquidity pool allocation across cross-border settlement rails.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.1,
+        "price": 64500.0
+      }
+    },
+    "votes_for": 12000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793713888.8608694,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "dc1d4ad5431aafe9a10e6d9cca70a733ae13b94bd30d205d52edaa6f198fa80c3bb3cf181dbf382603fd9ae563b78d5aa3a1be96ecdc4dae7be08918638ca5321c",
+    "voters": {
+      "0x1234567890abcdef1234567890abcdef12345678": {
+        "support": true,
+        "weight": 12000.0,
+        "timestamp": 1793713888.8693848
+      }
+    }
+  },
+  "DAO-PROP-CEC30E89": {
+    "proposal_id": "DAO-PROP-CEC30E89",
+    "proposer": "0x6dB633c055F30fD3dF739BD7133B703bA3a06B6a",
+    "title": "Decentralized Liquidity Expansion",
+    "description": "Expand liquidity pool allocation across cross-border settlement rails.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.1,
+        "price": 64500.0
+      }
+    },
+    "votes_for": 12000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793713906.5312686,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "4472eec45a3450ae90bab98f3ab890f686acd83e8ac883836403bd97345ee5931c4c22cff2d965bb9d33d43377381ed810f09b46668b59a6a6fd0a3c81bbed311b",
+    "voters": {
+      "0x1234567890abcdef1234567890abcdef12345678": {
+        "support": true,
+        "weight": 12000.0,
+        "timestamp": 1793713906.5387747
+      }
+    }
+  },
+  "DAO-PROP-28CFE6DB": {
+    "proposal_id": "DAO-PROP-28CFE6DB",
+    "proposer": "0xd1418E966cf5C771A52d87DDa7BE45c36C3C4AbD",
+    "title": "Decentralized Autonomous Treasury Balancing",
+    "description": "Autonomous reallocation ratified by token-weighted peer quorum.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.5,
+        "price": 64000.0
+      }
+    },
+    "votes_for": 55000.0,
+    "votes_against": 0.0,
+    "quorum_required": 50000.0,
+    "start_time": 1793714012.2357094,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "6210dac0c98cfe6e01db8e9b64f1860a862f82c92f36acf4d9db7acd51c3cf7e7c160da3ffe03d38c8afbc264ce314e6cda85b6eb111de5bbc92f3886e8b740b1c",
+    "voters": {
+      "0x1973283Ef7805ac450B7069397860a94179D5997": {
+        "support": true,
+        "weight": 30000.0,
+        "timestamp": 1793714012.2452443
+      },
+      "0xb42a34EabB5FE600B2AaC766fb06cf2b854e84a5": {
+        "support": true,
+        "weight": 25000.0,
+        "timestamp": 1793714012.2462432
+      }
+    }
+  },
+  "DAO-PROP-BBC3E995": {
+    "proposal_id": "DAO-PROP-BBC3E995",
+    "proposer": "0xba45D52Ef1bA6271d23E6837efD6DC56F6Ce237F",
+    "title": "Decentralized Autonomous Treasury Balancing",
+    "description": "Autonomous reallocation ratified by token-weighted peer quorum.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.5,
+        "price": 64000.0
+      }
+    },
+    "votes_for": 55000.0,
+    "votes_against": 0.0,
+    "quorum_required": 50000.0,
+    "start_time": 1793714070.5189493,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "db7f1cbda25532814d61307e587df70c39969a95cbba808967bff12dda72e1b222e295f3a8c9feb869ebdc2980a0a496182bbea1184c8759fe1853a493fbda691b",
+    "voters": {
+      "0x3579b073f7B8e54ea8304969D0F1bC985A622BAb": {
+        "support": true,
+        "weight": 30000.0,
+        "timestamp": 1793714070.5229788
+      },
+      "0x362506CD200091268B685a79a417cA63628F863E": {
+        "support": true,
+        "weight": 25000.0,
+        "timestamp": 1793714070.5239742
+      }
+    }
+  },
+  "DAO-PROP-24BAE7C1": {
+    "proposal_id": "DAO-PROP-24BAE7C1",
+    "proposer": "0x8190f28b89dD9b11b74Afc19f6cF8F548d5fac26",
+    "title": "Decentralized Liquidity Expansion",
+    "description": "Expand liquidity pool allocation across cross-border settlement rails.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.1,
+        "price": 64500.0
+      }
+    },
+    "votes_for": 12000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793714413.210036,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "8fc273cc24a6913a866e58c577f862c793344716669852b340822b72b6ca39e406cf18830c166b2275508df957efb470b764f6704a7929532dd0f3f1ae6f0e841c",
+    "voters": {
+      "0x1234567890abcdef1234567890abcdef12345678": {
+        "support": true,
+        "weight": 12000.0,
+        "timestamp": 1793714413.2168715
+      }
+    }
+  },
+  "DAO-PROP-23C94C34": {
+    "proposal_id": "DAO-PROP-23C94C34",
+    "proposer": "0x4b14Cf2658162871115E10C71bA6ba145450A913",
+    "title": "Decentralized Autonomous Treasury Balancing",
+    "description": "Autonomous reallocation ratified by token-weighted peer quorum.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.5,
+        "price": 64000.0
+      }
+    },
+    "votes_for": 55000.0,
+    "votes_against": 0.0,
+    "quorum_required": 50000.0,
+    "start_time": 1793714512.756114,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "05cc018227dcda4635fa2ce16aa34e8848735e7e9db0a1b602a60e5964b7d95e1f9e2ca703f36be0d31195fd73d6b7bdfe2d34dbdea2e8c62a42f1400b8ff0811b",
+    "voters": {
+      "0x1500513e7272764CFFd771A55861445882612A93": {
+        "support": true,
+        "weight": 30000.0,
+        "timestamp": 1793714512.7837088
+      },
+      "0x25bc1a1d5187e5A176A1C93ef62FcBB2F70525fd": {
+        "support": true,
+        "weight": 25000.0,
+        "timestamp": 1793714512.7873533
+      }
+    }
+  },
+  "DAO-PROP-AA45B352": {
+    "proposal_id": "DAO-PROP-AA45B352",
+    "proposer": "0xcbbC502a127DEe273C9505959924bB0CB0171B9b",
+    "title": "Decentralized Liquidity Expansion",
+    "description": "Expand liquidity pool allocation across cross-border settlement rails.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.1,
+        "price": 64500.0
+      }
+    },
+    "votes_for": 12000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793719671.7270849,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "52c4f7a0348bae108097a557b9aacb7db4bf3a56534ff0915a5d62af50f16f673343e83d5a95d018a921b467695b6b0101a7db2c7bb59e4b8178e57703b116511c",
+    "voters": {
+      "0x1234567890abcdef1234567890abcdef12345678": {
+        "support": true,
+        "weight": 12000.0,
+        "timestamp": 1793719671.7508008
+      }
+    }
+  },
+  "DAO-PROP-17322866": {
+    "proposal_id": "DAO-PROP-17322866",
+    "proposer": "0x0D9c0Fdb9B628ba34b81798Ac7fe96D346670F12",
+    "title": "Decentralized Liquidity Expansion",
+    "description": "Expand liquidity pool allocation across cross-border settlement rails.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.1,
+        "price": 64500.0
+      }
+    },
+    "votes_for": 12000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793719761.928377,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "cb9d351c9538e7340370063a13ff78931ab54b51a4b19c19e787f46125fb81465ec98b77b6e17757e818d7877c0f485032335aa800d3a25845838e49732b9d4a1c",
+    "voters": {
+      "0x1234567890abcdef1234567890abcdef12345678": {
+        "support": true,
+        "weight": 12000.0,
+        "timestamp": 1793719761.9569838
+      }
+    }
+  },
+  "DAO-PROP-7676062B": {
+    "proposal_id": "DAO-PROP-7676062B",
+    "proposer": "0x36e3B81EC3AD8e499f4DBeCC2eB6e2382dbb0f14",
+    "title": "Decentralized Autonomous Treasury Balancing",
+    "description": "Autonomous reallocation ratified by token-weighted peer quorum.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.5,
+        "price": 64000.0
+      }
+    },
+    "votes_for": 55000.0,
+    "votes_against": 0.0,
+    "quorum_required": 50000.0,
+    "start_time": 1793719945.3214946,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "ddf97f4af6d4942d16ffaacc3b24af2d2fb1cbc814720a10e82b0b82793caa677fc92098d4b13be5359e9470ae3380d891d118e715994cc54577dec071a0468d1c",
+    "voters": {
+      "0x3ED1Ab98fFAa6537AC4a1beEb0c1ded44523B2fa": {
+        "support": true,
+        "weight": 30000.0,
+        "timestamp": 1793719945.348999
+      },
+      "0xb9fDFbda65EcE2f5499FBfAb633886DaB8Ee1eba": {
+        "support": true,
+        "weight": 25000.0,
+        "timestamp": 1793719945.353994
+      }
+    }
+  },
+  "DAO-PROP-B02DEDD7": {
+    "proposal_id": "DAO-PROP-B02DEDD7",
+    "proposer": "0x27c24753fA6A4d665aE5D011C8a728211378F9Ac",
+    "title": "Decentralized Liquidity Expansion",
+    "description": "Expand liquidity pool allocation across cross-border settlement rails.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.1,
+        "price": 64500.0
+      }
+    },
+    "votes_for": 12000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793720226.600783,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "131c25ce43a8369b279eb653c2fc742814c00e851afb5b4c026917d6abf407c5047cdb5a7d872052d3c8e1d1c57a8cce20e9a5fe6b1127687c5eae8ddc878c161b",
+    "voters": {
+      "0x1234567890abcdef1234567890abcdef12345678": {
+        "support": true,
+        "weight": 12000.0,
+        "timestamp": 1793720226.6092956
+      }
+    }
+  },
+  "DAO-PROP-E251632B": {
+    "proposal_id": "DAO-PROP-E251632B",
+    "proposer": "0x87d49E4Eb70cC311d69B4D584da0289E4DE500E5",
+    "title": "Decentralized Liquidity Expansion",
+    "description": "Expand liquidity pool allocation across cross-border settlement rails.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.1,
+        "price": 64500.0
+      }
+    },
+    "votes_for": 12000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793720249.663777,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "96cc2e6b881a614b3ee4dbdf03f98e3ed9ab86584bf4e6fe2746e246a7a8f28b5b475da424b65a5b4050fb234778a91b97a46663bf579bc98ead405e115228f71c",
+    "voters": {
+      "0x1234567890abcdef1234567890abcdef12345678": {
+        "support": true,
+        "weight": 12000.0,
+        "timestamp": 1793720249.672325
+      }
+    }
+  },
+  "DAO-PROP-42BD4AE4": {
+    "proposal_id": "DAO-PROP-42BD4AE4",
+    "proposer": "0x10A305eB7424ca237BE8C019BB83b0e6c934b29e",
+    "title": "Decentralized Autonomous Treasury Balancing",
+    "description": "Autonomous reallocation ratified by token-weighted peer quorum.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.5,
+        "price": 64000.0
+      }
+    },
+    "votes_for": 55000.0,
+    "votes_against": 0.0,
+    "quorum_required": 50000.0,
+    "start_time": 1793720270.5070083,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "81889a765e7c78be0f3e836c686f7d188b1a814a940ed580703af3920239c0582cf0d3a6f3a8c215178092b4c352a1132b7f0450a0c4f6281e0545e08dd63f581c",
+    "voters": {
+      "0x9ec6cE045F4264826378931EE41A88E7B565b700": {
+        "support": true,
+        "weight": 30000.0,
+        "timestamp": 1793720270.51401
+      },
+      "0xC3C1B8831646EF4454DE5C790E504060298B2912": {
+        "support": true,
+        "weight": 25000.0,
+        "timestamp": 1793720270.5150087
+      }
+    }
+  },
+  "DAO-PROP-CB24104B": {
+    "proposal_id": "DAO-PROP-CB24104B",
+    "proposer": "0x276f4EFF36CD967403DC2BA614AfEd09A733929a",
+    "title": "Decentralized Autonomous Treasury Balancing",
+    "description": "Autonomous reallocation ratified by token-weighted peer quorum.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.5,
+        "price": 64000.0
+      }
+    },
+    "votes_for": 55000.0,
+    "votes_against": 0.0,
+    "quorum_required": 50000.0,
+    "start_time": 1793720281.5312512,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "8bf3661233da7718396a4cfbcc60e53eb09df8ace3785f3d23207e2ca4320bf4006fc44fd7e5eb804b8536a510f84562f2940d9d53e3e2ebb4135a583a7a7ecb1c",
+    "voters": {
+      "0x8eE518d698Ff1574a07aa9Ab9eD0c2fF7e25FBac": {
+        "support": true,
+        "weight": 30000.0,
+        "timestamp": 1793720281.5378008
+      },
+      "0xB184C6B06Fe6d66643350861706727F27F369738": {
+        "support": true,
+        "weight": 25000.0,
+        "timestamp": 1793720281.5392847
+      }
+    }
+  },
+  "DAO-PROP-A47C10E6": {
+    "proposal_id": "DAO-PROP-A47C10E6",
+    "proposer": "0x15083550fB145A71cd1FC854Ae006AA8f53267b8",
+    "title": "Decentralized Liquidity Expansion",
+    "description": "Expand liquidity pool allocation across cross-border settlement rails.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.1,
+        "price": 64500.0
+      }
+    },
+    "votes_for": 12000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793720845.3484504,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "d2d42df2c660193c1d58d386560447d78c17e93bcf30a1872c7e1d089faf3e2a6d88df528195827eb99f3f200a8cce0786f15c792e8016eb32a7a9f65ffb731a1c",
+    "voters": {
+      "0x1234567890abcdef1234567890abcdef12345678": {
+        "support": true,
+        "weight": 12000.0,
+        "timestamp": 1793720845.3756893
+      }
+    }
+  },
+  "DAO-PROP-024E45A1": {
+    "proposal_id": "DAO-PROP-024E45A1",
+    "proposer": "0x5b2BaEB1EC069bF0C48b00fE15A59D8dA8c01f74",
+    "title": "Decentralized Autonomous Treasury Balancing",
+    "description": "Autonomous reallocation ratified by token-weighted peer quorum.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.5,
+        "price": 64000.0
+      }
+    },
+    "votes_for": 55000.0,
+    "votes_against": 0.0,
+    "quorum_required": 50000.0,
+    "start_time": 1793720876.6643913,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "7904eb577b7de641c233051f897ec6074a9dc73adb13ed0bac41ad5665ee3e6105c0d8b1be643873cc33fe84ee3a6e85a1e0cd34aa7a744681de6610f329606e1c",
+    "voters": {
+      "0xf8C76d21137523690fa2c17C19FbEcF4900D7bA4": {
+        "support": true,
+        "weight": 30000.0,
+        "timestamp": 1793720876.6899197
+      },
+      "0xCc14774520D7c3A71a21996A296f7E7C7E057Db0": {
+        "support": true,
+        "weight": 25000.0,
+        "timestamp": 1793720876.6966696
+      }
+    }
+  },
+  "DAO-PROP-FA7C6FC8": {
+    "proposal_id": "DAO-PROP-FA7C6FC8",
+    "proposer": "0x27d1BeEe3CDE5fB5b45EB8F55153d45D4AE2a213",
+    "title": "Decentralized Liquidity Expansion",
+    "description": "Expand liquidity pool allocation across cross-border settlement rails.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.1,
+        "price": 64500.0
+      }
+    },
+    "votes_for": 12000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793721429.4033043,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "bd391c376e1182300b58e103216276e641b3449d17701e9161c89b15c30001f8737480b3773092c6956093a5ab9e60500e735b5e3f129ffdba132d6b709d12091c",
+    "voters": {
+      "0x1234567890abcdef1234567890abcdef12345678": {
+        "support": true,
+        "weight": 12000.0,
+        "timestamp": 1793721429.42946
+      }
+    }
+  },
+  "DAO-PROP-33059B6E": {
+    "proposal_id": "DAO-PROP-33059B6E",
+    "proposer": "0xf28bbe20250806aeae8BE0B6abA2bD44F18dad6C",
+    "title": "Decentralized Autonomous Treasury Balancing",
+    "description": "Autonomous reallocation ratified by token-weighted peer quorum.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.5,
+        "price": 64000.0
+      }
+    },
+    "votes_for": 55000.0,
+    "votes_against": 0.0,
+    "quorum_required": 50000.0,
+    "start_time": 1793721452.3587217,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "87a93a2def8780a5ef7a487ff14e8201209db7860afe3d98d61817e45fbc475130fb9af309ead08892362738a84777eff9cb81be312e09acf8094c5a6b8d995e1c",
+    "voters": {
+      "0xB93Ddc8e3Ef2dF8DDb3fD847942DbD564f1CEe2A": {
+        "support": true,
+        "weight": 30000.0,
+        "timestamp": 1793721452.3664372
+      },
+      "0x8f1Cb1D146b232E0837db24b02849C61eBB61a18": {
+        "support": true,
+        "weight": 25000.0,
+        "timestamp": 1793721452.368427
+      }
+    }
+  },
+  "DAO-PROP-007E0438": {
+    "proposal_id": "DAO-PROP-007E0438",
+    "proposer": "0x49089B3bFEa01B1F6b130Edd9Cef2E8350fa7776",
+    "title": "Decentralized Liquidity Expansion",
+    "description": "Expand liquidity pool allocation across cross-border settlement rails.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.1,
+        "price": 64500.0
+      }
+    },
+    "votes_for": 12000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793721866.3481948,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "f3630d00790c3ce5ac0fefa951a3e5affe8cc8926475f21f7dea2681413bb3bb62886adfb35ccf2415885acf8c7d2e58637d3bb0620aa58bb2d5c99af1bbe15b1c",
+    "voters": {
+      "0x1234567890abcdef1234567890abcdef12345678": {
+        "support": true,
+        "weight": 12000.0,
+        "timestamp": 1793721866.3855915
+      }
+    }
+  },
+  "DAO-PROP-A97F1328": {
+    "proposal_id": "DAO-PROP-A97F1328",
+    "proposer": "0xb92ef97eAF1E48C31C8C3ee1376A5D6B8F724b7e",
+    "title": "Decentralized Autonomous Treasury Balancing",
+    "description": "Autonomous reallocation ratified by token-weighted peer quorum.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.5,
+        "price": 64000.0
+      }
+    },
+    "votes_for": 55000.0,
+    "votes_against": 0.0,
+    "quorum_required": 50000.0,
+    "start_time": 1793721897.2427285,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "166e8a629be286c7add8dfb1c76bc7207fa6965c5dd03717e2af996e6f71e3391eef7c96b7a27064bd84c683a4ef00887ee787fc3d5e611ad91e293170189f0f1c",
+    "voters": {
+      "0x581413FE7d8B05F3f8F410E6AF3b51455fe27BA0": {
+        "support": true,
+        "weight": 30000.0,
+        "timestamp": 1793721897.2778885
+      },
+      "0xA8EaF3c0673bF2c268d69B586Bd110789b7c24D6": {
+        "support": true,
+        "weight": 25000.0,
+        "timestamp": 1793721897.2842185
+      }
+    }
+  },
+  "DAO-PROP-B478B721": {
+    "proposal_id": "DAO-PROP-B478B721",
+    "proposer": "0xdE4EF6c6a88B0a7425FD064E3051dB4CE84274aa",
+    "title": "Decentralized Liquidity Expansion",
+    "description": "Expand liquidity pool allocation across cross-border settlement rails.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.1,
+        "price": 64500.0
+      }
+    },
+    "votes_for": 12000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793722440.1189742,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "b9e41f547681c6d01e0a430067dbce362bfb7ece186c27dda761ed6b5dc5074517b8acd88e137ac2ce8c0c47588211e5eb95efa282a3c92b606ed91671fab0741c",
+    "voters": {
+      "0x1234567890abcdef1234567890abcdef12345678": {
+        "support": true,
+        "weight": 12000.0,
+        "timestamp": 1793722440.1439645
+      }
+    }
+  },
+  "DAO-PROP-E45809A7": {
+    "proposal_id": "DAO-PROP-E45809A7",
+    "proposer": "0x0f1A27Cd9FAcA55ddeB3f194914dC88e2FD9188c",
+    "title": "Decentralized Autonomous Treasury Balancing",
+    "description": "Autonomous reallocation ratified by token-weighted peer quorum.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.5,
+        "price": 64000.0
+      }
+    },
+    "votes_for": 55000.0,
+    "votes_against": 0.0,
+    "quorum_required": 50000.0,
+    "start_time": 1793722470.2026005,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "1effad1a623d43c80cfb5d2c035be8dd7384b9864a1103fb4a02e2d58386ba4667d06d4c93de7e21376582aa18f821119ee7c8a07e731a781ecdd147c0f244741b",
+    "voters": {
+      "0xEEA54a16f5155FccCf651e96842a4cbd45001C90": {
+        "support": true,
+        "weight": 30000.0,
+        "timestamp": 1793722470.2373936
+      },
+      "0x1240715cAD1A07C149195aFcDC17aD140f0EDDa8": {
+        "support": true,
+        "weight": 25000.0,
+        "timestamp": 1793722470.2433505
+      }
+    }
+  },
+  "DAO-PROP-F7FD28A7": {
+    "proposal_id": "DAO-PROP-F7FD28A7",
+    "proposer": "0xbFB58a22DA26bde7d708269e9580dDbAa960bc6d",
+    "title": "Decentralized Liquidity Expansion",
+    "description": "Expand liquidity pool allocation across cross-border settlement rails.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.1,
+        "price": 64500.0
+      }
+    },
+    "votes_for": 12000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793723939.5043118,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "ecac34f8b2eb470aa3e1fbe575c535a111a606ca404aa54092ec2134824765a2322d7f32935f07f21625035130c086f2fbeaef44610054700bd50bce7028a6c11c",
+    "voters": {
+      "0x1234567890abcdef1234567890abcdef12345678": {
+        "support": true,
+        "weight": 12000.0,
+        "timestamp": 1793723939.5342839
+      }
+    }
+  },
+  "DAO-PROP-FADB0FF3": {
+    "proposal_id": "DAO-PROP-FADB0FF3",
+    "proposer": "0x3ED28C399453bAa2db19396cbC387f3Eb0375478",
+    "title": "Decentralized Autonomous Treasury Balancing",
+    "description": "Autonomous reallocation ratified by token-weighted peer quorum.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.5,
+        "price": 64000.0
+      }
+    },
+    "votes_for": 55000.0,
+    "votes_against": 0.0,
+    "quorum_required": 50000.0,
+    "start_time": 1793723970.0530834,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "dd632b352ecec7bbdd472e94d3e54fd774e44ed26cc38e00c9aa7fbf641cef7766be3f030be4aea0ef9eb2d2e996656e9c6ee8385a2b31966b1194eb32894e551c",
+    "voters": {
+      "0x67871eB24bc405467C1cC78642b9659A33d38908": {
+        "support": true,
+        "weight": 30000.0,
+        "timestamp": 1793723970.087242
+      },
+      "0x0B9efE69f3d14381a1a392D05Daf40d58bD93bec": {
+        "support": true,
+        "weight": 25000.0,
+        "timestamp": 1793723970.0958848
+      }
+    }
+  },
+  "DAO-PROP-07B39BF3": {
+    "proposal_id": "DAO-PROP-07B39BF3",
+    "proposer": "0x1CB0E1078887c08eC16272833aFf5cbb382c0ee4",
+    "title": "Decentralized Liquidity Expansion",
+    "description": "Expand liquidity pool allocation across cross-border settlement rails.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.1,
+        "price": 64500.0
+      }
+    },
+    "votes_for": 12000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793724427.4548829,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "dcdc1b69e03039a648f973558fa7181d17e3bd895810e1170d847c92adde967c23ed01bc2e83ebc3dd1962963424db4a448c71ec75be0e95a14432c8e3f9809c1c",
+    "voters": {
+      "0x1234567890abcdef1234567890abcdef12345678": {
+        "support": true,
+        "weight": 12000.0,
+        "timestamp": 1793724427.4675736
+      }
+    }
+  },
+  "DAO-PROP-68E60369": {
+    "proposal_id": "DAO-PROP-68E60369",
+    "proposer": "0x8C5498C7d21E4FB13FaAf4a81F14e4884aC12654",
+    "title": "Decentralized Autonomous Treasury Balancing",
+    "description": "Autonomous reallocation ratified by token-weighted peer quorum.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.5,
+        "price": 64000.0
+      }
+    },
+    "votes_for": 55000.0,
+    "votes_against": 0.0,
+    "quorum_required": 50000.0,
+    "start_time": 1793724531.7740507,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "7f9ca971e3cc6436c9f40b0201e008a7e9ca5e60934bef3de7b56dc56d071a095322990615e011841f33d6c8cb579c6b4cdbf6c5b970bd6ddd6de19232c2dc441b",
+    "voters": {
+      "0x989190CfBacE94d48461cC93cEb9371C6CE16259": {
+        "support": true,
+        "weight": 30000.0,
+        "timestamp": 1793724531.7903411
+      },
+      "0xFee3Bc60c40F4a0E8BD493CfF98F8064f2f8269b": {
+        "support": true,
+        "weight": 25000.0,
+        "timestamp": 1793724531.7935748
+      }
+    }
+  },
+  "DAO-PROP-B318C796": {
+    "proposal_id": "DAO-PROP-B318C796",
+    "proposer": "0x54BE8ab57e917Bc14DfD829d4e7927cb5620580C",
+    "title": "Decentralized Liquidity Expansion",
+    "description": "Expand liquidity pool allocation across cross-border settlement rails.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.1,
+        "price": 64500.0
+      }
+    },
+    "votes_for": 12000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793725909.8177674,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "54bc4ccf3afc51942ededafc7a43a9df451e7b2c5db6d327bc677a7389268d8224fdac75ad5ffb0eb966c405bbb383ef65ec607c36b040ac7585d92aadc9ac031b",
+    "voters": {
+      "0x1234567890abcdef1234567890abcdef12345678": {
+        "support": true,
+        "weight": 12000.0,
+        "timestamp": 1793725909.82628
+      }
+    }
+  },
+  "DAO-PROP-A918D93E": {
+    "proposal_id": "DAO-PROP-A918D93E",
+    "proposer": "0xd5a2f519153B59cFD168C477AD6d980138D2eBf2",
+    "title": "Decentralized Autonomous Treasury Balancing",
+    "description": "Autonomous reallocation ratified by token-weighted peer quorum.",
+    "action_payload": {
+      "action": "EXECUTE_TRADE",
+      "parameters": {
+        "symbol": "BTC/USD",
+        "side": "BUY",
+        "quantity": 0.5,
+        "price": 64000.0
+      }
+    },
+    "votes_for": 55000.0,
+    "votes_against": 0.0,
+    "quorum_required": 50000.0,
+    "start_time": 1793725921.0053463,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "8952b1f11fce2ba74ebc1698a3470a4b8ac8cf32502120c09a9c196118da28d345de42b603e3f20b8739fd8ceba8a149459c920676f8dadcdffe0735f94319bb1b",
+    "voters": {
+      "0xF1Fc9509b454274Ab9Aa752Bae4089C294314353": {
+        "support": true,
+        "weight": 30000.0,
+        "timestamp": 1793725921.013302
+      },
+      "0x8Ece2E39e574B01bf5D3920353De84729fF2F19d": {
+        "support": true,
+        "weight": 25000.0,
+        "timestamp": 1793725921.0152745
+      }
+    }
+  }
+}

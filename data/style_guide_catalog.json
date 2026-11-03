@@ -1,0 +1,98 @@
+{
+  "1970s_espionage": {
+    "style_id": "1970s_espionage",
+    "display_name": "1970s Espionage Cinema (35mm Eastman)",
+    "aspect_ratio": "2.39:1",
+    "width": 768,
+    "height": 320,
+    "color_palette": [
+      "#2b261d",
+      "#7d6b4f",
+      "#a89f81",
+      "#3d4b3c",
+      "#181a17"
+    ],
+    "film_grain_intensity": 0.45,
+    "contrast_multiplier": 1.25,
+    "color_temperature_k": 3800,
+    "vignette_strength": 0.55,
+    "lut_type": "1970s_espionage",
+    "prompt_affixes": {
+      "prefix": "35mm Eastman color film still, 1970s cinematic espionage thriller, anamorphic lens flare, gritty realism",
+      "suffix": "muted vintage palette, subtle motion blur, authentic film grain, high dynamic range chiaroscuro",
+      "negative": "modern digital sheen, 3D CGI render, oversaturated cartoon, plastic smooth skin, watermark"
+    }
+  },
+  "cyberpunk_neon": {
+    "style_id": "cyberpunk_neon",
+    "display_name": "Cyberpunk Cinematic 4K",
+    "aspect_ratio": "16:9",
+    "width": 640,
+    "height": 360,
+    "color_palette": [
+      "#0d0221",
+      "#0f084b",
+      "#26408b",
+      "#a60067",
+      "#00f0ff"
+    ],
+    "film_grain_intensity": 0.15,
+    "contrast_multiplier": 1.4,
+    "color_temperature_k": 6500,
+    "vignette_strength": 0.35,
+    "lut_type": "cyberpunk_neon",
+    "prompt_affixes": {
+      "prefix": "Ultra-detailed 4K cyberpunk megacity, volumetric rain fog, neon sign reflections on wet asphalt",
+      "suffix": "octane render, raytraced subsurface scattering, chromatic aberration, cinematic composition",
+      "negative": "blurry, low quality, washed out colors, low resolution, artifacts"
+    }
+  },
+  "forensic_flir": {
+    "style_id": "forensic_flir",
+    "display_name": "Forensic Satellite FLIR Infrared",
+    "aspect_ratio": "4:3",
+    "width": 512,
+    "height": 384,
+    "color_palette": [
+      "#000004",
+      "#51127c",
+      "#b73779",
+      "#fc8961",
+      "#fcfdbf"
+    ],
+    "film_grain_intensity": 0.2,
+    "contrast_multiplier": 1.6,
+    "color_temperature_k": 8000,
+    "vignette_strength": 0.2,
+    "lut_type": "flir_thermal",
+    "prompt_affixes": {
+      "prefix": "FLIR thermal infrared sensor reconnaissance imagery, false-color heat signature mapping",
+      "suffix": "orthorectified elevation, sensor crosshairs, military telemetry overlay, Kelvin temperature gradient",
+      "negative": "optical photograph, visible spectrum daylight, painting, drawing"
+    }
+  },
+  "statutory_blueprint": {
+    "style_id": "statutory_blueprint",
+    "display_name": "Statutory Audit Technical Blueprint",
+    "aspect_ratio": "1:1",
+    "width": 512,
+    "height": 512,
+    "color_palette": [
+      "#0b1d3a",
+      "#10375c",
+      "#12497e",
+      "#f3f3f3",
+      "#00ff88"
+    ],
+    "film_grain_intensity": 0.05,
+    "contrast_multiplier": 1.5,
+    "color_temperature_k": 5500,
+    "vignette_strength": 0.15,
+    "lut_type": "monochrome_blueprint",
+    "prompt_affixes": {
+      "prefix": "Technical CAD architectural blueprint, forensic financial flows diagram, vector grid lines",
+      "suffix": "isometric schematic projection, crisp clean lines, schematic dimension annotations, white line art on navy ground",
+      "negative": "photograph, organic noise, gradient blur, messy textures"
+    }
+  }
+}
