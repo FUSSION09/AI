@@ -58,6 +58,7 @@ from externalization_protocol import externalization_protocol, EXTERNALIZATION_R
 from evolutionary_compiler import evolutionary_compiler, EVOLUTIONARY_REPORT_FILE
 from cyber_physical_guardian import cyber_physical_guardian, SELF_HEALING_LEDGER_FILE
 from open_network_mesh import open_network_mesh, OPEN_NETWORK_REPORT_FILE
+from causal_stress_novelty_pipeline import causal_pipeline, PIPELINE_REPORT_FILE
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -1675,6 +1676,28 @@ def broadcast_signed_mesh_message(payload: BroadcastPayload):
         "envelope": asdict(envelope),
         "signature_verified": open_network_mesh.verify_message(envelope)
     }
+
+
+# ==============================================================================
+# 4.15 3-PHASE CAUSAL STRESS & NOVELTY PIPELINE (CES -> DC -> NC)
+# ==============================================================================
+
+@app.post("/pipeline/causal-stress-novelty/run", tags=["3-Phase Causal Stress & Novelty Pipeline"])
+def run_causal_stress_novelty_pipeline():
+    """Executes all 3 phases: Causal Baseline (CES), Dynamic Stress Test (DC), and Weakness-Targeted Novelty Genesis (NC)."""
+    report = causal_pipeline.run_all_three_phases()
+    return report
+
+@app.get("/pipeline/causal-stress-novelty/report", tags=["3-Phase Causal Stress & Novelty Pipeline"])
+def get_causal_stress_novelty_report():
+    """Retrieves the latest 3-phase experimental report across Causal Effect Size, Degradation Curve, and Novel Concept."""
+    if PIPELINE_REPORT_FILE.exists():
+        try:
+            with open(PIPELINE_REPORT_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Failed to read pipeline report: {str(e)}")
+    return causal_pipeline.run_all_three_phases()
 
 
 

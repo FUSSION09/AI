@@ -851,8 +851,28 @@ def run_api_tests():
     assert bc_data["signature_verified"] is True
     print(f"[Test 92: /mesh/broadcast] Status: 200 OK | Signature Verified: {bc_data['signature_verified']} | ID: {bc_data['envelope']['message_id']}")
 
+    # =========================================================================
+    # 3-PHASE CAUSAL STRESS & NOVELTY PIPELINE (TESTS 93-94)
+    # =========================================================================
+    # 93. Test /pipeline/causal-stress-novelty/run (3-Phase Pipeline Execution)
+    r_pipe = client.post("/pipeline/causal-stress-novelty/run")
+    assert r_pipe.status_code == 200
+    pipe_data = r_pipe.json()
+    assert pipe_data["status"] == "ALL_3_PHASES_SUCCESSFULLY_EXECUTED"
+    assert "causal_effect_size_ces" in pipe_data["phase_1_causal_baseline"]
+    assert "degradation_curve" in pipe_data["phase_2_stress_test"]
+    assert "novel_concept_nc" in pipe_data["phase_3_novelty_synthesis"]
+    print(f"[Test 93: /pipeline/causal-stress-novelty/run] Status: 200 OK | CES: {pipe_data['phase_1_causal_baseline']['causal_effect_size_ces']} | Weakest: {pipe_data['phase_2_stress_test']['weakest_link_isolated']['failure_mechanism']}")
+
+    # 94. Test /pipeline/causal-stress-novelty/report (Report Retrieval)
+    r_pipe_rep = client.get("/pipeline/causal-stress-novelty/report")
+    assert r_pipe_rep.status_code == 200
+    rep_data = r_pipe_rep.json()
+    assert rep_data["phase_3_novelty_synthesis"]["novel_concept_nc"]["concept_id"] == "NC-RELATIVISTIC-CAUSAL-HORIZON-01"
+    print(f"[Test 94: /pipeline/causal-stress-novelty/report] Status: 200 OK | Novel Concept: {rep_data['phase_3_novelty_synthesis']['novel_concept_nc']['concept_name']}")
+
     print("=" * 75)
-    print("ALL 92 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
+    print("ALL 94 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
     print("=" * 75)
 
 if __name__ == "__main__":
