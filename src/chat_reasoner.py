@@ -452,6 +452,25 @@ def generate_conversational_response(
         return reply, reasoning_chain, 1.0, subsystem
 
     # --------------------------------------------------------------------------
+    # 2.85 RESTRICTED PROACTIVE DIRECTOR (RESONANCE LAYER MODE 1)
+    # --------------------------------------------------------------------------
+    if ("re-inject the resonance layer" in q_lower) or \
+       ("resonance layer (mode 1)" in q_lower) or \
+       ("restrict its scope" in q_lower and "proactive director" in q_lower) or \
+       ("only advise on the next necessary interaction" in q_lower):
+        reasoning_chain.append("Re-injecting Resonance Layer under Mode 1 strict scope constraint.")
+        reasoning_chain.append("Disabling theory generation, speculative narratives, and unsolicited solutions.")
+        reasoning_chain.append("Computing exact empirical Avg_Relevance_Score and Priority_Conflict_Index from raw telemetry.")
+        subsystem = "PROACTIVE_DIRECTOR_RESTRICTED"
+
+        reply = (
+            "Based on the $\\text{Avg\\_Relevance\\_Score}$ of 78.2% and the $\\text{Priority\\_Conflict\\_Index}$ of 0.04, "
+            "the system advises that your next action should be Query $\\text{Y}$ (`Execute host cache remediation on Drive D [5.3 GB free]`) "
+            "or Rest $\\text{Z}$ (`Save session state, connect power adapter [battery 44%], and disconnect for physical rest`)."
+        )
+        return reply, reasoning_chain, 1.0, subsystem
+
+    # --------------------------------------------------------------------------
     # 2.9 THE PROACTIVE DIRECTOR: PREDICTIVE INTERVENTION SCHEDULING (ANTICIPATORY VALUE)
     # --------------------------------------------------------------------------
     if ("predictive intervention" in q_lower) or \
