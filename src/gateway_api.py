@@ -49,6 +49,7 @@ from soft_fork_simulator import SoftForkSimulator, SOFT_FORK_FILE
 from goal_divergence_engine import GoalDivergenceStressEngine, GOAL_DIVERGENCE_FILE
 from vectors_suite import run_all_vectors, MASTER_VECTORS_REPORT_FILE
 from chat_reasoner import generate_conversational_response
+from tool_calling_engine import tool_engine
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -1386,6 +1387,44 @@ def get_master_vectors_report():
             raise HTTPException(status_code=500, detail=str(e))
     report = run_all_vectors()
     return asdict(report)
+
+
+# ==============================================================================
+# 4.6 PHASE 1: REAL-WORLD TOOL & FUNCTION CALLING WRAPPER
+# ==============================================================================
+
+class ToolExecuteRequest(BaseModel):
+    tool_name: str
+    parameters: Dict[str, Any] = Field(default_factory=dict)
+
+@app.get("/tools/list", tags=["Tools & OS Diagnostics"])
+def list_available_tools():
+    """Returns schemas and metadata for all registered OS and network diagnostic tools."""
+    return {"tools": tool_engine.list_tools(), "total_registered": len(tool_engine._registry)}
+
+@app.post("/tools/execute", tags=["Tools & OS Diagnostics"])
+def execute_system_tool(req: ToolExecuteRequest):
+    """Executes a sandboxed diagnostic or external tool by name."""
+    res = tool_engine.execute_tool(req.tool_name, req.parameters)
+    return asdict(res)
+
+@app.get("/tools/wifi", tags=["Tools & OS Diagnostics"])
+def inspect_wifi_connection():
+    """Real-time inspection of active Wi-Fi connection, SSID, IP, and gateway latency."""
+    res = tool_engine.execute_tool("get_wifi_status")
+    return asdict(res)
+
+@app.get("/tools/vitals", tags=["Tools & OS Diagnostics"])
+def inspect_system_vitals():
+    """Live diagnostic of CPU, RAM, Disk, Battery, and System Uptime."""
+    res = tool_engine.execute_tool("get_system_vitals")
+    return asdict(res)
+
+@app.get("/tools/ping", tags=["Tools & OS Diagnostics"])
+def probe_network_ping(host: str = "8.8.8.8", count: int = 1):
+    """Pings a specified host or gateway to measure round-trip network latency."""
+    res = tool_engine.execute_tool("ping_network_host", {"host": host, "count": count})
+    return asdict(res)
 
 
 

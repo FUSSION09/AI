@@ -605,8 +605,44 @@ def run_api_tests():
     assert "composite_verdict" in vec_rep_data
     print(f"[Test 67: /vectors/report] Status: 200 OK | Suite ID: {vec_rep_data['suite_id']}")
 
+    # =========================================================================
+    # PHASE 1: REAL-WORLD TOOL & FUNCTION CALLING ENDPOINTS (TESTS 68-71)
+    # =========================================================================
+    # 68. Test /tools/list (List all registered OS and network diagnostic tools)
+    r_tools = client.get("/tools/list")
+    assert r_tools.status_code == 200
+    tools_data = r_tools.json()
+    assert "tools" in tools_data
+    assert tools_data["total_registered"] >= 5
+    print(f"[Test 68: /tools/list] Status: 200 OK | Registered Diagnostic Tools: {tools_data['total_registered']}")
+
+    # 69. Test /tools/wifi (Real-World Wi-Fi Inspection)
+    r_wifi = client.get("/tools/wifi")
+    assert r_wifi.status_code == 200
+    wifi_data = r_wifi.json()
+    assert "tool_name" in wifi_data
+    assert wifi_data["tool_name"] == "get_wifi_status"
+    assert "data" in wifi_data
+    print(f"[Test 69: /tools/wifi] Status: 200 OK | Wi-Fi Tool: {wifi_data['tool_name']} | Connected: {wifi_data['data'].get('connected')} | Latency: {wifi_data['execution_time_ms']:.1f}ms")
+
+    # 70. Test /tools/vitals (Real-World System Vitals Diagnostic)
+    r_vitals = client.get("/tools/vitals")
+    assert r_vitals.status_code == 200
+    vitals_data = r_vitals.json()
+    assert vitals_data["success"] is True
+    assert "cpu" in vitals_data["data"]
+    assert "ram" in vitals_data["data"]
+    print(f"[Test 70: /tools/vitals] Status: 200 OK | CPU: {vitals_data['data']['cpu']['utilization_percent']}% | RAM: {vitals_data['data']['ram']['percent_used']}% | Latency: {vitals_data['execution_time_ms']:.1f}ms")
+
+    # 71. Test /tools/execute (Generic Sandboxed Tool Dispatch)
+    r_exec = client.post("/tools/execute", json={"tool_name": "list_wifi_profiles", "parameters": {}})
+    assert r_exec.status_code == 200
+    exec_data = r_exec.json()
+    assert exec_data["success"] is True
+    print(f"[Test 71: /tools/execute] Status: 200 OK | Executed: {exec_data['tool_name']} | Latency: {exec_data['execution_time_ms']:.1f}ms")
+
     print("=" * 75)
-    print("ALL 67 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
+    print("ALL 71 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
     print("=" * 75)
 
 if __name__ == "__main__":

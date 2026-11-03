@@ -25,6 +25,7 @@ if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
 from config import DATA_DIR
+from tool_calling_engine import tool_engine, dispatch_tool_intent
 
 
 def generate_conversational_response(
@@ -45,6 +46,36 @@ def generate_conversational_response(
     reasoning_chain: List[str] = []
     confidence = 0.95
     subsystem = "HCL_DIRECTOR"
+
+    # --------------------------------------------------------------------------
+    # 0. REAL-WORLD TOOL & FUNCTION CALLING DISPATCH (Wi-Fi, System Vitals, Diagnostics)
+    # --------------------------------------------------------------------------
+    explicit_match = re.search(r'(?:call_tool|execute_tool|tool_call)\s*\(\s*(?:tool_name=)?[\'"]?([a-zA-Z0-9_-]+)[\'"]?', q_clean, re.IGNORECASE)
+    tool_to_call = None
+    tool_params: Dict[str, Any] = {}
+
+    if explicit_match:
+        tool_to_call = explicit_match.group(1).strip()
+        reasoning_chain.append(f"Explicit function call detected for tool: '{tool_to_call}'.")
+    else:
+        inferred = dispatch_tool_intent(q_clean)
+        if inferred:
+            tool_to_call, tool_params = inferred
+            reasoning_chain.append(f"Autonomous Tool Dispatch: Mapped query to real-world tool '{tool_to_call}'.")
+
+    if tool_to_call and tool_to_call in tool_engine._registry:
+        reasoning_chain.append(f"Executing sandboxed tool '{tool_to_call}' via OS/Network Wrapper.")
+        tool_res = tool_engine.execute_tool(tool_to_call, tool_params)
+        subsystem = "TOOL_CALLING_ENGINE"
+        confidence = 1.0 if tool_res.success else 0.85
+        reasoning_chain.append(f"Tool '{tool_to_call}' executed in {tool_res.execution_time_ms:.2f}ms with status success={tool_res.success}.")
+        
+        reply = (
+            f"### Real-World Diagnostic Report: `{tool_to_call}`\n\n"
+            f"{tool_res.human_readable_summary}\n\n"
+            f"*(Executed via Sandboxed Tool & Function Calling Layer in {tool_res.execution_time_ms:.1f}ms)*"
+        )
+        return reply, reasoning_chain, confidence, subsystem
 
     # --------------------------------------------------------------------------
     # 1. GREETINGS & INTRODUCTORY INTENTS (hlo, hello, hi, hey, who are you)
