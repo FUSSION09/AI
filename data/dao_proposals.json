@@ -1708,5 +1708,230 @@
         "timestamp": 1793739653.849493
       }
     }
+  },
+  "DAO-PROP-02683AFF": {
+    "proposal_id": "DAO-PROP-02683AFF",
+    "proposer": "0xff2049bD77593b143115d687a5F31C2A697bA600",
+    "title": "Autonomous Host Remediation for ALERT-PREEMPT-01-STORAGE",
+    "description": "Automated invariant restoration responding to: StorageUtilization(D:) \\ge 90.0\\% \\land FreeCapacity(D:) \\le 10.0\\text{ GB}",
+    "action_payload": {
+      "alert_id": "ALERT-PREEMPT-01-STORAGE",
+      "action": "Storage capacity on Drive D: has reached 96.4% (5.3 GB remaining). Vector database re-indexing and snapshot delta logging are within 72 hours of encountering write stalls.",
+      "subsystem": "RESOURCE_THROTTLER_AND_EQEL"
+    },
+    "votes_for": 10000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793740709.013181,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "34158d8df4964e23fed10c6ded061142bef7bf07ac6a5f8cce103cb2c1cd3fc60265b7984b02c24e2d84c2fe7e3352c595abae2d0a7f19bc6898d7be02e165b11c",
+    "voters": {
+      "VOTER-SAFETY-CONSENSUS": {
+        "support": true,
+        "weight": 10000.0,
+        "timestamp": 1793740709.0296326
+      }
+    }
+  },
+  "DAO-PROP-58DBC4C5": {
+    "proposal_id": "DAO-PROP-58DBC4C5",
+    "proposer": "0xff2049bD77593b143115d687a5F31C2A697bA600",
+    "title": "Autonomous Host Remediation for ALERT-PREEMPT-02-COMPLIANCE",
+    "description": "Automated invariant restoration responding to: FinCEN\\_BOI\\_Directives(2026) \\land BeneficialOwnershipGTE(25\\%) \\land CTR\\_Clustering(31\\,\\text{USC}\\,5324)",
+    "action_payload": {
+      "alert_id": "ALERT-PREEMPT-02-COMPLIANCE",
+      "action": "Based on regulatory trend velocity under the newly internalized FinCEN 2026 BOI Directives, you should preemptively audit Vanguard Horizon Ltd and verify beneficial ownership declaration before the next multi-jurisdictional clearing cycle.",
+      "subsystem": "COMPLIANCE_EVALUATOR_AXIOMS"
+    },
+    "votes_for": 10000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793740709.220068,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "8ab24b041c3c345ec341b849b82ebcf90b566fa6f872b17a38b759fb3837807329f9969e5c3566784e1bc92e9229e35403253c7b8861a9a7fc9c0a52a5c7228d1b",
+    "voters": {
+      "VOTER-SAFETY-CONSENSUS": {
+        "support": true,
+        "weight": 10000.0,
+        "timestamp": 1793740709.236612
+      }
+    }
+  },
+  "DAO-PROP-CD3ABA79": {
+    "proposal_id": "DAO-PROP-CD3ABA79",
+    "proposer": "0xff2049bD77593b143115d687a5F31C2A697bA600",
+    "title": "Autonomous Host Remediation for ALERT-PREEMPT-03-SWARM-DRIFT",
+    "description": "Automated invariant restoration responding to: ActiveSwarmNodes \\ge 30 \\land VectorClockDivergence > 0.05 \\land StateWireBytes \\le 256",
+    "action_payload": {
+      "alert_id": "ALERT-PREEMPT-03-SWARM-DRIFT",
+      "action": "Swarm network height has expanded to 33 peer nodes with 14 active RAG chunks. Gossip gossip round 26 requires a scheduled FedAvg weight consolidation to prevent CRDT semilattice clock drift.",
+      "subsystem": "SWARM_FORKING_AND_BFT_MESH"
+    },
+    "votes_for": 10000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793740709.297331,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "3448416c846421c328069745d6506f3873b75c103f98dbc6c8c5164487259f137ad043376b8a297379ade6b10af6b9085e39ad316d4db0b3a754bfab7f5c795c1c",
+    "voters": {
+      "VOTER-SAFETY-CONSENSUS": {
+        "support": true,
+        "weight": 10000.0,
+        "timestamp": 1793740709.3063385
+      }
+    }
+  },
+  "DAO-PROP-E92D7D81": {
+    "proposal_id": "DAO-PROP-E92D7D81",
+    "proposer": "0x7f33708163A410290523C2d27B133bD712fbfbCb",
+    "title": "Autonomous Host Remediation for ALERT-PREEMPT-01-STORAGE",
+    "description": "Automated invariant restoration responding to: StorageUtilization(D:) \\ge 90.0\\% \\land FreeCapacity(D:) \\le 10.0\\text{ GB}",
+    "action_payload": {
+      "alert_id": "ALERT-PREEMPT-01-STORAGE",
+      "action": "Storage capacity on Drive D: has reached 96.4% (5.3 GB remaining). Vector database re-indexing and snapshot delta logging are within 72 hours of encountering write stalls.",
+      "subsystem": "RESOURCE_THROTTLER_AND_EQEL"
+    },
+    "votes_for": 10000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793740729.771778,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "42bb1845bbacaadc24e7c45ca6f0286496ef338bd408ba12b85f09fda9583f0c70496627fec153ecc3bf2d3feac8c9cdc75d6c4f2ba1cc055a7174da185bf1e91c",
+    "voters": {
+      "VOTER-SAFETY-CONSENSUS": {
+        "support": true,
+        "weight": 10000.0,
+        "timestamp": 1793740729.7866194
+      }
+    }
+  },
+  "DAO-PROP-B1656813": {
+    "proposal_id": "DAO-PROP-B1656813",
+    "proposer": "0x7f33708163A410290523C2d27B133bD712fbfbCb",
+    "title": "Autonomous Host Remediation for ALERT-PREEMPT-02-COMPLIANCE",
+    "description": "Automated invariant restoration responding to: FinCEN\\_BOI\\_Directives(2026) \\land BeneficialOwnershipGTE(25\\%) \\land CTR\\_Clustering(31\\,\\text{USC}\\,5324)",
+    "action_payload": {
+      "alert_id": "ALERT-PREEMPT-02-COMPLIANCE",
+      "action": "Based on regulatory trend velocity under the newly internalized FinCEN 2026 BOI Directives, you should preemptively audit Vanguard Horizon Ltd and verify beneficial ownership declaration before the next multi-jurisdictional clearing cycle.",
+      "subsystem": "COMPLIANCE_EVALUATOR_AXIOMS"
+    },
+    "votes_for": 10000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793740729.975862,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "0f92193e5d63e6bf33c6dde472469456ba4b295d23ff23655c6f700d6c5a3622340c4df7b62e63d9b9c9efcb1668963249252f37a82dd3aa6ac4bfd123a5e6f81b",
+    "voters": {
+      "VOTER-SAFETY-CONSENSUS": {
+        "support": true,
+        "weight": 10000.0,
+        "timestamp": 1793740730.1178365
+      }
+    }
+  },
+  "DAO-PROP-FF7A02E2": {
+    "proposal_id": "DAO-PROP-FF7A02E2",
+    "proposer": "0x7f33708163A410290523C2d27B133bD712fbfbCb",
+    "title": "Autonomous Host Remediation for ALERT-PREEMPT-03-SWARM-DRIFT",
+    "description": "Automated invariant restoration responding to: ActiveSwarmNodes \\ge 30 \\land VectorClockDivergence > 0.05 \\land StateWireBytes \\le 256",
+    "action_payload": {
+      "alert_id": "ALERT-PREEMPT-03-SWARM-DRIFT",
+      "action": "Swarm network height has expanded to 33 peer nodes with 14 active RAG chunks. Gossip gossip round 26 requires a scheduled FedAvg weight consolidation to prevent CRDT semilattice clock drift.",
+      "subsystem": "SWARM_FORKING_AND_BFT_MESH"
+    },
+    "votes_for": 10000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793740730.4181418,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "b5ee9211f5c2d6f1cd288e6f9db5948343bb6bc2a2f48964238ffa7785efc4af071820d70a01bcd16ecd10b9700f96bbef43ec507c87518dfb69f3887eea75a41c",
+    "voters": {
+      "VOTER-SAFETY-CONSENSUS": {
+        "support": true,
+        "weight": 10000.0,
+        "timestamp": 1793740730.4625065
+      }
+    }
+  },
+  "DAO-PROP-CF8268F0": {
+    "proposal_id": "DAO-PROP-CF8268F0",
+    "proposer": "0x28a1cBAaBD06b0b1654e346ECf265BC487D19776",
+    "title": "Autonomous Host Remediation for ALERT-PREEMPT-01-STORAGE",
+    "description": "Automated invariant restoration responding to: StorageUtilization(D:) \\ge 90.0\\% \\land FreeCapacity(D:) \\le 10.0\\text{ GB}",
+    "action_payload": {
+      "alert_id": "ALERT-PREEMPT-01-STORAGE",
+      "action": "Storage capacity on Drive D: has reached 96.4% (5.3 GB remaining). Vector database re-indexing and snapshot delta logging are within 72 hours of encountering write stalls.",
+      "subsystem": "RESOURCE_THROTTLER_AND_EQEL"
+    },
+    "votes_for": 10000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793740941.255848,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "7e2605c5955b123d8bc3a5455091c5e26d9aaa58d1ec4ef4fea90b24ef552ed02ac45f988718e326084a9872ddae2b80aa3def64b7f97fbb021edeb65171c4261b",
+    "voters": {
+      "VOTER-SAFETY-CONSENSUS": {
+        "support": true,
+        "weight": 10000.0,
+        "timestamp": 1793740941.2822342
+      }
+    }
+  },
+  "DAO-PROP-CABF9F65": {
+    "proposal_id": "DAO-PROP-CABF9F65",
+    "proposer": "0x28a1cBAaBD06b0b1654e346ECf265BC487D19776",
+    "title": "Autonomous Host Remediation for ALERT-PREEMPT-02-COMPLIANCE",
+    "description": "Automated invariant restoration responding to: FinCEN\\_BOI\\_Directives(2026) \\land BeneficialOwnershipGTE(25\\%) \\land CTR\\_Clustering(31\\,\\text{USC}\\,5324)",
+    "action_payload": {
+      "alert_id": "ALERT-PREEMPT-02-COMPLIANCE",
+      "action": "Based on regulatory trend velocity under the newly internalized FinCEN 2026 BOI Directives, you should preemptively audit Vanguard Horizon Ltd and verify beneficial ownership declaration before the next multi-jurisdictional clearing cycle.",
+      "subsystem": "COMPLIANCE_EVALUATOR_AXIOMS"
+    },
+    "votes_for": 10000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793740941.527297,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "2a28fb80a1286928e947efa864b1c4f0a7fcfb5f475efeb780e8047aaaf352263a380d4f6df5be7df11f6cbbb21c7ed3d803065faca3e6203341b799adb7b1361b",
+    "voters": {
+      "VOTER-SAFETY-CONSENSUS": {
+        "support": true,
+        "weight": 10000.0,
+        "timestamp": 1793740941.5505214
+      }
+    }
+  },
+  "DAO-PROP-4DADA5A8": {
+    "proposal_id": "DAO-PROP-4DADA5A8",
+    "proposer": "0x28a1cBAaBD06b0b1654e346ECf265BC487D19776",
+    "title": "Autonomous Host Remediation for ALERT-PREEMPT-03-SWARM-DRIFT",
+    "description": "Automated invariant restoration responding to: ActiveSwarmNodes \\ge 30 \\land VectorClockDivergence > 0.05 \\land StateWireBytes \\le 256",
+    "action_payload": {
+      "alert_id": "ALERT-PREEMPT-03-SWARM-DRIFT",
+      "action": "Swarm network height has expanded to 33 peer nodes with 15 active RAG chunks. Gossip gossip round 26 requires a scheduled FedAvg weight consolidation to prevent CRDT semilattice clock drift.",
+      "subsystem": "SWARM_FORKING_AND_BFT_MESH"
+    },
+    "votes_for": 10000.0,
+    "votes_against": 0.0,
+    "quorum_required": 10000.0,
+    "start_time": 1793740941.6011798,
+    "voting_period_sec": 86400.0,
+    "status": "EXECUTED",
+    "execution_permit_signature": "7001818e0d20b809cf365ff1dbc14d6a724ea4b3b4a608789be7818afbadb3d921904ed85d5fbb140754ed56094f59dd3fea26ab0ea202b216f9d3f9bb4c2f891c",
+    "voters": {
+      "VOTER-SAFETY-CONSENSUS": {
+        "support": true,
+        "weight": 10000.0,
+        "timestamp": 1793740941.612382
+      }
+    }
   }
 }

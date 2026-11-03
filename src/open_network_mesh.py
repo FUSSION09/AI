@@ -201,3 +201,4 @@ open_network_mesh = OpenNetworkMesh()
 if __name__ == "__main__":
     rep = open_network_mesh.probe_mesh_network()
     print(f"Vector Omega Probed | Peers: {rep['total_registered_peers']} | Online: {rep['online_peers_count']} | Conv: {rep['mesh_convergence_score']}")
+
