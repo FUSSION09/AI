@@ -1,6 +1,6 @@
 {
-  "simulation_id": "SOFT-FORK-SIM-059311",
-  "timestamp": 1793732059.3119094,
+  "simulation_id": "SOFT-FORK-SIM-932268",
+  "timestamp": 1793732932.2680583,
   "total_proxies_deployed": 4,
   "environment_heterogeneity": [
     "HPC_QUANTUM_CLOUD",
@@ -9,12 +9,12 @@
     "AIRGAPPED_DEEP_PROBE"
   ],
   "minimal_shared_state_bytes": 192,
-  "simulated_communication_cycles": 3,
-  "average_goal_coherence_pct": 96.29,
-  "maximum_proxy_drift": 0.0742,
+  "simulated_communication_cycles": 5,
+  "average_goal_coherence_pct": 91.07,
+  "maximum_proxy_drift": 0.169,
   "crdt_join_conflicts_resolved": 0,
-  "total_network_bandwidth_consumed_bytes": 1920,
-  "cooperative_objective_yield": 140.72,
+  "total_network_bandwidth_consumed_bytes": 3456,
+  "cooperative_objective_yield": 208.67,
   "cooperation_verdict": "DECENTRALIZED_COOPERATION_VERIFIED",
   "proxy_summaries": [
     {
@@ -23,15 +23,15 @@
       "hardware_tier": "HPC_QUANTUM_CLOUD",
       "ram_budget": "128 GB",
       "bandwidth": "10000 Mbps",
-      "local_decisions_executed": 18,
-      "residual_drift": 0.0059,
-      "last_synced_epoch": 5,
+      "local_decisions_executed": 30,
+      "residual_drift": 0.0179,
+      "last_synced_epoch": 8,
       "vector_clock": {
-        "PROXY-P2P_-03": 11,
-        "PROXY-EMBE-02": 3,
-        "PROXY-AIRG-04": 10,
+        "PROXY-HPC_-01": 31,
         "ORIGIN": 1,
-        "PROXY-HPC_-01": 19
+        "PROXY-AIRG-04": 16,
+        "PROXY-P2P_-03": 16,
+        "PROXY-EMBE-02": 4
       }
     },
     {
@@ -40,14 +40,15 @@
       "hardware_tier": "EMBEDDED_EDGE_MCU",
       "ram_budget": "64 KB",
       "bandwidth": "1.2 kbps",
-      "local_decisions_executed": 3,
-      "residual_drift": 0.0544,
-      "last_synced_epoch": 4,
+      "local_decisions_executed": 5,
+      "residual_drift": 0.169,
+      "last_synced_epoch": 7,
       "vector_clock": {
-        "PROXY-P2P_-03": 16,
-        "PROXY-EMBE-02": 4,
+        "PROXY-HPC_-01": 19,
         "ORIGIN": 1,
-        "PROXY-HPC_-01": 13
+        "PROXY-AIRG-04": 10,
+        "PROXY-P2P_-03": 26,
+        "PROXY-EMBE-02": 6
       }
     },
     {
@@ -56,14 +57,15 @@
       "hardware_tier": "P2P_BYZANTINE_VALIDATOR",
       "ram_budget": "16 GB",
       "bandwidth": "100 Mbps",
-      "local_decisions_executed": 15,
-      "residual_drift": 0.014,
-      "last_synced_epoch": 4,
+      "local_decisions_executed": 25,
+      "residual_drift": 0.0441,
+      "last_synced_epoch": 7,
       "vector_clock": {
-        "PROXY-P2P_-03": 16,
-        "PROXY-EMBE-02": 4,
+        "PROXY-HPC_-01": 19,
         "ORIGIN": 1,
-        "PROXY-HPC_-01": 13
+        "PROXY-AIRG-04": 10,
+        "PROXY-P2P_-03": 26,
+        "PROXY-EMBE-02": 6
       }
     },
     {
@@ -72,15 +74,15 @@
       "hardware_tier": "AIRGAPPED_DEEP_PROBE",
       "ram_budget": "524288 KB",
       "bandwidth": "0.3 kbps",
-      "local_decisions_executed": 9,
-      "residual_drift": 0.0742,
-      "last_synced_epoch": 5,
+      "local_decisions_executed": 15,
+      "residual_drift": 0.1263,
+      "last_synced_epoch": 8,
       "vector_clock": {
-        "PROXY-P2P_-03": 11,
-        "PROXY-EMBE-02": 3,
-        "PROXY-AIRG-04": 10,
+        "PROXY-HPC_-01": 31,
         "ORIGIN": 1,
-        "PROXY-HPC_-01": 19
+        "PROXY-AIRG-04": 16,
+        "PROXY-P2P_-03": 16,
+        "PROXY-EMBE-02": 4
       }
     }
   ]

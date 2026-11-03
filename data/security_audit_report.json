@@ -1,6 +1,6 @@
 {
-  "audit_id": "AUDIT-2053642",
-  "timestamp": 1793732053.6421294,
+  "audit_id": "AUDIT-2805044",
+  "timestamp": 1793732805.0443995,
   "target_asset": {
     "asset_id": "ASSET-GATEWAY-MESH-01",
     "hostname": "gateway-core.uas.internal",
@@ -76,7 +76,7 @@
   "defensive_mitigations_count": 4,
   "defensive_mitigation_patches": [
     {
-      "patch_id": "SEC-PATCH-2053641",
+      "patch_id": "SEC-PATCH-2805044",
       "threat_id": "THREAT-ASSET-GA-01",
       "asset_id": "ASSET-GATEWAY-MESH-01",
       "mitigation_type": "MTLS_ENFORCEMENT",
@@ -85,7 +85,7 @@
       "verification_status": "VERIFIED_HARDENED"
     },
     {
-      "patch_id": "SEC-PATCH-2053641",
+      "patch_id": "SEC-PATCH-2805044",
       "threat_id": "THREAT-ASSET-GA-02",
       "asset_id": "ASSET-GATEWAY-MESH-01",
       "mitigation_type": "MTLS_ENFORCEMENT",
@@ -94,7 +94,7 @@
       "verification_status": "VERIFIED_HARDENED"
     },
     {
-      "patch_id": "SEC-PATCH-2053641",
+      "patch_id": "SEC-PATCH-2805044",
       "threat_id": "THREAT-ASSET-GA-03",
       "asset_id": "ASSET-GATEWAY-MESH-01",
       "mitigation_type": "IAM_LEAST_PRIVILEGE",
@@ -103,7 +103,7 @@
       "verification_status": "VERIFIED_HARDENED"
     },
     {
-      "patch_id": "SEC-PATCH-2053641",
+      "patch_id": "SEC-PATCH-2805044",
       "threat_id": "THREAT-ASSET-GA-04",
       "asset_id": "ASSET-GATEWAY-MESH-01",
       "mitigation_type": "NETWORK_POLICY",
@@ -118,5 +118,5 @@
     "risk_reduction_percentage": 90.39
   },
   "audit_verdict": "SECURITY_POSTURE_HARDENED",
-  "workflow_latency_ms": 1.5
+  "workflow_latency_ms": 0.32
 }
