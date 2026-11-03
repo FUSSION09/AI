@@ -26,6 +26,7 @@ if str(SRC_DIR) not in sys.path:
 
 from config import DATA_DIR
 from tool_calling_engine import tool_engine, dispatch_tool_intent
+from rag_vector_engine import rag_database
 
 
 def generate_conversational_response(
@@ -74,6 +75,44 @@ def generate_conversational_response(
             f"### Real-World Diagnostic Report: `{tool_to_call}`\n\n"
             f"{tool_res.human_readable_summary}\n\n"
             f"*(Executed via Sandboxed Tool & Function Calling Layer in {tool_res.execution_time_ms:.1f}ms)*"
+        )
+        return reply, reasoning_chain, confidence, subsystem
+
+    # --------------------------------------------------------------------------
+    # 0.5 DYNAMIC RAG & HYBRID VECTOR MEMORY RETRIEVAL (Unstructured Papers & Documents)
+    # --------------------------------------------------------------------------
+    rag_trigger = any(k in q_lower for k in [
+        "rag", "vector database", "retrieval augmented", "unstructured", 
+        "external paper", "fincen", "boi", "beneficial ownership", 
+        "bft consensus", "flp impossibility", "asynchronous micro-mesh", 
+        "query documents", "knowledge base search"
+    ])
+    
+    rag_results = rag_database.query(q_clean, top_k=2, min_similarity=0.25)
+    if (rag_trigger and rag_results) or (rag_results and rag_results[0].score >= 0.45):
+        reasoning_chain.append(f"Dynamic RAG Memory activated. Queried {len(rag_database.chunks)} chunks across {len(rag_database.doc_registry)} external documents.")
+        top_hit = rag_results[0]
+        reasoning_chain.append(f"Top RAG semantic hit: {top_hit.citation} with hybrid score {top_hit.score:.3f} (Dense: {top_hit.dense_score:.3f}, Sparse: {top_hit.sparse_score:.3f}).")
+        subsystem = "DYNAMIC_RAG_MEMORY"
+        confidence = min(0.99, max(0.85, top_hit.score))
+
+        evidence_blocks = []
+        for idx, r in enumerate(rag_results, 1):
+            evidence_blocks.append(
+                f"**Evidence #{idx}**: {r.citation}\n"
+                f"- *Domain*: `{r.domain}` | *Hybrid Relevance Score*: `{r.score*100:.1f}%` (Dense: `{r.dense_score*100:.1f}%`, Sparse: `{r.sparse_score*100:.1f}%`)\n"
+                f"- *Excerpt*: \"{r.text}\""
+            )
+        evidence_md = "\n\n".join(evidence_blocks)
+
+        reply = (
+            f"### Dynamic Knowledge Retrieval: Retrieval-Augmented Brief\n\n"
+            f"The system queried its **Hybrid Dense-Sparse Vector Memory** (`data/rag_storage/`) and retrieved factual context from external ingested literature:\n\n"
+            f"{evidence_md}\n\n"
+            f"---\n\n"
+            f"**Synthesized Analytical Takeaway**:\n"
+            f"Unlike static Knowledge Graph lookups, the dynamic RAG pipeline continuously ingests unstructured whitepapers, regulatory filings, and external logs. "
+            f"The semantic match between your inquiry and `{top_hit.doc_title}` confirms empirical alignment across the `{top_hit.domain}` domain."
         )
         return reply, reasoning_chain, confidence, subsystem
 

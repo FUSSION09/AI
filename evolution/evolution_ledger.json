@@ -1,7 +1,7 @@
 {
   "chain_id": "APEX_EVOLUTION_LEDGER_MAIN",
-  "latest_commit": "07173ca3ea1c770cad68412d9976b8dcfdaaca711a38bf329427ce7c980dd8a1",
-  "total_evolutions": 62,
+  "latest_commit": "729c430b4faabc33a71bd8fd2f29e20c10c401cca228104d440b73bdb7fa3a46",
+  "total_evolutions": 64,
   "commits": [
     {
       "commit_hash": "9b26cea3ecf7a9607bba8967f6adf519147015d42c4ad345bb2a7dd28e2b27d6",
@@ -628,6 +628,25 @@
       "patch_id": "PATCH-5885584",
       "action": "ROLLBACK_RESTORE_BASELINE",
       "timestamp": 1793735885.7187514,
+      "author": "COMPILER_AGENT_SIAA_V15"
+    },
+    {
+      "commit_hash": "729c430b4faabc33a71bd8fd2f29e20c10c401cca228104d440b73bdb7fa3a46",
+      "parent_commit": "07173ca3ea1c770cad68412d9976b8dcfdaaca711a38bf329427ce7c980dd8a1",
+      "patch_id": "PATCH-6175595",
+      "target_subsystem": "RL",
+      "gap_addressed": "Unmodeled multi-hop liquidity slippage in RL reward function",
+      "file_path": "D:\\AI\\evolution\\patches\\PATCH-6175595.py",
+      "timestamp": 1793736175.595133,
+      "author": "COMPILER_AGENT_SIAA_V15",
+      "status": "COMMITTED"
+    },
+    {
+      "commit_hash": "ROLLBACK-PATCH-617559",
+      "parent_commit": "729c430b4faabc33a71bd8fd2f29e20c10c401cca228104d440b73bdb7fa3a46",
+      "patch_id": "PATCH-6175595",
+      "action": "ROLLBACK_RESTORE_BASELINE",
+      "timestamp": 1793736175.6728933,
       "author": "COMPILER_AGENT_SIAA_V15"
     }
   ]

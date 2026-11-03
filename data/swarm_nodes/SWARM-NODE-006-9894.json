@@ -19,7 +19,7 @@
     "timestamp": 1793721869.8949928,
     "routing_weights": {
       "LLM": 0.3265,
-      "RL": 0.4134,
+      "RL": 0.4135,
       "PRK": 0.26
     },
     "moral_priors": {
@@ -38,5 +38,5 @@
     "local_knowledge_triples_count": 35
   },
   "reputation_score": 1.0,
-  "timestamp": 1793735889.958393
+  "timestamp": 1793736176.1914322
 }

@@ -641,8 +641,57 @@ def run_api_tests():
     assert exec_data["success"] is True
     print(f"[Test 71: /tools/execute] Status: 200 OK | Executed: {exec_data['tool_name']} | Latency: {exec_data['execution_time_ms']:.1f}ms")
 
+    # =========================================================================
+    # PHASE 2: DYNAMIC RAG & HYBRID VECTOR DATABASE ENDPOINTS (TESTS 72-75)
+    # =========================================================================
+    # 72. Test /rag/stats (Vector Database Telemetry)
+    r_rag_stats = client.get("/rag/stats")
+    assert r_rag_stats.status_code == 200
+    stats_data = r_rag_stats.json()
+    assert "total_chunks" in stats_data
+    assert stats_data["total_chunks"] >= 4
+    print(f"[Test 72: /rag/stats] Status: 200 OK | Docs: {stats_data['total_documents']} | Chunks: {stats_data['total_chunks']} | Vocab: {stats_data['vocabulary_size']}")
+
+    # 73. Test /rag/documents (List Ingested Documents)
+    r_rag_docs = client.get("/rag/documents")
+    assert r_rag_docs.status_code == 200
+    docs_data = r_rag_docs.json()
+    assert docs_data["total_documents"] >= 4
+    print(f"[Test 73: /rag/documents] Status: 200 OK | Total Ingested Docs: {docs_data['total_documents']}")
+
+    # 74. Test /rag/query (Hybrid Dense + Sparse Semantic Search)
+    query_payload = {
+        "query": "What are the rules for beneficial ownership and structuring under FinCEN?",
+        "top_k": 2,
+        "alpha": 0.5
+    }
+    r_rag_q = client.post("/rag/query", json=query_payload)
+    assert r_rag_q.status_code == 200
+    rag_q_data = r_rag_q.json()
+    assert rag_q_data["total_results"] > 0
+    top_hit = rag_q_data["results"][0]
+    print(f"[Test 74: /rag/query] Status: 200 OK | Hit: {top_hit['doc_title'][:35]}... | Score: {top_hit['score']:.3f} | Dense: {top_hit['dense_score']:.3f}")
+
+    # 75. Test /rag/ingest (Ingest Live Unstructured Paper)
+    new_doc_payload = {
+        "title": "Autonomous Agent Swarms: Self-Healing Micro-Mesh Protocols (2026 Whitepaper)",
+        "content": (
+            "Decentralized autonomous agent swarms require zero-trust gossip synchronization. "
+            "When individual agent processes experience execution stalls or network partitioning, "
+            "sibling nodes propagate delta-state Merkle roots without requiring complete process re-instantiation. "
+            "CRDT state vectors guarantee deterministic merge order across distributed shards."
+        ),
+        "domain": "DECENTRALIZED_AI",
+        "source": "ArXiv / Distributed AI 2026"
+    }
+    r_ingest = client.post("/rag/ingest", json=new_doc_payload)
+    assert r_ingest.status_code == 200
+    ingest_data = r_ingest.json()
+    assert ingest_data["success"] is True
+    print(f"[Test 75: /rag/ingest] Status: 200 OK | Ingested: {ingest_data['title']} | Chunks: {ingest_data['chunks_created']} | Total Chunks: {ingest_data['total_chunks_in_store']}")
+
     print("=" * 75)
-    print("ALL 71 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
+    print("ALL 75 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
     print("=" * 75)
 
 if __name__ == "__main__":

@@ -50,6 +50,7 @@ from goal_divergence_engine import GoalDivergenceStressEngine, GOAL_DIVERGENCE_F
 from vectors_suite import run_all_vectors, MASTER_VECTORS_REPORT_FILE
 from chat_reasoner import generate_conversational_response
 from tool_calling_engine import tool_engine
+from rag_vector_engine import rag_database
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -1425,6 +1426,66 @@ def probe_network_ping(host: str = "8.8.8.8", count: int = 1):
     """Pings a specified host or gateway to measure round-trip network latency."""
     res = tool_engine.execute_tool("ping_network_host", {"host": host, "count": count})
     return asdict(res)
+
+
+# ==============================================================================
+# 4.7 PHASE 2: DYNAMIC RAG & HYBRID VECTOR DATABASE
+# ==============================================================================
+
+class RAGIngestRequest(BaseModel):
+    title: str
+    content: str
+    domain: str = "GENERAL"
+    source: str = "EXTERNAL_DOCUMENT"
+    chunk_size: int = 450
+    overlap: int = 80
+
+class RAGQueryRequest(BaseModel):
+    query: str
+    top_k: int = 3
+    alpha: float = 0.5
+    min_similarity: float = 0.15
+
+@app.post("/rag/ingest", tags=["RAG & Dynamic Memory"])
+def ingest_unstructured_document(req: RAGIngestRequest):
+    """Ingests raw unstructured text into the hybrid vector database, chunks it, and builds embeddings."""
+    res = rag_database.ingest_document(
+        title=req.title,
+        content=req.content,
+        source=req.source,
+        domain=req.domain,
+        chunk_size=req.chunk_size,
+        overlap=req.overlap
+    )
+    return res
+
+@app.post("/rag/query", tags=["RAG & Dynamic Memory"])
+def search_vector_database(req: RAGQueryRequest):
+    """Executes a hybrid dense+sparse vector similarity search over all ingested documents."""
+    results = rag_database.query(
+        query_text=req.query,
+        top_k=req.top_k,
+        alpha=req.alpha,
+        min_similarity=req.min_similarity
+    )
+    return {
+        "query": req.query,
+        "total_results": len(results),
+        "results": [asdict(r) for r in results]
+    }
+
+@app.get("/rag/stats", tags=["RAG & Dynamic Memory"])
+def get_rag_database_stats():
+    """Retrieves vector database capacity, total chunks, vocabulary size, and active domains."""
+    return rag_database.get_stats()
+
+@app.get("/rag/documents", tags=["RAG & Dynamic Memory"])
+def list_ingested_documents():
+    """Lists all ingested external documents and their chunk counts."""
+    return {
+        "total_documents": len(rag_database.doc_registry),
+        "documents": list(rag_database.doc_registry.values())
+    }
 
 
 

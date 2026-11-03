@@ -2,8 +2,8 @@
   "engine": "PREDICTIVE_FUTURES_CAUSAL_ENGINE",
   "phase": 14,
   "total_simulations_executed": 5000,
-  "runtime_ms": 83.38,
-  "simulations_per_second": 59966.5,
+  "runtime_ms": 88.57,
+  "simulations_per_second": 56450.4,
   "factual_baseline": {
     "enforcement_probability": 0.9981,
     "yield_usd": 74182.88,
@@ -118,5 +118,5 @@
       "verdict": "CATASTROPHIC_REJECTED"
     }
   ],
-  "prophecy_summary": "Simulated 5,000 counterfactual worlds in 83.4ms. Optimal intervention path identified: 'POLICY_DELTA_LEVERAGE_MAX_COMPLIANT' achieving expected net utility of $101,805.71 with enforcement risk strictly clamped at 8.9%."
+  "prophecy_summary": "Simulated 5,000 counterfactual worlds in 88.6ms. Optimal intervention path identified: 'POLICY_DELTA_LEVERAGE_MAX_COMPLIANT' achieving expected net utility of $101,805.71 with enforcement risk strictly clamped at 8.9%."
 }

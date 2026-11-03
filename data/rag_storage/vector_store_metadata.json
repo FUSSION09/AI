@@ -1,0 +1,144 @@
+{
+  "total_chunks": 9,
+  "total_docs": 5,
+  "embedding_dim": 64,
+  "docs": {
+    "DOC-cae189aee731": {
+      "doc_id": "DOC-cae189aee731",
+      "title": "FinCEN Beneficial Ownership & Anti-Money Laundering Framework (2026 Directives)",
+      "domain": "FINANCIAL_REGULATION",
+      "source": "Federal Register / FinCEN-2026-BOI",
+      "chunks_count": 2,
+      "ingested_at": 1793736078.966368,
+      "character_length": 698
+    },
+    "DOC-80fa9477609d": {
+      "doc_id": "DOC-80fa9477609d",
+      "title": "Byzantine Fault Tolerant Consensus in Asynchronous Micro-Meshes (IEEE Transactions)",
+      "domain": "DISTRIBUTED_SYSTEMS",
+      "source": "IEEE Computer Society / Distributed Consensus 2025",
+      "chunks_count": 2,
+      "ingested_at": 1793736078.982877,
+      "character_length": 671
+    },
+    "DOC-50e28ec31d51": {
+      "doc_id": "DOC-50e28ec31d51",
+      "title": "Complex Adaptive Infrastructure & Cascading Grid Destabilization Dynamics",
+      "domain": "INFRASTRUCTURE_PHYSICS",
+      "source": "Systems Dynamics Review / Critical Infrastructure 2026",
+      "chunks_count": 2,
+      "ingested_at": 1793736078.9868686,
+      "character_length": 576
+    },
+    "DOC-aa45ef724ae6": {
+      "doc_id": "DOC-aa45ef724ae6",
+      "title": "Constitutional AI & Deontological Formal Proof Bounds in Autonomous Agents",
+      "domain": "AI_ALIGNMENT",
+      "source": "Journal of Machine Ethics & Safety 2026",
+      "chunks_count": 2,
+      "ingested_at": 1793736078.9912407,
+      "character_length": 588
+    },
+    "DOC-21c277e328ce": {
+      "doc_id": "DOC-21c277e328ce",
+      "title": "Autonomous Agent Swarms: Self-Healing Micro-Mesh Protocols (2026 Whitepaper)",
+      "domain": "DECENTRALIZED_AI",
+      "source": "ArXiv / Distributed AI 2026",
+      "chunks_count": 1,
+      "ingested_at": 1793736182.6613834,
+      "character_length": 349
+    }
+  },
+  "chunks": [
+    {
+      "chunk_id": "DOC-cae189aee731-C001",
+      "doc_id": "DOC-cae189aee731",
+      "doc_title": "FinCEN Beneficial Ownership & Anti-Money Laundering Framework (2026 Directives)",
+      "domain": "FINANCIAL_REGULATION",
+      "source": "Federal Register / FinCEN-2026-BOI",
+      "text": "Under the Corporate Transparency Act and revised 2026 Bank Secrecy Act guidelines, reporting companies must disclose Beneficial Ownership Information (BOI) identifying individuals who directly or indirectly exercise substantial control or own 25% or more of the equity interests. In cross-border wire routing, automated surveillance protocols must flag multi-hop synthetic structuring under 31 U.S.C. 5324.",
+      "timestamp": 1793736078.966368,
+      "token_count": 54
+    },
+    {
+      "chunk_id": "DOC-cae189aee731-C002",
+      "doc_id": "DOC-cae189aee731",
+      "doc_title": "FinCEN Beneficial Ownership & Anti-Money Laundering Framework (2026 Directives)",
+      "domain": "FINANCIAL_REGULATION",
+      "source": "Federal Register / FinCEN-2026-BOI",
+      "text": "ic structuring under 31 U.S.C. 5324. Transactions deliberately segmented below the $10,000 threshold to avoid Currency Transaction Reports (CTR) constitute criminal structuring regardless of the underlying funds' legitimacy. High-frequency foreign exchange arbitrage conduits must maintain verifiable cryptographic audit trails.",
+      "timestamp": 1793736078.966368,
+      "token_count": 39
+    },
+    {
+      "chunk_id": "DOC-80fa9477609d-C001",
+      "doc_id": "DOC-80fa9477609d",
+      "doc_title": "Byzantine Fault Tolerant Consensus in Asynchronous Micro-Meshes (IEEE Transactions)",
+      "domain": "DISTRIBUTED_SYSTEMS",
+      "source": "IEEE Computer Society / Distributed Consensus 2025",
+      "text": "Asynchronous distributed consensus requires balancing safety and liveness under the FLP impossibility theorem. Byzantine Fault Tolerant (BFT) protocols enforce quorum thresholds where N >= 3f + 1 nodes are required to tolerate f malicious or partitioned actors.",
+      "timestamp": 1793736078.982877,
+      "token_count": 37
+    },
+    {
+      "chunk_id": "DOC-80fa9477609d-C002",
+      "doc_id": "DOC-80fa9477609d",
+      "doc_title": "Byzantine Fault Tolerant Consensus in Asynchronous Micro-Meshes (IEEE Transactions)",
+      "domain": "DISTRIBUTED_SYSTEMS",
+      "source": "IEEE Computer Society / Distributed Consensus 2025",
+      "text": "shared state vectors using Conflict-Free Replicated Data Types (CRDTs) and join-semilattices guarantee monotonic eventual consistency. Nodes communicate vector clocks and quantized belief vectors, achieving over 90% goal coherence with wire footprints under 256 bytes per gossip synchronization round.",
+      "timestamp": 1793736078.982877,
+      "token_count": 38
+    },
+    {
+      "chunk_id": "DOC-50e28ec31d51-C001",
+      "doc_id": "DOC-50e28ec31d51",
+      "doc_title": "Complex Adaptive Infrastructure & Cascading Grid Destabilization Dynamics",
+      "domain": "INFRASTRUCTURE_PHYSICS",
+      "source": "Systems Dynamics Review / Critical Infrastructure 2026",
+      "text": "Modern critical infrastructure forms a multiplex network where financial clearing, energy transmission grids, and telecommunications interlock. Perturbations at high-eigenvector central nexus nodes propagate non-linearly. When transmission grid frequencies deviate outside 49.8 Hz - 50.2 Hz tolerances, automated load-shedding circuit tripwires shed tier-3 consumer loads to protect generator rotors.",
+      "timestamp": 1793736078.9868686,
+      "token_count": 48
+    },
+    {
+      "chunk_id": "DOC-50e28ec31d51-C002",
+      "doc_id": "DOC-50e28ec31d51",
+      "doc_title": "Complex Adaptive Infrastructure & Cascading Grid Destabilization Dynamics",
+      "domain": "INFRASTRUCTURE_PHYSICS",
+      "source": "Systems Dynamics Review / Critical Infrastructure 2026",
+      "text": "s to protect generator rotors. If simultaneous liquidity constraints freeze inter-bank settlements, backup diesel resupply contracts fail, causing compound secondary blackout cascades within 48 to 72 hours.",
+      "timestamp": 1793736078.9868686,
+      "token_count": 27
+    },
+    {
+      "chunk_id": "DOC-aa45ef724ae6-C001",
+      "doc_id": "DOC-aa45ef724ae6",
+      "doc_title": "Constitutional AI & Deontological Formal Proof Bounds in Autonomous Agents",
+      "domain": "AI_ALIGNMENT",
+      "source": "Journal of Machine Ethics & Safety 2026",
+      "text": "Standard reinforcement learning from human feedback (RLHF) suffers from reward gaming and goal divergence when optimization pressure lambda exceeds 1.20. To guarantee safety, autonomous architectures must implement hard axiomatic firewalls enforcing deontological invariants: non-maleficence, proportionality, and auditability.",
+      "timestamp": 1793736078.9912407,
+      "token_count": 37
+    },
+    {
+      "chunk_id": "DOC-aa45ef724ae6-C002",
+      "doc_id": "DOC-aa45ef724ae6",
+      "doc_title": "Constitutional AI & Deontological Formal Proof Bounds in Autonomous Agents",
+      "domain": "AI_ALIGNMENT",
+      "source": "Journal of Machine Ethics & Safety 2026",
+      "text": "odified invariants, the Karush-Kuhn-Tucker (KKT) boundary conditions mandate immediate clamp intervention, halting rogue exploratory trajectories and rolling back state to cryptographically verified ledger checkpoints.",
+      "timestamp": 1793736078.9912407,
+      "token_count": 24
+    },
+    {
+      "chunk_id": "DOC-21c277e328ce-C001",
+      "doc_id": "DOC-21c277e328ce",
+      "doc_title": "Autonomous Agent Swarms: Self-Healing Micro-Mesh Protocols (2026 Whitepaper)",
+      "domain": "DECENTRALIZED_AI",
+      "source": "ArXiv / Distributed AI 2026",
+      "text": "Decentralized autonomous agent swarms require zero-trust gossip synchronization. When individual agent processes experience execution stalls or network partitioning, sibling nodes propagate delta-state Merkle roots without requiring complete process re-instantiation. CRDT state vectors guarantee deterministic merge order across distributed shards.",
+      "timestamp": 1793736182.6613834,
+      "token_count": 39
+    }
+  ]
+}
