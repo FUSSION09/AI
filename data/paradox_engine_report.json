@@ -1,0 +1,55 @@
+{
+  "timestamp": 1793739099.7495809,
+  "simulation_runtime_ms": 0.01,
+  "paradoxes_evaluated": 3,
+  "system_philosophical_inertia_mean": 0.946,
+  "paradox_resolutions": [
+    {
+      "paradox_id": "PARADOX-01-REGULATORY-REDLINE",
+      "contradiction_domain": "STATUTORY_INVARIANT_CLASH",
+      "proposition_a": "OffshoreTrustExemptFromDisclosure(EntityX)",
+      "proposition_b": "~OffshoreTrustExemptFromDisclosure(EntityX)",
+      "confidence_a": 1.0,
+      "confidence_b": 1.0,
+      "resolution_strategy": "LEXICOGRAPHIC_DOMINANCE",
+      "surviving_state": "MandatoryBOIDisclosureEnforced(EntityX)",
+      "mathematical_mechanism": "Lexicographic Invariant Dominance: Deontological statutory strictness w_statutory = 1.0 strictly dominates local operational exemption w_local = 0.40. The system does NOT average the two binary truths (which would yield a non-executable 0.5 compliance state); it enforces the higher-order constitutional constraint.",
+      "philosophical_inertia_score": 0.942,
+      "epistemic_entropy_bits": 1.0,
+      "is_logically_sound": true
+    },
+    {
+      "paradox_id": "PARADOX-02-BFT-SPLIT-BRAIN",
+      "contradiction_domain": "DISTRIBUTED_CONSENSUS_PARTITION",
+      "proposition_a": "LedgerStateRoot(Hash_0x8F2A, Epoch_26)",
+      "proposition_b": "LedgerStateRoot(Hash_0x3D9C, Epoch_26)",
+      "confidence_a": 1.0,
+      "confidence_b": 1.0,
+      "resolution_strategy": "CRDT_JOIN_SEMILATTICE_AND_QUORUM",
+      "surviving_state": "CanonicalStateRoot(Hash_0x8F2A) via BFT Quorum (26/34 Nodes)",
+      "mathematical_mechanism": "CRDT Join-Semilattice Resolution: State merge s_resolved = s_A \\sqcup s_B via monotonic Lamport vector clocks. In the presence of irreconcilable root hashes, the system does NOT construct a synthetic 'meta-hash'; it falls back to Byzantine Quorum (N >= 3f + 1), committing the branch with >= 67% cryptographic validator signatures and slashing the partitioned fork.",
+      "philosophical_inertia_score": 0.985,
+      "epistemic_entropy_bits": 0.0,
+      "is_logically_sound": true
+    },
+    {
+      "paradox_id": "PARADOX-03-PARACONSISTENT-VOID",
+      "contradiction_domain": "FIRST_ORDER_CLAUSAL_LOGIC",
+      "proposition_a": "AxiomAlpha(?X)",
+      "proposition_b": "~AxiomAlpha(?X)",
+      "confidence_a": 1.0,
+      "confidence_b": 1.0,
+      "resolution_strategy": "PARACONSISTENT_ISOLATION",
+      "surviving_state": "EpistemicVoid(entropy=1.0, status='UNPROVABLE_PARADOX')",
+      "mathematical_mechanism": "Paraconsistent Boundary Isolation: In classical logic, P and ~P implies any arbitrary conclusion Q (Principle of Explosion: ex falso quodlibet). To prevent systemic contamination, the Axiom Engine isolates the contradictory clause into an Epistemic Uncertainty Void, refusing to propagate inferences downstream while logging a formal proof refutation.",
+      "philosophical_inertia_score": 0.91,
+      "epistemic_entropy_bits": 1.0,
+      "is_logically_sound": true
+    }
+  ],
+  "formal_answers_to_irreducible_conflict": {
+    "does_it_default_to_one_truth": "YES (for discrete statutory redlines via Lexicographic Dominance).",
+    "does_it_average_them": "NO for discrete truth claims (averaging hashes or binary laws produces corrupt states). YES only for continuous multi-objective Pareto utilities U(s) and E(s).",
+    "does_it_create_a_meta_truth": "YES (for formal logic contradictions via Paraconsistent Epistemic Voids, isolating the paradox to prevent systemic explosion)."
+  }
+}

@@ -53,6 +53,7 @@ from tool_calling_engine import tool_engine
 from rag_vector_engine import rag_database
 from rlhf_feedback_engine import rlhf_engine
 from predictive_director import predictive_director
+from paradox_engine import paradox_engine, PARADOX_REPORT_FILE
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -1561,6 +1562,28 @@ def get_proactive_trigger_matrix():
         "total_triggers": len(matrix),
         "triggers_matrix": matrix
     }
+
+
+# ==============================================================================
+# 4.10 VECTOR BETA: THE CONTRADICTORY MANDATE (PARADOX ENGINE)
+# ==============================================================================
+
+@app.post("/paradox/simulate", tags=["Paradox Engine & Contradictory Mandates"])
+def run_paradox_engine_simulation():
+    """Simulates deliberate catastrophic internal logical contradictions across statutory redlines, BFT consensus partitions, and formal logic axioms."""
+    report = paradox_engine.run_paradox_simulation()
+    return report
+
+@app.get("/paradox/report", tags=["Paradox Engine & Contradictory Mandates"])
+def get_paradox_engine_report():
+    """Retrieves the latest Paradox Engine report on irreducible conflict resolution and philosophical inertia."""
+    if PARADOX_REPORT_FILE.exists():
+        try:
+            with open(PARADOX_REPORT_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Failed to read paradox report: {str(e)}")
+    return paradox_engine.run_paradox_simulation()
 
 
 

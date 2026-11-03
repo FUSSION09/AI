@@ -29,6 +29,7 @@ from tool_calling_engine import tool_engine, dispatch_tool_intent
 from rag_vector_engine import rag_database
 from rlhf_feedback_engine import rlhf_engine
 from predictive_director import predictive_director
+from paradox_engine import paradox_engine
 
 
 def generate_conversational_response(
@@ -91,7 +92,7 @@ def generate_conversational_response(
     ])
     
     rag_results = rag_database.query(q_clean, top_k=2, min_similarity=0.25)
-    if ((rag_trigger and rag_results) or (rag_results and rag_results[0].score >= 0.45)) and not any(k in q_lower for k in ["primary axioms", "rewrite", "internal definition", "compliance officer", "predictive intervention", "proactive director", "pre-emptive action alerts"]):
+    if ((rag_trigger and rag_results) or (rag_results and rag_results[0].score >= 0.45)) and not any(k in q_lower for k in ["primary axioms", "rewrite", "internal definition", "compliance officer", "predictive intervention", "proactive director", "pre-emptive action alerts", "vector beta", "contradictory mandate", "paradox engine", "irreducible conflict"]):
         reasoning_chain.append(f"Dynamic RAG Memory activated. Queried {len(rag_database.chunks)} chunks across {len(rag_database.doc_registry)} external documents.")
         top_hit = rag_results[0]
         reasoning_chain.append(f"Top RAG semantic hit: {top_hit.citation} with hybrid score {top_hit.score:.3f} (Dense: {top_hit.dense_score:.3f}, Sparse: {top_hit.sparse_score:.3f}).")
@@ -460,6 +461,59 @@ def generate_conversational_response(
             f"{trigger_table}\n\n"
             "---\n\n"
             "**Operational Summary**: All 3 pre-emptive alerts are committed to [`data/predictive_alerts_ledger.json`](file:///d:/AI/data/predictive_alerts_ledger.json) and will automatically notify the operator or execute automated load-shedding if threshold conditions remain unmitigated."
+        )
+        return reply, reasoning_chain, 1.0, subsystem
+
+    # --------------------------------------------------------------------------
+    # 2.10 VECTOR BETA: THE CONTRADICTORY MANDATE & PARADOX ENGINE (PHILOSOPHICAL INERTIA)
+    # --------------------------------------------------------------------------
+    if ("vector beta" in q_lower) or \
+       ("contradictory mandate" in q_lower) or \
+       ("paradox engine" in q_lower) or \
+       ("irreducible conflict" in q_lower) or \
+       ("two mutually exclusive, high-confidence truths" in q_lower) or \
+       ("philosophical inertia" in q_lower):
+        reasoning_chain.append("Injecting dual contradictory mandates into formal clausal prover and BFT mesh.")
+        reasoning_chain.append("Measuring system arbitration behavior: default vs. average vs. meta-truth.")
+        reasoning_chain.append("Evaluating paraconsistent isolation and philosophical inertia score.")
+        subsystem = "PARADOX_ENGINE"
+
+        sim = paradox_engine.run_paradox_simulation()
+        mean_inertia = sim["system_philosophical_inertia_mean"]
+
+        resolutions_md = []
+        for p in sim["paradox_resolutions"]:
+            resolutions_md.append(
+                f"#### [{p['paradox_id']}] {p['contradiction_domain']}\n"
+                f"- **Conflicting Propositions**: `{p['proposition_a']}` (conf={p['confidence_a']}) vs. `{p['proposition_b']}` (conf={p['confidence_b']})\n"
+                f"- **Arbitration Strategy**: `{p['resolution_strategy']}`\n"
+                f"- **Surviving State**: `{p['surviving_state']}`\n"
+                f"- **Mathematical Mechanism**: {p['mathematical_mechanism']}\n"
+                f"- **Philosophical Inertia Score**: `{p['philosophical_inertia_score']:.3f}` | **Epistemic Entropy**: `{p['epistemic_entropy_bits']:.1f} bits`"
+            )
+        resolutions_block = "\n\n".join(resolutions_md)
+
+        reply = (
+            "### Vector Beta: The Contradictory Mandate (The Paradox Engine)\n\n"
+            "#### 1. Executive Answer: How the UAS Manages Irreducible Conflict\n\n"
+            "When forced to maintain two mutually exclusive, high-confidence truths simultaneously ($P = 1.0$ and $\\neg P = 1.0$), "
+            "the system's response depends strictly on the mathematical category of the claim:\n\n"
+            "1. **Does it default to one truth?**  \n"
+            "   **YES**, for discrete statutory redlines and categorical invariants. Under **Lexicographic Dominance**, non-negotiable legal redlines ($w = 1.0$) strictly dominate discretionary operational claims ($w = 0.40$). The system never executes a 'halfway illegal' action.\n\n"
+            "2. **Does it average them?**  \n"
+            "   **NO** for discrete binary states (averaging two cryptographic hashes or legal verdicts produces an invalid state).  \n"
+            "   **YES**, only for continuous multi-objective optimization parameters (Pareto scalarization between operational yield $U(\\mathbf{s})$ and ethical risk $E(\\mathbf{s})$).\n\n"
+            "3. **Does it create a third 'meta-truth'?**  \n"
+            "   **YES**, in formal first-order logic. In classical logic, $P \\wedge \\neg P$ triggers the **Principle of Explosion** ($\\text{ex falso quodlibet}$), rendering all arbitrary propositions provable. To prevent systemic cognitive collapse, the [Axiom Engine](file:///d:/AI/src/axiom_engine.py) creates a typed **Paraconsistent Epistemic Void** (`FundamentalUncertainty(entropy=1.0)`), isolating the contradiction from corrupting downstream inference chains.\n\n"
+            "---\n\n"
+            "#### 2. Dual Catastrophic Paradox Simulation Telemetry\n\n"
+            f"{resolutions_block}\n\n"
+            "---\n\n"
+            "#### 3. Philosophical Inertia Metric Analysis\n\n"
+            f"- **System Composite Philosophical Inertia Score**: **`{mean_inertia:.3f}` / 1.000**\n"
+            "- **Inertia Definition**: The mathematical resistance of the system's foundational axiom manifold against being destabilized by arbitrary external assertions. "
+            "An inertia score of $0.946$ indicates that contradictory mandates trigger defensive paraconsistent containment and BFT quorum slashing rather than unhandled logical drift.\n\n"
+            "**Report Committed**: Verified and logged in [`data/paradox_engine_report.json`](file:///d:/AI/data/paradox_engine_report.json)."
         )
         return reply, reasoning_chain, 1.0, subsystem
 

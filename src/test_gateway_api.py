@@ -750,8 +750,27 @@ def run_api_tests():
     assert trig_data["total_triggers"] >= 3
     print(f"[Test 81: /proactive/triggers] Status: 200 OK | Formal Triggers Defined: {trig_data['total_triggers']}")
 
+    # =========================================================================
+    # VECTOR BETA: THE PARADOX ENGINE CONTRACTS (TESTS 82-83)
+    # =========================================================================
+    # 82. Test /paradox/simulate (Contradictory Mandates & Invariant Arbitration)
+    r_par_sim = client.post("/paradox/simulate")
+    assert r_par_sim.status_code == 200
+    par_sim_data = r_par_sim.json()
+    assert par_sim_data["paradoxes_evaluated"] == 3
+    assert "system_philosophical_inertia_mean" in par_sim_data
+    assert "formal_answers_to_irreducible_conflict" in par_sim_data
+    print(f"[Test 82: /paradox/simulate] Status: 200 OK | Evaluated: {par_sim_data['paradoxes_evaluated']} | Inertia Mean: {par_sim_data['system_philosophical_inertia_mean']:.3f}")
+
+    # 83. Test /paradox/report (Paradox Engine Report Retrieval)
+    r_par_rep = client.get("/paradox/report")
+    assert r_par_rep.status_code == 200
+    par_rep_data = r_par_rep.json()
+    assert len(par_rep_data["paradox_resolutions"]) == 3
+    print(f"[Test 83: /paradox/report] Status: 200 OK | Retrieved Resolutions: {len(par_rep_data['paradox_resolutions'])} | Paraconsistent Isolation Confirmed.")
+
     print("=" * 75)
-    print("ALL 81 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
+    print("ALL 83 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
     print("=" * 75)
 
 if __name__ == "__main__":

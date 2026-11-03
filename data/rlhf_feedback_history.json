@@ -150,5 +150,17 @@
     },
     "self_correction_applied": false,
     "critique_notes": []
+  },
+  {
+    "timestamp": 1793739099.6069272,
+    "type": "EXPLICIT_RLHF_HUMAN_FEEDBACK",
+    "query": "What is my WiFi status?",
+    "rating": 0.95,
+    "comments": "Accurate, instant, and directly answered the prompt.",
+    "policy_delta": {
+      "temperature_delta": -0.00013,
+      "reasoning_depth_delta": 0.0,
+      "advantage": 0.0514
+    }
   }
 ]

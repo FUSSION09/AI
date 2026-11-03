@@ -238,5 +238,37 @@
     "latency_ms": 5045.12,
     "summary": "Your Wi-Fi is **ONLINE and CONNECTED** to **Airtel_rake_5050 4**.\n\n- **Adapter**: `Intel(R) Wi-Fi 6E AX211 160MHz`\n- **Link Speed**: `52 Mbps`\n- **Local IP**: `192.168.1.10`\n- **Default Gateway**: `192.168.1.1` (48.3 ms)\n- **Internet Connectivity**: Operational (Ping to Google DNS: 77.7 ms)\n\nEverything is functioning normally. Signal and route to the local router are established.",
     "has_error": false
+  },
+  {
+    "timestamp": 1793739099.260268,
+    "tool_name": "get_wifi_status",
+    "success": true,
+    "latency_ms": 5607.71,
+    "summary": "Your Wi-Fi is **ONLINE and CONNECTED** to **A 192**.\n\n- **Adapter**: `Intel(R) Wi-Fi 6E AX211 160MHz`\n- **Link Speed**: `130 Mbps`\n- **Local IP**: `10.93.65.148`\n- **Default Gateway**: `10.93.65.76` (29.9 ms)\n- **Internet Connectivity**: Operational (Ping to Google DNS: 66.6 ms)\n\nEverything is functioning normally. Signal and route to the local router are established.",
+    "has_error": false
+  },
+  {
+    "timestamp": 1793739099.4167633,
+    "tool_name": "get_system_vitals",
+    "success": true,
+    "latency_ms": 143.0,
+    "summary": "### Real-Time System Vitals Diagnostic\n\n- **CPU Load**: `12.2%` (8 Physical Cores, 12 Logical Threads)\n- **Memory (RAM)**: `78.3% Used` (12.3 GB used of 15.7 GB)\n- **Battery**: `91%` (On Battery)\n- **System Uptime**: `2d 19h 3m`\n- **Storage Drives**:\n  - Drive `C:\\`: 116.7 GB free of 325.8 GB (64.2% used)\n  - Drive `D:\\`: 5.3 GB free of 148.9 GB (96.4% used)\n- **Operating System**: `Windows-10-10.0.26300-SP0`\n\nSystem health is **NOMINAL**.",
+    "has_error": false
+  },
+  {
+    "timestamp": 1793739099.564939,
+    "tool_name": "list_wifi_profiles",
+    "success": true,
+    "latency_ms": 118.15,
+    "summary": "Found **78 saved Wi-Fi network profile(s)** on this device.\n\n**Recent Saved Networks**:\n- `Airtel_Mukesh_5G`\n- `Airtel_maya_1580`\n- `A`\n- `Airtel_rake_5050`\n- `FTTH-18F8`\n- `moto edge 50 neo_4176`\n- `Airtel_chir_3086`\n- `Airtel_Lohan 1878`\n- `Tarun`\n- `Piyush`\n- *...and 68 additional saved networks.*",
+    "has_error": false
+  },
+  {
+    "timestamp": 1793739099.737998,
+    "tool_name": "get_system_vitals",
+    "success": true,
+    "latency_ms": 101.83,
+    "summary": "### Real-Time System Vitals Diagnostic\n\n- **CPU Load**: `22.0%` (8 Physical Cores, 12 Logical Threads)\n- **Memory (RAM)**: `78.1% Used` (12.3 GB used of 15.7 GB)\n- **Battery**: `91%` (On Battery)\n- **System Uptime**: `2d 19h 3m`\n- **Storage Drives**:\n  - Drive `C:\\`: 116.7 GB free of 325.8 GB (64.2% used)\n  - Drive `D:\\`: 5.3 GB free of 148.9 GB (96.4% used)\n- **Operating System**: `Windows-10-10.0.26300-SP0`\n\nSystem health is **NOMINAL**.",
+    "has_error": false
   }
 ]
