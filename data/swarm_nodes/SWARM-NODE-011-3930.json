@@ -18,8 +18,8 @@
     "generation": 1,
     "timestamp": 1793723943.9306824,
     "routing_weights": {
-      "LLM": 0.3262,
-      "RL": 0.4138,
+      "LLM": 0.326,
+      "RL": 0.414,
       "PRK": 0.26
     },
     "moral_priors": {
@@ -38,5 +38,5 @@
     "local_knowledge_triples_count": 35
   },
   "reputation_score": 1.0,
-  "timestamp": 1793738259.9637558
+  "timestamp": 1793739659.499941
 }

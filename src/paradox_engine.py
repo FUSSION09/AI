@@ -172,3 +172,4 @@ class ParadoxEngine:
 
 # Global singleton instance
 paradox_engine = ParadoxEngine()
+
