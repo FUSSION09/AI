@@ -244,3 +244,4 @@ def generate_conversational_response(
         )
 
     return reply, reasoning_chain, confidence, subsystem
+

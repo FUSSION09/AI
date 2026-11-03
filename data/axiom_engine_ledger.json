@@ -1,5 +1,5 @@
 {
-  "total_events": 36,
+  "total_events": 38,
   "events": [
     {
       "timestamp": 1793724160.0292645,
@@ -807,6 +807,50 @@
         "discovery_id": "DISC-1846133",
         "discovered_concept": "Fractional-Order Memory Diffusion Field",
         "discovered_equation": "d^0.846Phi / dt^0.846 = 3.45 * nabla^2(Phi) - 0.408 * Phi^1.25",
+        "formalized_axioms": [
+          "ResilientZeroPointCoupling(quantum_node) | ~Fractional_Order_Memory_Diffusion_Field(target_system)",
+          "Fractional_Order_Memory_Diffusion_Field(target_system)"
+        ],
+        "post_discovery_status": "PROVEN_TRUE",
+        "confidence_score": 1.0,
+        "proof_summary": "Proposition 'ResilientZeroPointCoupling(quantum_node)' deductively PROVEN from first principles in 2 steps (depth 2).",
+        "closure_achieved": true
+      }
+    },
+    {
+      "timestamp": 1793732059.1689217,
+      "type": "UNCERTAINTY_FLAGGED",
+      "data": {
+        "void_id": "VOID-059165",
+        "unprovable_proposition": "ResilientZeroPointCoupling(quantum_node)",
+        "epistemic_entropy": 0.8988,
+        "missing_predicates": [
+          "ResilientZeroPointCoupling",
+          "ComplementaryLaw(ResilientZeroPointCoupling)"
+        ],
+        "candidate_guidance_vector": [
+          -0.7211,
+          4.9019,
+          3.245,
+          6.6707,
+          1.0454,
+          6.2453,
+          0.7991,
+          1.536
+        ],
+        "recommended_discovery_domain": "AXIOM_CLOSURE_RESILIENTZEROPOINTCOUPLING",
+        "detected_at": 1793732059.1658816
+      }
+    },
+    {
+      "timestamp": 1793732059.225642,
+      "type": "UNCERTAINTY_RESOLVED",
+      "data": {
+        "void_id": "VOID-059165",
+        "target_proposition": "ResilientZeroPointCoupling(quantum_node)",
+        "discovery_id": "DISC-2059178",
+        "discovered_concept": "Fractional-Order Memory Diffusion Field",
+        "discovered_equation": "d^0.763Phi / dt^0.763 = 2.884 * nabla^2(Phi) - 0.328 * Phi^1.25",
         "formalized_axioms": [
           "ResilientZeroPointCoupling(quantum_node) | ~Fractional_Order_Memory_Diffusion_Field(target_system)",
           "Fractional_Order_Memory_Diffusion_Field(target_system)"

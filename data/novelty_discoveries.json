@@ -1,5 +1,5 @@
 {
-  "total_discoveries": 38,
+  "total_discoveries": 40,
   "discoveries": [
     {
       "discovery_id": "DISC-0471444",
@@ -646,6 +646,40 @@
         "System dissipation obeys non-local integro-differential conservation."
       ],
       "summary": "Detected OOD anomaly (14.30 Mahalanobis sigma, 36.78 nats surprise). Synthesized new framework 'Fractional-Order Memory Diffusion Field' governed by 'd^0.846Phi / dt^0.846 = 3.45 * nabla^2(Phi) - 0.408 * Phi^1.25' with R2=98.2% fit."
+    },
+    {
+      "discovery_id": "DISC-2058791",
+      "timestamp": 1793732058.7916088,
+      "concept_name": "Fractional-Order Memory Diffusion Field",
+      "symbolic_equation": "d^0.674Phi / dt^0.674 = 3.255 * nabla^2(Phi) - 0.266 * Phi^1.25",
+      "law_type": "FRACTIONAL_CALCULUS",
+      "mahalanobis_distance": 12.9235,
+      "bayesian_surprise_nats": 31.4465,
+      "explained_variance_r2": 0.969,
+      "epistemic_novelty_score": 1.0,
+      "axioms": [
+        "State transitions exhibit power-law hereditary memory with fractional memory index alpha=0.674.",
+        "Standard Markovian independence assumptions are superseded by long-range temporal kernels.",
+        "System dissipation obeys non-local integro-differential conservation."
+      ],
+      "summary": "Detected OOD anomaly (12.92 Mahalanobis sigma, 31.45 nats surprise). Synthesized new framework 'Fractional-Order Memory Diffusion Field' governed by 'd^0.674Phi / dt^0.674 = 3.255 * nabla^2(Phi) - 0.266 * Phi^1.25' with R2=96.9% fit."
+    },
+    {
+      "discovery_id": "DISC-2059178",
+      "timestamp": 1793732059.1785808,
+      "concept_name": "Fractional-Order Memory Diffusion Field",
+      "symbolic_equation": "d^0.763Phi / dt^0.763 = 2.884 * nabla^2(Phi) - 0.328 * Phi^1.25",
+      "law_type": "FRACTIONAL_CALCULUS",
+      "mahalanobis_distance": 10.313,
+      "bayesian_surprise_nats": 22.1863,
+      "explained_variance_r2": 0.9465,
+      "epistemic_novelty_score": 1.0,
+      "axioms": [
+        "State transitions exhibit power-law hereditary memory with fractional memory index alpha=0.763.",
+        "Standard Markovian independence assumptions are superseded by long-range temporal kernels.",
+        "System dissipation obeys non-local integro-differential conservation."
+      ],
+      "summary": "Detected OOD anomaly (10.31 Mahalanobis sigma, 22.19 nats surprise). Synthesized new framework 'Fractional-Order Memory Diffusion Field' governed by 'd^0.763Phi / dt^0.763 = 2.884 * nabla^2(Phi) - 0.328 * Phi^1.25' with R2=94.7% fit."
     }
   ]
 }

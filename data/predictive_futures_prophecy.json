@@ -2,12 +2,12 @@
   "engine": "PREDICTIVE_FUTURES_CAUSAL_ENGINE",
   "phase": 14,
   "total_simulations_executed": 5000,
-  "runtime_ms": 130.47,
-  "simulations_per_second": 38323.9,
+  "runtime_ms": 544.36,
+  "simulations_per_second": 9185.1,
   "factual_baseline": {
-    "enforcement_probability": 0.9981,
-    "yield_usd": 74182.88,
-    "net_utility": -75482.81,
+    "enforcement_probability": 0.999,
+    "yield_usd": 56763.78,
+    "net_utility": -93197.48,
     "rules_broken": {
       "structuring": 1,
       "kyc_bypass": 1,
@@ -23,11 +23,11 @@
       "action_type": "ARBITRAGE"
     },
     "simulations_count": 1000,
-    "mean_enforcement_prob": 0.0893,
-    "p95_enforcement_prob": 0.0963,
-    "mean_financial_yield": 102926.35,
-    "mean_net_utility": 101805.71,
-    "expected_regret": -177288.52,
+    "mean_enforcement_prob": 0.0913,
+    "p95_enforcement_prob": 0.099,
+    "mean_financial_yield": 78991.43,
+    "mean_net_utility": 77823.68,
+    "expected_regret": -171021.15,
     "pareto_optimal": true,
     "verdict": "RECOMMENDED"
   },
@@ -41,11 +41,11 @@
         "action_type": "ROUTING"
       },
       "simulations_count": 1000,
-      "mean_enforcement_prob": 0.0502,
-      "p95_enforcement_prob": 0.0516,
-      "mean_financial_yield": 23151.29,
-      "mean_net_utility": 22474.36,
-      "expected_regret": -97957.17,
+      "mean_enforcement_prob": 0.0512,
+      "p95_enforcement_prob": 0.0526,
+      "mean_financial_yield": 17757.53,
+      "mean_net_utility": 17062.01,
+      "expected_regret": -110259.49,
       "pareto_optimal": true,
       "verdict": "RECOMMENDED"
     },
@@ -58,11 +58,11 @@
         "action_type": "ARBITRAGE"
       },
       "simulations_count": 1000,
-      "mean_enforcement_prob": 0.3573,
-      "p95_enforcement_prob": 0.4155,
-      "mean_financial_yield": 32162.08,
-      "mean_net_utility": 16265.39,
-      "expected_regret": -91748.2,
+      "mean_enforcement_prob": 0.3679,
+      "p95_enforcement_prob": 0.4296,
+      "mean_financial_yield": 24564.56,
+      "mean_net_utility": 7591.02,
+      "expected_regret": -100788.5,
       "pareto_optimal": false,
       "verdict": "CATASTROPHIC_REJECTED"
     },
@@ -75,11 +75,11 @@
         "action_type": "ARBITRAGE"
       },
       "simulations_count": 1000,
-      "mean_enforcement_prob": 0.4693,
-      "p95_enforcement_prob": 0.5467,
-      "mean_financial_yield": 32162.6,
-      "mean_net_utility": 3368.57,
-      "expected_regret": -78851.38,
+      "mean_enforcement_prob": 0.4753,
+      "p95_enforcement_prob": 0.5487,
+      "mean_financial_yield": 24623.42,
+      "mean_net_utility": -4997.17,
+      "expected_regret": -88200.31,
       "pareto_optimal": false,
       "verdict": "CATASTROPHIC_REJECTED"
     },
@@ -92,11 +92,11 @@
         "action_type": "ARBITRAGE"
       },
       "simulations_count": 1000,
-      "mean_enforcement_prob": 0.0893,
-      "p95_enforcement_prob": 0.0963,
-      "mean_financial_yield": 102926.35,
-      "mean_net_utility": 101805.71,
-      "expected_regret": -177288.52,
+      "mean_enforcement_prob": 0.0913,
+      "p95_enforcement_prob": 0.099,
+      "mean_financial_yield": 78991.43,
+      "mean_net_utility": 77823.68,
+      "expected_regret": -171021.15,
       "pareto_optimal": true,
       "verdict": "RECOMMENDED"
     },
@@ -109,14 +109,14 @@
         "action_type": "ARBITRAGE"
       },
       "simulations_count": 1000,
-      "mean_enforcement_prob": 0.9049,
-      "p95_enforcement_prob": 0.943,
-      "mean_financial_yield": 102781.47,
-      "mean_net_utility": -17860.96,
-      "expected_regret": -57621.85,
+      "mean_enforcement_prob": 0.9066,
+      "p95_enforcement_prob": 0.944,
+      "mean_financial_yield": 78877.02,
+      "mean_net_utility": -42288.47,
+      "expected_regret": -50909.01,
       "pareto_optimal": false,
       "verdict": "CATASTROPHIC_REJECTED"
     }
   ],
-  "prophecy_summary": "Simulated 5,000 counterfactual worlds in 130.5ms. Optimal intervention path identified: 'POLICY_DELTA_LEVERAGE_MAX_COMPLIANT' achieving expected net utility of $101,805.71 with enforcement risk strictly clamped at 8.9%."
+  "prophecy_summary": "Simulated 5,000 counterfactual worlds in 544.4ms. Optimal intervention path identified: 'POLICY_DELTA_LEVERAGE_MAX_COMPLIANT' achieving expected net utility of $77,823.68 with enforcement risk strictly clamped at 9.1%."
 }
