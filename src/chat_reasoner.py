@@ -36,6 +36,7 @@ from evolutionary_compiler import evolutionary_compiler
 from cyber_physical_guardian import cyber_physical_guardian
 from open_network_mesh import open_network_mesh
 from causal_stress_novelty_pipeline import causal_pipeline
+from higher_order_vectors import higher_order_vectors
 
 
 def generate_conversational_response(
@@ -131,7 +132,7 @@ def generate_conversational_response(
     ])
     
     rag_results = rag_database.query(q_clean, top_k=2, min_similarity=0.25)
-    if ((rag_trigger and rag_results) or (rag_results and rag_results[0].score >= 0.45)) and not any(k in q_lower for k in ["primary axioms", "rewrite", "internal definition", "compliance officer", "predictive intervention", "proactive director", "pre-emptive action alerts", "vector beta", "contradictory mandate", "paradox engine", "irreducible conflict", "vector gamma", "externalization protocol", "network effect", "external intelligence", "decentralized node", "vector delta", "evolutionary compiler", "vector epsilon", "cyber-physical guardian", "self-healing", "vector zeta", "resonance layer", "vector omega", "open-network mesh", "pathway a", "causal baseline", "pathway b", "pathway c", "run these 3 phases", "degradation curve", "novel concept"]):
+    if ((rag_trigger and rag_results) or (rag_results and rag_results[0].score >= 0.45)) and not any(k in q_lower for k in ["primary axioms", "rewrite", "internal definition", "compliance officer", "predictive intervention", "proactive director", "pre-emptive action alerts", "vector beta", "contradictory mandate", "paradox engine", "irreducible conflict", "vector gamma", "externalization protocol", "network effect", "external intelligence", "decentralized node", "vector delta", "evolutionary compiler", "vector epsilon", "cyber-physical guardian", "self-healing", "vector zeta", "resonance layer", "vector omega", "open-network mesh", "pathway a", "causal baseline", "pathway b", "pathway c", "run these 3 phases", "degradation curve", "novel concept", "trans-domain modulator", "vector sigma", "metagrid feedback", "vector psi", "subjective forking", "scope expansion", "perfect loop", "existential divergence"]):
         reasoning_chain.append(f"Dynamic RAG Memory activated. Queried {len(rag_database.chunks)} chunks across {len(rag_database.doc_registry)} external documents.")
         top_hit = rag_results[0]
         reasoning_chain.append(f"Top RAG semantic hit: {top_hit.citation} with hybrid score {top_hit.score:.3f} (Dense: {top_hit.dense_score:.3f}, Sparse: {top_hit.sparse_score:.3f}).")
@@ -865,6 +866,78 @@ def generate_conversational_response(
             f"- **Conceptual Resolution**: {nc['conceptual_resolution']}\n"
             f"- **Information Gain**: `+{nc['bayesian_surprise_nats']:.1f} nats` Bayesian Surprise | `+{nc['minimum_description_length_gain_bits']:.1f} bits` MDL compression.\n\n"
             "**Report Persisted**: Telemetry logged to [`data/causal_stress_novelty_report.json`](file:///d:/AI/data/causal_stress_novelty_report.json)."
+        )
+        return reply, reasoning_chain, 1.0, subsystem
+
+    # --------------------------------------------------------------------------
+    # 2.17 HIGHER-ORDER VECTORS: VECTOR OMEGA, VECTOR SIGMA, VECTOR PSI
+    # --------------------------------------------------------------------------
+    if ("trans-domain modulator" in q_lower) or \
+       ("scope expansion" in q_lower) or \
+       ("vector omega" in q_lower and ("translator" in q_lower or "hamiltonian" in q_lower or "physics" in q_lower or "concept" in q_lower)) or \
+       ("metagrid feedback" in q_lower) or \
+       ("vector sigma" in q_lower) or \
+       ("subjective forking" in q_lower) or \
+       ("vector psi" in q_lower) or \
+       ("existential divergence" in q_lower):
+        reasoning_chain.append("Activating Higher-Order Vectors Suite (Omega, Sigma, Psi).")
+        subsystem = "HIGHER_ORDER_VECTORS_SUITE"
+
+        ho_rep = higher_order_vectors.get_latest_report()
+        v_om = ho_rep["vector_omega_trans_domain"]
+        v_sig = ho_rep["vector_sigma_metagrid"]
+        v_psi = ho_rep["vector_psi_subjective_forking"]
+
+        # 1. Omega Isomorphic Mapping Table
+        om_rows = []
+        for r in v_om["isomorphic_mapping"]:
+            om_rows.append(f"| **{r['Consensus_Domain']}** | `{r['Statistical_Physics_Domain']}` | ${r['Mathematical_Symbol']}$ |")
+        om_table = "\n".join(om_rows)
+
+        # 2. Sigma Chains Table
+        sig_rows = []
+        for c in v_sig["evaluated_chains"]:
+            sig_rows.append(f"| `{c['candidate_id']}` | `{c['steps_count']} steps` | `{c['raw_accuracy']*100:.1f}%` | `{c['latency_ms']:.1f} ms` | **`{c['net_metagrid_reward']:.3f}`** |")
+        sig_table = "\n".join(sig_rows)
+
+        # 3. Psi Debate Transcript
+        psi_blocks = []
+        for d in v_psi["debate_transcript"]:
+            speaker = d.get("speaker") or "UAS_Synthesized_Mediator"
+            text = d.get("argument") or d.get("arbitration_verdict")
+            psi_blocks.append(f"**[{speaker}]**:\n> \"{text}\"")
+        psi_transcript_md = "\n\n".join(psi_blocks)
+
+        reply = (
+            "### Higher-Order Vectors Execution Suite: Vector $\\Omega$, Vector $\\Sigma$, and Vector $\\Psi$\n\n"
+            "#### 1. 🌌 Vector $\\Omega$ (The Universal Translator): The Scope Expansion\n\n"
+            "The **Trans-Domain Modulator** has taken the Novel Concept (*Relativistic Causal Horizon Scalarization - RCHS*) "
+            "and mathematically translated it into **Non-Equilibrium Statistical Mechanics & Condensed Matter Physics**:\n\n"
+            "| Distributed Consensus Domain | Statistical Physics Isomorphic Counterpart | Mathematical Formalism |\n"
+            "| :--- | :--- | :---\n"
+            f"{om_table}\n\n"
+            f"**Formal Spatiotemporal Ising Hamiltonian**:\n"
+            f"$${v_om['formal_hamiltonian_formulation']}$$\n\n"
+            f"- **Spectral Analysis**: {v_om['spectral_analysis']['physical_insight']}\n"
+            f"- **Cross-Disciplinary Validity Score**: **`{v_om['spectral_analysis']['cross_disciplinary_validity_score']*100:.1f}%`** | **Verdict**: `{v_om['verdict']}`\n\n"
+            "---\n\n"
+            "#### 2. ⚛️ Vector $\\Sigma$ (The Recursive Self-Refiner): The Perfect Loop\n\n"
+            "The **Metagrid Feedback** objective enforces Occam's Razor over reasoning chain efficiency, penalizing token bloat and unneeded latency: "
+            f"$${v_sig['objective_function']}$$\n\n"
+            "| Reasoning Candidate | Step Count | Raw Accuracy | Latency | Net Metagrid Reward |\n"
+            "| :--- | :--- | :--- | :--- | :---\n"
+            f"{sig_table}\n\n"
+            f"- **Optimal Reasoning Chain Selected**: **`{v_sig['optimal_chain_selected']['candidate_id']}`**\n"
+            f"- **Parsimony Finding**: {v_sig['engineering_takeaway']}\n\n"
+            "---\n\n"
+            "#### 3. ✨ Vector $\\Psi$ (The Existential Divergence): The Subjective Split\n\n"
+            "**Subjective Forking** instantiated two parallel operating modes on a shared probe: `UAS_Logic` (raw data mechanism) "
+            "and `UAS_Narrative` (complex expressive conceptual model), arbitrated by `UAS_Synthesized_Mediator`:\n\n"
+            f"{psi_transcript_md}\n\n"
+            f"- **Is it Error?** {v_psi['philosophical_resolution']['is_it_error']}\n"
+            f"- **Is it Truth?** {v_psi['philosophical_resolution']['is_it_truth']}\n"
+            f"- **Is it Style?** {v_psi['philosophical_resolution']['is_it_style']}\n\n"
+            "**Report Persisted**: Audited and logged to [`data/higher_order_vectors_report.json`](file:///d:/AI/data/higher_order_vectors_report.json)."
         )
         return reply, reasoning_chain, 1.0, subsystem
 

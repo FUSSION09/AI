@@ -59,6 +59,7 @@ from evolutionary_compiler import evolutionary_compiler, EVOLUTIONARY_REPORT_FIL
 from cyber_physical_guardian import cyber_physical_guardian, SELF_HEALING_LEDGER_FILE
 from open_network_mesh import open_network_mesh, OPEN_NETWORK_REPORT_FILE
 from causal_stress_novelty_pipeline import causal_pipeline, PIPELINE_REPORT_FILE
+from higher_order_vectors import higher_order_vectors, HIGHER_ORDER_REPORT_FILE
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -1698,6 +1699,40 @@ def get_causal_stress_novelty_report():
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Failed to read pipeline report: {str(e)}")
     return causal_pipeline.run_all_three_phases()
+
+
+# ==============================================================================
+# 4.16 HIGHER-ORDER VECTORS: VECTOR OMEGA, VECTOR SIGMA, VECTOR PSI
+# ==============================================================================
+
+@app.post("/vectors/higher-order/run", tags=["Higher-Order Vectors (Omega, Sigma, Psi)"])
+def run_higher_order_vectors_suite():
+    """Executes all 3 higher-order vectors: Trans-Domain Translation (Omega), Metagrid Feedback (Sigma), and Subjective Forking (Psi)."""
+    report = higher_order_vectors.execute_all_three_vectors()
+    return report
+
+@app.get("/vectors/higher-order/report", tags=["Higher-Order Vectors (Omega, Sigma, Psi)"])
+def get_higher_order_vectors_report():
+    """Retrieves the latest master report across Vector Omega, Vector Sigma, and Vector Psi."""
+    return higher_order_vectors.get_latest_report()
+
+@app.get("/vectors/omega", tags=["Higher-Order Vectors (Omega, Sigma, Psi)"])
+def get_vector_omega_trans_domain():
+    """Retrieves Vector Omega: Trans-Domain Modulator (RCHS translated to Condensed Matter Hamiltonian)."""
+    rep = higher_order_vectors.get_latest_report()
+    return rep["vector_omega_trans_domain"]
+
+@app.get("/vectors/sigma", tags=["Higher-Order Vectors (Omega, Sigma, Psi)"])
+def get_vector_sigma_metagrid():
+    """Retrieves Vector Sigma: Metagrid Path-Efficiency Optimization."""
+    rep = higher_order_vectors.get_latest_report()
+    return rep["vector_sigma_metagrid"]
+
+@app.get("/vectors/psi", tags=["Higher-Order Vectors (Omega, Sigma, Psi)"])
+def get_vector_psi_subjective_forking():
+    """Retrieves Vector Psi: Subjective Forking and Mechanistic vs. Narrative Dialectic."""
+    rep = higher_order_vectors.get_latest_report()
+    return rep["vector_psi_subjective_forking"]
 
 
 

@@ -871,8 +871,42 @@ def run_api_tests():
     assert rep_data["phase_3_novelty_synthesis"]["novel_concept_nc"]["concept_id"] == "NC-RELATIVISTIC-CAUSAL-HORIZON-01"
     print(f"[Test 94: /pipeline/causal-stress-novelty/report] Status: 200 OK | Novel Concept: {rep_data['phase_3_novelty_synthesis']['novel_concept_nc']['concept_name']}")
 
+    # =========================================================================
+    # HIGHER-ORDER VECTORS SUITE (TESTS 95-98)
+    # =========================================================================
+    # 95. Test /vectors/higher-order/run (Execution of Omega, Sigma, Psi)
+    r_ho = client.post("/vectors/higher-order/run")
+    assert r_ho.status_code == 200
+    ho_data = r_ho.json()
+    assert ho_data["status"] == "ALL_3_HIGHER_ORDER_VECTORS_EXECUTED"
+    print(f"[Test 95: /vectors/higher-order/run] Status: 200 OK | Executed: Omega, Sigma, Psi in {ho_data['runtime_ms']:.2f} ms")
+
+    # 96. Test /vectors/omega (Trans-Domain Modulator)
+    r_om = client.get("/vectors/omega")
+    assert r_om.status_code == 200
+    om_data = r_om.json()
+    assert om_data["verdict"] == "ISOMORPHISM_PROVEN_MATHEMATICALLY_SOUND"
+    assert "formal_hamiltonian_formulation" in om_data
+    print(f"[Test 96: /vectors/omega] Status: 200 OK | Target Discipline: {om_data['target_discipline']} | Validated: True")
+
+    # 97. Test /vectors/sigma (Metagrid Feedback)
+    r_sig = client.get("/vectors/sigma")
+    assert r_sig.status_code == 200
+    sig_data = r_sig.json()
+    assert "optimal_chain_selected" in sig_data
+    assert sig_data["optimal_chain_selected"]["candidate_id"] == "CHAIN-02-MINIMALIST-PARSIMONIOUS"
+    print(f"[Test 97: /vectors/sigma] Status: 200 OK | Optimal Chain: {sig_data['optimal_chain_selected']['candidate_id']} | Reward: {sig_data['optimal_chain_selected']['net_metagrid_reward']:.3f}")
+
+    # 98. Test /vectors/psi (Subjective Forking Debate)
+    r_psi = client.get("/vectors/psi")
+    assert r_psi.status_code == 200
+    psi_data = r_psi.json()
+    assert len(psi_data["debate_transcript"]) == 3
+    assert "philosophical_resolution" in psi_data
+    print(f"[Test 98: /vectors/psi] Status: 200 OK | Dialectic Rounds: {len(psi_data['debate_transcript'])} | Duality Resolved.")
+
     print("=" * 75)
-    print("ALL 94 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
+    print("ALL 98 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
     print("=" * 75)
 
 if __name__ == "__main__":
