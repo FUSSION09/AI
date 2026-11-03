@@ -86,5 +86,29 @@
     "latency_ms": 112.96,
     "summary": "Found **78 saved Wi-Fi network profile(s)** on this device.\n\n**Recent Saved Networks**:\n- `Airtel_Mukesh_5G`\n- `Airtel_maya_1580`\n- `Airtel_rake_5050`\n- `A`\n- `FTTH-18F8`\n- `moto edge 50 neo_4176`\n- `Airtel_chir_3086`\n- `Airtel_Lohan 1878`\n- `Tarun`\n- `Piyush`\n- *...and 68 additional saved networks.*",
     "has_error": false
+  },
+  {
+    "timestamp": 1793736419.821957,
+    "tool_name": "get_wifi_status",
+    "success": true,
+    "latency_ms": 4559.66,
+    "summary": "Your Wi-Fi is **ONLINE and CONNECTED** to **Airtel_rake_5050 4**.\n\n- **Adapter**: `Intel(R) Wi-Fi 6E AX211 160MHz`\n- **Link Speed**: `275 Mbps`\n- **Local IP**: `192.168.1.10`\n- **Default Gateway**: `192.168.1.1` (27.5 ms)\n- **Internet Connectivity**: Operational (Ping to Google DNS: 69.1 ms)\n\nEverything is functioning normally. Signal and route to the local router are established.",
+    "has_error": false
+  },
+  {
+    "timestamp": 1793736419.9555223,
+    "tool_name": "get_system_vitals",
+    "success": true,
+    "latency_ms": 120.33,
+    "summary": "### Real-Time System Vitals Diagnostic\n\n- **CPU Load**: `19.1%` (8 Physical Cores, 12 Logical Threads)\n- **Memory (RAM)**: `75.1% Used` (11.8 GB used of 15.7 GB)\n- **Battery**: `75%` (Plugged In / AC Power)\n- **System Uptime**: `2d 18h 18m`\n- **Storage Drives**:\n  - Drive `C:\\`: 116.7 GB free of 325.8 GB (64.2% used)\n  - Drive `D:\\`: 5.3 GB free of 148.9 GB (96.4% used)\n- **Operating System**: `Windows-10-10.0.26300-SP0`\n\nSystem health is **NOMINAL**.",
+    "has_error": false
+  },
+  {
+    "timestamp": 1793736420.0789833,
+    "tool_name": "list_wifi_profiles",
+    "success": true,
+    "latency_ms": 99.86,
+    "summary": "Found **78 saved Wi-Fi network profile(s)** on this device.\n\n**Recent Saved Networks**:\n- `Airtel_Mukesh_5G`\n- `Airtel_maya_1580`\n- `Airtel_rake_5050`\n- `A`\n- `FTTH-18F8`\n- `moto edge 50 neo_4176`\n- `Airtel_chir_3086`\n- `Airtel_Lohan 1878`\n- `Tarun`\n- `Piyush`\n- *...and 68 additional saved networks.*",
+    "has_error": false
   }
 ]

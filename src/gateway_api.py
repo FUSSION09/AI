@@ -51,6 +51,7 @@ from vectors_suite import run_all_vectors, MASTER_VECTORS_REPORT_FILE
 from chat_reasoner import generate_conversational_response
 from tool_calling_engine import tool_engine
 from rag_vector_engine import rag_database
+from rlhf_feedback_engine import rlhf_engine
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -1485,6 +1486,55 @@ def list_ingested_documents():
     return {
         "total_documents": len(rag_database.doc_registry),
         "documents": list(rag_database.doc_registry.values())
+    }
+
+
+# ==============================================================================
+# 4.8 PHASE 3: RLHF / RLAIF ADAPTIVE REWARD & STRATEGY OPTIMIZATION
+# ==============================================================================
+
+class RLHFFeedbackRequest(BaseModel):
+    query: str
+    response: str
+    rating: float = Field(ge=-1.0, le=1.0)
+    comments: str = ""
+
+class RLHFCritiqueRequest(BaseModel):
+    query: str
+    response: str
+
+@app.post("/rlhf/feedback", tags=["RLHF & Adaptive Core"])
+def submit_human_feedback(req: RLHFFeedbackRequest):
+    """Submits human rating [-1.0, 1.0] to trigger online policy gradient updates on reasoning strategy."""
+    res = rlhf_engine.register_human_feedback(
+        query=req.query,
+        response=req.response,
+        rating=req.rating,
+        comments=req.comments
+    )
+    return res
+
+@app.get("/rlhf/strategy", tags=["RLHF & Adaptive Core"])
+def get_rlhf_strategy_state():
+    """Returns current learned reasoning strategy weights, average reward, and evaluation counts."""
+    return asdict(rlhf_engine.strategy)
+
+@app.post("/rlhf/critique", tags=["RLHF & Adaptive Core"])
+def evaluate_candidate_critique(req: RLHFCritiqueRequest):
+    """Evaluates an arbitrary candidate answer against the 4-component learned reward model."""
+    reward = rlhf_engine.reward_model.evaluate(req.query, req.response)
+    return {
+        "query": req.query,
+        "reward_components": asdict(reward),
+        "verdict": "STRONG_RESPONSE" if reward.total_scalar_reward >= 0.75 else "WEAK_REQUIRES_REFINEMENT"
+    }
+
+@app.get("/rlhf/history", tags=["RLHF & Adaptive Core"])
+def get_rlhf_feedback_history():
+    """Retrieves recent RLHF/RLAIF interaction evaluations and self-correction records."""
+    return {
+        "total_interactions": len(rlhf_engine.history),
+        "history": rlhf_engine.history[-25:]
     }
 
 

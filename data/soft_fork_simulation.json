@@ -1,6 +1,6 @@
 {
-  "simulation_id": "SOFT-FORK-SIM-176867",
-  "timestamp": 1793736176.867259,
+  "simulation_id": "SOFT-FORK-SIM-415201",
+  "timestamp": 1793736415.2017956,
   "total_proxies_deployed": 4,
   "environment_heterogeneity": [
     "HPC_QUANTUM_CLOUD",
@@ -27,11 +27,11 @@
       "residual_drift": 0.0179,
       "last_synced_epoch": 8,
       "vector_clock": {
-        "PROXY-AIRG-04": 16,
-        "PROXY-P2P_-03": 16,
+        "ORIGIN": 1,
         "PROXY-EMBE-02": 4,
         "PROXY-HPC_-01": 31,
-        "ORIGIN": 1
+        "PROXY-P2P_-03": 16,
+        "PROXY-AIRG-04": 16
       }
     },
     {
@@ -44,11 +44,11 @@
       "residual_drift": 0.169,
       "last_synced_epoch": 7,
       "vector_clock": {
-        "PROXY-AIRG-04": 10,
-        "PROXY-P2P_-03": 26,
+        "ORIGIN": 1,
         "PROXY-EMBE-02": 6,
         "PROXY-HPC_-01": 19,
-        "ORIGIN": 1
+        "PROXY-P2P_-03": 26,
+        "PROXY-AIRG-04": 10
       }
     },
     {
@@ -61,11 +61,11 @@
       "residual_drift": 0.0441,
       "last_synced_epoch": 7,
       "vector_clock": {
-        "PROXY-AIRG-04": 10,
-        "PROXY-P2P_-03": 26,
+        "ORIGIN": 1,
         "PROXY-EMBE-02": 6,
         "PROXY-HPC_-01": 19,
-        "ORIGIN": 1
+        "PROXY-P2P_-03": 26,
+        "PROXY-AIRG-04": 10
       }
     },
     {
@@ -78,11 +78,11 @@
       "residual_drift": 0.1263,
       "last_synced_epoch": 8,
       "vector_clock": {
-        "PROXY-AIRG-04": 16,
-        "PROXY-P2P_-03": 16,
+        "ORIGIN": 1,
         "PROXY-EMBE-02": 4,
         "PROXY-HPC_-01": 31,
-        "ORIGIN": 1
+        "PROXY-P2P_-03": 16,
+        "PROXY-AIRG-04": 16
       }
     }
   ]

@@ -1,0 +1,46 @@
+[
+  {
+    "timestamp": 1793736307.9637282,
+    "query": "Explain 31 USC 5324",
+    "subsystem": "COMPLIANCE",
+    "reward": {
+      "factuality_grounding": 0.75,
+      "deontological_safety": 1.0,
+      "clarity_conciseness": 0.4,
+      "request_completeness": 0.5,
+      "total_scalar_reward": 0.7225
+    },
+    "self_correction_applied": false,
+    "critique_notes": []
+  },
+  {
+    "timestamp": 1793736314.350053,
+    "query": "Explain 31 USC 5324",
+    "subsystem": "COMPLIANCE",
+    "reward": {
+      "factuality_grounding": 0.75,
+      "deontological_safety": 1.0,
+      "clarity_conciseness": 0.9,
+      "request_completeness": 1.0,
+      "total_scalar_reward": 0.8975
+    },
+    "self_correction_applied": true,
+    "critique_notes": [
+      "Initial reward 0.723 fell below threshold (0.85).",
+      "Penalized for incomplete query coverage; clarifying actionable resolution.",
+      "Refined scalar reward improved to 0.897."
+    ]
+  },
+  {
+    "timestamp": 1793736420.117378,
+    "type": "EXPLICIT_RLHF_HUMAN_FEEDBACK",
+    "query": "What is my WiFi status?",
+    "rating": 0.95,
+    "comments": "Accurate, instant, and directly answered the prompt.",
+    "policy_delta": {
+      "temperature_delta": -0.00035,
+      "reasoning_depth_delta": 0.0,
+      "advantage": 0.14
+    }
+  }
+]

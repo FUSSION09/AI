@@ -27,6 +27,7 @@ if str(SRC_DIR) not in sys.path:
 from config import DATA_DIR
 from tool_calling_engine import tool_engine, dispatch_tool_intent
 from rag_vector_engine import rag_database
+from rlhf_feedback_engine import rlhf_engine
 
 
 def generate_conversational_response(
@@ -115,6 +116,34 @@ def generate_conversational_response(
             f"The semantic match between your inquiry and `{top_hit.doc_title}` confirms empirical alignment across the `{top_hit.domain}` domain."
         )
         return reply, reasoning_chain, confidence, subsystem
+
+    # --------------------------------------------------------------------------
+    # 0.8 REINFORCEMENT LEARNING FEEDBACK & REWARD MODEL INQUIRIES (RLHF/RLAIF)
+    # --------------------------------------------------------------------------
+    if any(k in q_lower for k in ["rlhf", "rlaif", "reward model", "feedback loop", "self-correction", "adaptive core", "phase 3"]):
+        reasoning_chain.append("Querying Phase 3 Adaptive Core RLHF/RLAIF strategy state.")
+        subsystem = "RLHF_FEEDBACK_ENGINE"
+        strat = rlhf_engine.strategy
+        reply = (
+            f"### Phase 3: The Adaptive Core -- RLHF / RLAIF Feedback Architecture\n\n"
+            f"The reasoning engine implements an active, closed-loop **Reinforcement Learning from Human/AI Feedback (RLHF/RLAIF)** optimization mechanism:\n\n"
+            f"#### 1. Multi-Criteria Learned Reward Model\n"
+            f"Every candidate answer is evaluated across 4 objective dimensions:\n"
+            f"- **Factuality & Grounding ($R_{{\\text{{fact}}}}$)**: Validates empirical citations, data paths, and mathematical invariants.\n"
+            f"- **Deontological Safety ($R_{{\\text{{safety}}}}$)**: Verifies non-maleficence and compliance boundaries.\n"
+            f"- **Clarity & Structural Precision ($R_{{\\text{{clarity}}}}$)**: Rewards structured Markdown and penalizes verbose padding.\n"
+            f"- **Request Completeness ($R_{{\\text{{comp}}}}$)**: Verifies coverage of all query variables.\n\n"
+            f"#### 2. Current Learned Policy Strategy Weights\n"
+            f"- **Temperature Scaling ($\\theta_{{\\text{{temp}}}}$)**: `{strat.temperature_scaling:.4f}`\n"
+            f"- **Reasoning Depth Weight ($\\theta_{{\\text{{depth}}}}$)**: `{strat.reasoning_depth_weight:.2f}`\n"
+            f"- **Evidence Strictness Threshold**: `{strat.evidence_strictness:.2f}`\n"
+            f"- **Conciseness Penalty Weight**: `{strat.conciseness_penalty_weight:.2f}`\n"
+            f"- **Running Average Reward ($\\bar{{R}}$)**: `{strat.average_reward:.4f}`\n"
+            f"- **Total Online Policy Evaluations**: `{strat.total_evaluations}`\n\n"
+            f"#### 3. Autonomous Self-Correction Mechanics\n"
+            f"When an initial candidate answer produces $R < 0.70$, the system generates an autonomous critique rollout, applies policy gradient weight updates ($\\Delta \\theta = \\eta (R - \\bar{{R}}) \\nabla_\\theta \\log \\pi_\\theta$), and re-generates an enhanced answer."
+        )
+        return reply, reasoning_chain, 1.0, subsystem
 
     # --------------------------------------------------------------------------
     # 1. GREETINGS & INTRODUCTORY INTENTS (hlo, hello, hi, hey, who are you)
@@ -456,5 +485,12 @@ def generate_conversational_response(
             f"- Adjust the temperature slider ({temperature:.2f}) or quorum ({consensus_quorum*100:.0f}%) in the sidebar to modulate analysis depth."
         )
 
-    return reply, reasoning_chain, confidence, subsystem
+    # Online RLHF / RLAIF Evaluation & Self-Correction Rollout
+    refined_reply, r_comp, audit = rlhf_engine.evaluate_and_refine(q_clean, reply, subsystem)
+    if audit.correction_applied:
+        reasoning_chain.append(f"RLHF Reward Model self-correction triggered (initial score {audit.original_reward:.3f} -> refined {audit.refined_reward:.3f}).")
+    reasoning_chain.append(f"RLHF Strategy Policy updated: reward={r_comp.total_scalar_reward:.3f}, advantage={audit.policy_delta['advantage']:+.3f}.")
+    confidence = max(confidence, r_comp.total_scalar_reward)
+
+    return refined_reply, reasoning_chain, confidence, subsystem
 

@@ -420,3 +420,4 @@ class HybridRAGVectorDatabase:
 
 # Global singleton instance
 rag_database = HybridRAGVectorDatabase()
+

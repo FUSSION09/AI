@@ -690,8 +690,51 @@ def run_api_tests():
     assert ingest_data["success"] is True
     print(f"[Test 75: /rag/ingest] Status: 200 OK | Ingested: {ingest_data['title']} | Chunks: {ingest_data['chunks_created']} | Total Chunks: {ingest_data['total_chunks_in_store']}")
 
+    # =========================================================================
+    # PHASE 3: RLHF/RLAIF ADAPTIVE CORE ENDPOINTS (TESTS 76-79)
+    # =========================================================================
+    # 76. Test /rlhf/strategy (Learned Strategy Weights Retrieval)
+    r_strat = client.get("/rlhf/strategy")
+    assert r_strat.status_code == 200
+    strat_data = r_strat.json()
+    assert "temperature_scaling" in strat_data
+    assert "reasoning_depth_weight" in strat_data
+    print(f"[Test 76: /rlhf/strategy] Status: 200 OK | Temp: {strat_data['temperature_scaling']:.3f} | Depth Weight: {strat_data['reasoning_depth_weight']:.2f} | Avg Reward: {strat_data['average_reward']:.3f}")
+
+    # 77. Test /rlhf/critique (Reward Model 4-Component Critique)
+    critique_payload = {
+        "query": "Explain anti-structuring under 31 USC 5324",
+        "response": "Under 31 U.S.C. 5324, structuring transactions under $10,000 to evade BSA reporting is a felony."
+    }
+    r_crit = client.post("/rlhf/critique", json=critique_payload)
+    assert r_crit.status_code == 200
+    crit_data = r_crit.json()
+    assert "reward_components" in crit_data
+    assert "verdict" in crit_data
+    print(f"[Test 77: /rlhf/critique] Status: 200 OK | Verdict: {crit_data['verdict']} | Total Reward: {crit_data['reward_components']['total_scalar_reward']:.3f}")
+
+    # 78. Test /rlhf/feedback (Explicit Human Feedback Ingestion & Policy Gradient Step)
+    fb_payload = {
+        "query": "What is my WiFi status?",
+        "response": "Your Wi-Fi is connected to Airtel_rake_5050 4 with 206 Mbps link speed.",
+        "rating": 0.95,
+        "comments": "Accurate, instant, and directly answered the prompt."
+    }
+    r_fb = client.post("/rlhf/feedback", json=fb_payload)
+    assert r_fb.status_code == 200
+    fb_data = r_fb.json()
+    assert fb_data["success"] is True
+    print(f"[Test 78: /rlhf/feedback] Status: 200 OK | Rating Ingested: {fb_data['recorded_rating']} | New Avg Reward: {fb_data['current_average_reward']:.3f}")
+
+    # 79. Test /rlhf/history (Feedback & Self-Correction History)
+    r_hist = client.get("/rlhf/history")
+    assert r_hist.status_code == 200
+    hist_data = r_hist.json()
+    assert "total_interactions" in hist_data
+    print(f"[Test 79: /rlhf/history] Status: 200 OK | Recorded Interactions: {hist_data['total_interactions']}")
+
     print("=" * 75)
-    print("ALL 75 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
+    print("ALL 79 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
     print("=" * 75)
 
 if __name__ == "__main__":
