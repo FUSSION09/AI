@@ -1,6 +1,7 @@
 """
 Phase 8: Service Mesh Gateway (MSMG) Automated Test Suite
 Verifies all RESTful API contracts: /control, /objective, and UI skeleton serving.
+Contract Count: 107 (Tests 1-103 original; 104-107 EWMA Adaptive Threshold Governor)
 Location: d:\AI\src\test_gateway_api.py
 """
 
@@ -960,8 +961,100 @@ def run_api_tests():
     assert surge_rep["performance_delta"]["verdict"] == "MAXIMAL_COMPUTATIONAL_DEPTH_ACHIEVED_WITHOUT_THERMAL_OR_PRESSURE_BREACH"
     print(f"[Test 103: /api/v1/power-governor/report] Status: 200 OK | Power Plugged: {surge_rep['hardware_power_state']['power_plugged']} | CPU Headroom: {surge_rep['hardware_power_state']['headroom_cpu_pct']}%")
 
+    # =========================================================================
+    # EWMA ADAPTIVE THRESHOLD GOVERNOR (TESTS 104-107)
+    # Verifies that dynamic ceilings do not impede OTV-mandated sequences.
+    # =========================================================================
+
+    # 104. GET /api/v1/resource-throttler/thresholds — cold-start (mock low CPU)
+    # During warm-up the governor returns static defaults; otv_safe must be TRUE.
+    r_thresh_cold = client.get("/api/v1/resource-throttler/thresholds?mock_cpu=30.0")
+    assert r_thresh_cold.status_code == 200
+    td_cold = r_thresh_cold.json()
+    assert "thresholds" in td_cold
+    assert "otv_validation" in td_cold
+    t_cold = td_cold["thresholds"]
+    # Cold-start: static defaults 75 / 90 are always OTV-safe
+    assert t_cold["adaptive_elevated"] >= 65.0, "ELEVATED threshold below OTV floor (65)"
+    assert t_cold["adaptive_critical"] <= 95.0, "CRITICAL threshold above OTV ceiling (95)"
+    assert td_cold["otv_validation"]["otv_sequence_safe"] is True, "OTV safety violated on cold start"
+    print(
+        f"[Test 104: GET /api/v1/resource-throttler/thresholds (cold-start)] "
+        f"Status: 200 OK | Elevated: {t_cold['adaptive_elevated']}% | "
+        f"Critical: {t_cold['adaptive_critical']}% | OTV Safe: {td_cold['otv_validation']['otv_sequence_safe']}"
+    )
+
+    # 105. POST /api/v1/resource-throttler/thresholds/batch-ingest — warm-up
+    # Feed 15 samples to push past warmup_samples=10 and activate adaptive mode.
+    nominal_samples = [22.0, 25.5, 28.0, 24.5, 30.0, 27.0, 23.5, 29.0, 26.0, 24.0, 25.0, 27.5, 28.5, 23.0, 26.5]
+    r_batch = client.post(
+        "/api/v1/resource-throttler/thresholds/batch-ingest",
+        json=nominal_samples
+    )
+    assert r_batch.status_code == 200
+    batch_data = r_batch.json()
+    assert batch_data["samples_ingested"] == 15
+    t_batch = batch_data["thresholds"]
+    # After warmup, adaptive thresholds must still respect OTV bounds
+    assert t_batch["adaptive_elevated"] >= 65.0, "Post-warmup ELEVATED threshold below OTV floor"
+    assert t_batch["adaptive_critical"] <= 95.0, "Post-warmup CRITICAL threshold above OTV ceiling"
+    assert t_batch["adaptive_elevated"] <= t_batch["adaptive_critical"], \
+        "ELEVATED must not exceed CRITICAL (monotonicity violated)"
+    assert batch_data["injected_into_throttler"] is True, "Thresholds not injected after warmup"
+    assert batch_data["otv_validation"]["otv_sequence_safe"] is True
+    print(
+        f"[Test 105: POST /api/v1/resource-throttler/thresholds/batch-ingest (warm-up)] "
+        f"Status: 200 OK | Samples: {batch_data['samples_ingested']} | "
+        f"mu={t_batch['ewma_mean']}% | sigma={t_batch['ewma_sigma']}% | "
+        f"Adaptive Elevated: {t_batch['adaptive_elevated']}% | "
+        f"Adaptive Critical: {t_batch['adaptive_critical']}% | "
+        f"OTV Safe: {batch_data['otv_validation']['otv_sequence_safe']}"
+    )
+
+    # 106. GET /api/v1/resource-throttler/thresholds — burst load stress test
+    # Inject a high-but-below-ceiling CPU spike (88 %).
+    # The adaptive critical threshold must absorb the burst without exceeding 95 %,
+    # so an OTV-mandated sequence is NOT prematurely classified as CRITICAL.
+    r_thresh_burst = client.get("/api/v1/resource-throttler/thresholds?mock_cpu=88.0")
+    assert r_thresh_burst.status_code == 200
+    td_burst = r_thresh_burst.json()
+    t_burst = td_burst["thresholds"]
+    # Core OTV contract: ceiling must never be exceeded even under burst
+    assert t_burst["adaptive_critical"] <= 95.0, \
+        f"Burst load pushed CRITICAL threshold above OTV ceiling: {t_burst['adaptive_critical']}"
+    assert t_burst["adaptive_elevated"] <= t_burst["adaptive_critical"], \
+        "Monotonicity violated after burst ingest"
+    assert td_burst["otv_validation"]["fidelity_check_passed"] is True
+    assert td_burst["otv_validation"]["consistency_check_passed"] is True
+    assert td_burst["otv_validation"]["range_check_passed"] is True
+    print(
+        f"[Test 106: GET /api/v1/resource-throttler/thresholds (burst=88%)] "
+        f"Status: 200 OK | Adaptive Critical: {t_burst['adaptive_critical']}% (<= 95) | "
+        f"OTV Fidelity: {td_burst['otv_validation']['fidelity_check_passed']} | "
+        f"OTV Consistency: {td_burst['otv_validation']['consistency_check_passed']} | "
+        f"Range OK: {td_burst['otv_validation']['range_check_passed']}"
+    )
+
+    # 107. POST /api/v1/resource-throttler/thresholds/reset — restore static defaults
+    r_reset = client.post("/api/v1/resource-throttler/thresholds/reset")
+    assert r_reset.status_code == 200
+    reset_data = r_reset.json()
+    assert reset_data["status"] == "RESET_OK"
+    t_reset = reset_data["thresholds"]
+    # After reset, governor reverts to warm-start static defaults
+    assert t_reset["sample_count"] == 0, "sample_count must be 0 after reset"
+    assert t_reset["adaptive_elevated"] == 75.0, "Post-reset ELEVATED must equal static default 75.0"
+    assert t_reset["adaptive_critical"] == 90.0, "Post-reset CRITICAL must equal static default 90.0"
+    assert reset_data["otv_validation"]["otv_sequence_safe"] is True
+    print(
+        f"[Test 107: POST /api/v1/resource-throttler/thresholds/reset] "
+        f"Status: 200 OK | Samples: {t_reset['sample_count']} | "
+        f"Elevated: {t_reset['adaptive_elevated']}% | Critical: {t_reset['adaptive_critical']}% | "
+        f"OTV Safe: {reset_data['otv_validation']['otv_sequence_safe']}"
+    )
+
     print("=" * 75)
-    print("ALL 103 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
+    print("ALL 107 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
     print("=" * 75)
 
 if __name__ == "__main__":

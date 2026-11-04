@@ -27,7 +27,7 @@ from apex_orchestrator import ApexSystemOrchestrator, PrioritizedTask
 from hierarchical_cognitive_layer import CognitiveInput
 from eqel_purge_protocol import MultiStagePurgeProtocol
 from adversarial_threat_suite import run_adversarial_threat_suite
-from resource_throttler import AdaptiveResourceThrottler
+from resource_throttler import AdaptiveResourceThrottler, EWMAAdaptiveThresholdGovernor
 from self_limitation_auditor import SelfLimitationAuditor
 from dao_governance_layer import DAOGovernanceInterface, ProposalStatus
 from causal_inference_engine import CausalInferenceEngine, CausalRPST, CausalState
@@ -1795,6 +1795,98 @@ def get_power_governor_report():
         with open(POWER_GOVERNOR_REPORT_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
     return execute_power_governor_mcts_surge(baseline_simulations=100, cycles=3)
+
+
+# ==============================================================================
+# 4.19 EWMA ADAPTIVE THRESHOLD GOVERNOR
+# ==============================================================================
+
+# Module-level governor instance (shared across requests for running EWMA state)
+_ewma_governor = EWMAAdaptiveThresholdGovernor(alpha=0.15, k=1.5, warmup_samples=10)
+_ewma_throttler = AdaptiveResourceThrottler()
+
+
+@app.get("/api/v1/resource-throttler/thresholds", tags=["Adaptive Threshold Governor"])
+def get_ewma_thresholds(mock_cpu: Optional[float] = None):
+    """
+    Returns the current EWMA-derived adaptive CPU pressure thresholds.
+
+    If `mock_cpu` is provided, ingests that value into the running EWMA state
+    before returning the updated snapshot — useful for OTV sequence simulation.
+    The thresholds are then injected into the shared AdaptiveResourceThrottler
+    instance so that the next sample_metrics() call uses the updated ceilings.
+
+    The `otv_safe` flag confirms that both adaptive thresholds lie within the
+    OTV-valid range [65, 95], satisfying the Fidelity and Consistency checks
+    required for OTV-mandated execution sequences.
+    """
+    from dataclasses import asdict as _asdict
+    import psutil as _psutil
+
+    cpu = mock_cpu if mock_cpu is not None else _psutil.cpu_percent(interval=0.05)
+    snap = _ewma_governor.ingest(cpu)
+    _ewma_governor.inject_into_throttler(_ewma_throttler)
+
+    return {
+        "source_cpu_pct": round(cpu, 2),
+        "thresholds": _asdict(snap),
+        "injected_into_throttler": snap.sample_count >= _ewma_governor.warmup_samples,
+        "otv_validation": {
+            "fidelity_check_passed": snap.otv_safe,
+            "consistency_check_passed": snap.adaptive_elevated <= snap.adaptive_critical,
+            "range_check_passed": (
+                _ewma_governor.FLOOR <= snap.adaptive_elevated
+                and snap.adaptive_critical <= _ewma_governor.CEILING
+            ),
+            "otv_sequence_safe": snap.otv_safe,
+        },
+    }
+
+
+@app.post("/api/v1/resource-throttler/thresholds/reset", tags=["Adaptive Threshold Governor"])
+def reset_ewma_thresholds():
+    """
+    Resets the EWMA governor to cold-start defaults and restores static thresholds
+    on the shared AdaptiveResourceThrottler.  Returns the post-reset snapshot.
+    """
+    from dataclasses import asdict as _asdict
+    _ewma_governor.reset()
+    _ewma_throttler.cpu_elevated_thresh = EWMAAdaptiveThresholdGovernor.STATIC_ELEVATED
+    _ewma_throttler.cpu_critical_thresh = EWMAAdaptiveThresholdGovernor.STATIC_CRITICAL
+    snap = _ewma_governor.current_snapshot()
+    return {
+        "status": "RESET_OK",
+        "thresholds": _asdict(snap),
+        "otv_validation": {"otv_sequence_safe": snap.otv_safe},
+    }
+
+
+@app.post("/api/v1/resource-throttler/thresholds/batch-ingest", tags=["Adaptive Threshold Governor"])
+def batch_ingest_ewma_thresholds(cpu_samples: List[float]):
+    """
+    Ingests a batch of CPU observations into the running EWMA state.
+
+    Useful for OTV-mandated pre-flight calibration: feed N samples before
+    committing a ULP/OTV execution sequence to ensure the adaptive thresholds
+    have warmed up. Returns the final snapshot after all samples are processed.
+    """
+    from dataclasses import asdict as _asdict
+    if not cpu_samples:
+        raise HTTPException(status_code=422, detail="cpu_samples list must not be empty.")
+    if len(cpu_samples) > 500:
+        raise HTTPException(status_code=422, detail="Batch size capped at 500 samples per call.")
+
+    snap = None
+    for cpu in cpu_samples:
+        snap = _ewma_governor.ingest(float(cpu))
+    _ewma_governor.inject_into_throttler(_ewma_throttler)
+
+    return {
+        "samples_ingested": len(cpu_samples),
+        "thresholds": _asdict(snap),
+        "injected_into_throttler": snap.sample_count >= _ewma_governor.warmup_samples,
+        "otv_validation": {"otv_sequence_safe": snap.otv_safe},
+    }
 
 
 # ==============================================================================

@@ -891,6 +891,26 @@
             <button class="btn btn-cyan" onclick="runVectorAction('/mesh/peers', 'GET')">🌐 Probe Multi-Agent Mesh</button>
           </div>
 
+          <!-- Higher-Order Vectors (Omega, Sigma, Psi) -->
+          <div class="engine-card">
+            <div class="engine-head"><span style="color: var(--accent-purple);">[HIGHER-ORDER] VECTORS OMEGA, SIGMA, PSI</span><span class="subsys-tag" style="background: var(--accent-purple); color: #fff;">TRIAD</span></div>
+            <div class="engine-desc">Cross-disciplinary knowledge synthesis, minimalist heuristic chain discovery, and dialectic thesis-antithesis debate.</div>
+            <div style="display: flex; gap: 8px; margin-top: 8px;">
+              <button class="btn btn-cyan" style="flex: 1;" onclick="runVectorAction('/vectors/higher-order/run', 'POST')">⚡ Run Triad</button>
+              <button class="btn btn-primary" style="flex: 1;" onclick="runVectorAction('/vectors/psi', 'GET')">⚖️ Inspect Psi Debate</button>
+            </div>
+          </div>
+
+          <!-- Hardware Power Governor & EWMA Adaptive Thresholds -->
+          <div class="engine-card" style="border-color: var(--accent-green); background: rgba(16, 185, 129, 0.04);">
+            <div class="engine-head"><span style="color: var(--accent-green);">[GOVERNOR] EWMA ADAPTIVE THRESHOLDS & POWER SURGE</span><span class="subsys-tag" style="background: var(--accent-green); color: #000; font-weight: bold;">OTV-SAFE</span></div>
+            <div class="engine-desc">Dynamic EWMA noise floor reduction: Threshold(t) = clamp(&mu; + k&middot;&sigma;, 65, 95). Authorizes 1.5x MCTS surge on surplus CPU headroom.</div>
+            <div style="display: flex; gap: 8px; margin-top: 8px;">
+              <button class="btn btn-cyan" style="flex: 1;" onclick="probeEWMAThresholds()">📈 Probe Thresholds</button>
+              <button class="btn btn-primary" style="flex: 1;" onclick="runVectorAction('/api/v1/power-governor/surge?simulations=100&cycles=3', 'POST')">🚀 150% MCTS Surge</button>
+            </div>
+          </div>
+
           <!-- Offline Local Model Bridge -->
           <div class="engine-card" style="border-color: var(--accent-cyan); background: rgba(0, 240, 255, 0.04);">
             <div class="engine-head"><span style="color: var(--accent-cyan);">[VECTOR 2] OFFLINE LOCAL MODEL BRIDGE</span><span class="subsys-tag" style="background: var(--accent-cyan); color: #000; font-weight: bold;">ZERO-CLOUD</span></div>
@@ -991,6 +1011,22 @@
       } catch (err) {
         if (out) out.innerText = `Error executing ${endpoint}: ${err.message}`;
         log(`Vector Action Failed: ${endpoint} (${err.message})`, "alert");
+      }
+    }
+
+    // Hardware Governor & EWMA Adaptive Thresholds
+    async function probeEWMAThresholds() {
+      const out = document.getElementById("vector-console-output");
+      if (out) out.innerText = "Probing EWMA adaptive thresholds and OTV safety bounds...";
+      try {
+        const res = await fetch("/api/v1/resource-throttler/thresholds");
+        const data = await res.json();
+        if (out) out.innerText = JSON.stringify(data, null, 2);
+        const t = data.thresholds;
+        log(`EWMA Thresholds: Elevated=${t.adaptive_elevated}% | Critical=${t.adaptive_critical}% | OTV Safe=${data.otv_validation.otv_sequence_safe}`, "success");
+      } catch (err) {
+        if (out) out.innerText = `EWMA probe error: ${err.message}`;
+        log(`EWMA probe error: ${err.message}`, "alert");
       }
     }
 

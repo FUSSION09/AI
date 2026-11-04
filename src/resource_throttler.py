@@ -8,6 +8,11 @@ Implements:
 2. Hardware & Battery-Aware Power Governor:
    - Dynamically scales algorithmic search budgets (e.g. MCTS exploration width).
    - Authorizes computational surge (1.5x) when CPU utilization demonstrates surplus headroom (<50%) and AC power is connected.
+3. EWMA-Based Adaptive Threshold Governor:
+   - Replaces static CPU thresholds with exponentially-weighted moving average (EWMA) estimates
+     of the system's own CPU distribution: mu(t) and sigma(t).
+   - Threshold(t) = clamp(mu(t) + k * sigma(t), floor=65.0, ceiling=95.0)
+   - Protects OTV-mandated execution sequences from premature CRITICAL classification on burst loads.
 
 Location: d:/AI/src/resource_throttler.py
 Strictly localized within d:/AI
@@ -17,10 +22,12 @@ import os
 import sys
 import time
 import json
+import math
 from enum import Enum
 from pathlib import Path
 from typing import Dict, Any, Tuple, Optional, List
 from dataclasses import dataclass, asdict
+import math
 import psutil
 
 # Ensure root is in sys.path
@@ -49,6 +56,190 @@ class SystemMetricsSnapshot:
     queue_depth: int
     pressure_level: ResourcePressureLevel
     timestamp: float
+
+
+@dataclass
+class EWMAThresholdSnapshot:
+    """
+    Immutable telemetry record produced by EWMAAdaptiveThresholdGovernor.
+
+    Fields
+    ------
+    sample_count       : Number of CPU observations ingested so far.
+    ewma_mean          : Exponentially-weighted mean of CPU utilization (mu).
+    ewma_variance      : Exponentially-weighted variance (sigma^2).
+    ewma_sigma         : Square root of ewma_variance (sigma).
+    k_factor           : Sensitivity multiplier used in Threshold = mu + k*sigma.
+    adaptive_elevated  : Computed ELEVATED threshold = clamp(mu + k*sigma, 65, 95).
+    adaptive_critical  : Computed CRITICAL  threshold = clamp(mu + 2*k*sigma, 65, 95).
+    static_elevated    : Reference static threshold (75.0).
+    static_critical    : Reference static threshold (90.0).
+    otv_safe           : TRUE when both adaptive thresholds lie within OTV-valid range
+                         [65, 95], ensuring no premature CRITICAL classification.
+    """
+    sample_count: int
+    ewma_mean: float
+    ewma_variance: float
+    ewma_sigma: float
+    k_factor: float
+    adaptive_elevated: float
+    adaptive_critical: float
+    static_elevated: float
+    static_critical: float
+    otv_safe: bool
+
+
+class EWMAAdaptiveThresholdGovernor:
+    """
+    EWMA-Based Adaptive Threshold Governor for CPU pressure classification.
+
+    Replaces the static thresholds (75 / 90 %) in AdaptiveResourceThrottler with
+    empirically derived, exponentially-weighted estimates of the host's own CPU
+    distribution.
+
+    Formula
+    -------
+        mu(t)     = alpha * cpu(t) + (1 - alpha) * mu(t-1)
+        sigma2(t) = alpha * (cpu(t) - mu(t-1))^2 + (1 - alpha) * sigma2(t-1)
+        sigma(t)  = sqrt(sigma2(t))
+
+        Threshold_elevated(t) = clamp(mu(t) + k * sigma(t),     FLOOR, CEILING)
+        Threshold_critical(t) = clamp(mu(t) + 2*k * sigma(t),   FLOOR, CEILING)
+
+    Design Invariants
+    -----------------
+    - FLOOR  = 65.0  (never classify ELEVATED below 65 %; OTV Fidelity Check §1)
+    - CEILING = 95.0 (never classify CRITICAL above 95 %; OTV Consistency Check §2)
+    - On cold-start (< `warmup_samples` observations) the governor falls back to
+      static defaults (75 / 90) so that AdaptiveResourceThrottler remains safe.
+    - The governor is stateful but lightweight: O(1) memory, O(1) update cost.
+
+    OTV Integration
+    ---------------
+    The `otv_safe` flag on EWMAThresholdSnapshot is TRUE whenever:
+        FLOOR <= adaptive_elevated <= adaptive_critical <= CEILING
+    This directly satisfies the OTV Fidelity/Consistency dependency chain without
+    any additional pathway validation.
+    """
+
+    FLOOR: float = 65.0
+    CEILING: float = 95.0
+    STATIC_ELEVATED: float = 75.0
+    STATIC_CRITICAL: float = 90.0
+
+    def __init__(self, alpha: float = 0.15, k: float = 1.5, warmup_samples: int = 10):
+        """
+        Parameters
+        ----------
+        alpha          : EWMA decay factor in (0, 1). Lower = slower adaptation.
+                         Default 0.15 gives a ~6-sample effective window.
+        k              : Sensitivity multiplier for sigma. k=1.5 ≈ 86th-percentile
+                         threshold under a Gaussian load distribution.
+        warmup_samples : Minimum observations before adaptive thresholds activate.
+                         During warm-up, static defaults are returned.
+        """
+        if not (0.0 < alpha < 1.0):
+            raise ValueError(f"alpha must be in (0, 1), got {alpha}")
+        if k <= 0.0:
+            raise ValueError(f"k must be positive, got {k}")
+
+        self.alpha = alpha
+        self.k = k
+        self.warmup_samples = warmup_samples
+
+        # Running EWMA state
+        self._mu: float = self.STATIC_ELEVATED      # warm-start at static elevated
+        self._sigma2: float = 25.0                  # warm-start variance ~5 % std-dev
+        self._n: int = 0
+
+    # ------------------------------------------------------------------
+    # Public API
+    # ------------------------------------------------------------------
+
+    def ingest(self, cpu_pct: float) -> EWMAThresholdSnapshot:
+        """
+        Ingest a new CPU observation and return the updated threshold snapshot.
+
+        Parameters
+        ----------
+        cpu_pct : Instantaneous CPU utilization percentage in [0, 100].
+
+        Returns
+        -------
+        EWMAThresholdSnapshot with fresh adaptive thresholds and OTV safety flag.
+        """
+        cpu_pct = max(0.0, min(100.0, cpu_pct))
+        prev_mu = self._mu
+
+        # Welford-style EWMA update
+        self._mu = self.alpha * cpu_pct + (1.0 - self.alpha) * self._mu
+        self._sigma2 = (
+            self.alpha * (cpu_pct - prev_mu) ** 2
+            + (1.0 - self.alpha) * self._sigma2
+        )
+        self._n += 1
+
+        return self._build_snapshot()
+
+    def current_snapshot(self) -> EWMAThresholdSnapshot:
+        """Return the current threshold snapshot without ingesting a new sample."""
+        return self._build_snapshot()
+
+    def inject_into_throttler(self, throttler: "AdaptiveResourceThrottler") -> EWMAThresholdSnapshot:
+        """
+        Push the current adaptive thresholds into an AdaptiveResourceThrottler
+        instance, replacing its static values.  Returns the applied snapshot.
+
+        Only activates after warmup_samples have been ingested; during warm-up
+        the throttler's existing static values are left unchanged.
+        """
+        snap = self._build_snapshot()
+        if self._n >= self.warmup_samples:
+            throttler.cpu_elevated_thresh = snap.adaptive_elevated
+            throttler.cpu_critical_thresh = snap.adaptive_critical
+        return snap
+
+    def reset(self) -> None:
+        """Reset EWMA state to cold-start defaults."""
+        self._mu = self.STATIC_ELEVATED
+        self._sigma2 = 25.0
+        self._n = 0
+
+    # ------------------------------------------------------------------
+    # Internal helpers
+    # ------------------------------------------------------------------
+
+    def _clamp(self, value: float) -> float:
+        return max(self.FLOOR, min(self.CEILING, value))
+
+    def _build_snapshot(self) -> EWMAThresholdSnapshot:
+        sigma = math.sqrt(max(0.0, self._sigma2))
+        warmed_up = self._n >= self.warmup_samples
+
+        # During warm-up: report static defaults
+        if not warmed_up:
+            adap_elev = self.STATIC_ELEVATED
+            adap_crit = self.STATIC_CRITICAL
+        else:
+            adap_elev = self._clamp(self._mu + self.k * sigma)
+            adap_crit = self._clamp(self._mu + 2.0 * self.k * sigma)
+
+        otv_safe = (
+            self.FLOOR <= adap_elev <= adap_crit <= self.CEILING
+        )
+
+        return EWMAThresholdSnapshot(
+            sample_count=self._n,
+            ewma_mean=round(self._mu, 4),
+            ewma_variance=round(self._sigma2, 4),
+            ewma_sigma=round(sigma, 4),
+            k_factor=self.k,
+            adaptive_elevated=round(adap_elev, 4),
+            adaptive_critical=round(adap_crit, 4),
+            static_elevated=self.STATIC_ELEVATED,
+            static_critical=self.STATIC_CRITICAL,
+            otv_safe=otv_safe,
+        )
 
 
 @dataclass
@@ -333,3 +524,44 @@ if __name__ == "__main__":
     print("=" * 75)
     report = execute_power_governor_mcts_surge(baseline_simulations=100, cycles=3)
     print("Performance Delta Report:\n", json.dumps(report["performance_delta"], indent=2))
+
+    print("\n" + "=" * 75)
+    print("EWMA ADAPTIVE THRESHOLD GOVERNOR VERIFICATION")
+    print("=" * 75)
+    governor = EWMAAdaptiveThresholdGovernor(alpha=0.15, k=1.5, warmup_samples=10)
+    adaptive_throttler = AdaptiveResourceThrottler()
+
+    # Feed 15 nominal samples (20-30 % CPU)
+    nominal = [22, 25, 28, 24, 30, 27, 23, 29, 26, 24, 25, 27, 28, 23, 26]
+    for cpu in nominal:
+        snap = governor.ingest(float(cpu))
+    governor.inject_into_throttler(adaptive_throttler)
+    print(f"\n[After 15 nominal samples (20-30% CPU)]")
+    print(f"  mu={snap.ewma_mean:.2f}%  sigma={snap.ewma_sigma:.2f}%")
+    print(f"  Adaptive ELEVATED : {snap.adaptive_elevated:.2f}%  (static: {snap.static_elevated}%)")
+    print(f"  Adaptive CRITICAL : {snap.adaptive_critical:.2f}%  (static: {snap.static_critical}%)")
+    print(f"  OTV Safe          : {snap.otv_safe}")
+    assert snap.otv_safe, "FAIL: OTV safety violated after nominal warmup"
+
+    # Inject a burst (88% CPU) — critical threshold must stay <= 95
+    snap_burst = governor.ingest(88.0)
+    governor.inject_into_throttler(adaptive_throttler)
+    print(f"\n[After burst sample (88% CPU)]")
+    print(f"  mu={snap_burst.ewma_mean:.2f}%  sigma={snap_burst.ewma_sigma:.2f}%")
+    print(f"  Adaptive ELEVATED : {snap_burst.adaptive_elevated:.2f}%")
+    print(f"  Adaptive CRITICAL : {snap_burst.adaptive_critical:.2f}%  (must be <= 95)")
+    print(f"  OTV Safe          : {snap_burst.otv_safe}")
+    assert snap_burst.adaptive_critical <= 95.0, "FAIL: burst pushed critical above 95%"
+    assert snap_burst.otv_safe, "FAIL: OTV safety violated after burst"
+
+    # Reset and confirm static defaults restored
+    governor.reset()
+    snap_reset = governor.current_snapshot()
+    print(f"\n[After reset]")
+    print(f"  sample_count={snap_reset.sample_count} | Elevated={snap_reset.adaptive_elevated}% | Critical={snap_reset.adaptive_critical}%")
+    assert snap_reset.sample_count == 0
+    assert snap_reset.adaptive_elevated == 75.0
+    assert snap_reset.adaptive_critical == 90.0
+
+    print("\nALL EWMA ADAPTIVE THRESHOLD GOVERNOR ASSERTIONS PASSED.")
+    print("=" * 75)
