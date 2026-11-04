@@ -16,6 +16,7 @@ import os
 import sys
 import time
 import json
+import math
 import hmac
 import hashlib
 import urllib.request
@@ -58,6 +59,17 @@ class CryptographicMeshMessage:
     timestamp: float
     nonce: str
     signature: str
+
+
+@dataclass
+class NetworkOrderDirective:
+    target_peer_id: str
+    decision: int  # 1 = EXECUTE_PROBE, 0 = HOLD
+    expected_information_gain_bits: float  # I(pi)
+    compliance_cost: float                 # Cost(TQ)
+    information_gain_ratio: float          # I(pi) / Cost(TQ)
+    dynamic_tq_erosion_rate: float         # Delta TQ / Delta t
+    justification: str
 
 
 class OpenNetworkMesh:
@@ -122,6 +134,58 @@ class OpenNetworkMesh:
         raw_bytes = json.dumps(message.payload, sort_keys=True).encode("utf-8")
         expected = hmac.new(SHARED_SECRET, raw_bytes + message.nonce.encode(), hashlib.sha256).hexdigest()
         return hmac.compare_digest(expected, message.signature)
+
+    def evaluate_epistemic_probe_decision(
+        self,
+        peer_id: str,
+        prior_state_uncertainty_bits: float,
+        current_tq: float = 0.70,
+        base_cost: float = 10.0,
+        tq_erosion_beta: float = 0.15
+    ) -> Tuple[int, NetworkOrderDirective]:
+        """
+        Active Inference Probe Decision (DETS):
+        Calculates the Expected Information Gain Ratio:
+            Ratio = I(pi) / Cost(TQ)
+        Returns:
+            (binary_decision: 1 [Execute Probe] or 0 [Hold], directive: NetworkOrderDirective)
+            based strictly on whether the ratio exceeds the dynamic TQ erosion rate.
+        """
+        peer = self.peers.get(peer_id)
+        latency = peer.latency_ms if peer is not None else 5.0
+
+        # 1. Expected Information Resolution I(pi): entropy reduction potential
+        info_gain_bits = round(prior_state_uncertainty_bits * (1.0 - math.exp(-0.75)), 4)
+
+        # 2. Compliance / Resource Friction Cost: Cost(TQ)
+        cost_tq = round(base_cost / max(0.05, current_tq), 4)
+
+        # 3. Expected Information Gain Ratio: I(pi) / Cost(TQ)
+        eig_ratio = round(info_gain_bits / max(0.0001, cost_tq), 6)
+
+        # 4. Dynamic TQ Erosion Rate: Delta TQ / Delta t
+        tq_erosion_rate = round(tq_erosion_beta * (latency / 10.0) ** 2 * current_tq, 6)
+
+        # 5. Pure Information-Directed Decision Gate
+        decision = 1 if eig_ratio > tq_erosion_rate else 0
+
+        justification = (
+            f"EIG Ratio ({eig_ratio:.6f}) > Erosion Rate ({tq_erosion_rate:.6f}) -> EXECUTE PROBE"
+            if decision == 1 else
+            f"EIG Ratio ({eig_ratio:.6f}) <= Erosion Rate ({tq_erosion_rate:.6f}) -> HOLD"
+        )
+
+        directive = NetworkOrderDirective(
+            target_peer_id=peer_id,
+            decision=decision,
+            expected_information_gain_bits=info_gain_bits,
+            compliance_cost=cost_tq,
+            information_gain_ratio=eig_ratio,
+            dynamic_tq_erosion_rate=tq_erosion_rate,
+            justification=justification
+        )
+
+        return decision, directive
 
     def probe_mesh_network(self) -> Dict[str, Any]:
         """Probes all configured network peers and measures latency and consensus readiness."""
