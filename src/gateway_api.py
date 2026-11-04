@@ -61,6 +61,7 @@ from open_network_mesh import open_network_mesh, OPEN_NETWORK_REPORT_FILE
 from causal_stress_novelty_pipeline import causal_pipeline, PIPELINE_REPORT_FILE
 from higher_order_vectors import higher_order_vectors, HIGHER_ORDER_REPORT_FILE
 from local_model_bridge import local_model_bridge, LOCAL_MODEL_REPORT_FILE
+from ecc_bridge import ecc_bridge, ECC_CATALOG_FILE
 from resource_throttler import execute_power_governor_mcts_surge, POWER_GOVERNOR_REPORT_FILE
 
 # Initialize FastAPI app
@@ -238,6 +239,15 @@ class LocalModelGenerateRequest(BaseModel):
     backend: str = Field(default="auto", example="auto")
     max_tokens: int = Field(default=64, ge=1, le=512, example=64)
     temperature: float = Field(default=0.2, ge=0.0, le=1.0, example=0.2)
+
+class ECCRouteRequest(BaseModel):
+    query: str = Field(..., example="Audit our FastAPI endpoints for security vulnerabilities.")
+
+class ECCDispatchRequest(BaseModel):
+    agent_name: str = Field(default="security-reviewer", example="security-reviewer")
+    prompt: str = Field(..., example="Review risk parameters for statutory invariance.")
+    backend: str = Field(default="deterministic", example="deterministic")
+    max_tokens: int = Field(default=64, ge=1, le=512, example=64)
 
 class DAOVoteRequest(BaseModel):
     proposal_id: str = Field(..., example="DAO-PROP-1C39A5D3")
@@ -1887,6 +1897,117 @@ def batch_ingest_ewma_thresholds(cpu_samples: List[float]):
         "injected_into_throttler": snap.sample_count >= _ewma_governor.warmup_samples,
         "otv_validation": {"otv_sequence_safe": snap.otv_safe},
     }
+
+
+# ==============================================================================
+# 4.20 HIGHER-ORDER VECTORS SEMANTIC RELATIONAL DISPLAY LAYER (SRDL)
+# ==============================================================================
+
+@app.get("/api/v1/vectors/higher-order/relational", tags=["Higher-Order Vectors"])
+def get_semantic_relational_triad(
+    include_provenance: bool = False,
+    mock_folly_lambda: Optional[float] = None,
+    mock_expected_utility: Optional[float] = None,
+    mock_kmi_phi: Optional[float] = None,
+    mock_info_gain_bits: Optional[float] = None,
+    persist: bool = False
+):
+    """
+    Synthesizes the Semantic Relational Display Layer (SRDL) Triad.
+    Computes primary interaction invariants:
+    - Xi_UGE (Primary Invariant)
+    - Ratio_Lambda_U = Lambda / E[U]
+    - Epistemic_Velocity = I(pi) / (|tau| * Latency_ms)
+    - Isomorphic_Coupling = <M> / h_statutory
+    Decoupled provenance is only populated when `include_provenance=True`.
+    """
+    from dataclasses import asdict as _asdict
+    triad = higher_order_vectors.synthesize_relational_triad(
+        include_provenance=include_provenance,
+        mock_folly_lambda=mock_folly_lambda,
+        mock_expected_utility=mock_expected_utility,
+        mock_kmi_phi=mock_kmi_phi,
+        mock_info_gain_bits=mock_info_gain_bits,
+        persist=persist
+    )
+    return _asdict(triad)
+
+
+# ==============================================================================
+# 4.21 ECC (EVERYTHING CLAUDE CODE) AGENTIC OPERATING LAYER
+# ==============================================================================
+
+@app.get("/api/v1/ecc/status", tags=["ECC Agentic Operating Layer"])
+def get_ecc_status():
+    """Returns ECC repository status, agent & skill inventory count, and bridge readiness."""
+    return ecc_bridge.get_status()
+
+
+@app.get("/api/v1/ecc/agents", tags=["ECC Agentic Operating Layer"])
+def search_ecc_agents(query: str = "", limit: int = 15):
+    """Searches across all 71 specialized ECC agents by keyword, tools, or domain."""
+    return {
+        "query": query,
+        "count": len(ecc_bridge.agents),
+        "results": ecc_bridge.search_agents(query=query, limit=limit)
+    }
+
+
+@app.get("/api/v1/ecc/skills", tags=["ECC Agentic Operating Layer"])
+def search_ecc_skills(query: str = "", limit: int = 20):
+    """Searches across all 314 modular ECC skills by keyword, domain, or origin."""
+    return {
+        "query": query,
+        "count": len(ecc_bridge.skills),
+        "results": ecc_bridge.search_skills(query=query, limit=limit)
+    }
+
+
+@app.post("/api/v1/ecc/route", tags=["ECC Agentic Operating Layer"])
+def route_task_to_ecc_specialist(req: ECCRouteRequest):
+    """
+    Intelligently routes an engineering prompt to the optimal specialized ECC agent
+    and recommends the most relevant modular skills.
+    """
+    from dataclasses import asdict as _asdict
+    decision = ecc_bridge.route_task(req.query)
+    return _asdict(decision)
+
+
+@app.get("/api/v1/ecc/quartet", tags=["ECC Agentic Operating Layer"])
+def get_ecc_dialectic_quartet():
+    """
+    Returns the concrete ECC agent and skill mapping for the Dialectic Equilibrium (DEC) Quartet:
+    Execution Agent, Utility Agent, Coherence Agent, and Paraconsistency Agent.
+    """
+    from dataclasses import asdict as _asdict
+    quartet = ecc_bridge.get_dialectic_quartet_mapping()
+    serializable = {}
+    for role, info in quartet.items():
+        serializable[role] = {
+            "persona": info["persona"],
+            "ecc_agent": _asdict(info["ecc_agent"]) if info["ecc_agent"] else None,
+            "ecc_skills": info["ecc_skills"],
+            "directive": info["directive"]
+        }
+    return {
+        "architecture": "DEC_DIALECTIC_QUARTET_ECC_MAPPING",
+        "quartet": serializable
+    }
+
+
+@app.post("/api/v1/ecc/dispatch", tags=["ECC Agentic Operating Layer"])
+def dispatch_ecc_specialist(req: ECCDispatchRequest):
+    """
+    Executes offline neural inference using the specified ECC agent persona overlay
+    via the local model bridge (zero-cloud edge execution).
+    """
+    return ecc_bridge.dispatch_specialist(
+        agent_name=req.agent_name,
+        user_prompt=req.prompt,
+        backend=req.backend,
+        max_tokens=req.max_tokens
+    )
 
 
 # ==============================================================================

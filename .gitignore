@@ -43,3 +43,6 @@ Thumbs.db
 data/ephemeral_session/
 *.log
 
+# External third-party git repos
+external/
+

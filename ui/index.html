@@ -920,6 +920,16 @@
               <button class="btn btn-primary" style="flex: 1;" onclick="runLocalModelBenchmark()">📊 Run Benchmark</button>
             </div>
           </div>
+
+          <!-- ECC Agentic Operating Layer -->
+          <div class="engine-card" style="border-color: #f59e0b; background: rgba(245, 158, 11, 0.04);">
+            <div class="engine-head"><span style="color: #f59e0b;">[ECC] AGENTIC OPERATING LAYER (AFFAAN-M/ECC)</span><span class="subsys-tag" style="background: #f59e0b; color: #000; font-weight: bold;">71 AGENTS / 314 SKILLS</span></div>
+            <div class="engine-desc">Specialized AI agentic engineering toolkit: intelligent specialist routing, dialectic quartet mapping, and zero-cloud edge dispatch.</div>
+            <div style="display: flex; gap: 8px; margin-top: 8px;">
+              <button class="btn btn-cyan" style="flex: 1;" onclick="probeECCStatus()">📋 Probe ECC Status</button>
+              <button class="btn btn-primary" style="flex: 1;" onclick="runVectorAction('/api/v1/ecc/quartet', 'GET')">🏛️ Dialectic Quartet</button>
+            </div>
+          </div>
         </div>
 
         <!-- Interactive Offline Local Model Generator Console -->
@@ -1027,6 +1037,21 @@
       } catch (err) {
         if (out) out.innerText = `EWMA probe error: ${err.message}`;
         log(`EWMA probe error: ${err.message}`, "alert");
+      }
+    }
+
+    // ECC Agentic Layer Actions
+    async function probeECCStatus() {
+      const out = document.getElementById("vector-console-output");
+      if (out) out.innerText = "Querying ECC Agentic Toolkit (affaan-m/ECC)...";
+      try {
+        const res = await fetch("/api/v1/ecc/status");
+        const data = await res.json();
+        if (out) out.innerText = JSON.stringify(data, null, 2);
+        log(`ECC Agentic Layer Online: ${data.agents_count} Specialized Agents & ${data.skills_count} Modular Skills ready.`, "success");
+      } catch (err) {
+        if (out) out.innerText = `ECC probe error: ${err.message}`;
+        log(`ECC probe error: ${err.message}`, "alert");
       }
     }
 

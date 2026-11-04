@@ -1,7 +1,7 @@
 """
 Phase 8: Service Mesh Gateway (MSMG) Automated Test Suite
 Verifies all RESTful API contracts: /control, /objective, and UI skeleton serving.
-Contract Count: 107 (Tests 1-103 original; 104-107 EWMA Adaptive Threshold Governor)
+Contract Count: 114 (Tests 1-103 baseline; 104-107 EWMA; 108 SRDL Triad; 109-114 ECC Agentic Layer)
 Location: d:\AI\src\test_gateway_api.py
 """
 
@@ -1053,8 +1053,88 @@ def run_api_tests():
         f"OTV Safe: {reset_data['otv_validation']['otv_sequence_safe']}"
     )
 
+    # =========================================================================
+    # SEMANTIC RELATIONAL DISPLAY LAYER (TEST 108)
+    # =========================================================================
+    # 108. GET /api/v1/vectors/higher-order/relational
+    r_rel = client.get("/api/v1/vectors/higher-order/relational?include_provenance=true")
+    assert r_rel.status_code == 200
+    rel_data = r_rel.json()
+    assert "expressive_coherence_index" in rel_data
+    assert rel_data["expressive_coherence_index"] > 0
+    assert "ratio_psi_folly_utility" in rel_data
+    assert rel_data["ratio_psi_folly_utility"] > 0
+    assert "semantic_tags" in rel_data
+    assert "provenance" in rel_data and rel_data["provenance"] is not None
+    print(f"[Test 108: /api/v1/vectors/higher-order/relational] Status: 200 OK | Xi_UGE: {rel_data['expressive_coherence_index']} | Ratio Psi: {rel_data['ratio_psi_folly_utility']} | Runtime: {rel_data['runtime_ms']} ms")
+
+    # =========================================================================
+    # ECC (EVERYTHING CLAUDE CODE) AGENTIC OPERATING LAYER (TESTS 109-114)
+    # =========================================================================
+    # 109. GET /api/v1/ecc/status
+    r_ecc_stat = client.get("/api/v1/ecc/status")
+    assert r_ecc_stat.status_code == 200
+    ecc_stat = r_ecc_stat.json()
+    assert ecc_stat["ecc_installed"] is True
+    assert ecc_stat["agents_count"] >= 70
+    assert ecc_stat["skills_count"] >= 300
+    print(f"[Test 109: /api/v1/ecc/status] Status: 200 OK | Agents: {ecc_stat['agents_count']} | Skills: {ecc_stat['skills_count']} | Bridge Ready: {ecc_stat['offline_bridge_ready']}")
+
+    # 110. GET /api/v1/ecc/agents
+    r_ecc_agents = client.get("/api/v1/ecc/agents?query=architect&limit=5")
+    assert r_ecc_agents.status_code == 200
+    ecc_ag = r_ecc_agents.json()
+    assert len(ecc_ag["results"]) > 0
+    assert any("architect" in a["name"].lower() for a in ecc_ag["results"])
+    print(f"[Test 110: /api/v1/ecc/agents] Status: 200 OK | Found {len(ecc_ag['results'])} matching specialist agents.")
+
+    # 111. GET /api/v1/ecc/skills
+    r_ecc_skills = client.get("/api/v1/ecc/skills?query=agent&limit=5")
+    assert r_ecc_skills.status_code == 200
+    ecc_sk = r_ecc_skills.json()
+    assert len(ecc_sk["results"]) > 0
+    assert any("agent" in s["name"].lower() for s in ecc_sk["results"])
+    print(f"[Test 111: /api/v1/ecc/skills] Status: 200 OK | Found {len(ecc_sk['results'])} matching workflow skills.")
+
+    # 112. POST /api/v1/ecc/route
+    route_payload = {"query": "Audit our FastAPI endpoints for security vulnerabilities and race conditions."}
+    r_ecc_route = client.post("/api/v1/ecc/route", json=route_payload)
+    assert r_ecc_route.status_code == 200
+    ecc_route = r_ecc_route.json()
+    assert ecc_route["selected_agent"] == "security-reviewer"
+    assert ecc_route["agent_confidence"] >= 0.8
+    assert "agent-security-hardening" in ecc_route["recommended_skills"]
+    print(f"[Test 112: /api/v1/ecc/route] Status: 200 OK | Routed to [{ecc_route['selected_agent']}] (Conf: {ecc_route['agent_confidence']})")
+
+    # 113. GET /api/v1/ecc/quartet
+    r_ecc_quartet = client.get("/api/v1/ecc/quartet")
+    assert r_ecc_quartet.status_code == 200
+    ecc_quartet = r_ecc_quartet.json()
+    assert "quartet" in ecc_quartet
+    q = ecc_quartet["quartet"]
+    assert "execution_agent" in q
+    assert "utility_agent" in q
+    assert "coherence_agent" in q
+    assert "paraconsistency_agent" in q
+    print(f"[Test 113: /api/v1/ecc/quartet] Status: 200 OK | Dialectic Quartet Mapped to ECC: Exec=[{q['execution_agent']['ecc_agent']['name']}], Util=[{q['utility_agent']['ecc_agent']['name']}], Coher=[{q['coherence_agent']['ecc_agent']['name']}], Para=[{q['paraconsistency_agent']['ecc_agent']['name']}]")
+
+    # 114. POST /api/v1/ecc/dispatch
+    dispatch_payload = {
+        "agent_name": "security-reviewer",
+        "prompt": "Verify statutory anti-structuring invariants for 31 U.S.C. 5324.",
+        "backend": "deterministic",
+        "max_tokens": 48
+    }
+    r_ecc_dispatch = client.post("/api/v1/ecc/dispatch", json=dispatch_payload)
+    assert r_ecc_dispatch.status_code == 200
+    ecc_disp = r_ecc_dispatch.json()
+    assert ecc_disp["offline_certified"] is True
+    assert ecc_disp["ecc_agent"] == "security-reviewer"
+    assert len(ecc_disp["generated_output"]) > 0
+    print(f"[Test 114: /api/v1/ecc/dispatch] Status: 200 OK | Agent: {ecc_disp['ecc_agent']} | Backend: {ecc_disp['backend_used']} | Time: {ecc_disp['duration_ms']} ms")
+
     print("=" * 75)
-    print("ALL 107 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
+    print("ALL 114 SERVICE MESH GATEWAY (MSMG) ENDPOINT CONTRACTS VERIFIED!")
     print("=" * 75)
 
 if __name__ == "__main__":
